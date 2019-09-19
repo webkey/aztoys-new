@@ -1,0 +1,40 @@
+@import "../utils/variables";
+@import "../utils/mixins";
+@import "../../libs/include-media/dist/include-media";
+
+/* browserupgrade */
+.browserupgrade {
+  margin: 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.3em 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 199;
+}
+.lt-ie9 body{ background: #fff !important; }
+.lt-ie9 .header,
+.lt-ie9 .sidebar,
+.lt-ie9 [class*="color-tape"],
+.lt-ie9 .wrapper,
+.lt-ie9 .footer,
+.lt-ie9 .popup,
+.lt-ie9 .page-preloader{ display: none !important; }
+
+/* browserupgrade end */
+
+/* no js */
+.no-js-warning {
+  position: fixed;
+  width: 100%;
+  z-index: 99999;
+  border: 2px solid #f00;
+  color: #f00;
+  background: #fff;
+  padding: 5px 20px;
+  font-size: 18px;
+}
+
+/* no js end */

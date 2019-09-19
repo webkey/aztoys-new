@@ -1,0 +1,17 @@
+{
+  "name": "AzToys",
+  "description": "AzToys",
+  "main": "index.js",
+  "authors": [
+    "Astronim"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/libs/"
+  ],
+  "dependencies": {
+    "mathsass": "^0.9.5"
+  }
+}

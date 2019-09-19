@@ -1,0 +1,25 @@
+{
+  "name": "AZToys",
+  "short_name": "AZToys",
+  "description": "AZToys",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#fff",
+  "icons": [
+    {
+      "src": "apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "share.jpg",
+      "type": "image/jpg",
+      "sizes": "1200x630"
+    },
+    {
+      "src": "favicon.ico",
+      "type": "image/ico",
+      "sizes": "16x16"
+    }
+  ]
+}

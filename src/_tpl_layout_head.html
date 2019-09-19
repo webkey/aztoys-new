@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="UTF-8">
+  <title>@@title</title>
+  <!--Mobile optimized-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <!--SEO-->
+  <meta name="description" content="описание">
+  <meta name="keywords" content="ключевые слова">
+  <meta name="yandex-verification" content="XXXXXXXXXXXXXX">
+  <meta name="google-site-verification" content="XXXXXXXXXXXXXX">
+  <!--The Open Graph protocol-->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="http://localhost:3000/index.html">
+  <meta property="og:title" content="Название">
+  <meta property="og:image" content="http://localhost:3000/share.jpg">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:description" content="Описание">
+  <meta property="og:site_name" content="Расширенное название">
+  <!--Favicon-->
+  <link rel="shortcut icon" href="favicon.ico?rev=@@hash">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?rev=@@hash">
+  <!--manifest-->
+  <link rel="manifest" href="manifest.webmanifest">
+  <!--Style-->
+  <link rel="stylesheet" href="css/widgets.css?rev=@@hash">
+  <link rel="stylesheet" href="css/all.css?rev=@@hash">
+  <!--Modernizr-->
+  <script src="js/vendor/modernizr-3.3.1.custom.min.js"></script>
+</head>
+<body
+@@if(context.pageClass){ class="@@pageClass"}>
+<noscript><div class="no-js-warning">Для корректной работы сайта <b>включите JavaScript</b> в браузере</div></noscript>
+<!--[if lt IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!--preloader-->
+<div id="pagePreloader" class="page-preloader">
+  <div class="prl-cont">
+    <div class="prl-icon"></div>
+    <div class="prl-logo">
+      <div class="prl-text">Loading <span class="prl-dot">.</span><span class="prl-dot">.</span><span class="prl-dot">.</span></div>
+    </div>
+  </div>
+</div>
+<!--preloader end-->
+
+@@if(context.currentItem == "Home"){
+<!--screen-->
+<div class="color-tape-horizontal"></div>
+<div class="screen">
+  <div class="screen__bg"></div>
+  <strong class="screen__logo">AZToys</strong>
+  <strong class="screen__title">Interactive toys inspiring fun learning!</strong>
+</div>
+<!--screen end-->
+}
