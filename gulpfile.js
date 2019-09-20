@@ -115,7 +115,8 @@ gulp.task('sassCompilation', function () {
  */
 gulp.task('mergeCssLibs', function () {
   return gulp.src([
-    'src/css/_temp/widgets.css'
+    'src/css/_temp/widgets.css',
+    'node_modules/swiper/css/swiper.min.css'
   ])
       .pipe(concatCss("src/css/widgets.css", {
         rebaseUrls: false
@@ -131,7 +132,8 @@ gulp.task('mergeCssLibs', function () {
  */
 gulp.task('copyLibsScriptsToJs', function () {
   return gulp.src([
-    'src/js/_temp/widgets.js'
+    'src/js/_temp/widgets.js',
+    'node_modules/swiper/js/swiper.min.js'
   ])
       .pipe(concat('widgets.js'))
       .pipe(gulp.dest('src/js'))

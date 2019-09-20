@@ -1705,21 +1705,157 @@ function contacts() {
 /**
  * !Swiper slider initial
  */
-// external js:
-// 1) Swiper 3.3.1 (widgets.js);
-// 2) TweetMax VERSION: 1.19.0 (widgets.js);
 function swiperSliderInit() {
-  var $slider = $('.swiper-container');
+  var $videoSlider = $('.video-slider-js');
+
+  if($videoSlider.length){
+    var slideHolder = '.video-slider-el',
+        classVideoPlayed = 'video-played',
+        animateSpeed = 0.3;
+
+    $videoSlider.each(function () {
+      var $curSlider = $(this),
+          $navPrev = $curSlider.find('.swiper-button-prev'),
+          $navNext = $curSlider.find('.swiper-button-next');
+
+      var thisSlider = new Swiper($curSlider, {
+        spaceBetween: 10,
+        slidesPerView: 3,
+        effect: 'coverflow',
+        coverflowEffect: {
+          rotate: 10,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows : true
+        },
+        centeredSlides: true,
+        loop: true,
+        loopedSlides: 5,
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+        navigation: {
+          nextEl: $navNext,
+          prevEl: $navPrev,
+        },
+        on: {
+          init: function (event, a) {
+            console.log("thisSlider: ", thisSlider);
+            var $iframe = $('<iframe src="about:blank" frameborder="0" allowfullscreen></iframe>'),
+                thisSlideHolder = $(event.slides).find(slideHolder);
+
+            TweenMax.set($iframe, {autoAlpha: 0});
+
+            $iframe
+                .addClass('swiper-video')
+                .css({
+                  'width': '100%', 'height': '100%'
+                })
+                .prependTo(thisSlideHolder);
+          },
+          slideChange: function () {
+            closeSwiperVideo();
+          }
+        },
+      });
+
+      thisSlider.on('init', function() {
+        $curSlider.addClass('is-loaded');
+      });
+
+      thisSlider.init();
+
+
+      // Управление видео
+      $curSlider.on('click', '.play-video-js', function (e) {
+        e.preventDefault();
+
+        playSwiperVideo.call(this);
+      });
+
+      $curSlider.on('click', '.close-video-js', function (e) {
+        e.preventDefault();
+
+        closeSwiperVideo();
+      });
+
+      /*Add video to each slide*/
+      function playSwiperVideo() {
+        var $playBtn = $(this),
+            $container = $playBtn.closest($('.swiper-slide'));
+
+        $container.addClass(classVideoPlayed);
+
+        $playBtn.hide(0);
+        $container.find($('.swiper-img-js')).hide(0);
+        $container.find($('.swipe-title-js')).hide(0);
+        $playBtn.closest($slider).find('.swiper-button-prev').hide(0);
+        $playBtn.closest($slider).find('.swiper-button-next').hide(0);
+
+
+        var $iframe = $container.find('iframe');
+        var src = $playBtn.attr('href');
+
+        $iframe.attr("src", src + '?rel=0&autoplay=1');
+        TweenMax.to($iframe, animateSpeed, {autoAlpha:1});
+
+        $container.find('.close-video-js').show(0);
+      }
+
+      function closeSwiperVideo() {
+
+        var $content = $('.video-played');
+
+        $content.find('.close-video-js').hide(0);
+        $content.find($('.swiper-img-js')).show(0);
+        $content.find($('.swipe-title-js')).show(0);
+        $content.find('.play-video-js').show(0);
+        $('.swiper-button-prev').show(0);
+        $('.swiper-button-next').show(0);
+
+
+        var $iframe = $content.find('iframe');
+
+        $iframe.attr("src", 'about:blank');
+        TweenMax.to($iframe, animateSpeed, {autoAlpha: 0});
+
+        $content.removeClass(classVideoPlayed);
+      }
+    });
+  }
+
+
+  var $slider = $('.__swiper-container');
 
   if ($slider.length) {
-    var slideHolder = '.swiper-holder', classVideoPlayed = 'video-played', animateSpeed = 0.3;
+    var slideHolder = '.video-slider-el',
+        classVideoPlayed = 'video-played',
+        animateSpeed = 0.3;
 
     new Swiper($slider, {
-      loop: true, nextButton: '.swiper-button-next', prevButton: '.swiper-button-prev', // effect: 'coverflow',
-      grabCursor: false, centeredSlides: true, slidesPerView: 'auto', speed: 600, parallax: false, simulateTouch: true, coverflow: {
-        rotate: 0, modifier: 4, stretch: 0, slideShadows: false, scale: 0.8
-      }, slideToClickedSlide: true, slideNextClass: 'swiper-slide-next', slidePrevClass: 'swiper-slide-prev', onInit: function (event, a) {
-        var $iframe = $('<iframe src="about:blank" frameborder="0" allowfullscreen></iframe>'), thisSlideHolder = $(event.slides).find(slideHolder);
+      loop: true,
+      nextButton: '.swiper-button-next',
+      prevButton: '.swiper-button-prev',
+      // effect: 'coverflow',
+      grabCursor: false,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      speed: 600,
+      parallax: false,
+      simulateTouch: true,
+      coverflow: {
+        rotate: 0,
+        modifier: 4,
+        stretch: 0,
+        slideShadows: false,
+        scale: 0.8
+      },
+      slideToClickedSlide: true,
+      slideNextClass: 'swiper-slide-next',
+      slidePrevClass: 'swiper-slide-prev',
+      onInit: function (event, a) {
+        var $iframe = $('<iframe src="about:blank" frameborder="0" allowfullscreen></iframe>'),
+            thisSlideHolder = $(event.slides).find(slideHolder);
 
         TweenMax.set($iframe, {autoAlpha: 0});
 
@@ -1729,66 +1865,67 @@ function swiperSliderInit() {
               'width': '100%', 'height': '100%'
             })
             .prependTo(thisSlideHolder);
-      }, onSlideChangeStart: function(){
+      },
+      onSlideChangeStart: function () {
         closeSwiperVideo();
       }
     });
   }
 
-  $slider.on('click', '.play-video-js', function (e) {
-    e.preventDefault();
-
-    playSwiperVideo.call(this);
-  });
-
-  $slider.on('click', '.close-video-js', function (e) {
-    e.preventDefault();
-
-    closeSwiperVideo();
-  });
-
-  /*add video to each slide*/
-  function playSwiperVideo() {
-    var $playBtn = $(this),
-        $container = $playBtn.closest($('.swiper-slide'));
-
-    $container.addClass(classVideoPlayed);
-
-    $playBtn.hide(0);
-    $container.find($('.swiper-img-js')).hide(0);
-    $container.find($('.swipe-title-js')).hide(0);
-    $playBtn.closest($slider).find('.swiper-button-prev').hide(0);
-    $playBtn.closest($slider).find('.swiper-button-next').hide(0);
-
-
-    var $iframe = $container.find('iframe');
-    var src = $playBtn.attr('href');
-
-    $iframe.attr("src", src + '?rel=0&autoplay=1');
-    TweenMax.to($iframe, animateSpeed, {autoAlpha:1});
-
-    $container.find('.close-video-js').show(0);
-  }
-
-  function closeSwiperVideo() {
-
-    var $content = $('.video-played');
-
-    $content.find('.close-video-js').hide(0);
-    $content.find($('.swiper-img-js')).show(0);
-    $content.find($('.swipe-title-js')).show(0);
-    $content.find('.play-video-js').show(0);
-    $('.swiper-button-prev').show(0);
-    $('.swiper-button-next').show(0);
-
-
-    var $iframe = $content.find('iframe');
-
-    $iframe.attr("src", 'about:blank');
-    TweenMax.to($iframe, animateSpeed, {autoAlpha: 0});
-
-    $content.removeClass(classVideoPlayed);
-  }
+  // $slider.on('click', '.play-video-js', function (e) {
+  //   e.preventDefault();
+  //
+  //   playSwiperVideo.call(this);
+  // });
+  //
+  // $slider.on('click', '.close-video-js', function (e) {
+  //   e.preventDefault();
+  //
+  //   closeSwiperVideo();
+  // });
+  //
+  // /*Add video to each slide*/
+  // function playSwiperVideo() {
+  //   var $playBtn = $(this),
+  //       $container = $playBtn.closest($('.swiper-slide'));
+  //
+  //   $container.addClass(classVideoPlayed);
+  //
+  //   $playBtn.hide(0);
+  //   $container.find($('.swiper-img-js')).hide(0);
+  //   $container.find($('.swipe-title-js')).hide(0);
+  //   $playBtn.closest($slider).find('.swiper-button-prev').hide(0);
+  //   $playBtn.closest($slider).find('.swiper-button-next').hide(0);
+  //
+  //
+  //   var $iframe = $container.find('iframe');
+  //   var src = $playBtn.attr('href');
+  //
+  //   $iframe.attr("src", src + '?rel=0&autoplay=1');
+  //   TweenMax.to($iframe, animateSpeed, {autoAlpha:1});
+  //
+  //   $container.find('.close-video-js').show(0);
+  // }
+  //
+  // function closeSwiperVideo() {
+  //
+  //   var $content = $('.video-played');
+  //
+  //   $content.find('.close-video-js').hide(0);
+  //   $content.find($('.swiper-img-js')).show(0);
+  //   $content.find($('.swipe-title-js')).show(0);
+  //   $content.find('.play-video-js').show(0);
+  //   $('.swiper-button-prev').show(0);
+  //   $('.swiper-button-next').show(0);
+  //
+  //
+  //   var $iframe = $content.find('iframe');
+  //
+  //   $iframe.attr("src", 'about:blank');
+  //   TweenMax.to($iframe, animateSpeed, {autoAlpha: 0});
+  //
+  //   $content.removeClass(classVideoPlayed);
+  // }
 }
 
 
