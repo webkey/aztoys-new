@@ -1,13 +1,18 @@
+var $WINDOW = $(window);
+var $DOC = $(document);
+var $HTML = $('html');
+var $BODY = $('body');
+
 /**
  * !Resize only width
  */
 var resizeByWidth = true;
 var prevWidth = -1;
-$(window).resize(function () {
-  var currentWidth = $('body').outerWidth();
+$WINDOW.resize(function () {
+  var currentWidth = $BODY.outerWidth();
   resizeByWidth = prevWidth !== currentWidth;
   if(resizeByWidth){
-    $(window).trigger('resizeByWidth');
+    $WINDOW.trigger('resizeByWidth');
     prevWidth = currentWidth;
   }
 });
@@ -36,12 +41,12 @@ function headerFixed(){
   // external js:
   // 1) resizeByWidth (resize only width);
 
-  var $page = $('body'),
+  var $page = $BODY,
       minScrollTop = $('.header').outerHeight();
 
-  var previousScrollTop = $(window).scrollTop();
-  $(window).on('load scroll resizeByWidth', function () {
-    var currentScrollTop = $(window).scrollTop();
+  var previousScrollTop = $WINDOW.scrollTop();
+  $WINDOW.on('load scroll resizeByWidth', function () {
+    var currentScrollTop = $WINDOW.scrollTop();
     var showHeaderPanel = currentScrollTop < minScrollTop || currentScrollTop < previousScrollTop;
 
     $page.toggleClass('header-show', showHeaderPanel);
@@ -51,100 +56,53 @@ function headerFixed(){
 }
 
 
-/*custom scroll on page */
-function pageCustomScroll() {
-  // 1) malihu jquery custom scrollbar plugin (widgets.js);
-  // 2) resizeByWidth (resize only width);
-  // 3) TweetMax VERSION: 1.19.0 (widgets.js);
-
-  if (!DESKTOP) return false;
-
-  var $body = $('body'),
-      minScrollTop = $('.header').outerHeight(),
-      previousScrollTop = -1,
-      $fixedBox = $('.soc-js');
-
-  $(window).on("load",function(){
-
-    var thisMCSTop = 0;
-    // custom scroll on page
-    $body.mCustomScrollbar({
+/**
+ * Custom scroll
+ */
+function customScroll() {
+  // Custom scroll for nav drop
+  var $navDropScroll = $('.nav-drop');
+  if ($navDropScroll.length) {
+    $navDropScroll.mCustomScrollbar({
       theme: "minimal-dark",
       autoHideScrollbar: true,
       autoExpandScrollbar: true,
-      scrollInertia: 50,
-      mouseWheel:{ scrollAmount: 100 },
-      callbacks: {
-        onInit: function () {
-
-          thisMCSTop = -this.mcs.top;
-
-          toggleHeaderForCustomScroll(thisMCSTop);
-
-          // parallaxBg(thisMCSTop);
-
-          if ($fixedBox.length) {
-            shareFixedForCustomScroll(thisMCSTop);
-          }
-
-          tabs();
-          swiperSliderInit();
-
-        }, onScroll: function () {
-
-          toggleHeaderForCustomScroll(-this.mcs.top);
-
-        }, whileScrolling: function () {
-
-          // parallaxBg(thisMCSTop);
-
-          $(window).trigger("lookup");
-
-          if ($fixedBox.length) {
-            var thisMCSTop = -this.mcs.top;
-            shareFixedForCustomScroll(thisMCSTop);
-          }
-        }
-      }
+      scrollInertia: 300
     });
+  }
 
-    // custom scroll for nav drop
-    var $navDropScroll = $('.nav-drop');
-    if ($navDropScroll.length) {
-      $navDropScroll.mCustomScrollbar({
-        theme: "minimal-dark",
-        autoHideScrollbar: true,
-        autoExpandScrollbar: true,
-        scrollInertia: 300
-      });
-    }
+  // Custom scroll for sidebar
+  var $sidebarScroll = $('.sidebar__holder');
+  if ($sidebarScroll.length) {
+    $sidebarScroll.mCustomScrollbar({
+      theme: "minimal-dark",
+      autoHideScrollbar: true,
+      autoExpandScrollbar: true,
+      scrollInertia: 300
+    });
+  }
 
-    // custom scroll for sidebar
-    var $sidebarScroll = $('.sidebar__holder');
-    if ($sidebarScroll.length) {
-      $sidebarScroll.mCustomScrollbar({
-        theme: "minimal-dark",
-        autoHideScrollbar: true,
-        autoExpandScrollbar: true,
-        scrollInertia: 300
-      });
-    }
+  // Custom scroll for sidebar filters drop
+  var $sidebarFiltersDrop = $('.filters-drop');
+  if ($sidebarFiltersDrop.length) {
+    $sidebarFiltersDrop.mCustomScrollbar({
+      theme: "minimal-dark",
+      autoHideScrollbar: true,
+      autoExpandScrollbar: true,
+      scrollInertia: 300
+    });
+  }
+}
 
-    // custom scroll for sidebar filters drop
-    var $sidebarFiltersDrop = $('.filters-drop');
-    if ($sidebarFiltersDrop.length) {
-      $sidebarFiltersDrop.mCustomScrollbar({
-        theme: "minimal-dark",
-        autoHideScrollbar: true,
-        autoExpandScrollbar: true,
-        scrollInertia: 300
-      });
-    }
-  });
 
-  footerBottom();
+/**
+ * !Show and hide header on scroll
+ */
+function toggleHeader() {
+  var $body = $BODY,
+      minScrollTop = $('.header').outerHeight(),
+      previousScrollTop = -1;
 
-  // header show / hide
   function toggleHeaderForCustomScroll(value) {
     var currentScrollTop = value;
 
@@ -155,93 +113,12 @@ function pageCustomScroll() {
     previousScrollTop = currentScrollTop;
   }
 
-  // share box fixed
-  var $barrier = $('.full-width-js'),
-      $footer = $('.footer'),
-      topSpace = 50,
-      $fixedMarker = $('<div />');
-
-  $fixedMarker.insertBefore($fixedBox).css({
-    'height': 0,
-    'width': 0,
-    'float': 'left'
-  });
-
-  function shareFixedForCustomScroll(scrollTop) {
-    if (!$fixedBox.length) return false;
-
-    var fixedBoxHeight = $fixedBox.outerHeight(),
-        fixedBoxFullHeight = fixedBoxHeight + topSpace*2,
-        footerOffsetTop = $footer.offset().top,
-        fixedMarkerPositionTop = $fixedMarker.position().top;
-
-    var $wrapper = $fixedBox.parent(),
-        wrapperHeight = $wrapper.outerHeight(),
-        wrapperPositionTop = $wrapper.position().top,
-        topPadding = fixedMarkerPositionTop - wrapperPositionTop,
-        bottomPadding = +$wrapper.css("padding-top").replace("px", ""),
-        wrapperInnerHeight = wrapperHeight - (topPadding + bottomPadding);
-
-    if (wrapperInnerHeight <= fixedBoxHeight) {
-      clearFixedBoxStyles();
-
-      return false;
+  $WINDOW.on('load scroll', function () {
+    if ($('.header').length) {
+      toggleHeaderForCustomScroll($WINDOW.scrollTop());
     }
-
-    if ($barrier.length && $barrier.outerHeight() > 0) {
-      var barrierHeight = $barrier.outerHeight(),
-          showBeforeBarrier = $barrier.position().top + barrierHeight - topSpace,
-          wrapperMinHeight = fixedBoxHeight*2 + barrierHeight;
-
-      if (wrapperInnerHeight <= wrapperMinHeight) {
-        clearFixedBoxStyles();
-
-        return false;
-      }
-
-      if (scrollTop >= showBeforeBarrier) {
-        $fixedBox
-            .addClass('fixed')
-            .css({
-              'position': 'fixed',
-              'top': topSpace
-            });
-      } else {
-        clearFixedBoxStyles();
-      }
-    } else {
-      if (scrollTop >= fixedMarkerPositionTop - topSpace) {
-        $fixedBox
-            .addClass('fixed')
-            .css({
-              'position': 'fixed',
-              'top': topSpace
-            });
-      } else {
-        clearFixedBoxStyles();
-      }
-    }
-
-    if (footerOffsetTop <= fixedBoxFullHeight) {
-      $fixedBox
-          .addClass('stick-bottom')
-          .css({
-            'top': footerOffsetTop - fixedBoxFullHeight + topSpace
-          });
-    } else {
-      $fixedBox.removeClass('stick-bottom');
-    }
-  }
-
-  function clearFixedBoxStyles() {
-    $fixedBox
-        .removeClass('fixed')
-        .css({
-          'position': 'relative', 'top': 'auto'
-        });
-  }
+  })
 }
-/*custom scroll on page end*/
 
 
 /**
@@ -304,7 +181,6 @@ function tabs() {
 }
 
 function equalHeightForTabs(content){
-  $(window).trigger("lookup");
   var $parent = $('.products__list', content);
   if ($parent.length) {
     $('.products__inner', $parent).equalHeight({
@@ -450,7 +326,7 @@ function customSelect(){
         }
       });
     });
-    $(window).resize(selectResize);
+    $WINDOW.resize(selectResize);
   }
 }
 
@@ -486,7 +362,7 @@ function selectResize(){
 // 2) resizeByWidth (this file);
 function filtersEvents() {
   // external js: Isotope PACKAGED v3.0.1 (widgets.js);
-  var $body = $('body'),
+  var $body = $BODY,
       $filtersWrapper = $('.products'),
       $filters = $('.filters-js'),
       $filtersTagsGroup = $('.filters-tags-js'),
@@ -716,13 +592,13 @@ function filtersEvents() {
   }
 
   // recalculate height of phone drop
-  $(window).on('resize scroll', function () {
+  $WINDOW.on('resize scroll', function () {
     phonesDropHeight.call();
   });
 
   function phonesDropHeight() {
     var topSpace = $('.filters').outerHeight();
-    var windowHeight = $(window).height() - topSpace;
+    var windowHeight = $WINDOW.height() - topSpace;
 
     $jsDrop.css('height', windowHeight);
   }
@@ -751,8 +627,6 @@ function filtersEvents() {
     } else {
       tempNoProducts.hide();
     }
-
-    $(window).trigger("lookup");
   });
 
   // clear filter tags
@@ -783,7 +657,7 @@ function filtersEvents() {
   }
 
   // clear on horizontal resize
-  $(window).on('resizeByWidth', function () {
+  $WINDOW.on('resizeByWidth', function () {
     if ( $filters.attr('style') ) {
       $filters.attr('style','');
       $jsDropOpener.trigger('click');
@@ -894,6 +768,104 @@ function shareEvents() {
 
 
 /**
+ * !Share Fixed for custom scroll
+ */
+function shareFixedForCustom() {
+  var $fixedBox = $('.soc-js'),
+      $barrier = $('.full-width-js'),
+      $footer = $('.footer'),
+      topSpace = 50,
+      $fixedMarker = $('<div />');
+
+  $fixedMarker.insertBefore($fixedBox).css({
+    'height': 0,
+    'width': 0,
+    'float': 'left'
+  });
+
+  function shareFixedForCustomScroll(scrollTop) {
+    if (!$fixedBox.length) return false;
+
+    var fixedBoxHeight = $fixedBox.outerHeight(),
+        fixedBoxFullHeight = fixedBoxHeight + topSpace*2,
+        footerOffsetTop = $footer.offset().top,
+        fixedMarkerPositionTop = $fixedMarker.position().top;
+
+    var $wrapper = $fixedBox.parent(),
+        wrapperHeight = $wrapper.outerHeight(),
+        wrapperPositionTop = $wrapper.position().top,
+        topPadding = fixedMarkerPositionTop - wrapperPositionTop,
+        bottomPadding = +$wrapper.css("padding-top").replace("px", ""),
+        wrapperInnerHeight = wrapperHeight - (topPadding + bottomPadding);
+
+    if (wrapperInnerHeight <= fixedBoxHeight) {
+      clearFixedBoxStyles();
+
+      return false;
+    }
+
+    if ($barrier.length && $barrier.outerHeight() > 0) {
+      var barrierHeight = $barrier.outerHeight(),
+          showBeforeBarrier = $barrier.position().top + barrierHeight - topSpace,
+          wrapperMinHeight = fixedBoxHeight*2 + barrierHeight;
+
+      if (wrapperInnerHeight <= wrapperMinHeight) {
+        clearFixedBoxStyles();
+
+        return false;
+      }
+
+      if (scrollTop >= showBeforeBarrier) {
+        $fixedBox
+            .addClass('fixed')
+            .css({
+              'position': 'fixed',
+              'top': topSpace
+            });
+      } else {
+        clearFixedBoxStyles();
+      }
+    } else {
+      if (scrollTop >= fixedMarkerPositionTop - topSpace) {
+        $fixedBox
+            .addClass('fixed')
+            .css({
+              'position': 'fixed',
+              'top': topSpace
+            });
+      } else {
+        clearFixedBoxStyles();
+      }
+    }
+
+    if (footerOffsetTop <= fixedBoxFullHeight) {
+      $fixedBox
+          .addClass('stick-bottom')
+          .css({
+            'top': footerOffsetTop - fixedBoxFullHeight + topSpace
+          });
+    } else {
+      $fixedBox.removeClass('stick-bottom');
+    }
+  }
+
+  function clearFixedBoxStyles() {
+    $fixedBox
+        .removeClass('fixed')
+        .css({
+          'position': 'relative', 'top': 'auto'
+        });
+  }
+
+  $WINDOW.on('load scroll resizeByWidth', function () {
+    if ($fixedBox.length) {
+      shareFixedForCustomScroll($WINDOW.scrollTop());
+    }
+  })
+}
+
+
+/**
  * !Share Fixed
  */
 function shareFixed(){
@@ -906,13 +878,13 @@ function shareFixed(){
       $bottom = $('.footer'),
       topSpace = 50;
 
-  $(window).on('load scroll resizeByWidth', function () {
+  $WINDOW.on('load scroll resizeByWidth', function () {
 
     var barrierTopPosition = $barrier.offset().top,
         barrierHeight = $barrier.outerHeight(),
         fixedBoxHeight = $fixedBox.outerHeight(),
         bottomTopPosition = $bottom.offset().top,
-        currentScrollTop = $(window).scrollTop();
+        currentScrollTop = $WINDOW.scrollTop();
 
     if (currentScrollTop >= (fixedBoxTopPosition - topSpace)) {
       $fixedBox
@@ -970,7 +942,7 @@ function shareFixed(){
     self.addClassHover();
 
     if (!self.desktop) {
-      $(window).on('debouncedresize', function () {
+      $WINDOW.on('debouncedresize', function () {
         self.removeClassHover();
       });
     }
@@ -986,7 +958,7 @@ function shareFixed(){
 
     $container.on('click', ''+item+'', function (e) {
 
-      if (self.desktop || $(window).width() < 980) return;
+      if (self.desktop || $WINDOW.width() < 980) return;
 
       var $currentItem = $(this);
 
@@ -1010,13 +982,13 @@ function shareFixed(){
     });
 
     $drop.children().not('.close-nav-drop-js').on('click', function (e) {
-      if (self.desktop || $(window).width() < 980) return;
+      if (self.desktop || $WINDOW.width() < 980) return;
 
       e.stopPropagation();
     });
 
-    $(document).on('click', function () {
-      if (self.desktop || $(window).width() < 980) return;
+    $DOC.on('click', function () {
+      if (self.desktop || $WINDOW.width() < 980) return;
 
       $item.removeClass(_hover);
     });
@@ -1201,7 +1173,7 @@ function hoverClassInit(){
       e.preventDefault();
     });
 
-    $(document).on('click', self._overlayClass, function () {
+    $DOC.on('click', self._overlayClass, function () {
       self.closeNav();
     });
   };
@@ -1295,7 +1267,7 @@ function hoverClassInit(){
         $sbFooter = self.$navFooter;
 
     //clear on horizontal resize
-    $(window).on('resizeByWidth', function () {
+    $WINDOW.on('resizeByWidth', function () {
       self.$mainContainer.removeClass(self.modifiers.opened);
       $buttonMenu.removeClass(self.modifiers.active);
       self.showOverlay(false);
@@ -1335,8 +1307,8 @@ function navDropHeight() {
   var $navDrop = $('.js-nav-drop');
   if (!$navDrop.length) return false;
 
-  $(window).on('load resize', function () {
-    $navDrop.css('height', $(window).outerHeight());
+  $WINDOW.on('load resize', function () {
+    $navDrop.css('height', $WINDOW.outerHeight());
   });
 }
 
@@ -1348,7 +1320,7 @@ function navDropEvents(){
 
   var $navDrop = $('.js-nav-drop');
   if($navDrop.length){
-    var $html = $('html'),
+    var $html = $HTML,
         $item = $('.nav-list .has-drop'),
         activeClass = 'show-nav-drop',
         animateSpeed = 0.2,
@@ -1361,7 +1333,7 @@ function navDropEvents(){
       if (DESKTOP) {
         $currentItem.on('mouseenter', function () {
 
-          if ($(window).width() >= 980) {
+          if ($WINDOW.width() >= 980) {
             openNavDrop();
           }
 
@@ -1378,7 +1350,7 @@ function navDropEvents(){
 
       if(!DESKTOP){
         $currentItem.on('click', function () {
-          if ($(window).width() >= 980) {
+          if ($WINDOW.width() >= 980) {
             openNavDrop();
 
             equalHeightNavDropGroup();
@@ -1387,7 +1359,7 @@ function navDropEvents(){
         });
       }
 
-      $(document).on('click', function () {
+      $DOC.on('click', function () {
         closeNavDrop();
       });
 
@@ -1399,7 +1371,7 @@ function navDropEvents(){
         return false;
       });
 
-      $(window).on('resizeByWidth', function () {
+      $WINDOW.on('resizeByWidth', function () {
         if ($currentNavDrop.is(':visible')) {
           closeNavDrop();
         }
@@ -1439,7 +1411,7 @@ function navDropEvents(){
           amount: $navDropGroup.length
         });
 
-        $navDropGroup.css('min-height', $(window).outerHeight());
+        $navDropGroup.css('min-height', $WINDOW.outerHeight());
       }
 
       function createOverlay(close) {
@@ -1552,7 +1524,7 @@ function mapMainInit(){
 
     /*aligned after resize*/
     var resizeTimer0;
-    $(window).on('resize', function () {
+    $WINDOW.on('resize', function () {
       clearTimeout(resizeTimer0);
       resizeTimer0 = setTimeout(function () {
         moveToLocation(0,map0);
@@ -1575,7 +1547,7 @@ function mapMainInit(){
 
     /*aligned after resize*/
     var resizeTimer1;
-    $(window).on('resize', function () {
+    $WINDOW.on('resize', function () {
       clearTimeout(resizeTimer1);
       resizeTimer1 = setTimeout(function () {
         moveToLocation(1,map1);
@@ -1996,7 +1968,7 @@ function tapeSlider(reload) {
     }
 
     // Reload on resize
-    $(window).on('resize', function () {
+    $WINDOW.on('resize', function () {
       frame.reload();
     });
   }
@@ -2082,7 +2054,7 @@ function popupEvents() {
   });
 
   // recalculation main height
-  var $window = $(window);
+  var $window = $WINDOW;
   $window.on('heightMainRecalc', function () {
     if (popupOpened) {
       TweenMax.to($main, 0.2, {height: $popup.outerHeight()}, 0.5);
@@ -2095,14 +2067,14 @@ function popupEvents() {
   });
 
   // close popup on click to "Esc" key
-  $(document).keyup(function(e) {
+  $DOC.keyup(function(e) {
     if (e.keyCode == 27) {
       closePopup();
     }
   });
 
   // close popup on click to close button
-  $('body').on('click', btnClose, function (e) {
+  $BODY.on('click', btnClose, function (e) {
     e.preventDefault();
 
     // МОЙ КОД
@@ -2119,7 +2091,7 @@ function popupEvents() {
     if (DESKTOP) {
       topPosition = $('#mCSB_1_container').position().top;
     } else {
-      topPosition = $(window).scrollTop();
+      topPosition = $WINDOW.scrollTop();
     }
 
     $popup.height('auto');
@@ -2141,7 +2113,7 @@ function popupEvents() {
 
             toggleMainClass(popupOpened);
 
-            $('body').removeClass('product-is-card');
+            $BODY.removeClass('product-is-card');
           }
         }, 0.1);
       }
@@ -2205,7 +2177,7 @@ function popupEvents() {
   // page scroll to top
   function pageScrollToTop() {
     if (DESKTOP) {
-      $('body').mCustomScrollbar("scrollTo", 0, {
+      $BODY.mCustomScrollbar("scrollTo", 0, {
         scrollInertia: 0
       });
     } else {
@@ -2218,7 +2190,7 @@ function popupEvents() {
     topPosition = topPosition || 0;
 
     if (DESKTOP) {
-      $('body').mCustomScrollbar("scrollTo", topPosition, {
+      $BODY.mCustomScrollbar("scrollTo", topPosition, {
         scrollInertia: 0
       });
     } else {
@@ -2228,7 +2200,7 @@ function popupEvents() {
 
   // hide filters opener and header
   function toggleMainClass(popupOpened) {
-    $('html').toggleClass('popup-show', popupOpened);
+    $HTML.toggleClass('popup-show', popupOpened);
   }
 
   //replace tegs for SEO
@@ -2266,8 +2238,8 @@ function toggleScrollPage(id) {
   // page fixed;
   if (id === undefined) return false;
 
-  var $body = $('body'),
-      $html = $('html'),
+  var $body = $BODY,
+      $html = $HTML,
       attr = $html.attr('data-toggle-scroll');
 
   if (typeof attr !== typeof undefined && attr !== false && attr !== id) return false;
@@ -2299,7 +2271,7 @@ function toggleScrollPage(id) {
 function footerBottom(){
   var $footer = $('.footer');
   if($footer.length){
-    $(window).on('load resizeByWidth', function () {
+    $WINDOW.on('load resizeByWidth', function () {
       var footerOuterHeight = $footer.outerHeight();
       $footer.css({
         'margin-top': -footerOuterHeight
@@ -2310,6 +2282,8 @@ function footerBottom(){
     });
   }
 }
+
+
 
 
 // ___________________________________________НОВЫЙ КОД !!!
@@ -2332,20 +2306,19 @@ function imgLazyLoad() {
   if( $('.products__figure').length > 0) {
     $('.products__figure img').unveil();
   }
-
-  //if tabs switched
-  //$(window).trigger("lookup");
 }
 
 /** ready/load/resize document **/
-$(window).load(function () {
+$WINDOW.load(function () {
   // preloadPage();
 
   popupEvents();
 });
 
-$(document).ready(function(){
-  pageCustomScroll();
+$DOC.ready(function(){
+  customScroll();
+  toggleHeader();
+  shareFixed();
   placeholderInit();
   stateFields();
   printShow();
@@ -2363,16 +2336,19 @@ $(document).ready(function(){
   mainNavigationInit();
   // toggleScrollPage(id); // toggle scroll page
 
+  tabs();
+  swiperSliderInit();
+
+  imgLazyLoad();
+  footerBottom();
+
   if (!DESKTOP) {
-    tabs();
-    headerFixed();
-    swiperSliderInit();
+    // headerFixed();
     // fotoramaInit();
     // tapeSlider();
     // shareFixed();
 
-    footerBottom();
+    // footerBottom();
     // mainScreenForMobile();
   }
-  imgLazyLoad();
 });
