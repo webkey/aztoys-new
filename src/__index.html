@@ -5,14 +5,48 @@
 
 @@include("_tpl_layout_header.html", { "currentItem": "Home" })
 
+@@include("_tpl_layout_menu.html", { "currentItem": "Home" })
+
 @@include("_tpl_layout_sidebar.html", { "currentItem": "Home" })
 
 
 
 <!--WRAPPER-->
 <div class="wrapper">
+
+
   <!--MAIN-->
   <div class="main">
+    <!--promo-->
+    <div class="promo">
+      <div class="swiper-container promo-slider promo-slider-js">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            @@include("_tpl_promo-slider-el.html", {
+            "img": "img/img-video-01.jpg",
+            "title": "image description"
+            })
+          </div>
+          <div class="swiper-slide">
+            @@include("_tpl_promo-slider-el.html", {
+            "img": "img/img-video-02.jpg",
+            "title": "image description"
+            })
+          </div>
+          <div class="swiper-slide">
+            @@include("_tpl_promo-slider-el.html", {
+            "img": "img/img-video-03.jpg",
+            "title": "image description"
+            })
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+    <!--promo end-->
+
     <!--CONTENT-->
     <div class="content layout">
       <div class="tabs-wrap">
@@ -25,7 +59,7 @@
         <div class="tabs-panel" id="tabs-section-01">
           <div class="products__list">
             <div class="products__item">
-              <a href="products/prod-card.html" class="products__inner">
+              <a href="prod-card.html" class="products__inner">
                 <div class="products__img"><div class="products__figure"><img src="img/img-products-01.jpg" alt="image description" /></div></div>
                 <div class="products__content">
                   <h3 class="products__title">Baby Player</h3>
@@ -612,7 +646,6 @@
     <!--CONTENT end-->
   </div>
   <!--MAIN end-->
-  <div class="spacer"></div>
 </div>
 <!--WRAPPER end-->
 

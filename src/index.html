@@ -49,6 +49,16 @@
 <![endif]-->
   <!--HEADER-->
   <header class="header">
+    <!--menu opener-->
+    <a href="#" class="menu-opener menu-opener-js is-open">
+      <div class="btn-lines">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <span>Menu</span>
+    </a>
+    <!--menu opener end-->
     <!--logo-->
     <div class="logo">
       <a href="index.html">
@@ -68,22 +78,34 @@
     </a>
     <!--btn menu end-->
     <!--slogan-->
-    <div class="logo__slogan"><span>Playing to get smart</span></div>
+    <div class="slogan"><span>Playing to get smart</span></div>
     <!--slogan end-->
   </header>
   <!--HEADER end-->
+  <!--MENU-->
+  <aside class="menu menu-js is-open" data-swc-prevent-remove>
+    <div class="menu__holder">
+      <div class="menu__frame">
+        <!-- main navigation -->
+        <nav class="nav">
+          <ul class="nav-list">
+            <li><a href="products.html"><span>Products</span></a></li>
+            <li><a href="about.html"><span>About Us</span></a></li>
+            <li><a href="apps.html"><span>Apps</span></a></li>
+            <li><a href="news.html"><span>News</span></a></li>
+            <li><a href="video.html"><span>Video</span></a></li>
+            <li><a href="contacts.html"><span>Contacts</span></a></li>
+          </ul>
+        </nav>
+        <!-- main navigation end -->
+      </div>
+    </div>
+  </aside>
+  <!--menu end-->
   <!--SIDEBAR-->
   <aside class="sidebar">
     <div class="sidebar__holder">
       <div class="sidebar__frame">
-        <!--logo-->
-        <div class="logo">
-          <a href="index.html">
-            <strong class="logo__img">AZToys</strong>
-            <div class="logo__slogan"><span>Playing to get smart</span></div>
-          </a>
-        </div>
-        <!--logo end-->
         <!-- main navigation -->
         <nav class="nav">
           <ul class="nav-list">
@@ -218,6 +240,32 @@
   <div class="wrapper">
     <!--MAIN-->
     <div class="main">
+      <!--promo-->
+      <div class="promo">
+        <div class="swiper-container promo-slider promo-slider-js">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <a href="#" class="promo-slider-el" style="background-image:url(img/img-video-01.jpg);">
+                <div class="promo-slider-el__title">image description</div>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="#" class="promo-slider-el" style="background-image:url(img/img-video-02.jpg);">
+                <div class="promo-slider-el__title">image description</div>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="#" class="promo-slider-el" style="background-image:url(img/img-video-03.jpg);">
+                <div class="promo-slider-el__title">image description</div>
+              </a>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+      <!--promo end-->
       <!--CONTENT-->
       <div class="content layout">
         <div class="tabs-wrap">
@@ -229,7 +277,7 @@
           <div class="tabs-panel" id="tabs-section-01">
             <div class="products__list">
               <div class="products__item">
-                <a href="products/prod-card.html" class="products__inner">
+                <a href="prod-card.html" class="products__inner">
                   <div class="products__img">
                     <div class="products__figure"><img src="img/img-products-01.jpg" alt="image description" /></div>
                   </div>
@@ -898,7 +946,7 @@
                 <div class="swiper-slide">
                   <div class="video-slider-el">
                     <div class="swiper-img swiper-img-js"><img src="img/img-video-01.jpg" alt="image description" /></div>
-                    <div class="swipe-title swipe-title-js">Sound Cube - Playful learning</div>
+                    <div class="swipe-title swipe-title-js" data-swiper-parallax="-150" data-swiper-parallax-duration="600" data-swiper-parallax-opacity="0">Sound Cube - Playful learning</div>
                     <a href="https://www.youtube.com/embed/xm4TUYZxC-o" class="play-video play-video-js"><span><i class="depict-play">Play</i></span></a>
                     <a href="#" class="btn-close close-video-js">Close</a>
                   </div>
@@ -906,7 +954,7 @@
                 <div class="swiper-slide">
                   <div class="video-slider-el">
                     <div class="swiper-img swiper-img-js"><img src="img/img-video-02.jpg" alt="image description" /></div>
-                    <div class="swipe-title swipe-title-js">KIDS' PAD - Traffic Safety</div>
+                    <div class="swipe-title swipe-title-js" data-swiper-parallax="-150" data-swiper-parallax-duration="600" data-swiper-parallax-opacity="0">KIDS' PAD - Traffic Safety</div>
                     <a href="https://www.youtube.com/embed/n8WCheXl5As" class="play-video play-video-js"><span><i class="depict-play">Play</i></span></a>
                     <a href="#" class="btn-close close-video-js">Close</a>
                   </div>
@@ -914,7 +962,7 @@
                 <div class="swiper-slide">
                   <div class="video-slider-el">
                     <div class="swiper-img swiper-img-js"><img src="img/img-video-03.jpg" alt="image description" /></div>
-                    <div class="swipe-title swipe-title-js">Tactile Puzzles - Unique Puzzles for Babies</div>
+                    <div class="swipe-title swipe-title-js" data-swiper-parallax="-150" data-swiper-parallax-duration="600" data-swiper-parallax-opacity="0">Tactile Puzzles - Unique Puzzles for Babies</div>
                     <a href="https://www.youtube.com/embed/bL6Xzbr-CEY" class="play-video play-video-js"><span><i class="depict-play">Play</i></span></a>
                     <a href="#" class="btn-close close-video-js">Close</a>
                   </div>
@@ -922,7 +970,7 @@
                 <div class="swiper-slide">
                   <div class="video-slider-el">
                     <div class="swiper-img swiper-img-js"><img src="img/img-video-04.jpg" alt="image description" /></div>
-                    <div class="swipe-title swipe-title-js">SOFT TABLET - First Knowledge</div>
+                    <div class="swipe-title swipe-title-js" data-swiper-parallax="-150" data-swiper-parallax-duration="600" data-swiper-parallax-opacity="0">SOFT TABLET - First Knowledge</div>
                     <a href="https://www.youtube.com/embed/F4GMeHLB4no" class="play-video play-video-js"><span><i class="depict-play">Play</i></span></a>
                     <a href="#" class="btn-close close-video-js">Close</a>
                   </div>
@@ -930,7 +978,7 @@
                 <div class="swiper-slide">
                   <div class="video-slider-el">
                     <div class="swiper-img swiper-img-js"><img src="img/img-video-05.jpg" alt="image description" /></div>
-                    <div class="swipe-title swipe-title-js">Innovative Sound EVA Puzzles</div>
+                    <div class="swipe-title swipe-title-js" data-swiper-parallax="-150" data-swiper-parallax-duration="600" data-swiper-parallax-opacity="0">Innovative Sound EVA Puzzles</div>
                     <a href="https://www.youtube.com/embed/IZyCUj_ouSY" class="play-video play-video-js"><span><i class="depict-play">Play</i></span></a>
                     <a href="#" class="btn-close close-video-js">Close</a>
                   </div>
@@ -938,7 +986,7 @@
                 <div class="swiper-slide">
                   <div class="video-slider-el">
                     <div class="swiper-img swiper-img-js"><img src="img/img-video-06.jpg" alt="image description" /></div>
-                    <div class="swipe-title swipe-title-js">KIDS' PAD - Little Expert</div>
+                    <div class="swipe-title swipe-title-js" data-swiper-parallax="-150" data-swiper-parallax-duration="600" data-swiper-parallax-opacity="0">KIDS' PAD - Little Expert</div>
                     <a href="https://www.youtube.com/embed/lddQdkZ8MJA" class="play-video play-video-js"><span><i class="depict-play">Play</i></span></a>
                     <a href="#" class="btn-close close-video-js">Close</a>
                   </div>
@@ -1001,7 +1049,6 @@
       <!--CONTENT end-->
     </div>
     <!--MAIN end-->
-    <div class="spacer"></div>
   </div>
   <!--WRAPPER end-->
   <!--FOOTER-->

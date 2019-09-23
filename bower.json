@@ -12,6 +12,7 @@
     "src/libs/"
   ],
   "dependencies": {
-    "mathsass": "^0.9.5"
+    "mathsass": "^0.9.5",
+    "include-media": "^1.4.9"
   }
 }

@@ -1,0 +1,31 @@
+<!--MENU-->
+<aside class="menu menu-js is-open" data-swc-prevent-remove>
+  <div class="menu__holder">
+    <div class="menu__frame">
+      <!-- main navigation -->
+      <nav class="nav">
+        <ul class="nav-list">
+          @@if(context.currentItem == "Products"){<li class="active"><span><span>Products</span></span></li>}
+          @@if(context.currentItem != "Products"){<li><a href="products.html"><span>Products</span></a></li>}
+
+          @@if(context.currentItem == "About Us"){<li class="active"><span><span>About Us</span></span></li>}
+          @@if(context.currentItem != "About Us"){<li><a href="about.html"><span>About Us</span></a></li>}
+
+          @@if(context.currentItem == "Apps"){<li class="active"><a href="apps.html"><span>Apps</span></a></li>}
+          @@if(context.currentItem != "Apps"){<li><a href="apps.html"><span>Apps</span></a></li>}
+
+          @@if(context.currentItem == "News"){<li class="active"><a href="news.html"><span>News</span></a></li>}
+          @@if(context.currentItem != "News"){<li><a href="news.html"><span>News</span></a></li>}
+
+          @@if(context.currentItem == "Video"){<li class="active"><a href="video.html"><span>Video</span></a></li>}
+          @@if(context.currentItem != "Video"){<li><a href="video.html"><span>Video</span></a></li>}
+
+          @@if(context.currentItem == "Contacts"){<li class="active"><a href="contacts.html"><span>Contacts</span></a></li>}
+          @@if(context.currentItem != "Contacts"){<li><a href="contacts.html"><span>Contacts</span></a></li>}
+        </ul>
+      </nav>
+      <!-- main navigation end -->
+    </div>
+  </div>
+</aside>
+<!--menu end-->

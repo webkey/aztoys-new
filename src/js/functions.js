@@ -35,28 +35,6 @@ function placeholderInit(){
 
 
 /**
- * !Header fixed
- */
-function headerFixed(){
-  // external js:
-  // 1) resizeByWidth (resize only width);
-
-  var $page = $BODY,
-      minScrollTop = $('.header').outerHeight();
-
-  var previousScrollTop = $WINDOW.scrollTop();
-  $WINDOW.on('load scroll resizeByWidth', function () {
-    var currentScrollTop = $WINDOW.scrollTop();
-    var showHeaderPanel = currentScrollTop < minScrollTop || currentScrollTop < previousScrollTop;
-
-    $page.toggleClass('header-show', showHeaderPanel);
-
-    previousScrollTop = currentScrollTop;
-  });
-}
-
-
-/**
  * Custom scroll
  */
 function customScroll() {
@@ -98,14 +76,16 @@ function customScroll() {
 /**
  * !Show and hide header on scroll
  */
-function toggleHeader() {
+function toggleHeaderInit() {
   var $body = $BODY,
-      minScrollTop = $('.header').outerHeight(),
-      previousScrollTop = -1;
+      minScrollTop = $('.header').outerHeight();
 
-  function toggleHeaderForCustomScroll(value) {
-    var currentScrollTop = value;
+  var previousScrollTop = $WINDOW.scrollTop();
 
+  function toggleHeaderForCustomScroll(currentScrollTop) {
+    console.log("minScrollTop: ", minScrollTop);
+    console.log("currentScrollTop: ", currentScrollTop);
+    console.log("previousScrollTop: ", previousScrollTop);
     var showHeaderPanel = currentScrollTop < minScrollTop || currentScrollTop < previousScrollTop;
 
     $body.toggleClass('header-show', showHeaderPanel);
@@ -113,7 +93,7 @@ function toggleHeader() {
     previousScrollTop = currentScrollTop;
   }
 
-  $WINDOW.on('load scroll', function () {
+  $WINDOW.on('load scroll resizeByWidth', function () {
     if ($('.header').length) {
       toggleHeaderForCustomScroll($WINDOW.scrollTop());
     }
@@ -912,7 +892,7 @@ function shareFixed(){
 
 
 /**
- * !Toggel hover class
+ * !Toggle hover class
  */
 (function ($) {
   // external js:
@@ -1047,261 +1027,369 @@ function hoverClassInit(){
 
 
 /**
- * !Main navigation
+ * !jquery.switch-class.js
+ * !Version: 2.0
+ * !Description: Extended toggle class
  */
+
 (function ($) {
-  // external js:
-  // 1) TweetMax VERSION: 1.19.0 (widgets.js);
-  // 2) device.js 0.2.7 (widgets.js);
-  // 3) resizeByWidth (resize only width);
-  var MainNavigation = function (settings) {
-    var options = $.extend({
-      mainContainer: 'html',
-      navContainer: null,
-      navMenu: '.nav-list',
-      btnMenu: '.btn-menu',
-      navMenuItem: '.nav-list > li',
-      navMenuAnchor: 'a',
-      navDropMenu: '.js-nav-drop',
-      staggerItems: null,
-      navFooter: '.sidebar-footer__holder',
-      overlayClass: '.nav-overlay',
-      overlayAppend: 'body',
-      overlayAlpha: 0.8,
-      classNoClickDrop: '.no-click', // Класс, при наличии которого дроп не буте открываться по клику
-      classReturn: null,
-      overlayBoolean: false,
-      animationSpeed: 300,
-      animationSpeedOverlay: null,
-      minWidthItem: 100
-    },settings || {});
+  'use strict';
 
-    var self = this,
-        container = $(options.navContainer),
-        _animateSpeed = options.animationSpeed;
+  // Нужно для корректной работы с доп. классом блокирования скролла
+  var countFixedScroll = 0;
 
-    self.options = options;
-    self.$mainContainer = $(options.mainContainer);            // Основной контейнер дом дерева. по умолчанию <html></html>
-    self.$navMenu = $(options.navMenu);
-    self.$btnMenu = $(options.btnMenu);                        // Кнопка открытия/закрытия меню для моб. верси;
-    self.$navContainer = container;
-    self.$navMenuItem = $(options.navMenuItem, container);     // Пункты навигации;
-    self.$navMenuAnchor = $(options.navMenuAnchor, container); // Элемент, по которому производится событие (клик);
-    self.$navDropMenu = $(options.navDropMenu, container);     // Дроп-меню всех уровней;
-    self.$staggerItems = options.staggerItems || self.$navMenuItem;  //Элементы в стеке, к которым применяется анимация.
-    // По умолчанию navMenuItem;
-    self.$navFooter = $(options.navFooter);
+  // Inner Plugin Modifiers
+  var CONST_MOD = {
+    instanceClass: 'swc-instance',
+    initClass: 'swc-initialized',
+    activeClass: 'swc-active',
+    preventRemoveClass: 'swc-prevent-remove'
+  };
 
-    self._animateSpeed = _animateSpeed;
-    self._classNoClick = options.classNoClickDrop;
+  // Class definition
+  // ================
 
-    // overlay
-    self._overlayBoolean = options.overlayBoolean;            // Добавить оверлей (по-умолчанию == false). Если не true, то не будет работать по клику вне навигации;
-    self._overlayClass = options.overlayClass;                // Класс оверлея;
-    self.overlayAppend = options.overlayAppend;               // Элемент ДОМ, вконец которого добавится оверлей, по умолчанию <body></body>;
-    self.$overlay = $('<div class="' + self._overlayClass.substring(1) + '"></div>'); // Темплейт оверлея;
-    self._overlayAlpha = options.overlayAlpha;
-    self._animateSpeedOverlay = options.animationSpeedOverlay || _animateSpeed;
-    self._minWidthItem = options.minWidthItem;
-
-    self.desktop = device.desktop();
-
-    self.modifiers = {
-      active: 'active',
-      opened: 'nav-opened'
+  var SwitchClass = function (element, config) {
+    var self = this, elem;
+    self.element = element;
+    self.config = config;
+    self.mixedClasses = {
+      initialized: CONST_MOD.initClass + ' ' + (config.modifiers.initClass || ''),
+      active: CONST_MOD.activeClass + ' ' + (config.modifiers.activeClass || ''),
+      scrollFixedClass: 'css-scroll-fixed'
     };
-
-    self.createOverlay();
-    self.switchNav();
-    self.clearStyles();
+    self.$switchClassTo = $(config.toggleEl).add(config.addEl).add(config.removeEl).add(config.switchClassTo);
+    self._classIsAdded = false;
   };
 
-  MainNavigation.prototype.navIsOpened = false;
-
-  // init tween animation
-  MainNavigation.prototype.overlayTween = new TimelineMax({paused: true});
-
-  // overlay append to "overlayAppend"
-  MainNavigation.prototype.createOverlay = function () {
-    var self = this;
-    if (!self._overlayBoolean) return false;
-
-    var $overlay = self.$overlay;
-    $overlay.appendTo(self.overlayAppend);
-
-    TweenMax.set($overlay, {autoAlpha: 0});
-
-    self.overlayTween.to($overlay, self._animateSpeedOverlay / 1000, {autoAlpha: self._overlayAlpha});
-  };
-
-  // show/hide overlay
-  MainNavigation.prototype.showOverlay = function (close) {
-    var self = this;
-    if (!self._overlayBoolean) return false;
-
-    var overlayTween = self.overlayTween;
-
-    if (close === false) {
-      overlayTween.reverse();
+  $.extend(SwitchClass.prototype, {
+    callbacks: function () {
+      var self = this;
+      /** track events */
+      $.each(self.config, function (key, value) {
+        if (typeof value === 'function') {
+          $(self.element).on('switchClass.' + key, function (e, param) {
+            return value(e, $(self.element), param);
+          });
+        }
+      });
+    },
+    prevent: function (event) {
+      event.preventDefault();
+      event.stopPropagation();
       return false;
-    }
+    },
+    toggleFixedScroll: function () {
+      var self = this;
+      $('html').toggleClass(self.mixedClasses.scrollFixedClass, !!countFixedScroll);
+    },
+    add: function () {
+      var self = this;
+      var $currentEl = self.config.selector ? $(self.config.selector) : $(self.element);
 
-    if (overlayTween.progress() !== 0 && !overlayTween.reversed()) {
-      overlayTween.reverse();
-      return false;
-    }
+      if (self._classIsAdded) return;
 
-    overlayTween.play();
-  };
+      // Callback before added class
+      // $(self.element)
+      $currentEl
+          .trigger('switchClass.beforeAdd')
+          .trigger('switchClass.beforeChange');
 
-  // switch nav
-  MainNavigation.prototype.switchNav = function () {
-    var self = this,
-        $buttonMenu = self.$btnMenu;
+      if (self.config.removeExisting) {
+        $.switchClass.remove(true);
+      }
 
-    if ($buttonMenu.is(':visible')) {
-      self.preparationAnimation();
-    }
+      // Добавить активный класс на:
+      // 1) Основной элемент
+      // 2) Дополнительный переключатель
+      // 3) Элементы указанные в настройках экземпляра плагина
+      $currentEl.add(self.$switchClassTo)
+          .addClass(self.mixedClasses.active);
 
-    $buttonMenu.on('click', function (e) {
-      if (self.navIsOpened) {
-        self.closeNav();
+      // Сохранить в дата-атрибут текущий объект this
+      // $(self.element).data('SwitchClass', self);
+      $currentEl.addClass(CONST_MOD.instanceClass).data('SwitchClass', self);
+
+      self._classIsAdded = true;
+
+      if (self.config.cssScrollFixed) {
+        // Если в настойках указано, что нужно добавлять класс фиксации скролла,
+        // То каждый раз вызывая ДОБАВЛЕНИЕ активного класса, увеличивается счетчик количества этих вызовов
+        ++countFixedScroll;
+        self.toggleFixedScroll();
+      }
+
+      // callback after added class
+      // $(self.element)
+      $currentEl
+          .trigger('switchClass.afterAdd')
+          .trigger('switchClass.afterChange');
+    },
+    remove: function () {
+      var self = this;
+      var $currentEl = self.config.selector ? $(self.config.selector) : $(self.element);
+
+      if (!self._classIsAdded) return;
+
+      // callback beforeRemove
+      $currentEl
+          .trigger('switchClass.beforeRemove')
+          .trigger('switchClass.beforeChange');
+
+      // Удалять активный класс с:
+      // 1) Основной элемент
+      // 2) Дополнительный переключатель
+      // 3) Элементы указанные в настройках экземпляра плагина
+      $currentEl.add(self.$switchClassTo)
+          .removeClass(self.mixedClasses.active);
+
+      // Удалить дата-атрибут, в котором хранится объект
+      $currentEl.removeClass(CONST_MOD.instanceClass).removeData('SwitchClass');
+
+      self._classIsAdded = false;
+
+      if (self.config.cssScrollFixed) {
+        // Если в настойках указано, что нужно добавлять класс фиксации скролла,
+        // То каждый раз вызывая УДАЛЕНИЕ активного класса, уменьшается счетчик количества этих вызовов
+        --countFixedScroll;
+        self.toggleFixedScroll();
+      }
+
+      // callback afterRemove
+      $currentEl
+          .trigger('switchClass.afterRemove')
+          .trigger('switchClass.afterChange');
+    },
+    events: function () {
+      var self = this;
+
+      function _toggleClass (e) {
+        if (self._classIsAdded && e.handleObj.origType !== "mouseenter") {
+          self.remove();
+
+          e.preventDefault();
+          return false;
+        }
+
+        self.add();
+
+        self.prevent(e);
+      }
+
+      if (self.config.selector) {
+        $(self.element)
+            .off(self.config.eventType, self.config.selector)
+            .on(self.config.eventType, self.config.selector, _toggleClass);
       } else {
-        self.openNav();
+        $(self.element)
+            .off(self.config.eventType)
+            .on(self.config.eventType, _toggleClass);
       }
 
-      e.preventDefault();
-    });
+      $(self.config.toggleEl).on('click', _toggleClass);
 
-    $DOC.on('click', self._overlayClass, function () {
-      self.closeNav();
-    });
-  };
+      $(self.config.addEl).on('click', function (event) {
+        self.add();
+        self.prevent(event);
+      });
 
-  // open nav
-  MainNavigation.prototype.openNav = function() {
-    var self = this,
-        $html = self.$mainContainer,
-        $navContainer = self.$navContainer,
-        $buttonMenu = self.$btnMenu,
-        _animationSpeed = self._animateSpeedOverlay,
-        $staggerItems = self.$staggerItems,
-        $sbFooter = self.$navFooter;
+      $(self.config.removeEl).on('click', function (event) {
+        self.remove();
+        self.prevent(event);
+      })
 
-    // custom scroll page disabled
-    toggleScrollPage('main-navigation', false);
+    },
+    removeByClickOutside: function () {
+      var self = this;
 
-    $html.addClass(self.modifiers.opened);
-    $buttonMenu.addClass(self.modifiers.active);
+      $('html').on('click', function (event) {
 
-    $navContainer.css({
-      '-webkit-transition-duration': '0s',
-      'transition-duration': '0s'
-    });
+        if ($(event.target).closest('.' + CONST_MOD.preventRemoveClass).length) {
+          return;
+        }
 
-    var navTween = new TimelineMax();
-    var navInnerTween = new TimelineMax();
+        if ($(event.target).closest('[data-swc-prevent-remove]').length) {
+          return;
+        }
 
-    navTween
-        .to($navContainer, _animationSpeed / 1000, {
-          xPercent: 0, onComplete: function () {
-            navInnerTween
-                .staggerTo($staggerItems, _animationSpeed / 1000 * 2, {
-                  autoAlpha: 1, x: 0, ease: Elastic.easeOut
-                }, 0.05)
-                .to($sbFooter, _animationSpeed / 1000, {
-                  autoAlpha: 1, yPercent: 0
-                }, "-=0.4");
-          }
-        });
+        if (self.config.preventRemoveClass && $(event.target).closest('.' + self.config.preventRemoveClass).length) {
+          return;
+        }
 
-    self.showOverlay();
+        if (self._classIsAdded && self.config.removeOutsideClick) {
+          self.remove();
+        }
+      });
+    },
+    removeByClickEsc: function () {
+      var self = this;
 
-    self.navIsOpened = true;
-  };
+      $('html').keyup(function (event) {
+        if (self._classIsAdded && self.config.removeEscClick && event.keyCode === 27) {
+          self.remove();
+        }
+      });
+    },
+    init: function () {
+      var self = this;
+      var $currentEl = self.config.selector ? $(self.config.selector) : $(self.element);
 
-  // close nav
-  MainNavigation.prototype.closeNav = function() {
-    var self = this,
-        $html = self.$mainContainer,
-        $navContainer = self.$navContainer,
-        $buttonMenu = self.$btnMenu,
-        _animationSpeed = self._animateSpeedOverlay;
-
-    // custom scroll page update
-    toggleScrollPage('main-navigation');
-
-    $html.removeClass(self.modifiers.opened);
-    $buttonMenu.removeClass(self.modifiers.active);
-
-    self.showOverlay(false);
-
-    TweenMax.to($navContainer, _animationSpeed / 1000, {
-      xPercent: -100, onComplete: function () {
-        self.preparationAnimation();
-        self.navIsOpened = false;
-      }
-    });
-  };
-
-  // preparation element before animation
-  MainNavigation.prototype.preparationAnimation = function() {
-    var self = this,
-        $navContainer = self.$navContainer,
-        $staggerItems = self.$staggerItems,
-        $sbFooter = self.$navFooter;
-
-    TweenMax.set($navContainer, {xPercent: -100, onComplete: function () {
-        $navContainer.show(0);
-      }});
-    TweenMax.set($staggerItems, {autoAlpha: 0, x: -40});
-    TweenMax.set($sbFooter, {autoAlpha: 0, yPercent: 100});
-  };
-
-  // clearing inline styles
-  MainNavigation.prototype.clearStyles = function() {
-    var self = this,
-        $buttonMenu = self.$btnMenu,
-        $navContainer = self.$navContainer,
-        $staggerItems = self.$staggerItems,
-        $sbFooter = self.$navFooter;
-
-    //clear on horizontal resize
-    $WINDOW.on('resizeByWidth', function () {
-      self.$mainContainer.removeClass(self.modifiers.opened);
-      $buttonMenu.removeClass(self.modifiers.active);
-      self.showOverlay(false);
-
-      if ($buttonMenu.is(':hidden')) {
-        $navContainer.show(0);
-        TweenMax.set($navContainer, {xPercent: 0});
-        TweenMax.set($staggerItems, {autoAlpha: 1, x: 0});
-        TweenMax.set($sbFooter, {autoAlpha: 1, yPercent: 0});
-      } else {
-        // custom scroll page update
-        toggleScrollPage('main-navigation');
-        self.preparationAnimation();
+      if ($currentEl.hasClass(self.config.modifiers.activeClass) || $currentEl.hasClass(CONST_MOD.activeClass)) {
+        self.add();
       }
 
-      self.navIsOpened = false;
-    });
-  };
-
-  window.MainNavigation = MainNavigation;
-
-}(jQuery));
-
-function mainNavigationInit(){
-  var $container = $('.sidebar');
-  if(!$container.length){ return; }
-  new MainNavigation({
-    navContainer: $container,
-    staggerItems: $('.nav-list > li > a > span'),
-    animationSpeed: 300,
-    overlayBoolean: true,
-    overlayAlpha: 0.75
+      $currentEl.addClass(self.mixedClasses.initialized);
+      $currentEl.trigger('switchClass.afterInit');
+    }
   });
+
+  $.switchClass = {
+    version: "2.0",
+    getInstance: function (command) {
+      var instance = $('.' + CONST_MOD.instanceClass + '.' + CONST_MOD.activeClass + ':last').data("SwitchClass"),
+          args = Array.prototype.slice.call(arguments, 1);
+
+      if (instance instanceof SwitchClass) {
+        if ($.type(command) === "string") {
+          instance[command].apply(instance, args);
+        } else if ($.type(command) === "function") {
+          command.apply(instance, args);
+        }
+
+        return instance;
+      }
+
+      return false;
+    },
+    remove: function (all) {
+      // Получить текущий инстанс
+      var instance = this.getInstance();
+
+      // Если инстанс существует
+      if (instance) {
+
+        instance.remove();
+
+        // Try to find and close next instance
+        // 2) Если на вход функуии передан true,
+        if (all === true) {
+          // то попитаться найти следующий инстанс и запустить метод .close для него
+          this.remove(all);
+        }
+      }
+    },
+  };
+
+  function _run (el) {
+    el.switchClass.callbacks();
+    el.switchClass.events();
+    el.switchClass.removeByClickOutside();
+    el.switchClass.removeByClickEsc();
+    el.switchClass.init();
+  }
+
+  $.fn.switchClass = function (options) {
+    var self = this,
+        args = Array.prototype.slice.call(arguments, 1),
+        l = self.length,
+        i,
+        ret;
+
+    for (i = 0; i < l; i++) {
+      if (typeof options === 'object' || typeof options === 'undefined') {
+        self[i].switchClass = new SwitchClass(self[i], $.extend(true, {}, $.fn.switchClass.defaultOptions, options));
+        _run(self[i]);
+      } else {
+        ret = self[i].switchClass[options].apply(self[i].switchClass, args);
+      }
+      if (typeof ret !== 'undefined') {
+        return ret;
+      }
+    }
+    return self;
+  };
+
+  $.fn.switchClass.defaultOptions = {
+    // Event type
+    eventType: 'click',
+
+    // Remove existing classes
+    // Set this to false if you do not need to stack multiple instances
+    removeExisting: false,
+
+    // Бывает необходимо инициализировать плагин на динамически добавленном элемента.
+    // Чтобы повесить на этот элемент событие, нужно добавить его через совойство selector
+    // Example:
+    // $('.parents-element').switchClass({
+    //     selector : '.box a.opener:visible'
+    // });
+    selector: null,
+
+    // Дополнительный элемент, которым можно ДОБАВЛЯТЬ класс
+    // Example: '.some-class-js' or $('.some-class-js')
+    addEl: null,
+
+    // Дополнительный элемент, которым можно УДАЛЯТЬ класс
+    // Example: '.some-class-js' or $('.some-class-js')
+    removeEl: null,
+
+    // Дополнительный элемент, которым можно ДОБАВЛЯТЬ/УДАЛЯТЬ класс
+    // Example: '.some-class-js' or $('.some-class-js')
+    toggleEl: null,
+
+    // Один или несколько эелментов, на которые будет добавляться/удаляться активный класс (modifiers.activeClass)
+    // Example 1: $('html, .popup-js, .overlay-js')
+    // Example 2: $('html').add('.popup-js').add('.overlay-js')
+    switchClassTo: null,
+
+    // Удалать класс по клику по пустому месту на странице?
+    // Если по клику на определенный элемент удалять класс не нужно,
+    // то на этот элемент нужно добавить класс ".swc-prevent-remove" или дата-атрибудт "data-swc-prevent-remove",
+    // или класс указанный в параметре "preventRemoveClass"
+    // Example: true or false
+    removeOutsideClick: true,
+
+    // Удалять класс по клику на клавишу Esc?
+    // Example: true or false
+    removeEscClick: true,
+
+    // Добавлять на html дополнительный класс 'css-scroll-fixed'?
+    // Через этот класс можно фиксировать скролл методами css
+    // _mixins.sass, scroll-blocked()
+    // Example: true or false
+    cssScrollFixed: false,
+
+    // Если кликнуть по элементу с этим классом, то событие удаления активного класса не будет вызвано.
+    // По умолчанию можно использовать класс ".swc-prevent-remove" или дата-атрибудт "data-swc-prevent-remove".
+    // Example: class = "some-class"
+    preventRemoveClass: null,
+
+    // Классы-модификаторы
+    modifiers: {
+      initClass: null,
+      activeClass: 'active'
+    }
+  };
+
+})(jQuery);
+
+/**
+ * !Toggle menu
+ */
+function toggleMenu() {
+  var $toggleMenu = $('.menu-opener-js');
+  if ($toggleMenu.length) {
+    $toggleMenu.switchClass({
+      switchClassTo: $('.menu-js'),
+      removeExisting: true,
+      removeEl: $('.menu-close-js'),
+      modifiers: {
+        activeClass: 'menu_open'
+      }
+    });
+  }
 }
+
 
 function navDropHeight() {
   var $navDrop = $('.js-nav-drop');
@@ -1705,54 +1793,46 @@ function contacts() {
 /**
  * !Swiper slider initial
  */
-function swiperSliderInit() {
-  var $videoSlider = $('.video-slider-js');
+function videoSliderInit() {
+  var $videoSlider = $('.video-slider-js'),
+      $btnPrev = $('.swiper-button-prev'),
+      $btnNext = $('.swiper-button-next');
 
   if($videoSlider.length){
-    var slideHolder = '.video-slider-el',
-        classVideoPlayed = 'video-played',
+    var classVideoPlayed = 'video-played',
         animateSpeed = 0.3;
 
     $videoSlider.each(function () {
       var $curSlider = $(this),
-          $navPrev = $curSlider.find('.swiper-button-prev'),
-          $navNext = $curSlider.find('.swiper-button-next');
+          $navPrev = $curSlider.find($btnPrev),
+          $navNext = $curSlider.find($btnNext);
 
       var thisSlider = new Swiper($curSlider, {
+        init: false,
         spaceBetween: 10,
-        slidesPerView: 3,
+        // slidesPerView: 3,
+        slidesPerView: 'auto',
         effect: 'coverflow',
         coverflowEffect: {
           rotate: 10,
           stretch: 0,
           depth: 100,
           modifier: 1,
-          slideShadows : true
+          slideShadows : false
         },
         centeredSlides: true,
         loop: true,
         loopedSlides: 5,
+        shortSwipes: false,
+        slideToClickedSlide: true,
         watchSlidesVisibility: true,
         watchSlidesProgress: true,
+        parallax: true,
         navigation: {
           nextEl: $navNext,
           prevEl: $navPrev,
         },
         on: {
-          init: function (event, a) {
-            console.log("thisSlider: ", thisSlider);
-            var $iframe = $('<iframe src="about:blank" frameborder="0" allowfullscreen></iframe>'),
-                thisSlideHolder = $(event.slides).find(slideHolder);
-
-            TweenMax.set($iframe, {autoAlpha: 0});
-
-            $iframe
-                .addClass('swiper-video')
-                .css({
-                  'width': '100%', 'height': '100%'
-                })
-                .prependTo(thisSlideHolder);
-          },
           slideChange: function () {
             closeSwiperVideo();
           }
@@ -1761,116 +1841,123 @@ function swiperSliderInit() {
 
       thisSlider.on('init', function() {
         $curSlider.addClass('is-loaded');
-      });
 
-      thisSlider.init();
-
-
-      // Управление видео
-      $curSlider.on('click', '.play-video-js', function (e) {
-        e.preventDefault();
-
-        playSwiperVideo.call(this);
-      });
-
-      $curSlider.on('click', '.close-video-js', function (e) {
-        e.preventDefault();
-
-        closeSwiperVideo();
-      });
-
-      /*Add video to each slide*/
-      function playSwiperVideo() {
-        var $playBtn = $(this),
-            $container = $playBtn.closest($('.swiper-slide'));
-
-        $container.addClass(classVideoPlayed);
-
-        $playBtn.hide(0);
-        $container.find($('.swiper-img-js')).hide(0);
-        $container.find($('.swipe-title-js')).hide(0);
-        $playBtn.closest($slider).find('.swiper-button-prev').hide(0);
-        $playBtn.closest($slider).find('.swiper-button-next').hide(0);
-
-
-        var $iframe = $container.find('iframe');
-        var src = $playBtn.attr('href');
-
-        $iframe.attr("src", src + '?rel=0&autoplay=1');
-        TweenMax.to($iframe, animateSpeed, {autoAlpha:1});
-
-        $container.find('.close-video-js').show(0);
-      }
-
-      function closeSwiperVideo() {
-
-        var $content = $('.video-played');
-
-        $content.find('.close-video-js').hide(0);
-        $content.find($('.swiper-img-js')).show(0);
-        $content.find($('.swipe-title-js')).show(0);
-        $content.find('.play-video-js').show(0);
-        $('.swiper-button-prev').show(0);
-        $('.swiper-button-next').show(0);
-
-
-        var $iframe = $content.find('iframe');
-
-        $iframe.attr("src", 'about:blank');
-        TweenMax.to($iframe, animateSpeed, {autoAlpha: 0});
-
-        $content.removeClass(classVideoPlayed);
-      }
-    });
-  }
-
-
-  var $slider = $('.__swiper-container');
-
-  if ($slider.length) {
-    var slideHolder = '.video-slider-el',
-        classVideoPlayed = 'video-played',
-        animateSpeed = 0.3;
-
-    new Swiper($slider, {
-      loop: true,
-      nextButton: '.swiper-button-next',
-      prevButton: '.swiper-button-prev',
-      // effect: 'coverflow',
-      grabCursor: false,
-      centeredSlides: true,
-      slidesPerView: 'auto',
-      speed: 600,
-      parallax: false,
-      simulateTouch: true,
-      coverflow: {
-        rotate: 0,
-        modifier: 4,
-        stretch: 0,
-        slideShadows: false,
-        scale: 0.8
-      },
-      slideToClickedSlide: true,
-      slideNextClass: 'swiper-slide-next',
-      slidePrevClass: 'swiper-slide-prev',
-      onInit: function (event, a) {
-        var $iframe = $('<iframe src="about:blank" frameborder="0" allowfullscreen></iframe>'),
-            thisSlideHolder = $(event.slides).find(slideHolder);
-
+        var $iframe = $('<iframe src="about:blank" frameborder="0" allowfullscreen></iframe>');
         TweenMax.set($iframe, {autoAlpha: 0});
 
         $iframe
             .addClass('swiper-video')
             .css({
-              'width': '100%', 'height': '100%'
+              'width': '100%',
+              'height': '100%'
             })
-            .prependTo(thisSlideHolder);
-      },
-      onSlideChangeStart: function () {
-        closeSwiperVideo();
-      }
+            .prependTo($(thisSlider.slides).find('.video-slider-el'));
+      });
+
+      thisSlider.init();
+    });
+
+    // Управление видео
+    $videoSlider.on('click', '.play-video-js', function (e) {
+      e.preventDefault();
+
+      playSwiperVideo.call(this);
+    }).on('click', '.close-video-js', function (e) {
+      e.preventDefault();
+
+      closeSwiperVideo();
     });
   }
+
+  /* Add video to each slide */
+  function playSwiperVideo() {
+    var $playBtn = $(this),
+        $container = $playBtn.closest($('.swiper-slide'));
+
+    $container.addClass(classVideoPlayed);
+
+    $playBtn.hide(0);
+    $container.find($('.swiper-img-js')).hide(0);
+    $container.find($('.swipe-title-js')).hide(0);
+    $playBtn.closest($videoSlider).find($btnPrev).hide(0);
+    $playBtn.closest($videoSlider).find($btnNext).hide(0);
+
+
+    var $iframe = $container.find('iframe');
+    var src = $playBtn.attr('href');
+
+    $iframe.attr("src", src + '?rel=0&autoplay=1');
+    TweenMax.to($iframe, animateSpeed, {autoAlpha:1});
+
+    $container.find('.close-video-js').show(0);
+  }
+
+  function closeSwiperVideo() {
+
+    var $content = $('.video-played');
+
+    $content.find('.close-video-js').hide(0);
+    $content.find($('.swiper-img-js')).show(0);
+    $content.find($('.swipe-title-js')).show(0);
+    $content.find('.play-video-js').show(0);
+    $btnPrev.add($btnNext).show(0);
+
+
+    var $iframe = $content.find('iframe');
+
+    $iframe.attr("src", 'about:blank');
+    TweenMax.to($iframe, animateSpeed, {autoAlpha: 0});
+
+    $content.removeClass(classVideoPlayed);
+  }
+
+
+  // var $slider = $('.__swiper-container');
+  //
+  // if ($slider.length) {
+  //   var slideEl = '.video-slider-el',
+  //       classVideoPlayed = 'video-played',
+  //       animateSpeed = 0.3;
+  //
+  //   new Swiper($slider, {
+  //     loop: true,
+  //     nextButton: '.swiper-button-next',
+  //     prevButton: '.swiper-button-prev',
+  //     // effect: 'coverflow',
+  //     grabCursor: false,
+  //     centeredSlides: true,
+  //     slidesPerView: 'auto',
+  //     speed: 600,
+  //     parallax: false,
+  //     simulateTouch: true,
+  //     coverflow: {
+  //       rotate: 0,
+  //       modifier: 4,
+  //       stretch: 0,
+  //       slideShadows: false,
+  //       scale: 0.8
+  //     },
+  //     slideToClickedSlide: true,
+  //     slideNextClass: 'swiper-slide-next',
+  //     slidePrevClass: 'swiper-slide-prev',
+  //     onInit: function (event, a) {
+  //       var $iframe = $('<iframe src="about:blank" frameborder="0" allowfullscreen></iframe>'),
+  //           thisSlideHolder = $(event.slides).find(slideEl);
+  //
+  //       TweenMax.set($iframe, {autoAlpha: 0});
+  //
+  //       $iframe
+  //           .addClass('swiper-video')
+  //           .css({
+  //             'width': '100%', 'height': '100%'
+  //           })
+  //           .prependTo(thisSlideHolder);
+  //     },
+  //     onSlideChangeStart: function () {
+  //       closeSwiperVideo();
+  //     }
+  //   });
+  // }
 
   // $slider.on('click', '.play-video-js', function (e) {
   //   e.preventDefault();
@@ -1926,6 +2013,54 @@ function swiperSliderInit() {
   //
   //   $content.removeClass(classVideoPlayed);
   // }
+}
+
+
+/**
+ * !Promo slider initial
+ */
+function promoSliderInit() {
+  // promo slider
+  var $promoSlider = $('.promo-slider-js');
+
+  if($promoSlider.length){
+    $promoSlider.each(function () {
+      var $thisSlider = $(this),
+          $pagination = $thisSlider.find('.swiper-pagination'),
+          $navPrev = $thisSlider.find('.swiper-button-prev'),
+          $navNext = $thisSlider.find('.swiper-button-next');
+
+      var curSlider = new Swiper ($thisSlider, {
+        init: false,
+        effect: 'coverflow',
+        coverflowEffect: {
+          rotate: 10,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows : true
+        },
+        centeredSlides: true,
+        loop: true,
+        watchSlidesVisibility: true,
+        navigation: {
+          nextEl: $navNext,
+          prevEl: $navPrev,
+        },
+        pagination: {
+          el: $pagination,
+          type: 'bullets',
+          clickable: true
+        }
+      });
+
+      curSlider.on('init', function() {
+        $thisSlider.addClass('is-loaded');
+      });
+
+      curSlider.init();
+    });
+  }
 }
 
 
@@ -2402,25 +2537,6 @@ function toggleScrollPage(id) {
 }
 
 
-/**
- * !Footer at bottom
- */
-function footerBottom(){
-  var $footer = $('.footer');
-  if($footer.length){
-    $WINDOW.on('load resizeByWidth', function () {
-      var footerOuterHeight = $footer.outerHeight();
-      $footer.css({
-        'margin-top': -footerOuterHeight
-      });
-      $('.spacer').css({
-        'height': footerOuterHeight
-      });
-    });
-  }
-}
-
-
 
 
 // ___________________________________________НОВЫЙ КОД !!!
@@ -2447,14 +2563,12 @@ function imgLazyLoad() {
 
 /** ready/load/resize document **/
 $WINDOW.load(function () {
-  // preloadPage();
-
   popupEvents();
 });
 
 $DOC.ready(function(){
   customScroll();
-  toggleHeader();
+  // toggleHeaderInit();
   shareFixed();
   placeholderInit();
   stateFields();
@@ -2470,14 +2584,14 @@ $DOC.ready(function(){
   navDropEvents();
   mapMainInit();
   contacts();
-  mainNavigationInit();
+  toggleMenu();
   // toggleScrollPage(id); // toggle scroll page
 
   tabs();
-  swiperSliderInit();
+  videoSliderInit();
+  promoSliderInit();
 
   imgLazyLoad();
-  footerBottom();
 
   if (!DESKTOP) {
     // headerFixed();
@@ -2485,7 +2599,6 @@ $DOC.ready(function(){
     // tapeSlider();
     // shareFixed();
 
-    // footerBottom();
     // mainScreenForMobile();
   }
 });

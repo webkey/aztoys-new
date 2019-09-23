@@ -11,7 +11,7 @@ $breakpoints: (
     "lap": 1366px,
     "lap-s": 1280px,
     "net": 1200px,
-    "tab": 992px,
+    "tab": 980px,
     "tab-s": 768px,
     "mob": 640px,
     "mob-s": 480px,
@@ -208,7 +208,7 @@ $bottom-section--mob: round-float($line-height--mob * 1.5, 1) !default;
 
 // Colors
 // ====================================================
-$link-color: #007bff !default;
+$link-color: #00abc7 !default;
 $focus-color: #0080ff !default;
 $success-color: #28a745 !default;
 $error-color: #dc3545 !default;
@@ -217,11 +217,11 @@ $warning-color: #ffc107 !default;
 $light-color: #f8f9fa !default;
 $dark-color: #343a40 !default;
 // ----------------------------------------------------
-$base-color: #ee6e73 !default;
-$base-color-alt: invert($base-color) !default;
+$base-color: #00abc7 !default;
+$base-color-alt: #fcd105 !default;
 // ----------------------------------------------------
-$highlight-color: #ee6e73 !default
-$highlight-color--hover: invert($base-color) !default
+$highlight-color: #00abc7 !default
+$highlight-color--hover: lighten($highlight-color, 20%) !default
 // ----------------------------------------------------
 $bg-color: #fff !default;
 $bg-color-alt: #f3f3f3 !default;
@@ -535,12 +535,22 @@ $validate-feedback-height: 2.2rem;
 
 // Animation
 // ====================================================
-$animation-speed: 0.2s !default;
+$animation-speed: 0.3s !default;
 $animation-speed-mouseleave: 0.35s !default;
 
 
 // Header
 // ====================================================
+$header-height: 86px;
+$header-height--mob: 68px;
+
+$filters-panel-height: 100px;
+$filters-panel-height--desk-s: 72px;
+$filters-panel-height--lap-l: 144px;
+$filters-panel-height--lap-s: 144px;
+$filters-panel-height--tab: 231px;
+$filters-panel-height--tab-s: 166px;
+$filters-panel-height--mob-s: 140px;
 
 
 // Footer
