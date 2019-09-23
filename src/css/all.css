@@ -2774,6 +2774,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   will-change: transform;
   transition-property: transform;
   transition-duration: 0.3s;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 979px) {
@@ -2869,6 +2870,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   margin-top: -15px;
   text-indent: -9999px;
   overflow: hidden;
+  display: none;
 }
 
 @media (max-width: 479px) {
@@ -2947,10 +2949,11 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 /* button menu end */
 /* menu opener */
 .menu-opener {
+  box-sizing: border-box;
   position: absolute;
   left: 30px;
   top: 50%;
-  width: 50px;
+  width: 62px;
   padding: 12px 10px 6px;
   margin: -30px 0 0;
   text-decoration: none;
@@ -3032,7 +3035,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 18px;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -3054,6 +3057,38 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 /* menu opener end */
+/* button search */
+.btn-search {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  height: 62px;
+  width: 62px;
+  margin-top: -31px;
+  border-radius: 10px;
+  background-color: #fcd105;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiMwMGFiYzciIGQ9Ik0xNS44NTMgMTYuNTZjLTEuNjgzIDEuNTE3LTMuOTExIDIuNDQtNi4zNTMgMi40NC01LjI0MyAwLTkuNS00LjI1Ny05LjUtOS41czQuMjU3LTkuNSA5LjUtOS41IDkuNSA0LjI1NyA5LjUgOS41YzAgMi40NDItLjkyMyA0LjY3LTIuNDQgNi4zNTNsNy40NCA3LjQ0LS43MDcuNzA3LTcuNDQtNy40NHptLTYuMzUzLTE1LjU2YzQuNjkxIDAgOC41IDMuODA5IDguNSA4LjVzLTMuODA5IDguNS04LjUgOC41LTguNS0zLjgwOS04LjUtOC41IDMuODA5LTguNSA4LjUtOC41eiIvPjwvc3ZnPg==);
+  background-size: 38px;
+  box-shadow: 0 0 0 #fde46a;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  z-index: 5;
+}
+
+.btn-search:hover {
+  background-color: #fde46a;
+  box-shadow: 0 0 20px #fde46a;
+}
+
+.btn-search:active {
+  -ms-transform: scale(0.9, 0.9);
+      transform: scale(0.9, 0.9);
+  transition-duration: 0s;
+}
+
+/* button search end */
 /*MAIN*/
 /*CONTENT*/
 /*fotorama*/
@@ -3454,8 +3489,10 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .promo {
   position: relative;
   height: 100vh;
+  max-width: 2560px;
   padding: 86px 0 0;
   background-color: #00abc7;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.35);
   box-sizing: border-box;
   z-index: 90;
 }
@@ -5481,7 +5518,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   bottom: 0;
   width: 240px;
   padding-top: 86px;
-  background: black;
+  background: #00abc7;
   box-sizing: border-box;
   z-index: 85;
 }
@@ -5577,6 +5614,10 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   transition-duration: 0.3s;
 }
 
+.menu .nav-list > li > a {
+  color: #00abc7;
+}
+
 .nav-list > li > a > span {
   display: inline-block;
   vertical-align: top;
@@ -5586,7 +5627,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .nav-list > li.active > a {
   transition-duration: 0.1s;
   text-decoration: none;
-  background: #029db5;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .nav-list > li.active > a {
@@ -5601,7 +5642,11 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   height: 0;
   width: 40px;
   margin: 0 0 0 -20px;
-  border-top: 1px solid #029db5;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.menu .nav-list > li > a:before {
+  border-top-color: rgba(0, 171, 199, 0.35);
 }
 
 .nav-list > li:first-child > a:before {
@@ -5806,7 +5851,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   height: 100%;
   width: 240px;
   max-width: 100%;
-  background-color: black;
+  background-color: #fcd105;
   z-index: 95;
   transition-property: opacity, visibility, transform;
   transition-duration: 0.3s;

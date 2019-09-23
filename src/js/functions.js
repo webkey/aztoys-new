@@ -2580,11 +2580,11 @@ $DOC.ready(function(){
   // filtersEvents();
   shareEvents();
   hoverClassInit();
-  navDropHeight();
-  navDropEvents();
+  toggleMenu();
+  // navDropHeight();
+  // navDropEvents();
   mapMainInit();
   contacts();
-  toggleMenu();
   // toggleScrollPage(id); // toggle scroll page
 
   tabs();
