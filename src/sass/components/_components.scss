@@ -2548,74 +2548,77 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   }
 }
 
+/* logo */
+.header {
+  .logo {
+    float: left;
+    overflow: hidden;
+    border: none;
+    margin-left: 90px;
+    transition-property: transform;
+    transition-duration: $animation-speed;
 
+    a {
+      float: left;
+      text-decoration: none;
+      height: 100%;
+      overflow: hidden;
 
-/*logo*/
-.header .logo {
-  float: left;
-  overflow: hidden;
-  border: none;
-  margin-left: 90px;
-  transition-property: transform;
-  transition-duration: $animation-speed;
+      .desktop &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .logo__img {
+    float: left;
+    position: relative;
+    width: 118px;
+    //background: url(../../img/logo.png) no-repeat;
+    background-repeat: no-repeat;
+    background-image: url(../../img/logo.svg);
+    background-size: contain;
+    font-size: 0;
+    line-height: 0;
+    letter-spacing: -4px;
+    text-indent: -9999px;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      display: block;
+      height: 0;
+      width: 100%;
+      padding-top: 43%;
+    }
+  }
+
+  .logo__print {
+    display: none;
+  }
 }
 
-.header .logo a {
-  float: left;
-  text-decoration: none;
-  height: 100%;
-  overflow: hidden;
+/* logo end */
+
+/* slogan */
+.header {
+  .slogan {
+    //display: block;
+    overflow: hidden;
+    text-align: center;
+    font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+    color: #fff;
+    padding: 12px 102px 0 12px;
+
+    display: none;
+  }
 }
 
-.desktop .header .logo a:hover {
-  text-decoration: none;
-}
+/* slogan end */
 
-.header .logo__img {
-  float: left;
-  position: relative;
-  width: 110px;
-  background: url(../../img/logo.png) no-repeat;
-  -webkit-background-size: contain;
-  background-size: contain;
-  text-indent: -9999px;
-  overflow: hidden;
-  font-size: 0;
-  line-height: 0;
-  letter-spacing: -4px;
-}
-
-.header .logo__img:before {
-  content: '';
-  display: block;
-  height: 0;
-  width: 100%;
-  padding-top: 43%;
-}
-
-.logo__print {
-  display: none;
-}
-
-/*logo end*/
-
-/*slogan*/
-.header .slogan {
-  //display: block;
-  overflow: hidden;
-  text-align: center;
-  font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
-  font-size: 18px;
-  line-height: 24px;
-  color: #fff;
-  padding: 12px 102px 0 12px;
-
-  display: none;
-}
-
-/*slogan end*/
-
-/*HEADER end*/
+/* HEADER end */
 
 /* button menu */
 .btn-menu {

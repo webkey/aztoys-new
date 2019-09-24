@@ -2799,7 +2799,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   transition-duration: 0.3s;
 }
 
-/*logo*/
+/* logo */
 .header .logo {
   float: left;
   overflow: hidden;
@@ -2823,17 +2823,18 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .header .logo__img {
   float: left;
   position: relative;
-  width: 110px;
-  background: url(../img/logo.png) no-repeat;
+  width: 118px;
+  background-repeat: no-repeat;
+  background-image: url(../img/logo.svg);
   background-size: contain;
-  text-indent: -9999px;
-  overflow: hidden;
   font-size: 0;
   line-height: 0;
   letter-spacing: -4px;
+  text-indent: -9999px;
+  overflow: hidden;
 }
 
-.header .logo__img:before {
+.header .logo__img::before {
   content: '';
   display: block;
   height: 0;
@@ -2841,12 +2842,12 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   padding-top: 43%;
 }
 
-.logo__print {
+.header .logo__print {
   display: none;
 }
 
-/*logo end*/
-/*slogan*/
+/* logo end */
+/* slogan */
 .header .slogan {
   overflow: hidden;
   text-align: center;
@@ -2858,8 +2859,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   display: none;
 }
 
-/*slogan end*/
-/*HEADER end*/
+/* slogan end */
+/* HEADER end */
 /* button menu */
 .btn-menu {
   position: absolute;
