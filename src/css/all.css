@@ -3027,6 +3027,43 @@ html:not(.no-js) .home-page.modify .main {
 }
 
 /* button menu end */
+/* button filters */
+.btn-filters {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  right: 100px;
+  height: 62px;
+  margin-top: -31px;
+  padding: 0 20px 0 50px;
+  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-size: 24px;
+  line-height: 62px;
+  letter-spacing: 0.05em;
+  border-radius: 10px;
+  background-color: #fcd105;
+  background-repeat: no-repeat;
+  background-position: 15px 50%;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDI5ZGI1IiBkPSJNMTkuNDc5IDJsLTcuNDc5IDEyLjU0M3Y1LjkyNGwtMS0uNnYtNS4zMjRsLTcuNDc5LTEyLjU0M2gxNS45NTh6bTMuNTIxLTJoLTIzbDkgMTUuMDk0djUuOTA2bDUgM3YtOC45MDZsOS0xNS4wOTR6Ii8+PC9zdmc+);
+  background-size: 26px;
+  box-shadow: 0 0 0 #fde46a;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  z-index: 5;
+}
+
+.btn-filters:hover {
+  background-color: #fde46a;
+  box-shadow: 0 0 20px #fde46a;
+}
+
+.btn-filters:active {
+  -ms-transform: scale(0.9, 0.9);
+      transform: scale(0.9, 0.9);
+  transition-duration: 0s;
+}
+
+/* button filters end */
 /* menu opener */
 .menu-opener {
   box-sizing: border-box;
@@ -3150,8 +3187,8 @@ html:not(.no-js) .home-page.modify .main {
   background-color: #fcd105;
   background-repeat: no-repeat;
   background-position: 50%;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiMwMGFiYzciIGQ9Ik0xNS44NTMgMTYuNTZjLTEuNjgzIDEuNTE3LTMuOTExIDIuNDQtNi4zNTMgMi40NC01LjI0MyAwLTkuNS00LjI1Ny05LjUtOS41czQuMjU3LTkuNSA5LjUtOS41IDkuNSA0LjI1NyA5LjUgOS41YzAgMi40NDItLjkyMyA0LjY3LTIuNDQgNi4zNTNsNy40NCA3LjQ0LS43MDcuNzA3LTcuNDQtNy40NHptLTYuMzUzLTE1LjU2YzQuNjkxIDAgOC41IDMuODA5IDguNSA4LjVzLTMuODA5IDguNS04LjUgOC41LTguNS0zLjgwOS04LjUtOC41IDMuODA5LTguNSA4LjUtOC41eiIvPjwvc3ZnPg==);
-  background-size: 38px;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDI5ZGI1IiBkPSJNMjEuMTcyIDI0bC03LjM4Ny03LjM4N2MtMS4zODguODc0LTMuMDI0IDEuMzg3LTQuNzg1IDEuMzg3LTQuOTcxIDAtOS00LjAyOS05LTlzNC4wMjktOSA5LTkgOSA0LjAyOSA5IDljMCAxLjc2MS0uNTE0IDMuMzk4LTEuMzg3IDQuNzg1bDcuMzg3IDcuMzg3LTIuODI4IDIuODI4em0tMTIuMTcyLThjMy44NTkgMCA3LTMuMTQgNy03cy0zLjE0MS03LTctNy03IDMuMTQtNyA3IDMuMTQxIDcgNyA3eiIvPjwvc3ZnPg==);
+  background-size: 30px;
   box-shadow: 0 0 0 #fde46a;
   transition: background-color 0.3s, box-shadow 0.3s;
   z-index: 5;
