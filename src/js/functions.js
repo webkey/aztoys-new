@@ -60,6 +60,17 @@ function customScroll() {
     });
   }
 
+  // Custom scroll for menu
+  var $menuScroll = $('.menu__holder');
+  if ($menuScroll.length) {
+    $menuScroll.mCustomScrollbar({
+      theme: "minimal-dark",
+      autoHideScrollbar: true,
+      autoExpandScrollbar: true,
+      scrollInertia: 300
+    });
+  }
+
   // Custom scroll for sidebar filters drop
   var $sidebarFiltersDrop = $('.filters-drop');
   if ($sidebarFiltersDrop.length) {
@@ -102,6 +113,161 @@ function toggleHeaderInit() {
 
 
 /**
+ * !Show/hide promo section on scroll
+ */
+function togglePromoOnScroll() {
+  // detect if IE : from http://stackoverflow.com/a/16657946
+  var ie = (function () {
+    var undef, rv = -1; // Return value assumes failure.
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf('MSIE ');
+    var trident = ua.indexOf('Trident/');
+
+    if (msie > 0) {
+      // IE 10 or older => return version number
+      rv = parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    } else if (trident > 0) {
+      // IE 11 (or newer) => return version number
+      var rvNum = ua.indexOf('rv:');
+      rv = parseInt(ua.substring(rvNum + 3, ua.indexOf('.', rvNum)), 10);
+    }
+
+    return ((rv > -1) ? rv : undef);
+  }());
+
+
+  // disable/enable scroll (mousewheel and keys) from http://stackoverflow.com/a/4770179
+  // left: 37, up: 38, right: 39, down: 40,
+  // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+  var keys = [32, 37, 38, 39, 40], wheelIter = 0;
+
+  function preventDefault(e) {
+    e = e || window.event;
+    if (e.preventDefault)
+      e.preventDefault();
+    e.returnValue = false;
+  }
+
+  function keydown(e) {
+    for (var i = keys.length; i--;) {
+      if (e.keyCode === keys[i]) {
+        preventDefault(e);
+        return;
+      }
+    }
+  }
+
+  function touchmove(e) {
+    preventDefault(e);
+  }
+
+  function wheel(e) {
+    // for IE
+    //if( ie ) {
+    //preventDefault(e);
+    //}
+  }
+
+  function disable_scroll() {
+    window.onmousewheel = document.onmousewheel = wheel;
+    document.onkeydown = keydown;
+    document.body.ontouchmove = touchmove;
+  }
+
+  function enable_scroll() {
+    window.onmousewheel = document.onmousewheel = document.onkeydown = document.body.ontouchmove = null;
+  }
+
+  var docElem = window.document.documentElement,
+      scrollVal,
+      isRevealed,
+      noscroll,
+      isAnimating,
+      // container = document.getElementById( 'container' ),
+      // trigger = container.querySelector( 'button.trigger' );
+      container = document.body,
+      $container = $(container),
+      trigger = container.querySelector('a.trigger-js');
+
+  function scrollY() {
+    return window.pageYOffset || docElem.scrollTop;
+  }
+
+  function scrollPage() {
+    scrollVal = scrollY();
+
+    if (noscroll && !ie) {
+      if (scrollVal < 0) return false;
+      // keep it that way
+      window.scrollTo(0, 0);
+    }
+
+    // if( classie.has( container, 'notrans' ) ) {
+    //   classie.remove( container, 'notrans' );
+    //   return false;
+    // }
+    if ($container.hasClass('notrans')) {
+      $container.remove('notrans');
+      return false;
+    }
+
+    if (isAnimating) {
+      return false;
+    }
+
+    if (scrollVal <= 0 && isRevealed) {
+      toggle(0);
+    } else if (scrollVal > 0 && !isRevealed) {
+      toggle(1);
+    }
+  }
+
+  function toggle(reveal) {
+    isAnimating = true;
+
+    if (reveal) {
+      // classie.add( container, 'modify' );
+      $container.addClass('modify');
+    } else {
+      noscroll = true;
+      disable_scroll();
+      // classie.remove(container, 'modify');
+      $container.removeClass('modify');
+    }
+
+    // simulating the end of the transition:
+    setTimeout(function () {
+      isRevealed = !isRevealed;
+      isAnimating = false;
+      if (reveal) {
+        noscroll = false;
+        enable_scroll();
+      }
+    }, 1200);
+  }
+
+  // refreshing the page...
+  var pageScroll = scrollY();
+  noscroll = pageScroll === 0;
+
+  disable_scroll();
+
+  if (pageScroll) {
+    isRevealed = true;
+    // classie.add(container, 'notrans');
+    // classie.add(container, 'modify');
+    $container.addClass('notrans');
+    $container.addClass('modify');
+  }
+
+  window.addEventListener('scroll', scrollPage);
+  trigger.addEventListener('click', function () {
+    toggle('reveal');
+  });
+}
+
+
+/**
  * !Form fields state
  */
 function stateFields(){
@@ -138,8 +304,10 @@ function printShow() {
  * !Tabs initialize
  */
 function tabs() {
+  var $headerCategories = $('.header-categories-js');
   var $helpfulTabs = $('.tabs-wrap');
   var equalTimer;
+
   if ($helpfulTabs) {
     $helpfulTabs.responsiveTabs({
       active: 0,
@@ -155,9 +323,23 @@ function tabs() {
         equalTimer = setTimeout(function () {
           equalHeightForTabs($(tab.panel));
         }, 500);
-      }
+
+        $('li', $headerCategories).removeClass('active');
+        $('a[href="'+ tab.selector +'"]', $headerCategories).closest('li').addClass('active');
+      },
     });
   }
+
+  $headerCategories.on('click', 'a', function (event) {
+    var $curTab = $(this);
+    $('a[href="'+ $curTab.attr('href') +'"]', $helpfulTabs).trigger('click');
+
+    if (!$(this).is(':animated')) {
+      $('html,body').stop().animate({scrollTop: $helpfulTabs.offset().top - $('.header').innerHeight() + 1}, 600);
+    }
+
+    event.preventDefault();
+  })
 }
 
 function equalHeightForTabs(content){
@@ -2020,7 +2202,6 @@ function videoSliderInit() {
  * !Promo slider initial
  */
 function promoSliderInit() {
-  // promo slider
   var $promoSlider = $('.promo-slider-js');
 
   if($promoSlider.length){
@@ -2059,6 +2240,51 @@ function promoSliderInit() {
       });
 
       curSlider.init();
+    });
+  }
+}
+
+
+/**
+ * !Navigation slider
+ */
+function navSlider() {
+  var $navSlider = $('.nav-slider-js');
+
+  if($navSlider.length){
+    $navSlider.each(function () {
+      var $thisSlider = $(this);
+      var $activeSlide = $thisSlider.find('.swiper-slide.current');
+      var initSlide = $activeSlide.length ? $activeSlide.index() : 0;
+
+      var curSlider = new Swiper ($thisSlider, {
+        init: false,
+        autoHeight: true,
+        // effect: 'coverflow',
+        initialSlide: initSlide,
+        coverflowEffect: {
+          rotate: 10,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows : true
+        },
+        loop: false,
+        watchSlidesVisibility: true,
+        parallax: true,
+      });
+
+      curSlider.on('init', function() {
+        $thisSlider.addClass('is-loaded');
+      });
+
+      curSlider.init();
+
+      $thisSlider.on('click', 'a[href^="#"]', function (event) {
+        var $curLink = $(this);
+        curSlider.slideTo($($curLink.attr('href')).index());
+        event.preventDefault();
+      })
     });
   }
 }
@@ -2569,6 +2795,9 @@ $WINDOW.load(function () {
 $DOC.ready(function(){
   customScroll();
   // toggleHeaderInit();
+  if ($BODY.hasClass('home-page')) {
+    togglePromoOnScroll();
+  }
   shareFixed();
   placeholderInit();
   stateFields();
@@ -2590,6 +2819,7 @@ $DOC.ready(function(){
   tabs();
   videoSliderInit();
   promoSliderInit();
+  navSlider();
 
   imgLazyLoad();
 

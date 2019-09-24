@@ -13,39 +13,45 @@
 
 <!--WRAPPER-->
 <div class="wrapper">
+  <!--promo-->
+  <div class="promo">
+    <div class="swiper-container promo-slider promo-slider-js">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          @@include("_tpl_promo-slider-el.html", {
+          "img": "img/img-video-01.jpg",
+          "title": "image description"
+          })
+        </div>
+        <div class="swiper-slide">
+          @@include("_tpl_promo-slider-el.html", {
+          "img": "img/img-video-02.jpg",
+          "title": "image description"
+          })
+        </div>
+        <div class="swiper-slide">
+          @@include("_tpl_promo-slider-el.html", {
+          "img": "img/img-video-03.jpg",
+          "title": "image description"
+          })
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+  <div class="promo-overlay"></div>
+  <!--promo end-->
 
+  <!--scroll down trigger-->
+  <div class="scroll-down">
+    <a href="#" class="btn-default btn-trigger trigger-js">Scroll down</a>
+  </div>
+  <!--scroll down trigger end-->
 
   <!--MAIN-->
   <div class="main">
-    <!--promo-->
-    <div class="promo">
-      <div class="swiper-container promo-slider promo-slider-js">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            @@include("_tpl_promo-slider-el.html", {
-            "img": "img/img-video-01.jpg",
-            "title": "image description"
-            })
-          </div>
-          <div class="swiper-slide">
-            @@include("_tpl_promo-slider-el.html", {
-            "img": "img/img-video-02.jpg",
-            "title": "image description"
-            })
-          </div>
-          <div class="swiper-slide">
-            @@include("_tpl_promo-slider-el.html", {
-            "img": "img/img-video-03.jpg",
-            "title": "image description"
-            })
-          </div>
-        </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </div>
-    </div>
-    <!--promo end-->
 
     <!--CONTENT-->
     <div class="content layout">

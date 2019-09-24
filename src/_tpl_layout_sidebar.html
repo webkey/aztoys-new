@@ -3,9 +3,9 @@
   <div class="sidebar__holder">
     <div class="sidebar__frame">
       <!-- main navigation -->
-      <nav class="nav">
+      <nav class="nav" style="display: none;">
         <ul class="nav-list">
-          <li class="has-drop@@if(context.currentItem == 'Products'){ active}">
+          <!--<li class="has-drop@@if(context.currentItem == 'Products' || context.currentItem == 'Home'){ active}">
             <a href="products.html"><span>Products</span></a>
             <div class="nav-drop js-nav-drop">
               <div class="nav-drop__holder">
@@ -60,24 +60,81 @@
               </div>
               <a href="#" class="btn-close close-nav-drop-js">Close</a>
             </div>
-          </li>
+          </li>-->
 
-          @@if(context.currentItem == "About Us"){<li class="active"><span><span>About Us</span></span></li>}
-          @@if(context.currentItem != "About Us"){<li><a href="about.html"><span>About Us</span></a></li>}
+          @@if(context.currentItem == "Products"){<li class="active"><span><span>Products</span></span></li>}
+          @@if(context.currentItem != "Products"){<li><a href="products.html"><span>Products</span></a></li>}
+
+          @@if(context.currentItem == "Our Brands"){<li class="active"><span><span>Our Brands</span></span></li>}
+          @@if(context.currentItem != "Our Brands"){<li><a href="products.html"><span>Our Brands</span></a></li>}
+
 
           @@if(context.currentItem == "Apps"){<li class="active"><a href="apps.html"><span>Apps</span></a></li>}
           @@if(context.currentItem != "Apps"){<li><a href="apps.html"><span>Apps</span></a></li>}
 
+          @@if(context.currentItem == "Video"){<li class="active"><a href="video.html"><span>Video</span></a></li>}
+          @@if(context.currentItem != "Video"){<li><a href="video.html"><span>Video</span></a></li>}
+
+
+          @@if(context.currentItem == "About Us"){<li class="active"><span><span>About Us</span></span></li>}
+          @@if(context.currentItem != "About Us"){<li><a href="about.html"><span>About Us</span></a></li>}
+
           @@if(context.currentItem == "News"){<li class="active"><a href="news.html"><span>News</span></a></li>}
           @@if(context.currentItem != "News"){<li><a href="news.html"><span>News</span></a></li>}
 
-          @@if(context.currentItem == "Video"){<li class="active"><a href="video.html"><span>Video</span></a></li>}
-          @@if(context.currentItem != "Video"){<li><a href="video.html"><span>Video</span></a></li>}
 
           @@if(context.currentItem == "Contacts"){<li class="active"><a href="contacts.html"><span>Contacts</span></a></li>}
           @@if(context.currentItem != "Contacts"){<li><a href="contacts.html"><span>Contacts</span></a></li>}
         </ul>
       </nav>
+
+      <div class="swiper-container nav-slider nav-slider-js">
+        <div class="swiper-wrapper">
+          <div id="all" class="swiper-slide">
+            <ul class="nav-list" data-swiper-parallax-opacity="0">
+              <li><a href="#products"><span>Products</span></a></li>
+              <li><a href="#brands"><span>Our Brands</span></a></li>
+
+              @@if(context.currentItem == "Apps"){<li class="active"><a href="news.html"><span>Apps</span></a></li>}
+              @@if(context.currentItem != "Apps"){<li><a href="news.html"><span>Apps</span></a></li>}
+
+              @@if(context.currentItem == "Video"){<li class="active"><a href="news.html"><span>Video</span></a></li>}
+              @@if(context.currentItem != "Video"){<li><a href="news.html"><span>Video</span></a></li>}
+
+
+              @@if(context.currentItem == "About Us"){<li class="active"><span><span>About Us</span></span></li>}
+              @@if(context.currentItem != "About Us"){<li><a href="about.html"><span>About Us</span></a></li>}
+
+              @@if(context.currentItem == "News"){<li class="active"><a href="news.html"><span>News</span></a></li>}
+              @@if(context.currentItem != "News"){<li><a href="news.html"><span>News</span></a></li>}
+
+
+              @@if(context.currentItem == "Contacts"){<li class="active"><a href="contacts.html"><span>Contacts</span></a></li>}
+              @@if(context.currentItem != "Contacts"){<li><a href="contacts.html"><span>Contacts</span></a></li>}
+            </ul>
+          </div>
+          <div id="products" class="swiper-slide current">
+            <ul class="products-category-list" data-swiper-parallax-opacity="0">
+              <li><a href="#all"><span>&lt; Products</span></a></li>
+              <li><a href="products.html" style="background-color: #eab70c;"><span>Sound and Music Toys</span></a></li>
+              <li><a href="products.html" style="background-color: #e09a14;"><span>Education Tablets</span></a></li>
+              <li><a href="products.html" style="background-color: #d06517;"><span>Toy Smartphones</span></a></li>
+              <li><a href="products.html" style="background-color: #c10514;"><span>Smart Watches</span></a></li>
+              <li><a href="products.html" style="background-color: #c5127c;"><span>Musical Microphones</span></a></li>
+            </ul>
+          </div>
+          <div id="brands" class="swiper-slide">
+            <ul class="brands-category-list" data-swiper-parallax-opacity="0">
+              <li><a href="#all"><span>&lt; Our Brands</span></a></li>
+              <li><a href="products.html"><img src="img/brand1.jpg" alt="brand1" /></a></li>
+              <li><a href="products.html"><img src="img/brand2.jpg" alt="brand1" /></a></li>
+              <li><a href="products.html"><img src="img/brand3.jpg" alt="brand1" /></a></li>
+              <li><a href="products.html"><img src="img/brand4.jpg" alt="brand1" /></a></li>
+              <li><a href="products.html"><img src="img/brand5.jpg" alt="brand1" /></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <!-- main navigation end -->
       <!--sidebar footer-->
       <div class="sidebar-footer">
