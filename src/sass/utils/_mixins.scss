@@ -936,6 +936,19 @@
 }
 
 
+// ====================================================
+// btn:hover
+@mixin btn-hover {
+  background-color: $highlight-color--hover;
+  box-shadow: 0 0 20px $highlight-color--hover;
+}
+
+// ====================================================
+// btn:active
+@mixin btn-active {
+  transform: scale(0.98, 0.98);
+}
+
 
 // =============================================================================
 // For Print Version

@@ -56,7 +56,7 @@ function customScroll() {
       theme: "minimal-dark",
       autoHideScrollbar: true,
       autoExpandScrollbar: true,
-      scrollInertia: 300
+      scrollInertia: 300,
     });
   }
 
@@ -1198,7 +1198,7 @@ function shareFixed(){
 }(jQuery));
 
 function hoverClassInit(){
-  var $navList = $('.nav');
+  var $navList = $('.nav-list');
   if($navList.length){
     new HoverClass({
       container: $navList,
@@ -2260,8 +2260,11 @@ function navSlider() {
       var curSlider = new Swiper ($thisSlider, {
         init: false,
         autoHeight: true,
-        // effect: 'coverflow',
         initialSlide: initSlide,
+        simulateTouch: false,
+        followFinger: false,
+        allowTouchMove: false,
+        // effect: 'coverflow',
         coverflowEffect: {
           rotate: 10,
           stretch: 0,
@@ -2272,6 +2275,11 @@ function navSlider() {
         loop: false,
         watchSlidesVisibility: true,
         parallax: true,
+        on: {
+          slideChangeTransitionEnd: function () {
+            $thisSlider.closest('.mCustomScrollbar').mCustomScrollbar("update");
+          }
+        }
       });
 
       curSlider.on('init', function() {

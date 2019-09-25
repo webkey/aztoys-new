@@ -558,35 +558,34 @@ input[type="submit"],
 input[type="button"],
 input[type="reset"],
 button {
-  font-family: 'helvetica-neue-cyr-bold', Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
   line-height: 30px;
-  color: #1a1a1a;
+  color: $base-color;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   padding: 10px 34px;
   border: 1px solid transparent;
-  background: #fcd105;
+  background: $highlight-color;
+  box-shadow: 0 0 0 $highlight-color--hover;
   border-radius: 25px;
-  -webkit-transition-property: color;
-  transition-property: color;
-  -webkit-transition-duration: 0.2s;
-  transition-duration: 0.2s;
+  transition: color $animation-speed, background-color $animation-speed, box-shadow $animation-speed;
   position: relative;
   box-sizing: border-box;
+
+  // hover
+  &:hover {
+    @include btn-hover;
+  }
+
+  // :active
+  &:active {
+    @include btn-active;
+  }
 }
 
-.desktop .btn-default:hover,
-.desktop input[type="submit"]:hover,
-.desktop input[type="button"]:hover,
-.desktop input[type="reset"]:hover,
-.desktop button:hover {
-  color: #00abc7;
-}
 
-.btn-default:active {
-  bottom: -1px;
-}
 
 /*btn-default end*/
 
@@ -1893,12 +1892,12 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .social-networks a {
   float: left;
-  /*text-indent: -9999px;*/
   overflow: hidden;
   width: 50px;
   height: 50px;
   position: relative;
   border-radius: 50%;
+  color: inherit;
 }
 
 .social-networks a:before {
@@ -1910,11 +1909,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   width: 2px;
   height: 2px;
   border-radius: 50%;
-  background: #fff;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+  background: white;
   transform: translate(-50%, -50%);
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   backface-visibility: hidden;
 }
@@ -1932,13 +1928,10 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   top: 50%;
   height: 100%;
   width: 100%;
-  border: 2px solid #fff;
+  border: 2px solid currentColor;
   box-sizing: border-box;
   border-radius: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  -webkit-transition: border 0.3s 0.1s;
   transition: border 0.3s 0.1s;
 }
 
@@ -1951,8 +1944,6 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   max-width: 2rem;
   position: relative;
   margin-top: 50%;
-  -webkit-transform: translate(0, -50%);
-  -ms-transform: translate(0, -50%);
   transform: translate(0, -50%);
 }
 
@@ -1961,13 +1952,10 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .social-networks path {
-  -webkit-transition-property: fill;
   transition-property: fill;
-  -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
-  -webkit-transition-delay: 0.05s;
   transition-delay: 0.05s;
-  fill: #fff;
+  fill: currentColor;
 }
 
 .desktop .social-networks a:hover .soc-fb-path {
@@ -2669,7 +2657,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
     -webkit-tap-highlight-color: transparent;
 
     &:hover {
-      text-decoration: underline;
+      text-decoration: none;
+      background-color: rgba(white, 0.3);
     }
   }
 
@@ -2823,25 +2812,23 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   line-height: 62px;
   letter-spacing: 0.05em;
   border-radius: 10px;
-  background-color: #fcd105;
+  background-color: $highlight-color;
+  box-shadow: 0 0 0 $highlight-color--hover;
   background-repeat: no-repeat;
   background-position: 15px 50%;
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDI5ZGI1IiBkPSJNMTkuNDc5IDJsLTcuNDc5IDEyLjU0M3Y1LjkyNGwtMS0uNnYtNS4zMjRsLTcuNDc5LTEyLjU0M2gxNS45NTh6bTMuNTIxLTJoLTIzbDkgMTUuMDk0djUuOTA2bDUgM3YtOC45MDZsOS0xNS4wOTR6Ii8+PC9zdmc+);
   background-size: 26px;
-  box-shadow: 0 0 0 #fde46a;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition: background-color $animation-speed, box-shadow $animation-speed;
   z-index: 5;
 
   //:hover
   &:hover {
-    background-color: lighten($base-color-alt, 20%);
-    box-shadow: 0 0 20px lighten($base-color-alt, 20%);
+    @include btn-hover;
   }
 
   // :active
   &:active {
-    transform: scale(0.9, 0.9);
-    transition-duration: 0s;
+    @include btn-active;
   }
 }
 
@@ -2861,9 +2848,9 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   border-radius: 5px;
   line-height: 1;
   z-index: 5;
-  background-color: $base-color-alt;
+  background-color: $highlight-color;
+  box-shadow: 0 0 0 $highlight-color--hover;
   transition: background-color $animation-speed, box-shadow $animation-speed;
-  box-shadow: 0 0 0 lighten($base-color-alt, 20%);
 
   @include media('<mob-s') {
     right: 20px;
@@ -2871,14 +2858,12 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
   //:hover
   &:hover {
-    background-color: lighten($base-color-alt, 20%);
-    box-shadow: 0 0 20px lighten($base-color-alt, 20%);
+    @include btn-hover;
   }
 
   // :active
   &:active {
-    transform: scale(0.9, 0.9);
-    transition-duration: 0s;
+    @include btn-active;
   }
 
   // menu opener lines
@@ -2986,27 +2971,25 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   width: $size;
   margin-top: -#{round($size / 2)};
   border-radius: 10px;
-  background-color: $base-color-alt;
+  background-color: $highlight-color;
+  box-shadow: 0 0 0 $highlight-color--hover;
   background-repeat: no-repeat;
   background-position: 50%;
   //background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMjMuODA5IDIxLjY0NmwtNi4yMDUtNi4yMDVjMS4xNjctMS42MDUgMS44NTctMy41NzkgMS44NTctNS43MTEgMC01LjM2NS00LjM2NS05LjczLTkuNzMxLTkuNzMtNS4zNjUgMC05LjczIDQuMzY1LTkuNzMgOS43MyAwIDUuMzY2IDQuMzY1IDkuNzMgOS43MyA5LjczIDIuMDM0IDAgMy45MjMtLjYyNyA1LjQ4Ny0xLjY5OGw2LjIzOCA2LjIzOCAyLjM1NC0yLjM1NHptLTIwLjk1NS0xMS45MTZjMC0zLjc5MiAzLjA4NS02Ljg3NyA2Ljg3Ny02Ljg3N3M2Ljg3NyAzLjA4NSA2Ljg3NyA2Ljg3Ny0zLjA4NSA2Ljg3Ny02Ljg3NyA2Ljg3N2MtMy43OTMgMC02Ljg3Ny0zLjA4NS02Ljg3Ny02Ljg3N3oiPjwvcGF0aD48L3N2Zz4=);
   //background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiMwMGFiYzciIGQ9Ik0xNS44NTMgMTYuNTZjLTEuNjgzIDEuNTE3LTMuOTExIDIuNDQtNi4zNTMgMi40NC01LjI0MyAwLTkuNS00LjI1Ny05LjUtOS41czQuMjU3LTkuNSA5LjUtOS41IDkuNSA0LjI1NyA5LjUgOS41YzAgMi40NDItLjkyMyA0LjY3LTIuNDQgNi4zNTNsNy40NCA3LjQ0LS43MDcuNzA3LTcuNDQtNy40NHptLTYuMzUzLTE1LjU2YzQuNjkxIDAgOC41IDMuODA5IDguNSA4LjVzLTMuODA5IDguNS04LjUgOC41LTguNS0zLjgwOS04LjUtOC41IDMuODA5LTguNSA4LjUtOC41eiIvPjwvc3ZnPg==);
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDI5ZGI1IiBkPSJNMjEuMTcyIDI0bC03LjM4Ny03LjM4N2MtMS4zODguODc0LTMuMDI0IDEuMzg3LTQuNzg1IDEuMzg3LTQuOTcxIDAtOS00LjAyOS05LTlzNC4wMjktOSA5LTkgOSA0LjAyOSA5IDljMCAxLjc2MS0uNTE0IDMuMzk4LTEuMzg3IDQuNzg1bDcuMzg3IDcuMzg3LTIuODI4IDIuODI4em0tMTIuMTcyLThjMy44NTkgMCA3LTMuMTQgNy03cy0zLjE0MS03LTctNy03IDMuMTQtNyA3IDMuMTQxIDcgNyA3eiIvPjwvc3ZnPg==);
   background-size: 30px;
-  box-shadow: 0 0 0 lighten($base-color-alt, 20%);
   transition: background-color $animation-speed, box-shadow $animation-speed;
   z-index: 5;
 
   //:hover
   &:hover {
-    background-color: lighten($base-color-alt, 20%);
-    box-shadow: 0 0 20px lighten($base-color-alt, 20%);
+    @include btn-hover;
   }
 
   // :active
   &:active {
-    transform: scale(0.9, 0.9);
-    transition-duration: 0s;
+    @include btn-active;
   }
 }
 
@@ -3546,7 +3529,7 @@ a.btn-trigger {
   -webkit-tap-highlight-color: transparent;
 
   html:not(.no-js) & {
-    transition: visibility 0.3s 0.5s;
+    transition: visibility 0.3s 0.5s, color $animation-speed 0s, background-color $animation-speed 0s, box-shadow $animation-speed 0s;
   }
 
   html:not(.no-js) .modify & {
@@ -5870,10 +5853,7 @@ a.btn-trigger {
   line-height: 24px;
   color: #fff;
   text-decoration: none;
-  -webkit-transition-property: background;
-  transition-property: background;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
+  transition: 0.3s background;
 
   .menu & {
     color: $base-color;
@@ -5887,11 +5867,9 @@ a.btn-trigger {
 
 .nav-list > li.hover > a,
 .nav-list > li.active > a {
-  -webkit-transition-duration: 0.1s;
   transition-duration: 0.1s;
   text-decoration: none;
-  //background: $highlight-color--hover;
-  background: rgba(white, 0.3);
+  background-color: rgba(white, 0.3);
 }
 
 .nav-list > li.active > a {
@@ -6034,11 +6012,11 @@ a.btn-trigger {
 
 /* navigation slider end */
 
-/* products category list */
-.products-category-list {
+/* category list */
+.category-list {
   list-style: none;
   margin: 0;
-  padding: 0 0 20px;
+  padding: 10px 0 20px;
 
   li {
     padding: 2px 15px;
@@ -6049,10 +6027,12 @@ a.btn-trigger {
     position: relative;
     font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
     font-size: 18px;
-    line-height: 24px;
+    line-height: 27px;
     color: white;
-    padding: 12px 18px;
+    padding: 10px 18px;
     border-radius: 15px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 
     &::before {
       content: "";
@@ -6064,79 +6044,18 @@ a.btn-trigger {
       width: 100%;
       background-color: inherit;
       border-radius: inherit;
-      transition: transform $animation-speed * 1.5;
-    }
-
-    span {
-      display: block;
-      position: relative;
-    }
-  }
-
-  a {
-    text-decoration: none;
-
-    // Hover
-    &:hover {
-      &::before {
-        transform: translateZ(0) scale(1.1, 1.1);
-        transition-duration: $animation-speed;
-      }
-    }
-  }
-
-  li:first-child {
-    a, & > span {
-      font-size: 22px;
-      line-height: 26px;
-      color: white;
-
-      &::before {
-        content: none;
-      }
-    }
-  }
-}
-
-/* products category list end */
-
-/* brands category list */
-.brands-category-list {
-  list-style: none;
-  margin: 0;
-  padding: 0 0 20px;
-
-  li {
-    padding: 2px 15px;
-  }
-
-  a, li > span {
-    display: block;
-    position: relative;
-    font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
-    font-size: 18px;
-    line-height: 24px;
-    color: $base-color;
-    padding: 12px 18px;
-    border-radius: 15px;
-
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      background-color: white;
-      border-radius: 15px;
+      box-shadow: 0 0 0 rgba(black, 0.3);
       transition: transform $animation-speed * 1.5, box-shadow $animation-speed * 1.5;
     }
 
     img {
       position: relative;
+      display: block;
       height: auto;
-      width: 100%;
+      width: auto;
+      max-height: 87px;
+      max-width: 100%;
+      margin: 0 auto;
     }
 
     span {
@@ -6145,18 +6064,37 @@ a.btn-trigger {
     }
   }
 
+
+  // Hover
   a {
     text-decoration: none;
 
-    // Hover
     &:hover {
       z-index: 1;
 
       &::before {
         box-shadow: 0 0 15px rgba(black, 0.3);
-        transform: translateZ(0) scale(1.1, 1.1);
+        transform: translateZ(0) scale(1.1);
         transition-duration: $animation-speed;
       }
+    }
+  }
+
+  // Current
+  li.current {
+    padding: 6px 25px;
+    background-color: rgba(white, 0.3);
+
+    a, & > span {
+      font-size: 16px;
+      line-height: 24px;
+      color: white;
+      padding: 8px 10px;
+      border-radius: 13px;
+    }
+
+    img {
+      backface-visibility: hidden;
     }
   }
 
@@ -6170,38 +6108,67 @@ a.btn-trigger {
         content: none;
       }
     }
+
+    a {
+      transition: 0.3s background;
+      background-repeat: no-repeat;
+      background-position: 5px 50%;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTE2LjYyIDIuOTljLS40OS0uNDktMS4yOC0uNDktMS43NyAwTDYuNTQgMTEuM2MtLjM5LjM5LS4zOSAxLjAyIDAgMS40MWw4LjMxIDguMzFjLjQ5LjQ5IDEuMjguNDkgMS43NyAwcy40OS0xLjI4IDAtMS43N0w5LjM4IDEybDcuMjUtNy4yNWMuNDgtLjQ4LjQ4LTEuMjgtLjAxLTEuNzZ6Ii8+PC9zdmc+);
+      background-size: 24px;
+      padding-left: 35px;
+
+      &:hover {
+        text-decoration: none;
+        transition-duration: 0.1s;
+        background-color: rgba(white, 0.3);
+      }
+    }
   }
 }
 
-/* brands category list end */
+/* category list end */
 
-/*sidebar footer*/
+/* sidebar footer */
 .sidebar-footer {
   position: absolute;
   width: 100%;
   bottom: 0;
   left: 0;
   overflow: hidden;
+  color: white;
 }
 
-.sidebar-footer__holder {
-  border-top: 1px solid #029db5;
-}
+/* sidebar footer end */
 
-/*sidebar footer end*/
-
-/*slogan*/
+/* slogan */
 .slogan {
   display: table;
-  min-height: 85px;
+  min-height: 68px;
   font-size: 16px;
-  line-height: 24px;
-  color: #fff;
+  line-height: 20px;
+  color: inherit;
   width: 100%;
+  margin-bottom: 5px;
   text-decoration: none;
+  transition: background-color $animation-speed;
+
+  svg {
+    vertical-align: middle;
+    width: 48px;
+    margin: 8px 2px 0 0;
+  }
+
+  path {
+    fill: currentColor;
+  }
+
+  // Hover
+  &:hover {
+    background-color: rgba(white, 0.3);
+  }
 }
 
-.slogan .slogan__align {
+.slogan__align {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
@@ -6209,69 +6176,53 @@ a.btn-trigger {
   padding-right: 12px;
 }
 
-.slogan svg {
-  vertical-align: middle;
-  width: 48px;
-  margin-right: 2px;
-  margin: 8px 2px 0 0;
-}
-
-.slogan path {
-  fill: white;
-}
-
 .slogan__text {
   display: inline-block;
   vertical-align: middle;
   max-width: 140px;
   text-align: left;
+
+  span {
+    font-family: 'helvetica-neue-cyr-bold', Arial, Helvetica, sans-serif;
+  }
+
+  em {
+    display: block;
+    font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  }
 }
 
-.slogan__text span {
-  text-decoration: underline;
-  font-family: 'helvetica-neue-cyr-bold', Arial, Helvetica, sans-serif;
-}
+/* slogan end */
 
-.slogan__text em {
-  display: block;
-  padding-top: 1px;
-  font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
-}
-
-/*slogan end*/
-
-/*phone*/
+/* phone */
 .phone {
-  height: 75px;
   font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
-  font-size: 17px;
-  line-height: 23px;
+  font-size: 16px;
+  line-height: 24px;
   text-align: center;
-  box-sizing: border-box;
-  background-image: url(../../img/logo-az-books.png);
-  -webkit-background-size: 157px auto;
-  background-size: 114px auto;
-  background-repeat: no-repeat;
-  background-position: 50% 9px;
-  background-color: #fcd105;
+
+  a {
+    display: block;
+    box-sizing: border-box;
+    padding: 46px 10px 0;
+    height: 75px;
+    color: inherit;
+    text-decoration: none;
+    background-color: rgba(white, 0.3);
+    background-image: url(../../img/logo-az-books.png);
+    background-size: 114px auto;
+    background-repeat: no-repeat;
+    background-position: 50% 9px;
+    transition: box-shadow $animation-speed;
+
+    &:hover {
+      box-shadow: 0 0 15px rgba(white, 1);
+    }
+  }
 }
 
-.phone a {
-  display: block;
-  padding: 46px 10px 0;
-  height: 100%;
-  text-decoration: none;
-  color: #1a1a1a;
-  box-sizing: border-box;
-  -webkit-transition: color 0.2s;
-  transition: color 0.2s;
-}
+/* phone end */
 
-.phone a:hover {
-  color: #00abc7;
-}
-
-/*phone end*/
 /*SIDEBAR end*/
 
 /* MENU */
@@ -6331,10 +6282,7 @@ a.btn-trigger {
   bottom: 0;
   left: 0;
   overflow: hidden;
-}
-
-.menu-footer__holder {
-  border-top: 1px solid rgba($base-color, 0.2);
+  color: $base-color;
 }
 
 /* menu footer end */
@@ -7236,6 +7184,7 @@ body,
 .sidebar__holder > .mCSB_scrollTools,
 .mobile .mCSB_scrollTools {
   pointer-events: none;
+  z-index: 15;
 }
 
 /*custom page scroll end*/
