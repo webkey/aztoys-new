@@ -575,7 +575,7 @@ button {
   box-sizing: border-box;
 
   // hover
-  &:hover {
+  .desktop &:hover {
     @include btn-hover;
   }
 
@@ -2366,43 +2366,42 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .main {
+  box-sizing: border-box;
   position: relative;
   clear: both;
-  //z-index: 4;
-  box-sizing: border-box;
   padding-top: $header-height;
 
-  // 480
-  @include media('<mob-s') {
-    padding-top: $header-height--mob;
-  }
-
-  html:not(.no-js) .home-page & {
-    // transition
-    $prop: transform, opacity;
-    will-change: $prop;
-    transition: {
-      property: $prop;
-      duration: 1.2s;
-      delay: 0.2s;
-      timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  // Анимация промо-блока для десктопа и ширины больше 992
+  @include media(">=tab") {
+    .desktop .home-page & {
+      $prop: transform, opacity;
+      will-change: $prop;
+      transition: {
+        property: $prop;
+        duration: 1.2s;
+        delay: 0.2s;
+        timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+      }
+      opacity: 0;
+      $scale: 1, 1;
+      $translate: 0, 60vh;
+      transform: translate($translate) scale($scale);
+      transform: translate3d($translate, 0) scale($scale);
     }
-    // transform
-    opacity: 0;
-    $scale: 1, 1;
-    $translate: 0, 60vh;
-    transform: translate($translate) scale($scale);
-    transform: translate3d($translate, 0) scale($scale);
+
+    .desktop .home-page.modify & {
+      transition-delay: 0s;
+      opacity: 1;
+      $scale: 1, 1;
+      $translate: 0, 0;
+      transform: translate($translate) scale($scale);
+      transform: translate3d($translate, 0) scale($scale);
+    }
   }
 
-  html:not(.no-js) .home-page.modify & {
-    transition-delay: 0s;
-    // transform
-    opacity: 1;
-    $scale: 1, 1;
-    $translate: 0, 0;
-    transform: translate($translate) scale($scale);
-    transform: translate3d($translate, 0) scale($scale);
+  // 480
+  @include media("<mob-s") {
+    padding-top: $header-height--tab;
   }
 
   &::before {
@@ -2418,8 +2417,15 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
     display: none;
 
     // 980
-    @include media('<tab') {
+    @include media("<tab") {
       display: block;
+    }
+  }
+
+  .home-page & {
+    // <992px
+    @include media("<tab") {
+      padding-top: 0;
     }
   }
 
@@ -2427,38 +2433,38 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
     padding-top: $filters-panel-height;
 
     // 1600
-    @include media('<desk-s') {
+    @include media("<desk-s") {
       padding-top: $filters-panel-height--desk-s;
     }
 
     // 1440
-    @include media('<lap-l') {
+    @include media("<lap-l") {
       padding-top: $filters-panel-height--lap-l;
     }
 
     // 1280
-    @include media('<lap-s') {
+    @include media("<lap-s") {
       padding-top: $filters-panel-height--lap-s;
     }
 
     // 980
-    @include media('<tab') {
+    @include media("<tab") {
       padding-top: $filters-panel-height--tab;
     }
 
     // 768
-    @include media('<tab-s') {
+    @include media("<tab-s") {
       padding-top: $filters-panel-height--tab-s;
     }
 
     // 480
-    @include media('<mob-s') {
+    @include media("<mob-s") {
       padding-top: $filters-panel-height--mob-s;
     }
 
     &::before {
       // 980
-      @include media('<tab') {
+      @include media("<tab") {
         background: none;
       }
     }
@@ -2536,7 +2542,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
   //display: none;
 
-  @include media('<tab') {
+  @include media("<tab") {
     //display: block;
 
     .popup-show & {
@@ -2545,16 +2551,16 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
     }
   }
 
-  @include media('<mob-s') {
+  @include media("<mob-s") {
     padding: 10px 60px 10px 20px;
-    height: $header-height--mob;
+    height: $header-height--tab;
     //transform: translate(0, -68px);
   }
 
   //.home-page.header-show & {
   //  transform: translate(0, -86px);
   //
-  //  @include media('<mob-s') {
+  //  @include media("<mob-s") {
   //    transform: translate(0, -68px);
   //  }
   //}
@@ -2624,8 +2630,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   display: inline-block;
   vertical-align: top;
   list-style: none;
-  padding: 5px 0 0;
-  margin: 0;
+  padding: 0 190px 0 0;
+  margin: 0 auto;
   font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
   transition: opacity 0.5s, visibility 0.5s;
   cursor: default;
@@ -2633,6 +2639,10 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+
+  @include media("<tab") {
+    display: none;
+  }
 
   .modify & {
     transition-delay: 0.5s;
@@ -2654,7 +2664,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
     color: white;
     text-decoration: none;
     padding: 7px 20px;
-    border-radius: 15px;
+    border-radius: 25px;
     transition: color $animation-speed, background-color $animation-speed;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
@@ -2699,104 +2709,104 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 /* HEADER end */
 
 /* button menu */
-.btn-menu {
-  position: absolute;
-  right: 30px;
-  top: 50%;
-  height: 30px;
-  width: 30px;
-  margin-top: -15px;
-  text-indent: -9999px;
-  overflow: hidden;
-
-  display: none;
-
-  @include media('<mob-s') {
-    right: 20px;
-  }
-
-  &:active {
-    transform: scale(0.9, 0.9);
-  }
-
-  // button menu lines
-  .btn-lines {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 100%;
-    height: 0;
-
-    // all lines
-    & > span,
-    &::before,
-    &::after {
-      display: block;
-      width: 30px;
-      height: 4px;
-      background: #fff;
-      border-radius: 2px;
-      position: absolute;
-      left: 0;
-      top: 0;
-      will-change: transform, opacity;
-      transition-property: transform, opacity;
-      transition-duration: 0.4s;
-      transition-timing-function: cubic-bezier(1, 0, 0, 1);
-      transform: translateZ(0) scale(1, 1);
-      backface-visibility: hidden;
-    }
-
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      top: -2px;
-      opacity: 0;
-      z-index: 2;
-    }
-
-    & > span {
-      // first line
-      &:nth-child(1) {
-        top: -12px;
-      }
-
-      // second line
-      &:nth-child(2) {
-        top: -2px;
-      }
-
-      // third line
-      &:nth-child(3) {
-        top: 8px;
-      }
-    }
-  }
-
-  // Active (close view)
-  &.active {
-    .btn-lines {
-      &::before {
-        opacity: 1;
-        transform: rotate(-45deg);
-      }
-
-      &::after {
-        opacity: 1;
-        transform: rotate(45deg);
-      }
-
-      & > span {
-        &:nth-child(1),
-        &:nth-child(2),
-        &:nth-child(3) {
-          opacity: 0;
-        }
-      }
-    }
-  }
-}
+//.btn-menu {
+//  position: absolute;
+//  right: 30px;
+//  top: 50%;
+//  height: 30px;
+//  width: 30px;
+//  margin-top: -15px;
+//  text-indent: -9999px;
+//  overflow: hidden;
+//
+//  display: none;
+//
+//  @include media("<mob-s") {
+//    right: 20px;
+//  }
+//
+//  &:active {
+//    transform: scale(0.9, 0.9);
+//  }
+//
+//  // button menu lines
+//  .btn-lines {
+//    position: absolute;
+//    left: 0;
+//    top: 50%;
+//    width: 100%;
+//    height: 0;
+//
+//    // all lines
+//    & > span,
+//    &::before,
+//    &::after {
+//      display: block;
+//      width: 30px;
+//      height: 4px;
+//      background: #fff;
+//      border-radius: 2px;
+//      position: absolute;
+//      left: 0;
+//      top: 0;
+//      will-change: transform, opacity;
+//      transition-property: transform, opacity;
+//      transition-duration: 0.4s;
+//      transition-timing-function: cubic-bezier(1, 0, 0, 1);
+//      transform: translateZ(0) scale(1, 1);
+//      backface-visibility: hidden;
+//    }
+//
+//    &::before,
+//    &::after {
+//      content: '';
+//      position: absolute;
+//      top: -2px;
+//      opacity: 0;
+//      z-index: 2;
+//    }
+//
+//    & > span {
+//      // first line
+//      &:nth-child(1) {
+//        top: -12px;
+//      }
+//
+//      // second line
+//      &:nth-child(2) {
+//        top: -2px;
+//      }
+//
+//      // third line
+//      &:nth-child(3) {
+//        top: 8px;
+//      }
+//    }
+//  }
+//
+//  // Active (close view)
+//  &.active {
+//    .btn-lines {
+//      &::before {
+//        opacity: 1;
+//        transform: rotate(-45deg);
+//      }
+//
+//      &::after {
+//        opacity: 1;
+//        transform: rotate(45deg);
+//      }
+//
+//      & > span {
+//        &:nth-child(1),
+//        &:nth-child(2),
+//        &:nth-child(3) {
+//          opacity: 0;
+//        }
+//      }
+//    }
+//  }
+//}
 
 /* button menu end */
 
@@ -2805,7 +2815,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   box-sizing: border-box;
   position: absolute;
   top: 50%;
-  right: 100px;
+  right: 110px;
   height: 62px;
   margin-top: -31px;
   padding: 0 20px 0 50px;
@@ -2825,7 +2835,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   z-index: 5;
 
   //:hover
-  &:hover {
+  .desktop &:hover {
     @include btn-hover;
   }
 
@@ -2855,12 +2865,13 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   box-shadow: 0 0 0 $highlight-color--hover;
   transition: background-color $animation-speed, box-shadow $animation-speed;
 
-  @include media('<mob-s') {
-    right: 20px;
+  // <992px
+  @include media("<tab") {
+    display: none;
   }
 
   //:hover
-  &:hover {
+  .desktop &:hover {
     @include btn-hover;
   }
 
@@ -2961,6 +2972,16 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   }
 }
 
+// Мобильно меню
+.mob-menu-opener {
+  display: none;
+
+  // <992px
+  @include media("<tab") {
+    display: block;
+  }
+}
+
 /* menu opener end */
 
 /* search */
@@ -2979,8 +3000,6 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   box-shadow: 0 0 0 $highlight-color--hover;
   background-repeat: no-repeat;
   background-position: 50%;
-  //background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMjMuODA5IDIxLjY0NmwtNi4yMDUtNi4yMDVjMS4xNjctMS42MDUgMS44NTctMy41NzkgMS44NTctNS43MTEgMC01LjM2NS00LjM2NS05LjczLTkuNzMxLTkuNzMtNS4zNjUgMC05LjczIDQuMzY1LTkuNzMgOS43MyAwIDUuMzY2IDQuMzY1IDkuNzMgOS43MyA5LjczIDIuMDM0IDAgMy45MjMtLjYyNyA1LjQ4Ny0xLjY5OGw2LjIzOCA2LjIzOCAyLjM1NC0yLjM1NHptLTIwLjk1NS0xMS45MTZjMC0zLjc5MiAzLjA4NS02Ljg3NyA2Ljg3Ny02Ljg3N3M2Ljg3NyAzLjA4NSA2Ljg3NyA2Ljg3Ny0zLjA4NSA2Ljg3Ny02Ljg3NyA2Ljg3N2MtMy43OTMgMC02Ljg3Ny0zLjA4NS02Ljg3Ny02Ljg3N3oiPjwvcGF0aD48L3N2Zz4=);
-  //background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiMwMGFiYzciIGQ9Ik0xNS44NTMgMTYuNTZjLTEuNjgzIDEuNTE3LTMuOTExIDIuNDQtNi4zNTMgMi40NC01LjI0MyAwLTkuNS00LjI1Ny05LjUtOS41czQuMjU3LTkuNSA5LjUtOS41IDkuNSA0LjI1NyA5LjUgOS41YzAgMi40NDItLjkyMyA0LjY3LTIuNDQgNi4zNTNsNy40NCA3LjQ0LS43MDcuNzA3LTcuNDQtNy40NHptLTYuMzUzLTE1LjU2YzQuNjkxIDAgOC41IDMuODA5IDguNSA4LjVzLTMuODA5IDguNS04LjUgOC41LTguNS0zLjgwOS04LjUtOC41IDMuODA5LTguNSA4LjUtOC41eiIvPjwvc3ZnPg==);
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDI5ZGI1IiBkPSJNMjEuMTcyIDI0bC03LjM4Ny03LjM4N2MtMS4zODguODc0LTMuMDI0IDEuMzg3LTQuNzg1IDEuMzg3LTQuOTcxIDAtOS00LjAyOS05LTlzNC4wMjktOSA5LTkgOSA0LjAyOSA5IDljMCAxLjc2MS0uNTE0IDMuMzk4LTEuMzg3IDQuNzg1bDcuMzg3IDcuMzg3LTIuODI4IDIuODI4em0tMTIuMTcyLThjMy44NTkgMCA3LTMuMTQgNy03cy0zLjE0MS03LTctNy03IDMuMTQtNyA3IDMuMTQxIDcgNyA3eiIvPjwvc3ZnPg==);
   background-size: 30px;
   transition: background-color $animation-speed, box-shadow $animation-speed;
@@ -2989,7 +3008,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   -webkit-tap-highlight-color: transparent;
 
   //:hover
-  &:hover {
+  .desktop &:hover {
     @include btn-hover;
   }
 
@@ -2997,11 +3016,15 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   &:active {
     @include btn-active;
   }
+
+  // .active
+  &.active {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMjMuOTU0IDIxLjAzbC05LjE4NC05LjA5NSA5LjA5Mi05LjE3NC0yLjgzMi0yLjgwNy05LjA5IDkuMTc5LTkuMTc2LTkuMDg4LTIuODEgMi44MSA5LjE4NiA5LjEwNS05LjA5NSA5LjE4NCAyLjgxIDIuODEgOS4xMTItOS4xOTIgOS4xOCA5LjF6Ij48L3BhdGg+PC9zdmc+);
+  }
 }
 
 // Filters search
 .filters-search {
-  overflow: hidden;
   position: absolute;
   right: 110px;
   width: 320px;
@@ -3022,6 +3045,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .search-form {
+  position: relative;
+
   .input-wrap {
     position: relative;
     padding: 0;
@@ -3057,26 +3082,46 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
     }
   }
 
-  .depict-search {
-    background: none;
-  }
-
-  .depict-search path {
-    fill: #c5c5c5;
-  }
-
+  // Кнопка отправки формы
   .btn-search {
+    box-sizing: border-box;
     position: absolute;
-    right: 20px;
-    top: 50%;
-    margin-top: -8px;
-    line-height: 0;
-    pointer-events: none;
+    top: 0;
+    right: 0;
+    $size: 62px;
+    height: 100%;
+    width: $size;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    background-color: $base-color;
+    box-shadow: none;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjEuMTcyIDI0bC03LjM4Ny03LjM4N2MtMS4zODguODc0LTMuMDI0IDEuMzg3LTQuNzg1IDEuMzg3LTQuOTcxIDAtOS00LjAyOS05LTlzNC4wMjktOSA5LTkgOSA0LjAyOSA5IDljMCAxLjc2MS0uNTE0IDMuMzk4LTEuMzg3IDQuNzg1bDcuMzg3IDcuMzg3LTIuODI4IDIuODI4em0tMTIuMTcyLThjMy44NTkgMCA3LTMuMTQgNy03cy0zLjE0MS03LTctNy03IDMuMTQtNyA3IDMuMTQxIDcgNyA3eiIvPjwvc3ZnPg==);
+    background-size: 30px;
+    transition: background-color $animation-speed, box-shadow $animation-speed;
+    z-index: 5;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 
-    display: none;
+    //:hover
+    .btn-search-open &:hover {
+      background-color: lighten($base-color, 10%);
+    }
 
-    @include media('<desk-s') {
-      right: 15px;
+    // :active
+    &:active {
+      transform: scale(1, 1);
+    }
+
+    // Если кнопка есть, то на инпут добавить отступ
+    & + input[type="search"],
+    & + input[type="text"] {
+      $intend: 50px;
+      margin-right: $intend;
+      width: calc(100% - #{$intend});
     }
   }
 }
@@ -3392,7 +3437,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
     background: none;
     outline: none;
 
-    @include media('<mob') {
+    @include media("<mob") {
       height: nth($swp-size--mob, 1);
       width: nth($swp-size--mob, 2);
       margin: $swp-space--mob;
@@ -3419,7 +3464,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
       opacity: 0.2;
 
-      @include media('<mob') {
+      @include media("<mob") {
         height: nth($swp-size--mob, 1);
         width: nth($swp-size--mob, 2);
       }
@@ -3434,7 +3479,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
       opacity: 0;
 
-      @include media('<mob') {
+      @include media("<mob") {
         height: nth($swp-size--mob, 1);
         width: nth($swp-size--mob, 2);
       }
@@ -3466,7 +3511,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
       .swiper-pagination-bullet {
         margin: $swp-space;
 
-        @include media('<mob') {
+        @include media("<mob") {
           margin: $swp-space--mob;
         }
       }
@@ -3478,76 +3523,70 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 /* promo */
 .promo {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  min-height: 56rem;
-  max-width: 2560px;
+  box-sizing: border-box;
+  position: relative;
+  height: 100vh;
+  max-width: 1920px;
   width: 100%;
   padding: #{$header-height} 0 0;
-  background-color: $base-color;
-  box-shadow: 0 5px 25px rgba(black, 0.35);
-  box-sizing: border-box;
   z-index: 90;
 
-  html:not(.no-js) & {
-    // transform
-    //opacity: 1;
-    //$scale: 1, 1;
-    //$translate: 0, 0;
-    //transform: translate($translate) scale($scale);
-    //transform: translate3d($translate, 0) scale($scale);
-    // transition
-    $prop: transform, opacity;
-    will-change: $prop;
-    transition: {
-      property: $prop;
-      duration: 1.2s;
-      timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  // Анимация промо-блока для десктопа и ширины больше 992
+  @include media(">=tab") {
+    .desktop & {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100%;
+      min-height: 540px;
+      background-color: $base-color;
+      box-shadow: 0 5px 25px rgba(black, 0.35);
+      $prop: transform, opacity;
+      will-change: $prop;
+      transition: {
+        property: $prop;
+        duration: 1.2s;
+        timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+      }
     }
-  }
 
-  html:not(.no-js) .modify & {
-    // transform
-    //opacity: 0;
-    $scale: 1, 1;
-    $translate: 0, -100%;
-    transform: translate($translate) scale($scale);
-    transform: translate3d($translate, 0) scale($scale);
-  }
-
-  .main & {
-    padding: 0;
-    height: calc(100vh - #{$header-height});
+    .desktop .modify & {
+      $scale: 1, 1;
+      $translate: 0, -100%;
+      transform: translate($translate) scale($scale);
+      transform: translate3d($translate, 0) scale($scale);
+    }
   }
 }
 
 .promo-overlay {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(black, 0.6);
-  z-index: 89;
+  display: none;
 
-  html:not(.no-js) & {
-    // transition
-    $prop: transform, opacity, visibility;
-    will-change: $prop;
-    transition: {
-      property: $prop;
-      duration: 1.2s;
-      timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  // Анимация промо-блока для десктопа и ширины больше 992
+  @include media(">=tab") {
+    .desktop & {
+      display: block;
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(black, 0.6);
+      z-index: 89;
+      $prop: transform, opacity, visibility;
+      will-change: $prop;
+      transition: {
+        property: $prop;
+        duration: 1.2s;
+        timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+      }
     }
-  }
 
-  html:not(.no-js) .modify & {
-    // transform
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    .desktop .modify & {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
   }
 }
 
@@ -3555,122 +3594,205 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 /* scroll down trigger */
 .scroll-down {
-  visibility: hidden;
-  position: fixed;
+  position: absolute;
   bottom: 20px;
   left: 0;
   width: 100%;
   text-align: center;
   z-index: 98;
 
-  html:not(.no-js) & {
-    transition: opacity 0.3s 0.5s;
+  // Анимация промо-блока для десктопа и ширины больше 992
+  @include media(">=tab") {
+    .desktop & {
+      transition: opacity 0.5s 0.0s;
+    }
+
+    .desktop .modify & {
+      transition: opacity 0.5s 0.3s;
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 
-  html:not(.no-js) .modify & {
-    opacity: 0;
+  @include media("<tab") {
     pointer-events: none;
-  }
-}
-
-a.btn-trigger {
-  visibility: visible;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-
-  html:not(.no-js) & {
-    transition: visibility 0.3s 0.5s, color $animation-speed 0s, background-color $animation-speed 0s, box-shadow $animation-speed 0s;
+    cursor: default;
   }
 
-  html:not(.no-js) .modify & {
-    visibility: hidden;
+  a.btn-trigger {
+    visibility: visible;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    // Анимация промо-блока для десктопа и ширины больше 992
+    @include media(">=tab") {
+      .desktop & {
+        transition: visibility 0.3s 0.5s, color $animation-speed 0s, background-color $animation-speed 0s, box-shadow $animation-speed 0s;
+      }
+
+      .desktop .modify & {
+        visibility: hidden;
+      }
+    }
   }
 }
 
 /* scroll down trigger end */
 
 /*tabs*/
-.tabs-wrap .tab-controls,
-.user-content .tab-controls {
-  list-style: none;
-  padding: 60px 30px 40px;
-  margin: 0;
-  text-align: center;
-  box-sizing: border-box;
+.tab-controls {
+  .tabs-wrap &,
+  .user-content & {
+    list-style: none;
+    padding: 60px 30px 40px;
+    margin: 0;
+    text-align: center;
+    box-sizing: border-box;
 
-  font-size: 0;
-  letter-spacing: -4px;
-}
+    font-size: 0;
+    letter-spacing: -4px;
 
-.home-page .tab-controls {
-  opacity: 0;
-  overflow: hidden;
-  height: 0;
-  padding: 0;
-}
+    @include media("<tab") {
+      padding: 30px 30px 40px;
+    }
 
-.tab-controls li,
-.user-content .tab-controls li,
-.user-content .tab-controls li:first-child,
-.r-tabs .r-tabs-accordion-title {
-  display: inline-block;
-  vertical-align: top;
-  padding: 0 6px;
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
-  font-size: 40px;
-  line-height: 50px;
+    @include media("<mob") {
+      display: table;
+      padding: 0;
+      border: solid #d8d8d8;
+      border-width: 1px 0;
+      width: 100%;
+      background: #fff;
+      margin: 0 0 20px;
+    }
 
-  letter-spacing: normal;
-}
+    @include media("<mob-s") {
+      border-width: 1px;
+    }
+  }
 
-.r-tabs .r-tabs-accordion-title {
-  display: none;
-  text-align: center;
-  padding: 0 0 30px;
-}
+  .home-page & {
+    opacity: 0;
+    overflow: hidden;
+    height: 0;
+    padding: 0;
 
-.user-content .tab-controls li:before,
-.user-content .tab-controls li:first-child:before {
-  content: none;
-}
+    @include media("<tab") {
+      opacity: 1;
+      overflow: visible;
+      height: auto;
+      padding: 60px 30px 40px;
+    }
+  }
 
-.tab-controls a {
-  position: relative;
-  display: block;
-  padding: 5px 32px;
-  border-radius: 30px;
-  color: #00abc7;
-  text-decoration: none;
-}
+  & li,
+  .user-content & li,
+  .user-content & li:first-child {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 6px;
+    font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    line-height: 50px;
+    letter-spacing: normal;
 
-.tab-controls .r-tabs-state-active a {
-  text-decoration: none;
-  background: #fcd105;
-  color: #fff;
-}
+    @include media("<desk") {
+      font-size: 30px;
+      line-height: 36px;
+    }
 
-.tab-controls a:after {
-  top: 100%;
-  left: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-color: rgba(252, 209, 5, 0);
-  border-top-color: #fcd105;
-  border-width: 11px;
-  margin-left: -11px;
-  opacity: 0;
-  -webkit-transition-property: opacity;
-  transition-property: opacity;
-  /*-webkit-transition-duration: 2s;*/
-  /*transition-duration: 2s;*/
-}
+    @include media("<mob") {
+      display: table-cell;
+      padding: 0;
+      margin: 0;
+      border-left: 1px solid #d8d8d8;
+      font-size: 24px;
+      line-height: 30px;
+      vertical-align: middle;
+      text-align: center;
+      table-layout: fixed;
+    }
 
-.tab-controls .r-tabs-state-active a:after {
-  opacity: 1;
+    @include media("<mob-s") {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+
+  li:first-child,
+  .user-content & li:first-child{
+    @include media("<mob") {
+      border-left: none;
+    }
+  }
+
+  .user-content & li {
+    &:before,
+    &:first-child:before {
+      content: none;
+    }
+  }
+
+  a {
+    position: relative;
+    display: block;
+    padding: 5px 32px;
+    border-radius: 30px;
+    color: #00abc7;
+    text-decoration: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    @include media("<desk") {
+      padding: 5px 22px;
+    }
+
+    @include media("<mob") {
+      padding: 14px 4px;
+      border-radius: 0;
+    }
+
+    &:after {
+      top: 100%;
+      left: 50%;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border: solid transparent;
+      border-color: rgba(252, 209, 5, 0);
+      border-top-color: #fcd105;
+      border-width: 11px;
+      margin-left: -11px;
+      opacity: 0;
+      -webkit-transition-property: opacity;
+      transition-property: opacity;
+      /*-webkit-transition-duration: 2s;*/
+      /*transition-duration: 2s;*/
+
+      @include media("<mob") {
+        content: none;
+      }
+    }
+
+    span {
+      display: inline-block;
+      border-bottom: 2px dotted #00abc7;
+      transition: border $animation-speed;
+
+      @include media("<mob") {
+        line-height: 20px;
+        border-width: 1px;
+      }
+    }
+  }
+
+  // Hover
+  .desktop & a:hover span,
+  .r-tabs-state-active a span {
+    border-color: transparent;
+  }
 }
 
 .tabs-wrap .tabs-panel {
@@ -3678,20 +3800,30 @@ a.btn-trigger {
   display: none;
 }
 
-.tab-controls a span {
+// Дублирующие заголовки
+.r-tabs .r-tabs-accordion-title {
   display: inline-block;
-  border-bottom: 2px dotted #00abc7;
-  -webkit-transition-property: border;
-  transition-property: border;
-  -webkit-transition-duration: 0.2s;
-  transition-duration: 0.2s;
+  vertical-align: top;
+  padding: 0 0 30px;
+  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  line-height: 50px;
+  text-align: center;
+  letter-spacing: normal;
+
+
+  display: none;
 }
 
-.desktop .tab-controls a:hover span,
-.tab-controls .r-tabs-state-active a span {
-  border-color: transparent;
-}
+.tab-controls .r-tabs-state-active a {
+  text-decoration: none;
+  background: #fcd105;
+  color: #fff;
 
+  &:after {
+    opacity: 1;
+  }
+}
 /*tabs end*/
 
 /*buttons*/
@@ -5830,7 +5962,6 @@ a.btn-trigger {
 
 /*overlay*/
 .overlay,
-.nav-overlay,
 .popup-overlay {
   background: #000 url(../../img/empty.png);
   position: fixed;
@@ -5857,65 +5988,78 @@ a.btn-trigger {
 
 /*SIDEBAR*/
 .sidebar {
+  box-sizing: border-box;
   position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
   width: 240px;
   padding-top: $header-height;
-  //background: rgba(black, 0.8);
   background: $base-color;
-  box-sizing: border-box;
-  z-index: 85;
+  z-index: $sidebar-z;
 
-  @include media('<tab') {
-    width: 100%;
-
-    display: none;
-  }
-
-  @include media('<mob-s') {
-    padding-top: $header-height--mob;
-  }
-
-  html:not(.no-js) .home-page & {
-    // transition
-    $prop: transform, opacity;
-    will-change: $prop;
-    transition: {
-      property: $prop;
-      duration: 1.2s;
-      delay: 0.2s;
-      timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  // Анимация промо-блока для десктопа и ширины больше 992
+  @include media(">=tab") {
+    .desktop .home-page & {
+      $prop: transform, opacity;
+      will-change: $prop;
+      transition: {
+        property: $prop;
+        duration: 1.2s;
+        delay: 0.2s;
+        timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+      }
+      opacity: 0;
+      $scale: 1, 1;
+      $translate: 0, 90vh;
+      transform: translate($translate) scale($scale);
+      transform: translate3d($translate, 0) scale($scale);
     }
-    // transform
-    opacity: 0;
-    $scale: 1, 1;
-    $translate: 0, 90vh;
-    transform: translate($translate) scale($scale);
-    transform: translate3d($translate, 0) scale($scale);
+
+    .desktop .home-page.modify & {
+      transition-delay: 0s;
+      opacity: 1;
+      $scale: 1, 1;
+      $translate: 0, 0;
+      transform: translate($translate) scale($scale);
+      transform: translate3d($translate, 0) scale($scale);
+    }
   }
 
-  html:not(.no-js) .home-page.modify & {
-    transition-delay: 0s;
-    // transform
-    opacity: 1;
-    $scale: 1, 1;
-    $translate: 0, 0;
-    transform: translate($translate) scale($scale);
-    transform: translate3d($translate, 0) scale($scale);
-  }
-}
+  @include media("<tab") {
+    z-index: $sidebar-z--tab;
+    will-change: opacity, transform;
+    transition: {
+      property: opacity, transform;
+      duration: $animation-speed;
+    };
 
-.popup-show .sidebar {
-  z-index: 104;
+    // hide
+    $translate: -100%, 0;
+    transform: translate($translate);
+    transform: translate3d($translate, 0);
+
+    &.menu_open {
+      $translate: 0, 0;
+      transform: translate($translate);
+      transform: translate3d($translate, 0);
+    }
+  }
+
+  @include media("<mob-s") {
+    padding-top: $header-height--tab;
+  }
+
+  .popup-show & {
+    z-index: 104;
+  }
 }
 
 .sidebar__holder {
   height: 100%;
   overflow: auto;
 
-  @include media('<tab') {
+  @include media("<tab") {
     border-top: 1px solid #029db5;
   }
 }
@@ -5926,12 +6070,48 @@ a.btn-trigger {
   box-sizing: border-box;
   padding-bottom: 268px;
 
-  @include media('<920px') {
+  @include media("<920px") {
     padding-bottom: 245px;
   }
 
-  @include media('<739px') {
+  @include media("<739px") {
     padding-bottom: 228px;
+  }
+}
+
+// Mobile menu overlay
+.mob-menu-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(black, 0.35);
+  z-index: $mob-menu-overlay-z;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  $prop: transform, opacity, visibility;
+  will-change: $prop;
+  transition: {
+    property: $prop;
+    duration: $animation-speed;
+    timing-function: ease-in-out;
+  }
+  display: none;
+
+  // <992px
+  @include media("<tab") {
+    display: block;
+  }
+
+  &.menu_open {
+    // <992px
+    @include media("<tab") {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
   }
 }
 
@@ -5946,24 +6126,24 @@ a.btn-trigger {
   justify-content: flex-start;
   align-items: stretch;
 
-  @include media('height<920px') {
+  @include media("height<920px") {
     //top: 171px;
     //bottom: 279px;
   }
 
-  @include media('height<830px') {
+  @include media("height<830px") {
     //top: 91px;
     //bottom: 279px;
   }
 
-  @include media('height<740px') {
+  @include media("height<740px") {
     position: relative;
     width: auto;
     bottom: auto;
     top: auto;
   }
 
-  @include media('<tab') {
+  @include media("<tab") {
     //top: 0;
   }
 }
@@ -5973,7 +6153,7 @@ a.btn-trigger {
   margin: 0;
   padding: 0;
 
-  @include media('height<740px') {
+  @include media("height<740px") {
     position: relative;
     top: auto;
     left: auto;
@@ -6001,13 +6181,13 @@ a.btn-trigger {
       text-decoration: none;
       transition: 0.3s background;
 
-      @include media('height<830px') {
+      @include media("height<830px") {
         $size: 16px;
         padding-top: $size;
         padding-bottom: $size;
       }
 
-      @include media('height<580px') {
+      @include media("height<580px") {
         $size: 13px;
         padding-top: $size;
         padding-bottom: $size;
@@ -6323,7 +6503,7 @@ a.btn-trigger {
   width: 100%;
   margin-bottom: 5px;
   text-decoration: none;
-  transition: background-color $animation-speed;
+  transition: background-color $animation-speed, box-shadow $animation-speed;
 
   svg {
     vertical-align: middle;
@@ -6338,6 +6518,7 @@ a.btn-trigger {
   // Hover
   &:hover {
     background-color: rgba(white, 0.3);
+    //box-shadow: 0 0 15px rgba(white, 1);
   }
 }
 
@@ -6408,7 +6589,7 @@ a.btn-trigger {
   max-width: 100%;
   padding-top: $header-height;
   box-sizing: border-box;
-  //background-color: rgba(black, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   background-color: $base-color-alt;
   // Поднять над контентом
   z-index: 95;
@@ -6422,11 +6603,6 @@ a.btn-trigger {
   $translate: -100%, 0;
   transform: translate($translate);
   transform: translate3d($translate, 0);
-
-  // 480
-  @include media('<mob-s') {
-    padding-top: $header-height--mob;
-  }
 
   &.menu_open {
     opacity: 1;
@@ -6629,12 +6805,13 @@ a.btn-trigger {
   transition-property: box-shadow, background, color, border;
   transition-duration: $animation-speed;
 
-  @include media('<mob-s') {
+  @include media("<mob-s") {
     padding: 0 20px;
   }
 
   // Arrow
-  &::before {
+  &::before,
+  &::after {
     content: "";
     display: block;
     position: absolute;
@@ -6647,22 +6824,22 @@ a.btn-trigger {
     background-position: 50%;
     background-size: 10px;
     transition: opacity $animation-speed;
+  }
+
+  &::before {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCA3LjMzbDIuODI5LTIuODMgOS4xNzUgOS4zMzkgOS4xNjctOS4zMzkgMi44MjkgMi44My0xMS45OTYgMTIuMTd6Ij48L3BhdGg+PC9zdmc+);
   }
 
-  //&::before {
-  //}
-
-  //&::after {
-  //  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMCA3LjMzbDIuODI5LTIuODMgOS4xNzUgOS4zMzkgOS4xNjctOS4zMzkgMi44MjkgMi44My0xMS45OTYgMTIuMTd6Ij48L3BhdGg+PC9zdmc+);
-  //  opacity: 0;
-  //}
+  &::after {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMCA3LjMzbDIuODI5LTIuODMgOS4xNzUgOS4zMzkgOS4xNjctOS4zMzkgMi44MjkgMi44My0xMS45OTYgMTIuMTd6Ij48L3BhdGg+PC9zdmc+);
+    opacity: 0;
+  }
 
   // Active
   &.show-drop {
-    //background: rgba(#fff, 0.8);
-    //color: $base-color;
-    //border-color: $base-color;
+    background: rgba(#fff, 1);
+    color: $base-color;
+    border-color: $base-color;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 
     &::before,
@@ -6670,13 +6847,13 @@ a.btn-trigger {
       transform: rotate(-180deg);
     }
 
-    //&::before {
-    //  opacity: 0;
-    //}
-    //
-    //&::after {
-    //  opacity: 1;
-    //}
+    &::before {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
   }
 
   // Hover
@@ -6685,9 +6862,9 @@ a.btn-trigger {
   }
 
   // Active Hover
-  //.desktop &.show-drop:hover {
-  //  background: rgba(#fff, 1);
-  //}
+  .desktop &.show-drop:hover {
+    background: rgba(#fff, 1);
+  }
 }
 
 /*filters drop*/
@@ -6849,11 +7026,11 @@ a.btn-trigger {
   z-index: 6;
   display: none;
 
-  @include media('<tab-s') {
+  @include media("<tab-s") {
     z-index: 103;
   }
 
-  @include media('<mob') {
+  @include media("<mob") {
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -6867,7 +7044,7 @@ a.btn-trigger {
     display: inline-block;
     vertical-align: top;
 
-    @include media('<mob') {
+    @include media("<mob") {
       float: none;
       display: inline-block;
       vertical-align: top;
@@ -6880,7 +7057,7 @@ a.btn-trigger {
     line-height: 17px;
     min-width: 140px;
 
-    @include media('<mob') {
+    @include media("<mob") {
       float: left;
       line-height: 15px;
       width: 80px;

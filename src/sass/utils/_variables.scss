@@ -11,7 +11,7 @@ $breakpoints: (
     "lap": 1366px,
     "lap-s": 1280px,
     "net": 1200px,
-    "tab": 980px,
+    "tab": 992px,
     "tab-s": 768px,
     "mob": 640px,
     "mob-s": 480px,
@@ -542,16 +542,30 @@ $animation-speed-mouseleave: 0.35s !default;
 // Header
 // ====================================================
 $header-height: 86px;
-$header-height--mob: 68px; // 480px '<mob-s'
+$header-height--tab: 68px; // 480px '<tab'
+$header-height--mob: 60px; // 640px '<mob'
 
-$filters-panel-height: 100px;
-$filters-panel-height--desk-s: 72px;
-$filters-panel-height--lap-l: 144px;
-$filters-panel-height--lap-s: 144px;
-$filters-panel-height--tab: 231px;
-$filters-panel-height--tab-s: 166px;
-$filters-panel-height--mob-s: 140px;
+$filters-panel-height: 100px !default;
+$filters-panel-height--desk-s: 72px !default;
+$filters-panel-height--lap-l: 144px !default;
+$filters-panel-height--lap-s: 144px !default;
+$filters-panel-height--tab: 231px !default;
+$filters-panel-height--tab-s: 166px !default;
+$filters-panel-height--mob-s: 140px !default;
+
+
+// Sidebar
+// ====================================================
 
 
 // Footer
 // ====================================================
+
+
+// Z-index
+// ====================================================
+
+
+$sidebar-z: 90 !default; // Сайдбар и мобильное меню
+$sidebar-z--tab: 96 !default; // Сайдбар и мобильное меню
+$mob-menu-overlay-z: 95 !default; // Тень под мобильным меню

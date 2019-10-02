@@ -299,6 +299,41 @@ function printShow() {
   });
 }
 
+/**
+ * !Search toggle
+ */
+function searchToggle() {
+  var $searchOpen = $('.btn-search-open-js');
+  var $searchForm = $('.search-panel-js');
+  var timeout;
+
+  if ($searchOpen.length) {
+    $searchOpen.switchClass({
+      switchClassTo: $searchForm,
+      removeExisting: true,
+      cssScrollFixed: false,
+      removeEl: $('.menu-close-js'),
+      modifiers: {
+        activeClass: 'active'
+      },
+      afterAdd: function () {
+        console.log(1);
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          $searchForm.find('input[type="search"]').focus();
+        }, 50);
+      }
+    });
+  }
+
+  // Открыть поле поиска если в url хэш #open-search
+  if (document.location.hash === "#open-search") {
+    setTimeout(function () {
+      $searchOpen.switchClass('add');
+    }, 1000);
+  }
+}
+
 
 /**
  * !Tabs initialize
@@ -414,7 +449,6 @@ function equalHeightInit() {
 /**
  * !Multiselect initialize
  */
-
 /* add ui position add class */
 function addPositionClass(position, feedback, obj) {
   removePositionClass(obj);
@@ -900,44 +934,6 @@ function filtersEvents() {
         'max-height': productsContainerHeight
       });
     }
-  }
-}
-
-
-/**
- * !Search toggle
- */
-function searchToggle() {
-  var $searchOpen = $('.btn-search-open-js');
-  var $searchForm = $('.filters-search-js');
-  var timeout;
-
-  function openSearchForm() {
-    $searchOpen.add($searchForm).addClass('active');
-
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
-      $searchForm.find('input[type="search"]').focus();
-    }, 50);
-  }
-
-  if ($searchOpen.length) {
-    $searchOpen.on('click', function (e) {
-      var $curBtn = $(this);
-
-      if ($curBtn.hasClass('active')) {
-        $searchOpen.add($searchForm).removeClass('active');
-      } else {
-        openSearchForm();
-      }
-
-      e.preventDefault();
-    })
-  }
-
-  // Открыть поле поиска если в url хэш #open-search
-  if (document.location.hash === "#open-search") {
-    openSearchForm();
   }
 }
 
@@ -1615,11 +1611,26 @@ function hoverClassInit() {
  * !Toggle menu
  */
 function toggleMenu() {
+  // Toggle Additional menu
   var $toggleMenu = $('.menu-opener-js');
   if ($toggleMenu.length) {
     $toggleMenu.switchClass({
       switchClassTo: $('.menu-js'),
       removeExisting: true,
+      removeEl: $('.menu-close-js'),
+      modifiers: {
+        activeClass: 'menu_open'
+      }
+    });
+  }
+
+  // Toggle Mobile menu
+  var $mobMenu = $('.mob-menu-opener-js');
+  if ($mobMenu.length) {
+    $mobMenu.switchClass({
+      switchClassTo: $('.mob-menu-js').add('.mob-menu-overlay-js'),
+      removeExisting: true,
+      cssScrollFixed: true,
       removeEl: $('.menu-close-js'),
       modifiers: {
         activeClass: 'menu_open'
@@ -2345,6 +2356,9 @@ function navSlider() {
 
       curSlider.on('init', function () {
         $thisSlider.addClass('is-loaded');
+        setTimeout(function () {
+          $thisSlider.closest('.mCustomScrollbar').mCustomScrollbar("update");
+        }, 50)
       });
 
       curSlider.init();
@@ -2863,19 +2877,20 @@ $WINDOW.load(function () {
 $DOC.ready(function () {
   customScroll();
   // toggleHeaderInit();
-  if ($BODY.hasClass('home-page')) {
+  if ($BODY.hasClass('home-page') && DESKTOP && window.innerWidth >= 992) {
     togglePromoOnScroll();
   }
   shareFixed();
   placeholderInit();
   stateFields();
   printShow();
+  searchToggle();
+  tabs();
   equalHeightInit();
   if (DESKTOP) {
     customSelect();
   }
   // filtersEvents();
-  searchToggle();
   shareEvents();
   hoverClassInit();
   toggleMenu();
@@ -2885,19 +2900,9 @@ $DOC.ready(function () {
   contacts();
   // toggleScrollPage(id); // toggle scroll page
 
-  tabs();
   videoSliderInit();
   promoSliderInit();
   navSlider();
 
   imgLazyLoad();
-
-  if (!DESKTOP) {
-    // headerFixed();
-    // fotoramaInit();
-    // tapeSlider();
-    // shareFixed();
-
-    // mainScreenForMobile();
-  }
 });
