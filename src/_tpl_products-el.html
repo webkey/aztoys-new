@@ -1,0 +1,23 @@
+<a href="prod-card.html" class="products__inner">
+  @@if(context.stickers){
+    <div class="products__stickers stickers">
+      @@if(context.stickers.new){<div class="stickers__item sticker stickers_new"><span>@@stickers.new</span></div>}
+      @@if(context.stickers.top){<div class="stickers__item sticker stickers_top"><span>@@stickers.top</span></div>}
+      @@if(context.stickers.hit){<div class="stickers__item sticker stickers_hit"><span>@@stickers.hit</span></div>}
+    </div>
+  }
+  @@if(context.img){
+  <div class="products__img">
+    <div class="products__figure"><img src="@@img" alt="@@title" /></div>
+  </div>
+  }
+  <div class="products__content">
+    @@if(context.title){<h3 class="products__title">@@title</h3>}
+    @@if(context.subtitle){<h4 class="products__subtitle">@@subtitle</h4>}
+    @@if(context.params){
+    <dl class="products__param">
+      @@params
+    </dl>
+    }
+  </div>
+</a>

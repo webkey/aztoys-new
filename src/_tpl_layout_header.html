@@ -1,5 +1,5 @@
 <!--HEADER-->
-<header class="header">
+<header class="header@@if(context.currentItem == 'Products'){ has-filters}">
   <!--menu opener-->
   <a href="#" class="menu-opener menu-opener-js is-open">
     <div class="btn-lines">
@@ -20,10 +20,12 @@
   <img class="logo__print" src="img/logo-print.png" alt="aztoys">
   <!--logo end-->
 
+  @@if(context.currentItem == "Home"){
   <ul class="header-categories header-categories-js">
     <li class="active"><a href="#newToys"><span>New toys</span></a></li>
     <li><a href="#popularToys"><span>Popular</span></a></li>
   </ul>
+  }
 
   <!--btn menu-->
   <a href="#" class="btn-menu">
@@ -36,12 +38,34 @@
   </a>
   <!--btn menu end-->
 
+  @@if(context.currentItem == "Products"){@@include("_tpl_product-filters.html")}
+
+  @@if(context.currentItem != "Products"){
   <!--btn filters-->
-  <a href="#" class="btn-filters">Filters</a>
-  <!--btn filters end-->
+  <a href="products.html" class="btn-filters">Filters</a>
+  <!--btn filters end-->}
 
   <!--btn search-->
-  <a href="#" class="btn-search"></a>
+  @@if(context.currentItem != "Products"){
+  <a href="products.html#open-search" class="btn-search-open"></a>
+  }
+  @@if(context.currentItem == "Products"){
+  <a href="#" class="btn-search-open btn-search-open-js"></a>
+  <div class="filters-search filters-search-js">
+    <div class="search-form">
+      <div class="from">
+        <div class="input-wrap">
+          <input type="search" value="" placeholder="Search">
+          <div class="btn-search">
+            <i class="depict-search">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 18 22.5" version="1.1" x="0px" y="0px"><title>icon-search</title><desc>Created with Sketch.</desc><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g fill="#000000"><path d="M12.076923,7.76923077 C12.076923,6.5833274 11.655453,5.56891447 10.8125,4.72596154 C9.969547,3.88300861 8.955134,3.46153846 7.769231,3.46153846 C6.583327,3.46153846 5.568914,3.88300861 4.725962,4.72596154 C3.883009,5.56891447 3.461538,6.5833274 3.461538,7.76923077 C3.461538,8.95513413 3.883009,9.96954707 4.725962,10.8125 C5.568914,11.6554529 6.583327,12.0769231 7.769231,12.0769231 C8.955134,12.0769231 9.969547,11.6554529 10.8125,10.8125 C11.655453,9.96954707 12.076923,8.95513413 12.076923,7.76923077 L12.076923,7.76923077 L12.076923,7.76923077 Z M17,15.7692308 C17,16.1025658 16.878206,16.3910244 16.634615,16.6346154 C16.391024,16.8782063 16.102566,17 15.769231,17 C15.423075,17 15.134617,16.8782063 14.903846,16.6346154 L11.605769,13.3461538 C10.458328,14.1410296 9.179494,14.5384615 7.769231,14.5384615 C6.85256,14.5384615 5.975966,14.3605787 5.139423,14.0048077 C4.30288,13.6490367 3.581734,13.1682723 2.975962,12.5625 C2.370189,11.9567277 1.889425,11.2355811 1.533654,10.3990385 C1.177883,9.56249582 1,8.68590202 1,7.76923077 C1,6.85255952 1.177883,5.97596572 1.533654,5.13942308 C1.889425,4.30288043 2.370189,3.5817338 2.975962,2.97596154 C3.581734,2.37018928 4.30288,1.88942486 5.139423,1.53365385 C5.975966,1.17788284 6.85256,1 7.769231,1 C8.685902,1 9.562496,1.17788284 10.399038,1.53365385 C11.235581,1.88942486 11.956728,2.37018928 12.5625,2.97596154 C13.168272,3.5817338 13.649037,4.30288043 14.004808,5.13942308 C14.360579,5.97596572 14.538462,6.85255952 14.538462,7.76923077 C14.538462,9.17949423 14.14103,10.4583276 13.346154,11.6057692 L16.644231,14.9038462 C16.881411,15.1410268 17,15.4294855 17,15.7692308 L17,15.7692308 L17,15.7692308 Z"/></g></g></svg>
+            </i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
   <!--btn search end-->
 
   <!--slogan-->

@@ -5,6 +5,8 @@
       <!-- main navigation -->
       <nav class="nav">
         <ul class="nav-list">
+          @@if(context.currentItem != "Home"){<li><a href="index.html"><span>Home</span></a></li>}
+
           @@if(context.currentItem == "Products"){<li class="active"><span><span>Products</span></span></li>}
           @@if(context.currentItem != "Products"){<li><a href="products.html"><span>Products</span></a></li>}
 

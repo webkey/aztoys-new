@@ -240,27 +240,27 @@ $mark-color: $info-color !default;
 // Layout page
 // ====================================================
 // Минимальная ширина сайта
-$layout-page-min-width: 32rem !default;
+$layout-page-min-width: 320px !default;
 // Максимальная ширина сайта
-$layout-page-max-width: 192rem !default;
+$layout-page-max-width: 1920px !default;
 // Отступы для всего сайта
-$layout-page-space: 3rem 5rem !default;
+$layout-page-space: 30px 30px !default;
 
 
 // Layout text
 // ====================================================
 // Ширина текстового блока
-$layout-text-width: 80rem !default;
+$layout-text-width: 800px !default;
 // Отступы текствого блока
-$layout-text-space: 2rem 3rem !default;
+$layout-text-space: 20px 30px !default;
 // Максимальная ширина элементов выходящих за пределы текста
-$layout-flood-width: 110rem !default;
+$layout-flood-width: 1100px !default;
 
 
 // Inner space
 // ====================================================
 // Внутренние отступы
-$grid-space: 2.8rem 3rem !default;
+$grid-space: 28px 30px !default;
 
 
 // Buttons
