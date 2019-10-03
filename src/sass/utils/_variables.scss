@@ -240,6 +240,8 @@ $base-color-alt: #fcd105 !default;
 // ----------------------------------------------------
 $highlight-color: #fcd105 !default
 $highlight-color--hover: lighten($base-color-alt, 20%) !default
+$highlight-color-alt: $base-color !default
+$highlight-color-alt--hover: lighten($highlight-color-alt, 20%) !default
 // ----------------------------------------------------
 $bg-color: #fff !default;
 $bg-color-alt: #f3f3f3 !default;
@@ -264,8 +266,8 @@ $layout-page-min-width: 320px !default;
 $layout-page-max-width: 2560px !default;
 // Отступы для всего сайта
 $layout-page-space: 30px 30px !default;
-$layout-page-space--tab: 30px 20px !default;
-$layout-page-space--mob: 20px 15px !default;
+$layout-page-space--tab: 30px 25px !default; // <992px
+$layout-page-space--mob: 20px 20px !default; // <640px
 
 
 // Layout text

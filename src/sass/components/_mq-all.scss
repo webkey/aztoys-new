@@ -5,66 +5,6 @@
    Media Queries
    ========================================================================== */
 
-@media only screen and (max-width: 1279px){
-  /*locate*/
-  .locate { padding: 250px 40px 100px; }
-  .locate-controls{
-    left: 40px;
-    top: 40px;
-    font-size: 22px;
-  }
-  .locate-controls a{
-    float: none;
-    display: block;
-    text-align: center;
-  }
-  .locate-adr__item,
-  .locate-cont__item{
-    font-size: 22px;
-    line-height: 36px;
-  }
-  .locate-cont__item .locate__tel + dd {
-    font-size: 32px;
-    line-height: 36px;
-    position: relative;
-  }
-  .see-map {
-    right: 40px;
-    top: 40px;
-  }
-  /*locate end*/
-
-  /*popup*/
-  .product-card__content, .product-card__title { padding-left: 30px; }
-  /*popup end*/
-  /*MAIN end*/
-
-  ///*SIDEBAR*/
-  ///*main navigation*/
-  //.nav-drop__group{
-  //  padding: 25px 30px;
-  //  width: 240px;
-  //}
-  ///*main navigation end*/
-  ///*SIDEBAR end*/
-
-  /*FOOTER*/
-  .footer-holder{ text-align: center; }
-  .footer-holder:after{ content: normal; }
-  .footer-holder:before{
-    content: '';
-    display: inline-block;
-    vertical-align: middle;
-    min-height: 80px;
-  }
-  .footer-col{
-    width: 33.28%;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  /*FOOTER end*/
-}
-
 @media only screen and (max-width: 1199px){
   /*about*/
   .about__img,
@@ -99,11 +39,6 @@
     content: none;
   }
   /*about end*/
-}
-
-@media only screen and (max-width: 1079px){
-  .footer-nav__col.no-space{ width: 49%; }
-  .footer-nav__col.col-lg{ width: 50%; }
 }
 
 @media only screen and (max-width: 979px){
@@ -221,43 +156,6 @@
   .news__content:before { content: none; }
   .news__img, .news__share { display: none; }
   /*news end*/
-
-  /*contacts*/
-  .contacts__holder { float: none; }
-  .contacts__frame { margin-right: 0; }
-  .contacts-aside {
-    float: none;
-    margin: 0;
-    width: auto;
-  }
-  /*contacts end*/
-
-  /*locate*/
-  .locate {
-    padding: 190px 30px 40px;
-    min-height: 590px;
-  }
-  .locate-controls{ left: 30px; }
-  .locate-controls a{
-    float: left;
-    text-align: left;
-    padding: 15px 30px;
-  }
-  .see-map {
-    right: 10px;
-    top: 38px;
-  }
-  /*locate*/
-
-  /*contacts form*/
-  .contacts-aside:before{ content: none; }
-  .contacts-form{
-    max-width: 440px;
-    display: block;
-    width: auto;
-    padding: 30px;
-  }
-  /*contacts form end*/
 
   /*popup*/
   .product-card__title{
@@ -505,53 +403,6 @@
     transform: translate(-50%, -50%) scale(0.8, 0.8);
   }
   /*news end*/
-
-  /*locate*/
-  .locate{
-    padding: 190px 20px 20px;
-    min-height: 568px;
-  }
-  .locate-controls{
-    left: 20px;
-    top: 20px;
-    font-size: 18px;
-    line-height: 24px;
-  }
-  .map-show .locate-controls { display: none; }
-  .locate-controls a{
-    float: none;
-    display: block;
-    text-align: center;
-  }
-  .locate-adr__item,
-  .locate-cont__item {
-    font-size: 18px;
-    line-height: 26px;
-  }
-  .locate-cont__item dt { min-width: 65px; }
-  .locate-cont__item .locate__tel + dd {
-    font-size: 24px;
-    line-height: 26px;
-    position: relative;
-  }
-  .see-map{
-    right: 18px;
-    top: 18px;
-    width: 56px;
-    height: 56px;
-  }
-  /*locate*/
-
-  /*contacts form*/
-  .contacts-form{
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .contacts-form h3{
-    font-size: 30px;
-    line-height: 40px;
-  }
-  /*contacts form end*/
 
   /*popup*/
   .product-card {

@@ -1,7 +1,10 @@
-var $WINDOW = $(window);
-var $DOC = $(document);
-var $HTML = $('html');
-var $BODY = $('body');
+var $WINDOW = $(window),
+    $DOC = $(document),
+    $HTML = $('html'),
+    $BODY = $('body');
+
+var DESKTOP_WIDTH = 992,
+    TABLET_WIDTH = 768;
 
 /**
  * !Resize only width
@@ -875,6 +878,9 @@ function filtersEvents() {
       $filters.attr('style', '');
       // $jsDropOpener.trigger('click');
       // toggleScrollPage('mobile-filter-panel');
+    }
+
+    if ($jsFiltersOpener.hasClass('active')) {
       hideFiltersPanel();
     }
   });
@@ -912,7 +918,7 @@ function filtersEvents() {
   });
 
   // Открыть панель фильтров на мобиле в url хэш #filters-open
-  if (document.location.hash === "#filters-open") {
+  if (document.location.hash === "#filters-open" && window.innerWidth < DESKTOP_WIDTH) {
     setTimeout(function () {
       showFiltersPanel();
     }, 200);
@@ -2915,7 +2921,7 @@ $WINDOW.load(function () {
 $DOC.ready(function () {
   customScroll();
   // toggleHeaderInit();
-  if ($BODY.hasClass('home-page') && DESKTOP && window.innerWidth >= 992) {
+  if ($BODY.hasClass('home-page') && DESKTOP && window.innerWidth >= TABLET_WIDTH) {
     togglePromoOnScroll();
   }
   shareFixed();
