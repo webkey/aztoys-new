@@ -48,7 +48,7 @@
 <![endif]-->
   <!--HEADER-->
   <header class="header has-filters">
-    <!--menu opener-->
+    <!--menu open button-->
     <a href="#" class="menu-opener menu-opener-js">
       <div class="btn-lines">
         <span></span>
@@ -57,8 +57,8 @@
       </div>
       <span>Menu</span>
     </a>
-    <!--menu opener end-->
-    <!--mobile menu opener-->
+    <!--menu open button end-->
+    <!--mobile menu open button-->
     <a href="#" class="menu-opener mob-menu-opener mob-menu-opener-js">
       <div class="btn-lines">
         <span></span>
@@ -67,7 +67,7 @@
       </div>
       <span>Menu</span>
     </a>
-    <!--mobile menu opener end-->
+    <!--mobile menu open button end-->
     <!--logo-->
     <div class="logo">
       <a href="index.html">
@@ -76,10 +76,12 @@
     </div>
     <img class="logo__print" src="img/logo-print.png" alt="aztoys">
     <!--logo end-->
+    <!--filters open button-->
+    <a class="btn-filters btn-filters-opener btn-filters-opener-js">Filters</a>
+    <!--filters open button end-->
     <!--FILTERS-->
-    <div class="filters-opener"><a href="#" class="btn-filter-opener btn-filter-opener-js">Filters</a></div>
     <div class="filters filters-js">
-      <a href="#" class="btn-close btn-filter-close btn-filter-close-js">Close</a>
+      <a href="#" class="btn-close btn-filters-close btn-filters-close-js">Close</a>
       <div class="filters__panel">
         <div class="filters__groups">
           <div class="filters__group">
@@ -91,24 +93,20 @@
             </div>
           </div>
           <div class="filters__group has-drop filters-content-js">
-            <a href="#" class="filter-selector filter-selector-js">Age</a>
+            <a href="#" class="filter-selector filter-selector-js">Show filters</a>
             <div class="filters-drop filters-drop-js">
               <div class="filters-drop__holder">
                 <div class="filters-drop__group">
+                  <strong class="filters-drop__title">Age</strong>
                   <ul class="filters-drop__list filters-tags-js" data-filter-method="or">
-                    <li><a href="#" data-filter=".tag-younger"><span>2-3</span></a></li>
-                    <li><a href="#" data-filter=".tag-middle"><span>4-5</span></a></li>
-                    <li><a href="#" data-filter=".tag-senior"><span>6+</span></a></li>
+                    <li><a href="#" data-filter=".tag-baby"><span>0+ years</span></a></li>
+                    <li><a href="#" data-filter=".tag-younger"><span>1+ years</span></a></li>
+                    <li><a href="#" data-filter=".tag-middle"><span>4-5 years</span></a></li>
+                    <li><a href="#" data-filter=".tag-senior"><span>6+ years</span></a></li>
                   </ul>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="filters__group has-drop filters-content-js">
-            <a href="#" class="filter-selector filter-selector-js">Category</a>
-            <div class="filters-drop filters-drop-js">
-              <div class="filters-drop__holder">
                 <div class="filters-drop__group">
+                  <strong class="filters-drop__title">Category</strong>
                   <ul class="filters-drop__list filters-tags-js" data-filter-method="or">
                     <li><a href="#" data-filter=".tag-educational"><span>Educational Toys</span></a></li>
                     <li><a href="#" data-filter=".tag-music"><span>Sound and Music Toys</span></a></li>
@@ -126,14 +124,8 @@
                     <li><a href="#" data-filter=".tag-sticker"><span>Sticker Elements</span></a></li>
                   </ul>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="filters__group has-drop filters-content-js">
-            <a href="#" class="filter-selector filter-selector-js">Skills</a>
-            <div class="filters-drop filters-drop-js">
-              <div class="filters-drop__holder">
                 <div class="filters-drop__group">
+                  <strong class="filters-drop__title">Skills</strong>
                   <ul class="filters-drop__list filters-tags-js" data-filter-method="or">
                     <li><a href="#" data-filter=".tag-physical"><i class="depict-skills-01"></i><span>Physical skills</span></a></li>
                     <li><a href="#" data-filter=".tag-cognitive"><i class="depict-skills-02"></i><span>Cognitive skills</span></a></li>
@@ -382,77 +374,72 @@
           <h1>Products</h1>
         </div>
         <div class="products__list products filters-container-js">
-          <div class="products__item tag-younger tag-educational tag-music tag-set tag-puzzle">
-            <a href="products/prod-card.html" class="products__inner popup-opener-js">
+          <div class="products__item tag-baby tag-educational tag-music tag-set tag-puzzle">
+            <a href="#" class="products__inner popup-opener-js">
+              <div class="products__stickers stickers">
+                <div class="stickers__item sticker stickers_new"><span>New</span></div>
+              </div>
               <div class="products__img">
-                <div class="products__figure"><img src="img/preloader.svg" data-src="img/img-products-01.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-06.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Fire Kids Edition Tablet</span>
-                </h3>
+                <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5, 6+</dd>
-                  <dt>Category:</dt>
+                  <dd>2-3, 4-5, 6+</dd><dt>Category:</dt>
                   <dd>Educational Toys, Sound and Music Toys, Tablets with Touch Screen Pages</dd>
                 </dl>
               </div>
             </a>
           </div>
-          <div class="products__item tag-middle tag-new tag-educational tag-music tag-music tag-art">
+          <div class="products__item tag-baby tag-new tag-educational tag-music tag-music tag-art">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-02.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-02.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Ladybird</span>
-                </h3>
+                <h3 class="products__title"><strong>Baby Player</strong><span>Ladybird</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd>
-                  <dt>Category:</dt>
+                  <dd>5-7 years</dd><dt>Category:</dt>
                   <dd>Learn</dd>
                 </dl>
               </div>
             </a>
           </div>
-          <div class="products__item tag-younger tag-new tag-music tag-educational-card">
+          <div class="products__item tag-little tag-new tag-music tag-educational-card">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-03.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/brand1.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Fire Kids Edition Tablet</span>
-                </h3>
+                <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5</dd>
-                  <dt>Category:</dt>
+                  <dd>2-3, 4-5</dd><dt>Category:</dt>
                   <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
                 </dl>
               </div>
             </a>
           </div>
-          <div class="products__item tag-senior tag-younger tag-popular tag-educational tag-art tag-educational-card">
+          <div class="products__item tag-little tag-senior tag-popular tag-educational tag-art tag-educational-card">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-04.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-04.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Ladybird</span>
-                </h3>
+                <h3 class="products__title"><strong>Kids' Pad</strong><span>My First Atlas</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd>
-                  <dt>Category:</dt>
+                  <dd>4-5 years</dd><dt>Category:</dt>
                   <dd>Learn</dd>
                 </dl>
               </div>
@@ -461,36 +448,32 @@
           <div class="products__item tag-middle tag-younger tag-popular tag-tablet tag-sticker">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-05.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-expl-lg.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Fire Kids Edition Tablet</span>
-                </h3>
+                <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd>
-                  <dt>Category:</dt>
-                  <dd>Learn</dd>
+                  <dd>5-7 years</dd><dt>Category:</dt>
+                  <dd>Active Learning Toys, Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
           </div>
-          <div class="products__item tag-senior tag-younger tag-middle tag-new tag-educational tag-music tag-smartphone tag-sticker">
+          <div class="products__item tag-senior tag-middle tag-new tag-educational tag-music tag-smartphone tag-sticker">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-06.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-06.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Ladybird</span>
-                </h3>
+                <h3 class="products__title"><strong>3D Drawing Tablet</strong><span>Let's Learn ABC</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5</dd>
-                  <dt>Category:</dt>
+                  <dd>5-7 years</dd><dt>Category:</dt>
                   <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
                 </dl>
               </div>
@@ -499,37 +482,36 @@
           <div class="products__item tag-middle tag-exclusive tag-educational tag-tablet tag-touch">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-01.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-03.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Fire Kids Edition Tablet</span>
-                </h3>
+                <h3 class="products__title"><strong>Kids' Pad</strong><span>Smart Quest</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5</dd>
-                  <dt>Category:</dt>
-                  <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
+                  <dd>5-7 years</dd><dt>Category:</dt>
+                  <dd>Active Learning Toys, Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
           </div>
           <div class="products__item tag-senior tag-middle tag-exclusive tag-educational tag-smartphone">
             <a href="#" class="products__inner popup-opener-js">
+              <div class="products__stickers stickers">
+                <div class="stickers__item sticker stickers_new"><span>New</span></div>
+              </div>
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-02.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-01.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Ladybird</span>
-                </h3>
+                <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd>
-                  <dt>Category:</dt>
-                  <dd>Learn</dd>
+                  <dd>2-3, 4-5, 6+</dd><dt>Category:</dt>
+                  <dd>Educational Toys, Sound and Music Toys, Tablets with Touch Screen Pages</dd>
                 </dl>
               </div>
             </a>
@@ -537,18 +519,16 @@
           <div class="products__item tag-middle tag-exclusive tag-smartphone tag-sticker">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-03.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-02.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Fire Kids Edition Tablet</span>
-                </h3>
+                <h3 class="products__title"><strong>Baby Player</strong><span>Ladybird</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5</dd>
-                  <dt>Category:</dt>
-                  <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
+                  <dd>5-7 years</dd><dt>Category:</dt>
+                  <dd>Learn</dd>
                 </dl>
               </div>
             </a>
@@ -556,18 +536,16 @@
           <div class="products__item tag-senior tag-middle tag-smart-watch tag-microphone">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-04.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-03.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Ladybird</span>
-                </h3>
+                <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd>
-                  <dt>Category:</dt>
-                  <dd>Learn</dd>
+                  <dd>2-3, 4-5</dd><dt>Category:</dt>
+                  <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
                 </dl>
               </div>
             </a>
@@ -575,18 +553,16 @@
           <div class="products__item tag-middle tag-microphone tag-educational-card">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-05.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-05.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Fire Kids Edition Tablet</span>
-                </h3>
+                <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5</dd>
-                  <dt>Category:</dt>
-                  <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
+                  <dd>5-7 years</dd><dt>Category:</dt>
+                  <dd>Active Learning Toys, Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -594,18 +570,16 @@
           <div class="products__item tag-senior tag-exclusive tag-educational tag-smart-watch">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-06.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-01.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Ladybird</span>
-                </h3>
+                <h3 class="products__title"><strong>Kids' Pad</strong><span>Smart Quest</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd>
-                  <dt>Category:</dt>
-                  <dd>Learn</dd>
+                  <dd>5-7 years</dd><dt>Category:</dt>
+                  <dd>Active Learning Toys, Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -613,17 +587,15 @@
           <div class="products__item tag-younger tag-middle tag-educational tag-smart-watch tag-set">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-01.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-06.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Fire Kids Edition Tablet</span>
-                </h3>
+                <h3 class="products__title"><strong>3D Drawing Tablet</strong><span>Let's Learn ABC</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5</dd>
-                  <dt>Category:</dt>
+                  <dd>5-7 years</dd><dt>Category:</dt>
                   <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
                 </dl>
               </div>
@@ -632,36 +604,35 @@
           <div class="products__item tag-middle tag-new tag-educational tag-art tag-console tag-puzzle">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-02.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-03.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Ladybird</span>
-                </h3>
+                <h3 class="products__title"><strong>Kids' Pad</strong><span>Smart Quest</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd>
-                  <dt>Category:</dt>
-                  <dd>Learn</dd>
+                  <dd>5-7 years</dd><dt>Category:</dt>
+                  <dd>Active Learning Toys, Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
           </div>
           <div class="products__item tag-younger tag-middle tag-new tag-educational tag-console tag-sound-mat">
             <a href="#" class="products__inner popup-opener-js">
+              <div class="products__stickers stickers">
+                <div class="stickers__item sticker stickers_hit"><span>Hit</span></div>
+              </div>
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-03.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-04.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Fire Kids Edition Tablet</span>
-                </h3>
+                <h3 class="products__title"><strong>Kids' Pad</strong><span>My First Atlas</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd>
-                  <dt>Category:</dt>
+                  <dd>4-5 years</dd><dt>Category:</dt>
                   <dd>Learn</dd>
                 </dl>
               </div>
@@ -670,17 +641,15 @@
           <div class="products__item tag-senior tag-popular tag-sound-mat tag-sticker">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-04.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-06.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Ladybird</span>
-                </h3>
+                <h3 class="products__title"><strong>3D Drawing Tablet</strong><span>Let's Learn ABC</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5</dd>
-                  <dt>Category:</dt>
+                  <dd>5-7 years</dd><dt>Category:</dt>
                   <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
                 </dl>
               </div>
@@ -688,19 +657,20 @@
           </div>
           <div class="products__item tag-middle tag-popular tag-educational tag-sound-mat tag-puzzle">
             <a href="#" class="products__inner popup-opener-js">
+              <div class="products__stickers stickers">
+                <div class="stickers__item sticker stickers_new"><span>New</span></div>
+              </div>
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-05.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-01.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Fire Kids Edition Tablet</span>
-                </h3>
+                <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd>
-                  <dt>Category:</dt>
-                  <dd>Learn</dd>
+                  <dd>2-3, 4-5, 6+</dd><dt>Category:</dt>
+                  <dd>Educational Toys, Sound and Music Toys, Tablets with Touch Screen Pages</dd>
                 </dl>
               </div>
             </a>
@@ -708,18 +678,16 @@
           <div class="products__item tag-senior tag-new tag-educational tag-music tag-console">
             <a href="#" class="products__inner popup-opener-js">
               <div class="products__img">
-                <div class="products__figure"><img src="img/img-products-06.jpg" alt="image description" /></div>
+                <div class="products__figure">
+                  <img src="img/preloader.svg" data-src="img/img-products-03.jpg" alt="image description" />
+                </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title">
-                  <strong>Baby Player</strong>
-                  <span>Ladybird</span>
-                </h3>
+                <h3 class="products__title"><strong>Kids' Pad</strong><span>Smart Quest</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5</dd>
-                  <dt>Category:</dt>
-                  <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
+                  <dd>5-7 years</dd><dt>Category:</dt>
+                  <dd>Active Learning Toys, Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>

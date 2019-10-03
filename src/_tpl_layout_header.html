@@ -1,6 +1,6 @@
 <!--HEADER-->
 <header class="header@@if(context.currentItem == 'Products'){ has-filters}">
-  <!--menu opener-->
+  <!--menu open button-->
   <a href="#" class="menu-opener menu-opener-js">
     <div class="btn-lines">
       <span></span>
@@ -9,9 +9,9 @@
     </div>
     <span>Menu</span>
   </a>
-  <!--menu opener end-->
+  <!--menu open button end-->
 
-  <!--mobile menu opener-->
+  <!--mobile menu open button-->
   <a href="#" class="menu-opener mob-menu-opener mob-menu-opener-js">
     <div class="btn-lines">
       <span></span>
@@ -20,7 +20,7 @@
     </div>
     <span>Menu</span>
   </a>
-  <!--mobile menu opener end-->
+  <!--mobile menu open button end-->
 
   <!--logo-->
   <div class="logo">
@@ -32,18 +32,21 @@
   <!--logo end-->
 
   @@if(context.currentItem == "Home"){
+  <!--header-categories tabs-->
   <ul class="header-categories header-categories-js">
     <li class="active"><a href="#newToys"><span>New toys</span></a></li>
     <li><a href="#popularToys"><span>Popular</span></a></li>
   </ul>
+  <!--header-categories tabs end-->
+  }
+
+  @@if(context.currentItem != "Products"){
+  <!--filters open button-->
+  <a href="products.html" class="btn-filters">Filters</a>
+  <!--filters open button end-->
   }
 
   @@if(context.currentItem == "Products"){@@include("_tpl_product-filters.html")}
-
-  @@if(context.currentItem != "Products"){
-  <!--btn filters-->
-  <a href="products.html" class="btn-filters">Filters</a>
-  <!--btn filters end-->}
 
   <!--btn search-->
   @@if(context.currentItem != "Products"){

@@ -317,7 +317,6 @@ function searchToggle() {
         activeClass: 'active'
       },
       afterAdd: function () {
-        console.log(1);
         clearTimeout(timeout);
         timeout = setTimeout(function () {
           $searchForm.find('input[type="search"]').focus();
@@ -569,9 +568,9 @@ function filtersEvents() {
       $jsDrop = $(jsDrop),
       jsDropOpener = '.filter-selector-js',
       $jsDropOpener = $(jsDropOpener),
-      jsFiltersOpener = '.btn-filter-opener-js',
+      jsFiltersOpener = '.btn-filters-opener-js',
       $jsFiltersOpener = $(jsFiltersOpener),
-      jsFiltersCloser = '.btn-filter-close-js',
+      jsFiltersCloser = '.btn-filters-close-js',
       $jsFiltersCloser = $(jsFiltersCloser),
       tags = {},
       classShowDrop = 'show-drop',
@@ -750,7 +749,7 @@ function filtersEvents() {
     switchClass($jsDrop, $curDrop, !_cond);
 
     // Ограничить высоту выпадающего списка фильтров
-    phonesDropHeight.call();
+    // phonesDropHeight.call();
 
     return false;
   });
@@ -812,9 +811,9 @@ function filtersEvents() {
   }
 
   // recalculate height of phone drop
-  $WINDOW.on('resize scroll', function () {
-    phonesDropHeight.call();
-  });
+  // $WINDOW.on('resize scroll', function () {
+  //   phonesDropHeight.call();
+  // });
 
   // add "no product" template
   var tempNoProducts = $('<h2 style="text-align: center;">Items not found</h2>');
@@ -2615,19 +2614,17 @@ function popupEvents() {
     e.preventDefault();
     if (!popupOpened) {
 
+      if (false) {
+        // _________________________________________________МОЙ КОД
+        var item_url = $(this).attr('data-url');
+        history.pushState({}, '', '/products/' + item_url + '/');
+        fill_item_card_data(item_url);
+        // ________________________________________________МОЙ КОД_КОНЕЦ
+      }
 
-      // _________________________________________________МОЙ КОД
-      var item_url = $(this).attr('data-url');
-      history.pushState({}, '', '/products/' + item_url + '/');
-      fill_item_card_data(item_url);
-
-      // ________________________________________________МОЙ КОД_КОНЕЦ
-
-      // openPopup();
+      openPopup();
     } else {
-
       closePopup();
-
     }
   });
 
@@ -2635,7 +2632,8 @@ function popupEvents() {
   var $window = $WINDOW;
   $window.on('heightMainRecalc', function () {
     if (popupOpened) {
-      TweenMax.to($main, 0.2, {height: $popup.outerHeight()}, 0.5);
+      var height = $popup.outerHeight() + $('.header').innerHeight();
+      TweenMax.to($main, 0.2, {height: height}, 0.5);
     }
   });
 
@@ -2674,8 +2672,9 @@ function popupEvents() {
 
     $popup.height('auto');
     // show popup
+    var height = $popup.outerHeight() + $('.header').innerHeight();
     TweenMax.set($main, {
-      height: $popup.outerHeight(),
+      height: height,
       onComplete: function () {
         pageScrollToTop();
 
@@ -2733,7 +2732,9 @@ function popupEvents() {
     });
 
     // МОЙ КОД
-    history.pushState({}, '', '/products/');
+    if (false) {
+      history.pushState({}, '', '/products/');
+    }
     // МОЙ КОД_КОНЕЦ
 
     // replaceTegSEO(false);
@@ -2832,13 +2833,13 @@ function toggleScrollPage(id) {
     if (DESKTOP) {
       $body.mCustomScrollbar('disable');
     } else {
-      $html.addClass('no-scroll');
+      $html.addClass('css-scroll-fixed');
     }
   } else {
     if (DESKTOP) {
       $body.mCustomScrollbar('update');
     } else {
-      $html.removeClass('no-scroll');
+      $html.removeClass('css-scroll-fixed');
     }
 
     $html.removeAttr('data-toggle-scroll');

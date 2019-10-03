@@ -22,8 +22,13 @@ $breakpoints: (
 
 // Fonts style
 // ====================================================
-$font-norm: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-$font-alt: Georgia, serif !default;
+$font-norm: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif !default;
+$font-bold: 'helvetica-neue-cyr-bold', Arial, Helvetica, sans-serif !default;
+$font-italic: 'helvetica-neue-cyr-light-italic', Arial, Helvetica, sans-serif !default;
+$font-bold-italic: 'helvetica-neue-cyr-bold-italic', Arial, Helvetica, sans-serif !default;
+$font-thin: 'helvetica-neue-cyr-thin-italic', Arial, Helvetica, sans-serif !default;
+$font-alt: 'rotondac-regular', Arial, Helvetica, sans-serif !default;
+$font-alt-bold: 'rotondac-bold', Arial, Helvetica, sans-serif !default;
 
 // Main font
 // ----------------------------------------------------
@@ -32,16 +37,24 @@ $font-alt: Georgia, serif !default;
 }
 
 @mixin font-bold {
-  font-weight: bold;
+  font-family: $font-bold;
+  font-weight: normal;
 }
 
 @mixin font-italic {
-  font-style: italic;
+  font-family: $font-italic;
+  font-style: normal;
 }
 
 @mixin font-bold-italic {
-  font-weight: bold;
-  font-style: italic;
+  font-family: $font-bold-italic;
+  font-weight: normal;
+  font-style: normal;
+}
+
+@mixin font-thin {
+  font-family: $font-thin;
+  font-weight: normal;
 }
 
 // Alternative font
@@ -51,13 +64,18 @@ $font-alt: Georgia, serif !default;
 }
 
 @mixin font-alt-bold {
+  font-family: $font-alt-bold;
+  font-weight: normal;
+}
+
+@mixin font-alt-italic {
   font-family: $font-alt;
-  font-weight: bold;
+  font-style: italic;
 }
 
 @mixin font-alt-bold-italic {
-  font-family: $font-alt;
-  font-weight: bold;
+  font-family: $font-alt-bold;
+  font-weight: normal;
   font-style: italic;
 }
 
@@ -226,11 +244,12 @@ $highlight-color--hover: lighten($base-color-alt, 20%) !default
 $bg-color: #fff !default;
 $bg-color-alt: #f3f3f3 !default;
 // ----------------------------------------------------
-$text-color: #262626 !default;
+$text-color: #4c4c4c !default;
 $text-color-muted: #6c757d !default;
 $text-color-light: #ccc !default;
 // ----------------------------------------------------
-$title-color: #ee6e73 !default;
+$title-color: #333 !default;
+$title-color-alt: $base-color !default;
 // ----------------------------------------------------
 $border-color: #ccc !default;
 // ----------------------------------------------------
@@ -242,9 +261,11 @@ $mark-color: $info-color !default;
 // Минимальная ширина сайта
 $layout-page-min-width: 320px !default;
 // Максимальная ширина сайта
-$layout-page-max-width: 1920px !default;
+$layout-page-max-width: 2560px !default;
 // Отступы для всего сайта
 $layout-page-space: 30px 30px !default;
+$layout-page-space--tab: 30px 20px !default;
+$layout-page-space--mob: 20px 15px !default;
 
 
 // Layout text
@@ -254,7 +275,7 @@ $layout-text-width: 800px !default;
 // Отступы текствого блока
 $layout-text-space: 20px 30px !default;
 // Максимальная ширина элементов выходящих за пределы текста
-$layout-flood-width: 1100px !default;
+$layout-flood-width: 1120px !default;
 
 
 // Inner space
@@ -542,9 +563,16 @@ $animation-speed-mouseleave: 0.35s !default;
 // Header
 // ====================================================
 $header-height: 86px;
-$header-height--tab: 68px; // 480px '<tab'
-$header-height--mob: 60px; // 640px '<mob'
+$header-height--tab: 60px; // 992px '<tab'
+$header-height--mob: 50px; // 640px '<mob'
 
+$header-btn-height: 62px;
+$header-btn-height--tab: 46px;
+$header-btn-height--mob: 46px;
+
+
+// Filters
+// ====================================================
 $filters-panel-height: 100px !default;
 $filters-panel-height--desk-s: 72px !default;
 $filters-panel-height--lap-l: 144px !default;
@@ -553,9 +581,34 @@ $filters-panel-height--tab: 231px !default;
 $filters-panel-height--tab-s: 166px !default;
 $filters-panel-height--mob-s: 140px !default;
 
+$filters-drop-group-space: 40px 30px !default;
+
+$filter-btn-arr-size: 34px;
+$filter-btn-arr-size--tab: 26px;
+$filter-btn-spaces: 17px 18px;
+$filter-btn-spaces--tab: 9px 10px;
+
+@mixin filter-btn-font {
+  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+}
+
+@mixin filter-btn-font--tab {
+  font-size: 15px;
+  line-height: 24px;
+}
+
 
 // Sidebar
 // ====================================================
+$sidebar-width: 240px;
 
 
 // Footer
@@ -564,8 +617,20 @@ $filters-panel-height--mob-s: 140px !default;
 
 // Z-index
 // ====================================================
+$sidebar-z: 65 !default; // Сайдбар и мобильное меню
+$sidebar-z--tab: 84 !default; // Сайдбар и мобильное меню
+$mob-menu-overlay-z: 83 !default; // Тень под мобильным меню
+
+$header-z: 90 !default; // Шапка
+
+$menu-z: 95 !default; // Дополнительное меню
+
+$promo-z: 75 !default; // Промослайдер
+$promo-overlay-z: 70 !default; // Промослайдер
+
+$popup-z: 85 !default; // Попап с описанием продукта
 
 
-$sidebar-z: 90 !default; // Сайдбар и мобильное меню
-$sidebar-z--tab: 96 !default; // Сайдбар и мобильное меню
-$mob-menu-overlay-z: 95 !default; // Тень под мобильным меню
+// box-shadow
+// ====================================================
+$box-shadow: 0 2px 20px rgba(black, 0.3) !default;

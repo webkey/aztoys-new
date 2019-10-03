@@ -1,168 +1,11 @@
 @import "../utils/variables";
 @import "../utils/mixins";
 @import "../../libs/include-media/dist/include-media";
-
-/* ==========================================================================
-   Individual Media Queries
-   ========================================================================== */
-@media only screen and (max-width: 1919px){ .products__list .products__item{ width: 19.98%; } }
-@media only screen and (max-width: 1639px){ .products__list .products__item{ width: 24.98%; } }
-@media only screen and (max-width: 1359px){ .products__list .products__item{ width: 33.28%; } }
-/*@media only screen and (max-width: 1079px){ .products__list .products__item{ width: 49.98%; } }
-@media only screen and (max-width: 1079px){ .products__list .products__item{ width: 50%; } }*/
-@media only screen and (max-width: 979px){ .products__list .products__item{ width: 33.33%; } }
-@media only screen and (max-width: 839px){ .products__list .products__item{ width: 50%; } }
-@media only screen and (max-width: 559px){
-  .products__list{
-    max-width: 280px;
-    margin: 0 auto;
-  }
-  .home-page .products__list {
-    margin: 0 auto;
-  }
-  .products__list .products__item{
-    display: block;
-    width: 100%;
-    padding-bottom: 20px;
-  }
-  .products__list .products__inner{ height: auto !important; }
-}
-
-/* ==========================================================================
-   Media Queries on height
-   ========================================================================== */
-@media only screen and (max-height: 919px){
-  .social-networks, .social-networks .list{ padding: 15px 0; }
-}
-@media only screen and (max-height: 739px){
-  .slogan { min-height: 70px; }
-  .social-networks, .social-networks .list { padding: 0; }
-}
-
 /* ==========================================================================
    Media Queries
    ========================================================================== */
 
-/*@import url(1900.css) only screen and (max-width:1899px);*/
-/*@import url(1600.css) only screen and (max-width:1599px);*/
-/*@import url(1280.css) only screen and (max-width:1279px);*/
-/*@import url(980.css) only screen and (max-width:979px);*/
-/*@import url(768.css) only screen and (max-width:767px);*/
-/*@import url(640.css) only screen and (max-width:639px);*/
-/*@import url(480.css) only screen and (max-width:479px);*/
-/*@import url(320.css) only screen and (max-width:319px);*/
-
-@media only screen and (max-width: 1899px){
-  /*previews*/
-  .previews{
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  .previews__item:nth-child(3) { display: none; }
-  .previews__item_lg{ width: auto; }
-  /*previews end*/
-
-  /*footer*/
-  /*footer nav*/
-  .footer-nav__col,
-  .footer-nav__col.col-lg{ width: 19.98%; }
-  /*footer nav end*/
-  /*footer end*/
-}
-
-@media only screen and (max-width: 1599px){
-  /*screen*/
-  .screen__logo{
-    width: 172px;
-    left: 66px;
-  }
-  .screen__title{
-    font-size: 30px;
-    line-height: 40px;
-    padding: 0 260px;
-  }
-  /*screen end*/
-
-  /*previews*/
-  .previews__item:nth-child(1) { display: inline-block; }
-  /*previews end*/
-
-  /*locate*/
-  .locate { padding: 230px 60px 100px; }
-  .locate-controls{
-    left: 60px;
-    top: 60px;
-  }
-  .see-map {
-    right: 60px;
-    top: 60px;
-  }
-  /*locate end*/
-
-  /*FOOTER*/
-  /*footer nav*/
-  .footer-nav__col{ width: 33.28%; }
-  .footer-nav__col.col-lg{ width: 66.56%; }
-  .footer-nav__col.no-space { padding-left: 30px; }
-  /*footer nav end*/
-  /*FOOTER end*/
-}
-
 @media only screen and (max-width: 1279px){
-  .text-page .max-wrap { padding: 30px 30px 30px 200px; }
-  .text-page .max-wrap .full-width {
-    margin-left: -200px;
-    margin-right: -30px;
-  }
-
-  /*social*/
-  .soc {
-    width: 200px;
-    padding-bottom: 25px;
-    padding-left: 30px;
-  }
-  /*social end*/
-
-  /*note*/
-  .note,
-  .more {
-    padding-right: 30px;
-    margin-right: -30px;
-  }
-  /*note end*/
-
-  /*blockquote*/
-  .user-content blockquote {
-    padding-right: 30px;
-    margin-right: -30px;
-  }
-  /*blockquote end*/
-
-  /*MAIN*/
-  /*breadcrumbs*/
-  .user-content .breadcrumbs{ padding-left: 30px; }
-  /*breadcrumbs end*/
-
-  /*previews*/
-  .previews{ max-width: 840px; }
-  .previews__list{ padding-left: 0; }
-  .previews__item{
-    float: none;
-    margin-left: 0;
-    display: inline-block;
-    vertical-align: top;
-    max-width: 33.33%;
-  }
-  .previews__item:before{
-    border-left-color: #fff;
-    border-bottom-color: transparent;
-  }
-  .previews__item:first-child:before{ border-left-color: #d8d8d8; }
-  .previews__item_lg{ max-width: none;  }
-  .previews__item_lg a { height:435px !important; }
-  .previews__item:nth-child(3){ display: inline-block; }
-  /*previews end*/
-
   /*locate*/
   .locate { padding: 250px 40px 100px; }
   .locate-controls{
@@ -276,7 +119,6 @@
     padding-right: 30px;
     top: 138px;
   }
-  .layout { padding-left: 0; }
   //.mobile .nav-drop .btn-close{ margin-top: 86px; }
   /*MAIN*/
   /*CONTENT*/
@@ -290,16 +132,6 @@
   .buttons,
   .load-more{ padding: 35px 30px 55px; }
   .section-title{ padding: 55px 30px 35px; }
-  /*popup*/
-  .popup{ z-index: 99; }
-  .btn-close-wrap,
-  .btn-close-popup{
-    right: 10px;
-    top: 10px;
-    z-index: 100;
-  }
-  .popup-overlay{ z-index: 100; }
-  /*popup end*/
   /*CONTENT end*/
   /*overlay*/
   .overlay{ background: transparent url(../../img/empty.png); }
@@ -352,20 +184,6 @@
   //}
   ///*main navigation end*/
   /*SIDEBAR end*/
-
-  /*FILTERS*/
-  .filters {
-    top: 0;
-    left: 0;
-    border-top: 1px solid #f7f7f7;
-  }
-  .popup-show .filters { display: none; }
-  .header-show .filters {
-    -webkit-transform: translate(0, 86px);
-    -ms-transform: translate(0, 86px);
-    transform: translate(0, 86px);
-  }
-  /*FILTERS end*/
 
   /*FOOTER*/
   .footer-holder{ padding: 0 30px; }
@@ -467,68 +285,6 @@
   /*tape slider end*/
   /*CONTENT end*/
   /*MAIN end*/
-
-  /*FILTERS*/
-  .filters-opener{ display: block; }
-  .popup-show .filters-opener{ display: none; }
-  .header-show .filters-opener{
-    -webkit-transform: translate(0, 86px);
-    -ms-transform: translate(0, 86px);
-    transform: translate(0, 86px);
-  }
-  .filters{
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: #fff;
-    z-index: 102;
-  }
-  .filters__panel{
-    height: 100%;
-    overflow: auto;
-  }
-  .filters,
-  .header-show .filters {
-    -webkit-transform: translate(-100%, 0);
-    -ms-transform: translate(-100%, 0);
-    transform: translate(-100%, 0);
-    opacity: 0;
-    visibility: hidden;
-  }
-  .filters__panel:before{ content: none; }
-  .filters__label.hide-state{ display: block; }
-
-  //.filters-drop{
-  //  position: relative;
-  //  left: auto;
-  //  right: auto;
-  //  top: auto;
-  //  overflow: visible;
-  //  opacity: 1 !important;
-  //  visibility: visible !important;
-  //  height: auto !important;
-  //  background: #fff;
-  //  display: none;
-  //}
-  //.filters-drop__holder,
-  //.header-show .filters-drop__holder {
-  //  padding-bottom: 30px;
-  //}
-  //.filters-drop.show-drop{ display: block; }
-  //.filters-drop__title{
-  //  font-size: 20px;
-  //  line-height: 24px;
-  //}
-
-  .show-filters-items{
-    padding: 5px 28px;
-  }
-
-  .btn-filter-close{ display: block; }
-  /*FILTERS end*/
 }
 
 @media only screen and (max-width: 639px){
@@ -627,13 +383,6 @@
   //.nav-drop__group { width: 240px; }
   ///*SIDEBAR end*/
 
-  /*FILTERS*/
-  .show-filters-items{
-    padding: 6px 17px;
-    font-size: 13px;
-  }
-  /*FILTERS end*/
-
   /*FOOTER*/
   /*footer nav*/
   .footer-nav{ padding: 40px 0 10px; }
@@ -726,13 +475,6 @@
   .buttons,
   .load-more{ padding: 25px 20px 45px; }
   .section-title{ padding: 45px 20px 25px; }
-
-  /*tabs*/
-  .products__list{
-    max-width: 280px;
-    margin: 0 auto;
-  }
-  /*tabs end*/
 
   h1,
   .section-title h2,
@@ -857,23 +599,6 @@
     padding-right: 20px;
   }
   /*popup end*/
-
-  /*FILTERS*/
-  //.filters-drop__holder { padding: 24px 20px 14px; }
-  //.filters-drop__list li,
-  //.user-content .filters-drop__list li,
-  //.user-content .filters-drop__list li:first-child {
-  //  width: auto;
-  //  display: block;
-  //}
-  .header-show .filters-opener {
-    -webkit-transform: translate(0, 68px);
-    -ms-transform: translate(0, 68px);
-    transform: translate(0, 68px);
-  }
-
-  .btn-filter-close{ right: 10px; }
-  /*FILTERS end*/
 
   /*FOOTER*/
   /*footer nav*/

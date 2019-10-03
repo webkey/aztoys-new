@@ -1,4 +1,4 @@
-<a href="prod-card.html" class="products__inner">
+<a href="#" class="products__inner popup-opener-js">
   @@if(context.stickers){
     <div class="products__stickers stickers">
       @@if(context.stickers.new){<div class="stickers__item sticker stickers_new"><span>@@stickers.new</span></div>}
@@ -8,7 +8,9 @@
   }
   @@if(context.img){
   <div class="products__img">
-    <div class="products__figure"><img src="@@img" alt="@@title" /></div>
+    <div class="products__figure">
+      <img src="img/preloader.svg" data-src="@@img" alt="image description" />
+    </div>
   </div>
   }
   <div class="products__content">

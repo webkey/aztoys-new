@@ -48,7 +48,7 @@
 <![endif]-->
   <!--HEADER-->
   <header class="header has-filters">
-    <!--menu opener-->
+    <!--menu open button-->
     <a href="#" class="menu-opener menu-opener-js">
       <div class="btn-lines">
         <span></span>
@@ -57,8 +57,8 @@
       </div>
       <span>Menu</span>
     </a>
-    <!--menu opener end-->
-    <!--mobile menu opener-->
+    <!--menu open button end-->
+    <!--mobile menu open button-->
     <a href="#" class="menu-opener mob-menu-opener mob-menu-opener-js">
       <div class="btn-lines">
         <span></span>
@@ -67,7 +67,7 @@
       </div>
       <span>Menu</span>
     </a>
-    <!--mobile menu opener end-->
+    <!--mobile menu open button end-->
     <!--logo-->
     <div class="logo">
       <a href="index.html">
@@ -76,10 +76,12 @@
     </div>
     <img class="logo__print" src="img/logo-print.png" alt="aztoys">
     <!--logo end-->
+    <!--filters open button-->
+    <a class="btn-filters btn-filters-opener btn-filters-opener-js">Filters</a>
+    <!--filters open button end-->
     <!--FILTERS-->
-    <div class="filters-opener"><a href="#" class="btn-filter-opener btn-filter-opener-js">Filters</a></div>
     <div class="filters filters-js">
-      <a href="#" class="btn-close btn-filter-close btn-filter-close-js">Close</a>
+      <a href="#" class="btn-close btn-filters-close btn-filters-close-js">Close</a>
       <div class="filters__panel">
         <div class="filters__groups">
           <div class="filters__group">
@@ -91,24 +93,20 @@
             </div>
           </div>
           <div class="filters__group has-drop filters-content-js">
-            <a href="#" class="filter-selector filter-selector-js">Age</a>
+            <a href="#" class="filter-selector filter-selector-js">Show filters</a>
             <div class="filters-drop filters-drop-js">
               <div class="filters-drop__holder">
                 <div class="filters-drop__group">
+                  <strong class="filters-drop__title">Age</strong>
                   <ul class="filters-drop__list filters-tags-js" data-filter-method="or">
-                    <li><a href="#" data-filter=".tag-younger"><span>2-3</span></a></li>
-                    <li><a href="#" data-filter=".tag-middle"><span>4-5</span></a></li>
-                    <li><a href="#" data-filter=".tag-senior"><span>6+</span></a></li>
+                    <li><a href="#" data-filter=".tag-baby"><span>0+ years</span></a></li>
+                    <li><a href="#" data-filter=".tag-younger"><span>1+ years</span></a></li>
+                    <li><a href="#" data-filter=".tag-middle"><span>4-5 years</span></a></li>
+                    <li><a href="#" data-filter=".tag-senior"><span>6+ years</span></a></li>
                   </ul>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="filters__group has-drop filters-content-js">
-            <a href="#" class="filter-selector filter-selector-js">Category</a>
-            <div class="filters-drop filters-drop-js">
-              <div class="filters-drop__holder">
                 <div class="filters-drop__group">
+                  <strong class="filters-drop__title">Category</strong>
                   <ul class="filters-drop__list filters-tags-js" data-filter-method="or">
                     <li><a href="#" data-filter=".tag-educational"><span>Educational Toys</span></a></li>
                     <li><a href="#" data-filter=".tag-music"><span>Sound and Music Toys</span></a></li>
@@ -126,14 +124,8 @@
                     <li><a href="#" data-filter=".tag-sticker"><span>Sticker Elements</span></a></li>
                   </ul>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="filters__group has-drop filters-content-js">
-            <a href="#" class="filter-selector filter-selector-js">Skills</a>
-            <div class="filters-drop filters-drop-js">
-              <div class="filters-drop__holder">
                 <div class="filters-drop__group">
+                  <strong class="filters-drop__title">Skills</strong>
                   <ul class="filters-drop__list filters-tags-js" data-filter-method="or">
                     <li><a href="#" data-filter=".tag-physical"><i class="depict-skills-01"></i><span>Physical skills</span></a></li>
                     <li><a href="#" data-filter=".tag-cognitive"><i class="depict-skills-02"></i><span>Cognitive skills</span></a></li>
@@ -372,10 +364,12 @@
   </aside>
   <div class="mob-menu-overlay mob-menu-overlay-js"></div>
   <!--SIDEBAR end-->
+  <!--filters open button-->
+  <a class="btn-filters btn-filters-opener btn-filters-opener-js">Filters</a>
+  <!--filters open button end-->
   <!--FILTERS-->
-  <div class="filters-opener"><a href="#" class="btn-filter-opener btn-filter-opener-js">Filters</a></div>
   <div class="filters filters-js">
-    <a href="#" class="btn-close btn-filter-close btn-filter-close-js">Close</a>
+    <a href="#" class="btn-close btn-filters-close btn-filters-close-js">Close</a>
     <div class="filters__panel">
       <div class="filters__groups">
         <div class="filters__group">
@@ -387,24 +381,20 @@
           </div>
         </div>
         <div class="filters__group has-drop filters-content-js">
-          <a href="#" class="filter-selector filter-selector-js">Age</a>
+          <a href="#" class="filter-selector filter-selector-js">Show filters</a>
           <div class="filters-drop filters-drop-js">
             <div class="filters-drop__holder">
               <div class="filters-drop__group">
+                <strong class="filters-drop__title">Age</strong>
                 <ul class="filters-drop__list filters-tags-js" data-filter-method="or">
-                  <li><a href="#" data-filter=".tag-younger"><span>2-3</span></a></li>
-                  <li><a href="#" data-filter=".tag-middle"><span>4-5</span></a></li>
-                  <li><a href="#" data-filter=".tag-senior"><span>6+</span></a></li>
+                  <li><a href="#" data-filter=".tag-baby"><span>0+ years</span></a></li>
+                  <li><a href="#" data-filter=".tag-younger"><span>1+ years</span></a></li>
+                  <li><a href="#" data-filter=".tag-middle"><span>4-5 years</span></a></li>
+                  <li><a href="#" data-filter=".tag-senior"><span>6+ years</span></a></li>
                 </ul>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="filters__group has-drop filters-content-js">
-          <a href="#" class="filter-selector filter-selector-js">Category</a>
-          <div class="filters-drop filters-drop-js">
-            <div class="filters-drop__holder">
               <div class="filters-drop__group">
+                <strong class="filters-drop__title">Category</strong>
                 <ul class="filters-drop__list filters-tags-js" data-filter-method="or">
                   <li><a href="#" data-filter=".tag-educational"><span>Educational Toys</span></a></li>
                   <li><a href="#" data-filter=".tag-music"><span>Sound and Music Toys</span></a></li>
@@ -422,14 +412,8 @@
                   <li><a href="#" data-filter=".tag-sticker"><span>Sticker Elements</span></a></li>
                 </ul>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="filters__group has-drop filters-content-js">
-          <a href="#" class="filter-selector filter-selector-js">Skills</a>
-          <div class="filters-drop filters-drop-js">
-            <div class="filters-drop__holder">
               <div class="filters-drop__group">
+                <strong class="filters-drop__title">Skills</strong>
                 <ul class="filters-drop__list filters-tags-js" data-filter-method="or">
                   <li><a href="#" data-filter=".tag-physical"><i class="depict-skills-01"></i><span>Physical skills</span></a></li>
                   <li><a href="#" data-filter=".tag-cognitive"><i class="depict-skills-02"></i><span>Cognitive skills</span></a></li>
