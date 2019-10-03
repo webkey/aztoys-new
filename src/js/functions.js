@@ -572,6 +572,7 @@ function filtersEvents() {
       $jsFiltersOpener = $(jsFiltersOpener),
       jsFiltersCloser = '.btn-filters-close-js',
       $jsFiltersCloser = $(jsFiltersCloser),
+      $jsFilterCounter = $('.filters-counter-js'),
       tags = {},
       classShowDrop = 'show-drop',
       isCheckedClass = 'is-checked',
@@ -690,7 +691,7 @@ function filtersEvents() {
     $this.toggleClass('is-checked');
 
     clearBtnState();
-    toggleFiltersOptions();
+    // toggleFiltersOptions();
   });
 
   // prepare filters options
@@ -719,12 +720,10 @@ function filtersEvents() {
     $body.on('click', '.show-filter-items-js', function (e) {
       e.preventDefault();
 
-      $jsDropOpener.trigger('click');
-      if (DESKTOP) {
-        $body.mCustomScrollbar("scrollTo", 'top');
-      } else {
-        $('html,body').stop().animate({scrollTop: 0}, animationSpeed);
-      }
+      $jsFiltersOpener.add($filtersOptions).add($filters).removeClass('active');
+      $HTML.removeClass('css-scroll-fixed');
+
+      $('html,body').stop().animate({scrollTop: 0}, animationSpeed);
     });
   }
 
@@ -772,7 +771,7 @@ function filtersEvents() {
     filtersDropShow = false;
 
     // fixedContainerHeight(false);
-    toggleFiltersOptions();
+    // toggleFiltersOptions();
 
     // enable page scroll
     toggleScrollPage('switch-drop');
@@ -828,15 +827,17 @@ function filtersEvents() {
       filterCounterContent = 'Found <span style="display: inline-block;"><strong>' + lengthItems + '</strong> ' + items + '</span>';
     }
 
-    $('.filters-counter-js')
+    $jsFilterCounter
         .html(filterCounterContent)
         .closest('.filters-button')
         .toggleClass('btn-show', showButtonFind);
 
     // "no product" show / hide
     if (!lengthItems) {
+      $jsFilterCounter.closest('.filters-button').addClass('no-items');
       tempNoProducts.show();
     } else {
+      $jsFilterCounter.closest('.filters-button').removeClass('no-items');
       tempNoProducts.hide();
     }
   });
@@ -872,32 +873,61 @@ function filtersEvents() {
   $WINDOW.on('resizeByWidth', function () {
     if ($filters.attr('style')) {
       $filters.attr('style', '');
-      $jsDropOpener.trigger('click');
-      toggleScrollPage('mobile-filter-panel');
+      // $jsDropOpener.trigger('click');
+      // toggleScrollPage('mobile-filter-panel');
+      hideFiltersPanel();
     }
   });
 
-  // open filters on mobile
+  // Открыть панель фильтров (на мобиле)
   var filtersTLL = new TimelineLite();
   $body.on('click', jsFiltersOpener, function () {
-    filtersTLL
-        .set($filters, {autoAlpha: 1, transitionDuration: 0})
-        .to($filters, animationSpeedTween, {x: 0, ease: Power2.easeInOut});
+    var $curBtn = $(this);
 
-    toggleScrollPage('mobile-filter-panel', false);
+    if (!$curBtn.hasClass('active')) {
+      showFiltersPanel();
+      // filtersTLL
+      //     .set($filters, {autoAlpha: 1, transitionDuration: 0})
+      //     .to($filters, animationSpeedTween, {x: 0, ease: Power2.easeInOut});
+    } else {
+      hideFiltersPanel();
+      // var filtersWidth = $('.filters-js').outerWidth();
+      // filtersTLL.to($filters, animationSpeedTween, {x: -filtersWidth, ease: Power2.easeInOut});
+    }
+
+    // toggleScrollPage('mobile-filter-panel', false);
 
     return false;
   });
 
-  // close filters on mobile
+  // Закрыть панель фильтров на мобиле
   $body.on('click', jsFiltersCloser, function () {
-    var filtersWidth = $('.filters-js').outerWidth();
-    filtersTLL.to($filters, animationSpeedTween, {x: -filtersWidth, ease: Power2.easeInOut});
+    hideFiltersPanel();
+    // var filtersWidth = $('.filters-js').outerWidth();
+    // filtersTLL.to($filters, animationSpeedTween, {x: -filtersWidth, ease: Power2.easeInOut});
 
-    toggleScrollPage('mobile-filter-panel');
+    // toggleScrollPage('mobile-filter-panel');
 
     return false;
   });
+
+  // Открыть панель фильтров на мобиле в url хэш #filters-open
+  if (document.location.hash === "#filters-open") {
+    setTimeout(function () {
+      showFiltersPanel();
+    }, 200);
+  }
+
+  function showFiltersPanel() {
+    $jsFiltersOpener.add($filtersOptions).add($filters).addClass('active');
+    $HTML.addClass('css-scroll-fixed');
+    $('.mob-menu-opener-js').switchClass('remove');
+  }
+
+  function hideFiltersPanel() {
+    $jsFiltersOpener.add($filtersOptions).add($filters).removeClass('active');
+    $HTML.removeClass('css-scroll-fixed');
+  }
 
   // switch class
   function switchClass(remove, add, condition) {
@@ -1633,6 +1663,13 @@ function toggleMenu() {
       removeEl: $('.menu-close-js'),
       modifiers: {
         activeClass: 'menu_open'
+      },
+      beforeAdd: function () {
+        var $btnFilters = $('.btn-filters-opener-js');
+
+        if ($btnFilters.length && $btnFilters.hasClass('active')) {
+          $btnFilters.trigger('click');
+        }
       }
     });
   }

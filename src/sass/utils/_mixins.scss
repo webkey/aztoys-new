@@ -950,6 +950,83 @@
 }
 
 
+// Slider arrow for promo-slider, video-slider
+@mixin slider-button {
+  .swiper-button-prev,
+  .swiper-button-next {
+    position: absolute;
+    top: 50%;
+    $size: 80px;
+    width: $size;
+    height: $size;
+    margin-top: -#{$size / 2};
+    background: #ec1b24;
+    opacity: 0.75;
+
+    // <992px
+    @include media("<tab") {
+      $size: 60px;
+      width: $size;
+      height: $size;
+      margin-top: -#{$size / 2};
+    }
+
+    // <480px
+    @include media("<mob-s") {
+      width: 36px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      height: 14px;
+      width: 37px;
+      margin: -7px 0 0 -18px;
+      background: url(../../img/swiper-arrows.png) no-repeat 0 0;
+      background-size: 100%;
+
+      // <480px
+      @include media("<mob-s") {
+        height: 8px;
+        width: 20px;
+        margin: -4px 0 0 -10px;
+      }
+    }
+
+    &::after {
+      content: none;
+    }
+
+    .desktop &:hover {
+      opacity: 1;
+    }
+  }
+
+  .swiper-button-prev {
+    left: 0;
+
+    &::before {
+      background-position: 0 0;
+
+      // <480px
+      @include media("<mob-s") {
+        background-position: 0 -17px
+      }
+    }
+  }
+
+  .swiper-button-next {
+    right: 0;
+
+    &::before {
+      background-position: 0 -34px;
+    }
+  }
+}
+
+
 // =============================================================================
 // For Print Version
 // =============================================================================

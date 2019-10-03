@@ -567,8 +567,8 @@ $header-height--tab: 60px; // 992px '<tab'
 $header-height--mob: 50px; // 640px '<mob'
 
 $header-btn-height: 62px;
-$header-btn-height--tab: 46px;
-$header-btn-height--mob: 46px;
+$header-btn-height--tab: 46px; // <992px
+$header-btn-height--mob: 46px; // <640px
 
 
 // Filters
@@ -587,9 +587,10 @@ $filter-btn-arr-size: 34px;
 $filter-btn-arr-size--tab: 26px;
 $filter-btn-spaces: 17px 18px;
 $filter-btn-spaces--tab: 9px 10px;
+$filter-btn-spaces--tab-s: 12px 20px;
 
 @mixin filter-btn-font {
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  @include font-alt-bold;
   font-size: 18px;
   line-height: 24px;
   letter-spacing: 0.08em;
@@ -603,6 +604,12 @@ $filter-btn-spaces--tab: 9px 10px;
 @mixin filter-btn-font--tab {
   font-size: 15px;
   line-height: 24px;
+}
+
+@mixin filter-btn-font--tab-s {
+  font-size: 18px;
+  line-height: 24px;
+  color: $base-color;
 }
 
 

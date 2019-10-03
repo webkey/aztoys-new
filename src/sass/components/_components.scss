@@ -569,6 +569,12 @@ button {
   position: relative;
   box-sizing: border-box;
 
+  // <768px
+  @include media("<tab-s") {
+    text-transform: none;
+    padding: 8px 30px;
+  }
+
   // hover
   .desktop &:hover {
     @include btn-hover;
@@ -587,36 +593,82 @@ button {
 /*btn close*/
 .btn-close {
   position: absolute;
-  right: 30px;
-  top: 30px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  right: nth($layout-page-space, 2);
+  top: 15px;
+  $size: 60px;
+  width: $size;
+  height: $size;
+  border-radius: 10px;
   text-indent: -9999px;
   overflow: hidden;
+  border-radius: 10px;
+  background-color: $highlight-color;
+  box-shadow: 0 0 0 $highlight-color--hover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMjMuOTU0IDIxLjAzbC05LjE4NC05LjA5NSA5LjA5Mi05LjE3NC0yLjgzMi0yLjgwNy05LjA5IDkuMTc5LTkuMTc2LTkuMDg4LTIuODEgMi44MSA5LjE4NiA5LjEwNS05LjA5NSA5LjE4NCAyLjgxIDIuODEgOS4xMTItOS4xOTIgOS4xOCA5LjF6Ij48L3BhdGg+PC9zdmc+);
+  background-size: 24px;
+  transition: background-color $animation-speed, box-shadow $animation-speed;
+  z-index: 5;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  // Hide
   opacity: 0;
   visibility: hidden;
-}
 
-.btn-close:before,
-.btn-close:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  margin: -3px 0 0;
-  height: 6px;
-  width: 30px;
-  border-radius: 5px;
-  background: #00abc7;
-}
+  // <992px
+  @include media("<tab") {
+    right: nth($layout-page-space--tab, 2);
+    $size: $header-btn-height--tab;
+    height: $size;
+    width: $size;
+    background-size: 20px;
+  }
 
-.btn-close:before {
-  transform: rotate(45deg);
-}
+  // <640px
+  @include media("<mob") {
+    right: nth($layout-page-space--mob, 2);
+    $size: $header-btn-height--mob;
+    height: $size;
+    width: $size;
+  }
 
-.btn-close:after {
-  transform: rotate(-45deg);
+  // <480px
+  @include media("<mob-s") {
+    right: 0;
+    top: 0;
+  }
+
+  //&::before,
+  //&::after {
+  //  content: '';
+  //  position: absolute;
+  //  left: 50%;
+  //  top: 50%;
+  //  margin: -2px 0 0 -15px;
+  //  height: 4px;
+  //  width: 30px;
+  //  border-radius: 5px;
+  //  background: #00abc7;
+  //}
+  //
+  //&::before {
+  //  transform: rotate(45deg);
+  //}
+  //
+  //&::after {
+  //  transform: rotate(-45deg);
+  //}
+
+  //:hover
+  .desktop &:hover {
+    @include btn-hover;
+  }
+
+  // :active
+  &:active {
+    @include btn-active;
+  }
 }
 
 /*btn close end*/
@@ -2902,6 +2954,12 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   // .active
   &.active {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMjMuOTU0IDIxLjAzbC05LjE4NC05LjA5NSA5LjA5Mi05LjE3NC0yLjgzMi0yLjgwNy05LjA5IDkuMTc5LTkuMTc2LTkuMDg4LTIuODEgMi44MSA5LjE4NiA5LjEwNS05LjA5NSA5LjE4NCAyLjgxIDIuODEgOS4xMTItOS4xOTIgOS4xOCA5LjF6Ij48L3BhdGg+PC9zdmc+);
+    background-size: 24px;
+
+    // <992px
+    @include media("<tab") {
+      background-size: 20px;
+    }
   }
 }
 
@@ -3254,53 +3312,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
   // slider arrows
   // ----------------------------------------------------
-  .swiper-button-prev,
-  .swiper-button-next {
-    position: absolute;
-    top: 50%;
-    width: 80px;
-    height: 80px;
-    margin-top: -40px;
-    background: #ec1b24;
-    opacity: 0.75;
-    transition: opacity $animation-speed;
-
-    &::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      height: 14px;
-      width: 37px;
-      margin: -7px 0 0 -18px;
-      background: url(../../img/swiper-arrows.png) no-repeat 0 0;
-      background-size: 100%;
-    }
-
-    &::after {
-      content: none;
-    }
-
-    .desktop &:hover {
-      opacity: 1;
-    }
-  }
-
-  .swiper-button-prev {
-    left: 0;
-
-    &::before {
-      background-position: 0 0;
-    }
-  }
-
-  .swiper-button-next {
-    right: 0;
-
-    &::before {
-      background-position: 0 -34px;
-    }
-  }
+  @include slider-button;
 
 
   // slider pagination
@@ -4339,6 +4351,12 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   background: #fff;
   border-radius: 20px;
   overflow: hidden;
+
+  // <480px
+  @include media("<mob-s") {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 .video-slider .video-slider-el {
@@ -4399,6 +4417,15 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   max-width: 280px;
   max-height: 72px;
   overflow: hidden;
+
+  // <640px
+  @include media("<mob") {
+    margin-top: -65px;
+    font-size: 18px;
+    line-height: 24px;
+    max-width: 220px;
+    max-height: 48px;
+  }
 }
 
 .play-video {
@@ -4417,6 +4444,13 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   border-radius: 50%;
   text-indent: -9999px;
   box-sizing: border-box;
+
+  // <480px
+  @include media("<mob-s") {
+    width: 60px;
+    height: 60px;
+    margin: -50px 0 0 -30px;
+  }
 }
 
 .play-video > span:before,
@@ -4465,52 +4499,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .video-slider {
-  .swiper-button-prev,
-  .swiper-button-next {
-    position: absolute;
-    top: 50%;
-    width: 80px;
-    height: 80px;
-    margin-top: -40px;
-    background: #ec1b24;
-    opacity: 0.75;
-
-    &::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      height: 14px;
-      width: 37px;
-      margin: -7px 0 0 -18px;
-      background: url(../../img/swiper-arrows.png) no-repeat 0 0;
-      background-size: 100%;
-    }
-
-    &::after {
-      content: none;
-    }
-
-    .desktop &:hover {
-      opacity: 1;
-    }
-  }
-
-  .swiper-button-prev {
-    left: 0;
-
-    &::before {
-      background-position: 0 0;
-    }
-  }
-
-  .swiper-button-next {
-    right: 0;
-
-    &::before {
-      background-position: 0 -34px;
-    }
-  }
+  @include slider-button;
 }
 
 /*video section end*/
@@ -5203,24 +5192,11 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .btn-close-popup {
   position: fixed;
-  right: 20px;
-  top: 20px;
   opacity: 0;
   visibility: hidden;
 
-  // <640px
-  @include media("<tab") {
-    right: 10px;
-    top: 10px;
-  }
-
   .btn-close-wrap & {
     position: absolute;
-  }
-
-  // Active
-  .btn-close-popup:active {
-    transform: scale(0.9, 0.9);
   }
 }
 
@@ -6461,9 +6437,9 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 /* FILTERS */
 .filters {
+  box-sizing: border-box;
   margin: 0 auto;
   text-align: left;
-  z-index: 6;
 
   // <992px
   @include media("<tab") {
@@ -6474,25 +6450,43 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   @include media("<tab-s") {
     position: fixed;
     left: 0;
-    top: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% - #{$header-height--tab * 2});
+    top: $header-height--tab;
     border: none;
     background: #fff;
-    z-index: 102;
-    transform: translate(-100%, 0);
-    opacity: 0;
-    visibility: hidden;
+
+    // transition
+    will-change: opacity, transform;
+    transition: {
+      property: opacity, transform;
+      duration: $animation-speed;
+    };
+
+    // hide
+    $translate: -100%, 0;
+    transform: translate($translate);
+    transform: translate3d($translate, 0);
+
+    // show
+    &.active {
+      $translate: 0, 0;
+      transform: translate($translate);
+      transform: translate3d($translate, 0);
+    }
   }
 }
 
 .filters__panel {
   position: relative;
+  box-sizing: border-box;
 
   // <768px
   @include media("<tab-s") {
     height: 100%;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -6502,6 +6496,18 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   margin: 0 0 -20px -20px;
   display: flex;
   align-items: center;
+
+  // <768px
+  @include media("<tab-s") {
+    margin: 0;
+    padding: #{nth($layout-page-space--tab, 1)} #{nth($layout-page-space--tab, 2)} 10px;
+    display: block;
+  }
+
+  // <640px
+  @include media("<mob") {
+    padding: #{nth($layout-page-space--mob, 1)} #{nth($layout-page-space--mob, 2)} 10px;
+  }
 }
 
 .filters__group {
@@ -6509,14 +6515,18 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   position: relative;
   margin: 0 0 20px 20px;
 
-  &.has-drop {
-    padding: 0;
+  // <768px
+  @include media("<tab-s") {
+    margin: 0 0 20px;
   }
 }
 
+// Tags group
 .tags-group {
   position: relative;
-  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 // Filters buttons group
@@ -6527,6 +6537,11 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   align-items: stretch;
   border-radius: 10px;
   border: 2px solid rgba(white, 0.8);
+
+  // <768px
+  @include media("<tab-s") {
+    border-color: $base-color;
+  }
 }
 
 .filters-button {
@@ -6536,11 +6551,20 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   border-left: 2px solid rgba(white, 0.8);
   transition-property: box-shadow, background, color, border;
   transition-duration: $animation-speed;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 
   // <992px
   @include media("<tab") {
     padding: $filter-btn-spaces--tab;
     @include filter-btn-font--tab;
+  }
+
+  // <768px
+  @include media("<tab-s") {
+    padding: $filter-btn-spaces--tab-s;
+    @include filter-btn-font--tab-s;
+    border-color: $base-color;
   }
 
   &:first-child {
@@ -6549,19 +6573,34 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
   // Checked
   &.is-checked {
-    //background: rgba(#55c7da, 0.8);
-    background: rgba(#fff, 0.8);
+    background-color: rgba(#fff, 0.8);
     color: $base-color;
+
+    // <768px
+    @include media("<tab-s") {
+      background-color: rgba($base-color, 0.8);
+      color: white;
+    }
   }
 
   // Hover
   .desktop &:hover {
     background-color: rgba(#fff, 0.3);
+
+    // <768px
+    @include media("<tab-s") {
+      background-color: rgba($base-color, 0.3);
+    }
   }
 
   // Checked Hover
   .desktop &.is-checked:hover {
-    background: rgba(#fff, 1);
+    background-color: rgba(#fff, 1);
+
+    // <768px
+    @include media("<tab-s") {
+      background-color: rgba($base-color, 1);
+    }
   }
 }
 
@@ -6572,6 +6611,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   font-size: 14px;
   line-height: 18px;
   letter-spacing: 0.05em;
+  text-align: left;
   white-space: nowrap;
   color: $base-color-alt;
 
@@ -6646,6 +6686,11 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
     padding-top: 20px;
   }
 
+  // <768px
+  @include media("<tab-s") {
+    display: none;
+  }
+
   .filters-counter {
     position: absolute;
     top: 0;
@@ -6672,6 +6717,13 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
     $sp: $filter-btn-spaces--tab;
     padding: #{nth($sp, 1)} #{$filter-btn-arr-size--tab} #{nth($sp, 1)} #{nth($sp, 2)};
     @include filter-btn-font--tab;
+  }
+
+  // <768px
+  @include media("<tab-s") {
+    @include filter-btn-font--tab-s;
+
+    display: none;
   }
 
   // Arrow
@@ -6766,18 +6818,12 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
     left: auto;
     right: auto;
     top: auto;
-    overflow: visible;
     opacity: 1 !important;
+    overflow: visible !important;
     visibility: visible !important;
     height: auto !important;
-    background: #fff;
-    display: none;
-  }
-
-  // <640px
-  @include media("<mob") {
-    top: $header-height--mob;
-    height: calc(100% - #{$header-height--mob});
+    background: none;
+    box-shadow: none;
   }
 
   .mobile & {
@@ -6802,9 +6848,10 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   flex-wrap: wrap;
   align-items: flex-start;
 
-  // <480px
-  @include media("<mob-s") {
-    //padding: 24px 20px 14px;
+  // <768px
+  @include media("<tab-s") {
+    padding: 0;
+    display: block;
   }
 }
 
@@ -6815,24 +6862,18 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   max-width: $width;
   padding: 0 #{nth($filters-drop-group-space, 2) / 2} nth($filters-drop-group-space, 1);
 
-  //$prop: transform, opacity;
-  //will-change: $prop;
-  //transition: {
-  //  property: $prop;
-  //  duration: 5s;
-  //  timing-function: ease-in-out;
-  //}
-  //opacity: 0;
-  //transform: translate(0, 50px);
-  //@for $i from 1 through 6 {
-  //  &:nth-child(#{$i}) {
-  //    transition-duration: $i * 0.2s;
-  //  }
-  //}
-  //.show-drop & {
-  //  opacity: 1;
-  //  transform: translate(0, 0);
-  //}
+  // <768px
+  @include media("<tab-s") {
+    max-width: none;
+    margin-bottom: 20px;
+    padding: $filter-btn-spaces--tab;
+    border: 2px solid $base-color;
+    border-radius: 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .filters-drop__title {
@@ -6846,8 +6887,12 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
   // <768px
   @include media("<tab-s") {
-    font-size: 20px;
+    @include font-alt-bold;
+    font-size: 18px;
     line-height: 24px;
+    color: $base-color;
+    padding: 0;
+    margin-bottom: 10px;
   }
 }
 
@@ -6877,6 +6922,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
     text-decoration: none;
     transition-property: color;
     transition-duration: $animation-speed;
+    -webkit-tap-highlight-color: transparent;
 
     &::before {
       box-sizing: border-box;
@@ -6949,65 +6995,97 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 /* filters panel */
 .filters-options {
+  box-sizing: border-box;
   position: fixed;
   bottom: 0;
   left: 0;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  box-sizing: border-box;
-  text-align: center;
+  height: $header-height;
+  padding: 5px #{nth($layout-page-space, 2)};
   width: 100%;
   background: #fff;
   box-shadow: 0 -3px 15px -3px rgba(0, 0, 0, 0.15);
-  z-index: 6;
+  z-index: 5;
+
+  // Hide for desktop
   display: none;
 
+  // <768px
   @include media("<tab-s") {
-    z-index: 103;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $header-height--tab;
+    padding: 5px #{nth($layout-page-space--tab, 2)};
+
+    // transition
+    will-change: opacity, transform;
+    transition: {
+      property: opacity, transform;
+      duration: $animation-speed;
+    };
+
+    // hide
+    $translate: -100%, 0;
+    transform: translate($translate);
+    transform: translate3d($translate, 0);
+
+    // show
+    &.active {
+      $translate: 0, 0;
+      transform: translate($translate);
+      transform: translate3d($translate, 0);
+    }
   }
 
+  // <640px
   @include media("<mob") {
-    padding-left: 10px;
-    padding-right: 10px;
+    height: $header-height--mob;
+    padding: 5px #{nth($layout-page-space--mob, 2)};
   }
 
-  //&.active {
-  //  display: block;
-  //}
-
-  .filters-button {
-    float: none;
-    display: inline-block;
-    vertical-align: top;
-
-    @include media("<mob") {
-      float: none;
-      display: inline-block;
-      vertical-align: top;
-      padding: 0;
-      min-height: 44px;
-    }
-  }
-
+  // Счетчик
   .filters-counter {
-    line-height: 17px;
-    min-width: 140px;
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100px;
+    color: $base-color;
+    padding: 0;
+    margin-right: 20px;
 
-    @include media("<mob") {
-      float: left;
-      line-height: 15px;
-      width: 80px;
-      min-width: 0;
-      margin: 0;
-    }
-
-    & > div {
-      font-size: 15px;
+    &.no-items {
+      color: $error-color;
     }
   }
 
+  // Кнопка "Show found items"
+  .show-filters-items{
+    // <768px
+    @include media("<tab-s") {
+      font-size: 16px;
+      line-height: 24px;
+      text-transform: none;
+    }
+
+    // <640px
+    @include media("<mob") {
+      padding: 8px 20px;
+    }
+  }
+
+  // Конпка очистки фильтров
   .clear-filters {
-    margin: 0 0 0 30px;
+    margin: 0 0 0 20px;
+    color: $base-color;
+    opacity: 1;
+
+    &.disabled {
+      opacity: 0.3;
+    }
+
+    &::before {
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNOSAxMmwtNC40NjMgNC45NjktNC41MzctNC45NjloM2MwLTQuOTcgNC4wMy05IDktOSAyLjM5NSAwIDQuNTY1Ljk0MiA2LjE3OSAyLjQ2OGwtMi4wMDQgMi4yMzFjLTEuMDgxLTEuMDUtMi41NTMtMS42OTktNC4xNzUtMS42OTktMy4zMDkgMC02IDIuNjkxLTYgNmgzem0xMC40NjMtNC45NjlsLTQuNDYzIDQuOTY5aDNjMCAzLjMwOS0yLjY5MSA2LTYgNi0xLjYyMyAwLTMuMDk0LS42NS00LjE3NS0xLjY5OWwtMi4wMDQgMi4yMzFjMS42MTMgMS41MjYgMy43ODQgMi40NjggNi4xNzkgMi40NjggNC45NyAwIDktNC4wMyA5LTloM2wtNC41MzctNC45Njl6Ij48L3BhdGg+PC9zdmc+);
+    }
   }
 }
 
@@ -7074,48 +7152,31 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   &:active {
     @include btn-active;
   }
+
+  // .active
+  &.active {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMjMuOTU0IDIxLjAzbC05LjE4NC05LjA5NSA5LjA5Mi05LjE3NC0yLjgzMi0yLjgwNy05LjA5IDkuMTc5LTkuMTc2LTkuMDg4LTIuODEgMi44MSA5LjE4NiA5LjEwNS05LjA5NSA5LjE4NCAyLjgxIDIuODEgOS4xMTItOS4xOTIgOS4xOCA5LjF6Ij48L3BhdGg+PC9zdmc+);
+    background-size: 18px;
+  }
 }
 
 /* filters opener button end */
 
 /* filters close button */
 .btn-filters-close {
-  display: none;
   visibility: visible;
   opacity: 1;
   position: absolute;
-  right: 11px;
-  top: 11px;
-  z-index: 103;
+
+  display: none;
 
   // <768px
-  @include media("<tab-s") {
-    display: block;
-  }
-
-  // <480px
-  @include media("<mob-s") {
-    right: 10px;
-  }
+  //@include media("<tab-s") {
+  //  display: block;
+  //}
 }
 
 /* filters close button end */
-
-/* show filters items */
-.show-filters-items{
-  // <768px
-  @include media("<tab-s") {
-    padding: 5px 28px;
-  }
-
-  // <640px
-  @include media("<mob") {
-    padding: 6px 17px;
-    font-size: 13px;
-  }
-}
-
-/* show filters items end */
 
 /*FILTERS end*/
 
