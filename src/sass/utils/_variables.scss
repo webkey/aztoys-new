@@ -82,12 +82,12 @@ $font-alt-bold: 'rotondac-bold', Arial, Helvetica, sans-serif !default;
 
 // Base font size
 // ====================================================
-$font-size: 1.6rem !default;
-$line-height: 2.4rem !default;
+$font-size: 18px !default;
+$line-height: 32px !default;
 $letter-spacing: normal !default;
 // ------ mob -----------------------------------------
-$font-size--mob: 1.4rem !default;
-$line-height--mob: 2.0rem !default;
+$font-size--mob: 16px !default;
+$line-height--mob: 25px !default;
 
 
 // Heading h1
@@ -278,6 +278,23 @@ $layout-text-width: 800px !default;
 $layout-text-space: 20px 30px !default;
 // Максимальная ширина элементов выходящих за пределы текста
 $layout-flood-width: 1120px !default;
+
+$max-wrap-width: 1120px;
+$max-wrap-width--lap: 980px;
+
+// Text page intends
+// ====================================================
+$text-page-intend-left: 280px;
+$text-page-intend-left--lap: 200px;
+$text-page-intend-left--net: 180px;
+$text-page-intend-left--tab: nth($layout-page-space--tab, 2);
+$text-page-intend-left--mob: nth($layout-page-space--mob, 2);
+// ----------------------------------------------------
+$text-page-intend-right: 80px;
+$text-page-intend-right--lap: nth($layout-page-space, 2);
+$text-page-intend-right--net: nth($layout-page-space, 2);
+$text-page-intend-right--tab: nth($layout-page-space--tab, 2);
+$text-page-intend-right--mob: nth($layout-page-space--mob, 2);
 
 
 // Inner space
@@ -570,7 +587,7 @@ $header-height--mob: 50px; // 640px '<mob'
 
 $header-btn-height: 62px;
 $header-btn-height--tab: 46px; // <992px
-$header-btn-height--mob: 46px; // <640px
+$header-btn-height--mob: 42px; // <640px
 
 
 // Filters

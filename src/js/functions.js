@@ -420,6 +420,15 @@ function equalHeightInit() {
         resize: true
       });
 
+      // equal height of elements
+      // var $productsList = $('.products__list');
+      //
+      // if($productsList.length) {
+      //   $productsList.children().matchHeight({
+      //     byRow: true, property: 'height', target: null, remove: false
+      //   });
+      // }
+
       filtersEvents();
 
       // _____________________НОВЫЙ КОД !!!!!
@@ -918,7 +927,7 @@ function filtersEvents() {
   });
 
   // Открыть панель фильтров на мобиле в url хэш #filters-open
-  if (document.location.hash === "#filters-open" && window.innerWidth < DESKTOP_WIDTH) {
+  if (document.location.hash === "#filters-open" && window.innerWidth < TABLET_WIDTH) {
     setTimeout(function () {
       showFiltersPanel();
     }, 200);
@@ -1017,104 +1026,6 @@ function shareEvents() {
 
 
 /**
- * !Share Fixed for custom scroll
- */
-function shareFixedForCustom() {
-  var $fixedBox = $('.soc-js'),
-      $barrier = $('.full-width-js'),
-      $footer = $('.footer'),
-      topSpace = 50,
-      $fixedMarker = $('<div />');
-
-  $fixedMarker.insertBefore($fixedBox).css({
-    'height': 0,
-    'width': 0,
-    'float': 'left'
-  });
-
-  function shareFixedForCustomScroll(scrollTop) {
-    if (!$fixedBox.length) return false;
-
-    var fixedBoxHeight = $fixedBox.outerHeight(),
-        fixedBoxFullHeight = fixedBoxHeight + topSpace * 2,
-        footerOffsetTop = $footer.offset().top,
-        fixedMarkerPositionTop = $fixedMarker.position().top;
-
-    var $wrapper = $fixedBox.parent(),
-        wrapperHeight = $wrapper.outerHeight(),
-        wrapperPositionTop = $wrapper.position().top,
-        topPadding = fixedMarkerPositionTop - wrapperPositionTop,
-        bottomPadding = +$wrapper.css("padding-top").replace("px", ""),
-        wrapperInnerHeight = wrapperHeight - (topPadding + bottomPadding);
-
-    if (wrapperInnerHeight <= fixedBoxHeight) {
-      clearFixedBoxStyles();
-
-      return false;
-    }
-
-    if ($barrier.length && $barrier.outerHeight() > 0) {
-      var barrierHeight = $barrier.outerHeight(),
-          showBeforeBarrier = $barrier.position().top + barrierHeight - topSpace,
-          wrapperMinHeight = fixedBoxHeight * 2 + barrierHeight;
-
-      if (wrapperInnerHeight <= wrapperMinHeight) {
-        clearFixedBoxStyles();
-
-        return false;
-      }
-
-      if (scrollTop >= showBeforeBarrier) {
-        $fixedBox
-            .addClass('fixed')
-            .css({
-              'position': 'fixed',
-              'top': topSpace
-            });
-      } else {
-        clearFixedBoxStyles();
-      }
-    } else {
-      if (scrollTop >= fixedMarkerPositionTop - topSpace) {
-        $fixedBox
-            .addClass('fixed')
-            .css({
-              'position': 'fixed',
-              'top': topSpace
-            });
-      } else {
-        clearFixedBoxStyles();
-      }
-    }
-
-    if (footerOffsetTop <= fixedBoxFullHeight) {
-      $fixedBox
-          .addClass('stick-bottom')
-          .css({
-            'top': footerOffsetTop - fixedBoxFullHeight + topSpace
-          });
-    } else {
-      $fixedBox.removeClass('stick-bottom');
-    }
-  }
-
-  function clearFixedBoxStyles() {
-    $fixedBox
-        .removeClass('fixed')
-        .css({
-          'position': 'relative', 'top': 'auto'
-        });
-  }
-
-  $WINDOW.on('load scroll resizeByWidth', function () {
-    if ($fixedBox.length) {
-      shareFixedForCustomScroll($WINDOW.scrollTop());
-    }
-  })
-}
-
-
-/**
  * !Share Fixed
  */
 function shareFixed() {
@@ -1133,14 +1044,15 @@ function shareFixed() {
         barrierHeight = $barrier.outerHeight(),
         fixedBoxHeight = $fixedBox.outerHeight(),
         bottomTopPosition = $bottom.offset().top,
-        currentScrollTop = $WINDOW.scrollTop();
+        currentScrollTop = $WINDOW.scrollTop(),
+        intend = $('.header').innerHeight();
 
     if (currentScrollTop >= (fixedBoxTopPosition - topSpace)) {
       $fixedBox
           .addClass('fixed')
           .css({
             'position': 'fixed',
-            'top': topSpace
+            'top': topSpace + intend
           });
     } else {
       $fixedBox
@@ -2921,7 +2833,7 @@ $WINDOW.load(function () {
 $DOC.ready(function () {
   customScroll();
   // toggleHeaderInit();
-  if ($BODY.hasClass('home-page') && DESKTOP && window.innerWidth >= TABLET_WIDTH) {
+  if ($BODY.hasClass('home-page') && DESKTOP && window.innerWidth >= DESKTOP_WIDTH) {
     togglePromoOnScroll();
   }
   shareFixed();

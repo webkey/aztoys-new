@@ -134,6 +134,7 @@ gulp.task('copyLibsScriptsToJs', function () {
   return gulp.src([
     'src/js/_temp/widgets.js',
     'node_modules/swiper/js/swiper.min.js'
+    // 'src/libs/matchHeight/dist/jquery.matchHeight-min.js'
   ])
       .pipe(concat('widgets.js'))
       .pipe(gulp.dest('src/js'))

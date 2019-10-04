@@ -13,6 +13,7 @@
   ],
   "dependencies": {
     "mathsass": "^0.9.5",
-    "include-media": "^1.4.9"
+    "include-media": "^1.4.9",
+    "matchHeight": "matchheight#^0.7.2"
   }
 }
