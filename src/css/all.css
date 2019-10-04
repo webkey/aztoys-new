@@ -6460,7 +6460,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   min-height: 50px;
   background: #fff;
   overflow: hidden;
-  z-index: 85;
+  z-index: 60;
   display: none;
 }
 
@@ -6501,7 +6501,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   left: 0;
   top: 86px;
   width: 100%;
-  z-index: 86;
+  z-index: 61;
 }
 
 @media (max-width: 991px) {
@@ -7856,19 +7856,13 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
     top: 60px;
     border: none;
     background: #fff;
-    box-shadow: 10px 0 15px -3px transparent;
+    box-shadow: 25px 0 15px -15px transparent;
     will-change: opacity, transform, box-shadow;
     transition-property: opacity, transform;
     transition-duration: 0.3s;
     -ms-transform: translate(-100%, 0);
         transform: translate(-100%, 0);
     transform: translate3d(-100%, 0, 0);
-  }
-  .filters.active {
-    box-shadow: 10px 0 15px -3px rgba(0, 0, 0, 0.25);
-    -ms-transform: translate(0, 0);
-        transform: translate(0, 0);
-    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -7887,14 +7881,30 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   height: 50px;
   width: 100%;
   pointer-events: none;
-  box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.3);
   display: none;
+  opacity: 0;
+  transition: opacity 0.3s 0s;
 }
 
 @media (max-width: 767px) {
   .filters::before {
     display: block;
   }
+}
+
+@media (max-width: 767px) {
+  .filters.active {
+    box-shadow: 25px 0 15px -15px rgba(0, 0, 0, 0.15);
+    -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.filters.active::before {
+  opacity: 1;
+  transition-delay: 0.3s;
 }
 
 .filters__panel {

@@ -1588,10 +1588,10 @@ function toggleMenu() {
           $btnFilters.trigger('click');
         }
 
-        var $popupProd = $('.popup-js');
-        if ($popupProd.length) {
-          $popupProd.trigger('popupProdClose');
-        }
+        // var $popupProd = $('.popup-js');
+        // if ($popupProd.length) {
+        //   $popupProd.trigger('popupProdClose');
+        // }
       }
     });
   }
@@ -2746,7 +2746,9 @@ $WINDOW.load(function () {
 });
 
 $DOC.ready(function () {
-  customScroll();
+  if (DESKTOP) {
+    customScroll();
+  }
   // toggleHeaderInit();
   if ($BODY.hasClass('home-page') && DESKTOP && window.innerWidth >= DESKTOP_WIDTH) {
     togglePromoOnScroll();
