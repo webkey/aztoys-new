@@ -2012,6 +2012,7 @@ function videoSliderInit() {
 
     $videoSlider.each(function () {
       var $curSlider = $(this),
+          $pagination = $curSlider.find('.swiper-pagination'),
           $navPrev = $curSlider.find($btnPrev),
           $navNext = $curSlider.find($btnNext);
 
@@ -2039,6 +2040,11 @@ function videoSliderInit() {
         navigation: {
           nextEl: $navNext,
           prevEl: $navPrev,
+        },
+        pagination: {
+          el: $pagination,
+          type: 'bullets',
+          clickable: true
         },
         on: {
           slideChange: function () {
@@ -2118,109 +2124,6 @@ function videoSliderInit() {
 
     $content.removeClass(classVideoPlayed);
   }
-
-
-  // var $slider = $('.__swiper-container');
-  //
-  // if ($slider.length) {
-  //   var slideEl = '.video-slider-el',
-  //       classVideoPlayed = 'video-played',
-  //       animateSpeed = 0.3;
-  //
-  //   new Swiper($slider, {
-  //     loop: true,
-  //     nextButton: '.swiper-button-next',
-  //     prevButton: '.swiper-button-prev',
-  //     // effect: 'coverflow',
-  //     grabCursor: false,
-  //     centeredSlides: true,
-  //     slidesPerView: 'auto',
-  //     speed: 600,
-  //     parallax: false,
-  //     simulateTouch: true,
-  //     coverflow: {
-  //       rotate: 0,
-  //       modifier: 4,
-  //       stretch: 0,
-  //       slideShadows: false,
-  //       scale: 0.8
-  //     },
-  //     slideToClickedSlide: true,
-  //     slideNextClass: 'swiper-slide-next',
-  //     slidePrevClass: 'swiper-slide-prev',
-  //     onInit: function (event, a) {
-  //       var $iframe = $('<iframe src="about:blank" frameborder="0" allowfullscreen></iframe>'),
-  //           thisSlideHolder = $(event.slides).find(slideEl);
-  //
-  //       TweenMax.set($iframe, {autoAlpha: 0});
-  //
-  //       $iframe
-  //           .addClass('swiper-video')
-  //           .css({
-  //             'width': '100%', 'height': '100%'
-  //           })
-  //           .prependTo(thisSlideHolder);
-  //     },
-  //     onSlideChangeStart: function () {
-  //       closeSwiperVideo();
-  //     }
-  //   });
-  // }
-
-  // $slider.on('click', '.play-video-js', function (e) {
-  //   e.preventDefault();
-  //
-  //   playSwiperVideo.call(this);
-  // });
-  //
-  // $slider.on('click', '.close-video-js', function (e) {
-  //   e.preventDefault();
-  //
-  //   closeSwiperVideo();
-  // });
-  //
-  // /*Add video to each slide*/
-  // function playSwiperVideo() {
-  //   var $playBtn = $(this),
-  //       $container = $playBtn.closest($('.swiper-slide'));
-  //
-  //   $container.addClass(classVideoPlayed);
-  //
-  //   $playBtn.hide(0);
-  //   $container.find($('.swiper-img-js')).hide(0);
-  //   $container.find($('.swipe-title-js')).hide(0);
-  //   $playBtn.closest($slider).find('.swiper-button-prev').hide(0);
-  //   $playBtn.closest($slider).find('.swiper-button-next').hide(0);
-  //
-  //
-  //   var $iframe = $container.find('iframe');
-  //   var src = $playBtn.attr('href');
-  //
-  //   $iframe.attr("src", src + '?rel=0&autoplay=1');
-  //   TweenMax.to($iframe, animateSpeed, {autoAlpha:1});
-  //
-  //   $container.find('.close-video-js').show(0);
-  // }
-  //
-  // function closeSwiperVideo() {
-  //
-  //   var $content = $('.video-played');
-  //
-  //   $content.find('.close-video-js').hide(0);
-  //   $content.find($('.swiper-img-js')).show(0);
-  //   $content.find($('.swipe-title-js')).show(0);
-  //   $content.find('.play-video-js').show(0);
-  //   $('.swiper-button-prev').show(0);
-  //   $('.swiper-button-next').show(0);
-  //
-  //
-  //   var $iframe = $content.find('iframe');
-  //
-  //   $iframe.attr("src", 'about:blank');
-  //   TweenMax.to($iframe, animateSpeed, {autoAlpha: 0});
-  //
-  //   $content.removeClass(classVideoPlayed);
-  // }
 }
 
 
