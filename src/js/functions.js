@@ -1584,9 +1584,13 @@ function toggleMenu() {
       },
       beforeAdd: function () {
         var $btnFilters = $('.btn-filters-opener-js');
-
         if ($btnFilters.length && $btnFilters.hasClass('active')) {
           $btnFilters.trigger('click');
+        }
+
+        var $popupProd = $('.popup-js');
+        if ($popupProd.length) {
+          $popupProd.trigger('popupProdClose');
         }
       }
     });
@@ -2428,6 +2432,14 @@ function popupEvents() {
       popupOpened = false,
       animateSpeed = 0.6,
       topPosition = 0;
+
+  $popup.on('popupProdOpen', function () {
+    openPopup();
+  });
+
+  $popup.on('popupProdClose', function () {
+    closePopup();
+  });
 
   // add overlay on page
 
