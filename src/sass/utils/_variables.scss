@@ -600,7 +600,8 @@ $filters-panel-height--tab: 231px !default;
 $filters-panel-height--tab-s: 166px !default;
 $filters-panel-height--mob-s: 140px !default;
 
-$filters-drop-group-space: 40px 30px !default;
+$filters-drop-group-space: 40px 140px !default;
+//$filters-drop-group-space: 40px 4.4% !default;
 
 $filter-btn-arr-size: 34px;
 $filter-btn-arr-size--tab: 26px;
@@ -635,7 +636,8 @@ $filter-btn-spaces--tab-s: 12px 20px;
 // Sidebar
 // ====================================================
 //$sidebar-width: 240px;
-$sidebar-width: 280px;
+//$sidebar-width: 280px;
+$sidebar-width: 320px;
 
 
 // Footer

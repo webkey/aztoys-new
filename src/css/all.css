@@ -955,6 +955,10 @@ strong em {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjEgMTN2MTBoLTZ2LTZoLTZ2NmgtNnYtMTBoLTNsMTItMTIgMTIgMTJoLTN6bS0xLTUuOTA3di01LjA5M2gtM3YyLjA5M2wzIDN6Ii8+PC9zdmc+);
 }
 
+.icon-m-home--blue {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMjEgMTN2MTBoLTZ2LTZoLTZ2NmgtNnYtMTBoLTNsMTItMTIgMTIgMTJoLTN6bS0xLTUuOTA3di01LjA5M2gtM3YyLjA5M2wzIDN6Ii8+PC9zdmc+);
+}
+
 .icon-m-news--white {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAyNCAxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMi4yNDE3NiA0LjQ4MzUyQzMuNDc5ODUgNC40ODM1MiA0LjQ4MzUyIDMuNDc5ODUgNC40ODM1MiAyLjI0MTc2QzQuNDgzNTIgMS4wMDM2NyAzLjQ3OTg1IDAgMi4yNDE3NiAwQzEuMDAzNjcgMCAwIDEuMDAzNjcgMCAyLjI0MTc2QzAgMy40Nzk4NSAxLjAwMzY3IDQuNDgzNTIgMi4yNDE3NiA0LjQ4MzUyWiIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMjIuMDIyIDQuMzUxNjNIOC40Mzk1NkM3LjM4NDYxIDQuMzUxNjMgNi40NjE1NCAzLjQyODU2IDYuNDYxNTQgMi4zNzM2MVYyLjI0MTc0QzYuNDYxNTQgMS4xODY4IDcuMzg0NjEgMC4yNjM3MjEgOC40Mzk1NiAwLjI2MzcyMUgyMi4wMjJDMjMuMDc2OSAwLjI2MzcyMSAyNCAxLjE4NjggMjQgMi4yNDE3NFYyLjM3MzYxQzI0IDMuNDI4NTYgMjMuMDc2OSA0LjM1MTYzIDIyLjAyMiA0LjM1MTYzWiIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMi4yNDE3NiAxMS40NzI1QzMuNDc5ODUgMTEuNDcyNSA0LjQ4MzUyIDEwLjQ2ODkgNC40ODM1MiA5LjIzMDc4QzQuNDgzNTIgNy45OTI3IDMuNDc5ODUgNi45ODkwMyAyLjI0MTc2IDYuOTg5MDNDMS4wMDM2NyA2Ljk4OTAzIDAgNy45OTI3IDAgOS4yMzA3OEMwIDEwLjQ2ODkgMS4wMDM2NyAxMS40NzI1IDIuMjQxNzYgMTEuNDcyNVoiIGZpbGw9IndoaXRlIi8+PHBhdGggZD0iTTIyLjAyMiAxMS4yMDg4SDguNDM5NTZDNy4zODQ2MSAxMS4yMDg4IDYuNDYxNTQgMTAuMjg1NyA2LjQ2MTU0IDkuMjMwNzhWOS4wOTg5MUM2LjQ2MTU0IDguMDQzOTYgNy4zODQ2MSA3LjEyMDg5IDguNDM5NTYgNy4xMjA4OUgyMi4wMjJDMjMuMDc2OSA3LjEyMDg5IDI0IDguMDQzOTYgMjQgOS4wOTg5MVY5LjIzMDc4QzI0IDEwLjI4NTcgMjMuMDc2OSAxMS4yMDg4IDIyLjAyMiAxMS4yMDg4WiIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMi4yNDE3NiAxOC4zMjk3QzMuNDc5ODUgMTguMzI5NyA0LjQ4MzUyIDE3LjMyNiA0LjQ4MzUyIDE2LjA4NzlDNC40ODM1MiAxNC44NDk4IDMuNDc5ODUgMTMuODQ2MiAyLjI0MTc2IDEzLjg0NjJDMS4wMDM2NyAxMy44NDYyIDAgMTQuODQ5OCAwIDE2LjA4NzlDMCAxNy4zMjYgMS4wMDM2NyAxOC4zMjk3IDIuMjQxNzYgMTguMzI5N1oiIGZpbGw9IndoaXRlIi8+PHBhdGggZD0iTTIyLjAyMiAxOC4wNjU5SDguNDM5NTZDNy4zODQ2MSAxOC4wNjU5IDYuNDYxNTQgMTcuMTQyOSA2LjQ2MTU0IDE2LjA4NzlWMTUuOTU2QzYuNDYxNTQgMTQuOTAxMSA3LjM4NDYxIDEzLjk3OCA4LjQzOTU2IDEzLjk3OEgyMi4wMjJDMjMuMDc2OSAxMy45NzggMjQgMTQuOTAxMSAyNCAxNS45NTZWMTYuMDg3OUMyNCAxNy4yNzQ3IDIzLjA3NjkgMTguMDY1OSAyMi4wMjIgMTguMDY1OVoiIGZpbGw9IndoaXRlIi8+PC9zdmc+);
 }
@@ -2600,58 +2604,20 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .social-networks a {
   float: left;
   overflow: hidden;
-  width: 50px;
-  height: 50px;
+  width: 54px;
+  height: 54px;
   position: relative;
-  border-radius: 50%;
   color: inherit;
+  transition: color 0.3s;
 }
 
-.social-networks a:before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  opacity: 0;
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background: white;
-  -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-  transition: all 0.3s;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-}
-
-.desktop .social-networks a:hover:before {
-  opacity: 1;
-  width: 46px;
-  height: 46px;
-}
-
-.social-networks a:after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: 100%;
-  width: 100%;
-  border: 2px solid currentColor;
-  box-sizing: border-box;
-  border-radius: 50%;
-  -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-  transition: border 0.3s 0.1s;
-}
-
-.desktop .social-networks a:hover:after {
-  border-color: transparent;
+.social-networks a svg path {
+  fill: currentColor;
 }
 
 .social-networks svg {
-  max-height: 2rem;
-  max-width: 2rem;
+  height: 100%;
+  width: 100%;
   position: relative;
   margin-top: 50%;
   -ms-transform: translate(0, -50%);
@@ -2665,16 +2631,18 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   fill: currentColor;
 }
 
-.desktop .social-networks a:hover .soc-fb-path {
-  fill: #3b5998;
+.desktop .social-networks a:hover .soc-fb-path,
+.desktop .social-networks a.facebook:hover {
+  color: #3b5998;
 }
 
-.desktop .social-networks a:hover .soc-tw-path {
-  fill: #00acee;
+.desktop .social-networks a:hover .soc-tw-path,
+.desktop .social-networks a.twitter:hover {
+  color: #00acee;
 }
 
-.desktop .social-networks a:hover .soc-yt-path {
-  fill: #af100a;
+.desktop .social-networks a.youtube:hover {
+  color: #af100a;
 }
 
 .social-networks a > [class*="depict-"] {
@@ -3355,7 +3323,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .layout {
   box-sizing: border-box;
-  padding-left: 280px;
+  padding-left: 320px;
   max-width: 2560px;
 }
 
@@ -6454,9 +6422,9 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .popup {
   box-sizing: border-box;
   position: absolute;
-  left: 280px;
+  left: 320px;
   top: 86px;
-  width: calc(100% - 280px);
+  width: calc(100% - 320px);
   min-height: 50px;
   background: #fff;
   overflow: hidden;
@@ -6480,7 +6448,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .popup, .popup.layout {
   padding-left: 0;
-  max-width: calc(2560px - 280px);
+  max-width: calc(2560px - 320px);
 }
 
 .popup-overflow {
@@ -7318,7 +7286,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 280px;
+  width: 320px;
   padding-top: 86px;
   background: #00abc7;
   z-index: 65;
@@ -7366,6 +7334,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 @media (max-width: 639px) {
   .sidebar {
     padding-top: 50px;
+    width: 100%;
   }
 }
 
@@ -7450,7 +7419,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .nav-list {
   list-style: none;
   margin: 0;
-  padding: 20px 0 0;
+  padding: 20px 10px 5px;
 }
 
 @media (max-height: 739px) {
@@ -7464,6 +7433,10 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   }
 }
 
+.nav-list > li {
+  margin-bottom: 5px;
+}
+
 .nav-list > li > a,
 .nav-list > li > span {
   display: -ms-flexbox;
@@ -7472,12 +7445,13 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
       align-items: flex-start;
   position: relative;
   text-align: left;
-  padding: 15px 30px;
+  padding: 17px 30px;
   font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
   font-size: 24px;
   line-height: 28px;
   letter-spacing: 0.05em;
   color: #fff;
+  border-radius: 15px;
   text-decoration: none;
   transition: 0.3s background;
 }
@@ -7500,7 +7474,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .menu .nav-list > li > a, .menu
 .nav-list > li > span {
-  color: #00abc7;
+  color: white;
 }
 
 .nav-list > li > a em[class*="icon"],
@@ -7517,7 +7491,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .nav-list > li.active > span {
   transition-duration: 0.1s;
   text-decoration: none;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .nav-list > li.active > a,
@@ -7693,6 +7667,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   margin-bottom: 5px;
   text-decoration: none;
   transition: background-color 0.3s, box-shadow 0.3s;
+  border-radius: 15px;
 }
 
 @media (max-height: 739px) {
@@ -7712,7 +7687,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .slogan:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .slogan__align {
@@ -7755,16 +7730,16 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   height: 75px;
   color: inherit;
   text-decoration: none;
-  background-color: rgba(255, 255, 255, 0.3);
   background-image: url(../img/logo-az-books.png);
   background-size: 114px auto;
   background-repeat: no-repeat;
   background-position: 50% 9px;
-  transition: box-shadow 0.3s;
+  border-radius: 15px;
+  transition: background-color 0.3s;
 }
 
 .phone a:hover {
-  box-shadow: 0 0 15px white;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 /* phone end */
@@ -7775,9 +7750,9 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   left: 0;
   top: 86px;
   height: calc(100% - 86px);
-  width: 280px;
+  width: 320px;
   box-sizing: border-box;
-  background-color: #fcd105;
+  background-color: rgba(30, 30, 28, 0.85);
   z-index: 95;
   transition-property: opacity, visibility, transform;
   transition-duration: 0.3s;
@@ -7822,12 +7797,14 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 /* menu footer */
 .menu-footer {
+  box-sizing: border-box;
   position: absolute;
   width: 100%;
   bottom: 0;
   left: 0;
   overflow: hidden;
-  color: #00abc7;
+  color: white;
+  padding: 0 10px;
 }
 
 /* menu footer end */
@@ -8255,11 +8232,11 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .filters-drop {
   box-sizing: border-box;
   position: fixed;
-  left: 280px;
+  left: 320px;
   top: 86px;
   height: calc(100% - 86px);
-  width: calc(100% - 280px);
-  max-width: calc(2560px - 280px);
+  width: calc(100% - 320px);
+  max-width: calc(2560px - 320px);
   opacity: 0;
   visibility: hidden;
   background-color: #fff;
@@ -8304,15 +8281,9 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .filters-drop__holder {
   position: relative;
   box-sizing: content-box;
-  padding: 30px 15px;
+  padding: 30px 5px;
   max-width: 1120px;
-  margin: 0 auto;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -ms-flex-align: start;
-      align-items: flex-start;
+  display: table;
 }
 
 @media (max-width: 767px) {
@@ -8323,15 +8294,28 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .filters-drop__group {
+  display: table-cell;
   box-sizing: border-box;
-  -ms-flex: 1 0 33.33%;
-      flex: 1 0 33.33%;
-  max-width: 33.33%;
-  padding: 0 15px 40px;
+  padding: 0 70px 40px;
+}
+
+@media (max-width: 1599px) {
+  .filters-drop__group {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 1279px) {
+  .filters-drop__group {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
 @media (max-width: 767px) {
   .filters-drop__group {
+    display: block;
     max-width: none;
     margin-bottom: 20px;
     padding: 9px 10px;

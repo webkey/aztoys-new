@@ -927,19 +927,24 @@ function filtersEvents() {
   });
 
   // Открыть панель фильтров на мобиле в url хэш #filters-open
-  if (document.location.hash === "#filters-open" && window.innerWidth < TABLET_WIDTH) {
+  // if (document.location.hash === "#filters-open" && window.innerWidth < TABLET_WIDTH) {
+
+  // Открыть панель фильтров на всех устройствах в url хэш #filters-open
+  if (document.location.hash === "#filters-open") {
     setTimeout(function () {
       showFiltersPanel();
     }, 200);
   }
 
   function showFiltersPanel() {
+    console.log(1);
     $jsFiltersOpener.add($filtersOptions).add($filters).addClass('active');
     $HTML.addClass('css-scroll-fixed');
     $('.mob-menu-opener-js').switchClass('remove');
   }
 
   function hideFiltersPanel() {
+    console.log(2);
     $jsFiltersOpener.add($filtersOptions).add($filters).removeClass('active');
     $HTML.removeClass('css-scroll-fixed');
   }
