@@ -38,7 +38,7 @@ function placeholderInit() {
 
 
 /**
- * Custom scroll
+ * !Custom scroll
  */
 function customScroll() {
   // Custom scroll for nav drop
@@ -84,34 +84,6 @@ function customScroll() {
       scrollInertia: 300
     });
   }
-}
-
-
-/**
- * !Show and hide header on scroll
- */
-function toggleHeaderInit() {
-  var $body = $BODY,
-      minScrollTop = $('.header').outerHeight();
-
-  var previousScrollTop = $WINDOW.scrollTop();
-
-  function toggleHeaderForCustomScroll(currentScrollTop) {
-    console.log("minScrollTop: ", minScrollTop);
-    console.log("currentScrollTop: ", currentScrollTop);
-    console.log("previousScrollTop: ", previousScrollTop);
-    var showHeaderPanel = currentScrollTop < minScrollTop || currentScrollTop < previousScrollTop;
-
-    $body.toggleClass('header-show', showHeaderPanel);
-
-    previousScrollTop = currentScrollTop;
-  }
-
-  $WINDOW.on('load scroll resizeByWidth', function () {
-    if ($('.header').length) {
-      toggleHeaderForCustomScroll($WINDOW.scrollTop());
-    }
-  })
 }
 
 
@@ -291,16 +263,6 @@ function stateFields() {
   });
 }
 
-
-/**
- * !Print show
- */
-function printShow() {
-  $('.view-print').on('click', function (e) {
-    e.preventDefault();
-    window.print();
-  });
-}
 
 /**
  * !Search toggle
@@ -927,10 +889,10 @@ function filtersEvents() {
   });
 
   // Открыть панель фильтров на мобиле в url хэш #filters-open
-  // if (document.location.hash === "#filters-open" && window.innerWidth < TABLET_WIDTH) {
+  if (document.location.hash === "#filters-open" && window.innerWidth < TABLET_WIDTH) {
 
   // Открыть панель фильтров на всех устройствах в url хэш #filters-open
-  if (document.location.hash === "#filters-open") {
+  // if (document.location.hash === "#filters-open") {
     setTimeout(function () {
       showFiltersPanel();
     }, 200);
@@ -2751,17 +2713,16 @@ $WINDOW.load(function () {
 });
 
 $DOC.ready(function () {
+  /* Init custom scroll only no touch devices */
   if (DESKTOP) {
     customScroll();
   }
-  // toggleHeaderInit();
   if ($BODY.hasClass('home-page') && DESKTOP && window.innerWidth >= DESKTOP_WIDTH) {
     togglePromoOnScroll();
   }
   shareFixed();
   placeholderInit();
   stateFields();
-  printShow();
   searchToggle();
   tabs();
   equalHeightInit();

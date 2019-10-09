@@ -949,6 +949,31 @@
   transform: scale(0.98, 0.98);
 }
 
+// ====================================================
+// btn.current / btn.active
+@mixin btn-current {
+  color: white;
+  cursor: default;
+  background-color: #4dc4d8;
+  box-shadow: 0 0 0 #6cd5e6;
+  transform: scale(1, 1);
+}
+
+// ====================================================
+// btn:checked
+@mixin btn-checked {
+  color: white;
+  background-color: #4dc4d8;
+  box-shadow: 0 0 0 #6cd5e6;
+}
+
+// ====================================================
+// btn:checked:hover
+@mixin btn-checked-hover {
+  background-color: #6cd5e6;
+  box-shadow: 0 0 20px #6cd5e6;
+}
+
 
 // =============================================================================
 // For Print Version

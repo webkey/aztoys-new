@@ -245,7 +245,7 @@ gulp.task('buildDist', ['cleanDist', 'html:buildAllPages', 'copyImgToDist', 'sas
   gulp.src(['!src/css/temp/**/*.css', '!src/css/**/_temp_*.css', '!src/css/all.css', 'src/css/**/*.css'])
       .pipe(gulp.dest(path.dist + '/css'));
 
-  gulp.src(['!src/js/temp/**/*.js', '!src/js/**/_temp_*.js', '!src/js/functions.js', 'src/js/**/*.js'])
+  gulp.src(['!src/js/temp/**/*.js', '!src/js/_temp/**/*.js', '!src/js/**/_temp_*.js', '!src/js/functions.js', 'src/js/**/*.js'])
       .pipe(gulp.dest(path.dist + '/js'));
 
   gulp.src('src/assets/**/*')

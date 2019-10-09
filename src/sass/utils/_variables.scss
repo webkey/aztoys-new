@@ -603,10 +603,10 @@ $filters-panel-height--mob-s: 140px !default;
 $filters-drop-group-space: 40px 140px !default;
 //$filters-drop-group-space: 40px 4.4% !default;
 
-$filter-btn-arr-size: 34px;
-$filter-btn-arr-size--tab: 26px;
-$filter-btn-spaces: 17px 18px;
-$filter-btn-spaces--tab: 9px 10px;
+$filter-btn-arr-size: 30px;
+$filter-btn-arr-size--tab: 28px;
+$filter-btn-spaces: 12px 20px;
+$filter-btn-spaces--tab: 9px 15px;
 $filter-btn-spaces--tab-s: 12px 20px;
 
 @mixin filter-btn-font {
@@ -615,7 +615,7 @@ $filter-btn-spaces--tab-s: 12px 20px;
   line-height: 24px;
   letter-spacing: 0.08em;
   white-space: nowrap;
-  color: white;
+  color: $base-color;
   text-align: center;
   text-decoration: none;
   text-transform: none;
@@ -632,12 +632,21 @@ $filter-btn-spaces--tab-s: 12px 20px;
   color: $base-color;
 }
 
+@mixin filter-btn-bg {
+  border-radius: 25px;
+  background-color: $highlight-color;
+  box-shadow: 0 0 0 $highlight-color--hover;
+  transition: color $animation-speed, background-color $animation-speed, box-shadow $animation-speed;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 
 // Sidebar
 // ====================================================
-//$sidebar-width: 240px;
+$sidebar-width: 240px;
 //$sidebar-width: 280px;
-$sidebar-width: 320px;
+//$sidebar-width: 320px;
 
 
 // Footer

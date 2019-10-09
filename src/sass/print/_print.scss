@@ -39,6 +39,7 @@
     bottom: auto !important;
     padding: 0 !important;
     margin: 0 0 30pt !important;
+    text-align: left !important;
   }
   .sidebar{
     visibility: hidden !important;
@@ -46,6 +47,7 @@
     position: absolute !important;
     overflow: visible !important;
   }
+  .footer,
   .aside,
   .print-hidden,
   .logo,
@@ -55,7 +57,11 @@
   .footer-nav,
   .screen,
   .btn-default,
-  .aaa{ display: none !important; }
+  .menu-opener,
+  .filters-search,
+  .btn-filters,
+  .slogan,
+  .btn-search-open { display: none !important; }
   .layout{
     padding: 0 !important;
     margin: 0 !important;
