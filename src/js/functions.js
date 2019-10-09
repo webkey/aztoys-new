@@ -890,11 +890,15 @@ function filtersEvents() {
 
   // Открыть панель фильтров на мобиле в url хэш #filters-open
   if (document.location.hash === "#filters-open" && window.innerWidth < TABLET_WIDTH) {
-
-  // Открыть панель фильтров на всех устройствах в url хэш #filters-open
-  // if (document.location.hash === "#filters-open") {
     setTimeout(function () {
       showFiltersPanel();
+    }, 200);
+  }
+
+  // Открыть панель фильтров на планшете и десктопе в url хэш #filters-open
+  if (document.location.hash === "#filters-open" && window.innerWidth >= TABLET_WIDTH) {
+    setTimeout(function () {
+      $jsDropOpener.trigger('click');
     }, 200);
   }
 
