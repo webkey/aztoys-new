@@ -7259,7 +7259,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   bottom: 0;
   width: 240px;
   padding-top: 86px;
-  background: #00abc7;
+  background-color: rgba(30, 30, 28, 0.85);
   z-index: 65;
 }
 
@@ -7480,7 +7480,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .nav-slider .swiper-slide {
-  background-color: #00abc7;
+  background: none;
 }
 
 /* navigation slider end */
@@ -7573,6 +7573,18 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   transition-duration: 0.3s;
 }
 
+@media (max-width: 639px) {
+  .category-list a:hover::before {
+    transform: translateZ(0) scale(1.03, 1.1);
+  }
+}
+
+@media (max-width: 479px) {
+  .category-list a:hover::before {
+    transform: translateZ(0) scale(1.06, 1.1);
+  }
+}
+
 .category-list li.current a, .category-list li.current > span {
   z-index: 1;
 }
@@ -7581,6 +7593,18 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   transform: translateZ(0) scale(1.1);
   transition-duration: 0.3s;
+}
+
+@media (max-width: 639px) {
+  .category-list li.current a::before, .category-list li.current > span::before {
+    transform: translateZ(0) scale(1.03, 1.1);
+  }
+}
+
+@media (max-width: 479px) {
+  .category-list li.current a::before, .category-list li.current > span::before {
+    transform: translateZ(0) scale(1.06, 1.1);
+  }
 }
 
 .category-list li.current img {

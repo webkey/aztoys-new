@@ -6795,7 +6795,8 @@ $swp-space--mob: 9px;
   bottom: 0;
   width: $sidebar-width;
   padding-top: $header-height;
-  background: $base-color;
+  //background: $base-color;
+  background-color: rgba(#1e1e1c, 0.85);
   z-index: $sidebar-z;
 
   // Анимация промо-блока для десктопа и ширины больше 992
@@ -7066,7 +7067,8 @@ $swp-space--mob: 9px;
   }
 
   .swiper-slide {
-    background-color: $base-color;
+    //background-color: $base-color;
+    background: none;
   }
 }
 
@@ -7148,6 +7150,16 @@ $swp-space--mob: 9px;
         box-shadow: 0 0 15px rgba(black, 0.15);
         transform: translateZ(0) scale(1.1);
         transition-duration: $animation-speed;
+
+        // <640px
+        @include media("<mob") {
+          transform: translateZ(0) scale(1.03, 1.1);
+        }
+
+        // <480px
+        @include media("<mob-s") {
+          transform: translateZ(0) scale(1.06, 1.1);
+        }
       }
     }
   }
@@ -7169,6 +7181,16 @@ $swp-space--mob: 9px;
         box-shadow: 0 0 15px rgba(black, 0.15);
         transform: translateZ(0) scale(1.1);
         transition-duration: $animation-speed;
+
+        // <640px
+        @include media("<mob") {
+          transform: translateZ(0) scale(1.03, 1.1);
+        }
+
+        // <480px
+        @include media("<mob-s") {
+          transform: translateZ(0) scale(1.06, 1.1);
+        }
       }
     }
 

@@ -522,13 +522,689 @@ function selectResize() {
   }
 }
 
+
+/**
+ * !Filters
+ */
+// external js:
+// 1) TweetMax VERSION: 1.19.0 (widgets.js);
+// 2) resizeByWidth (this file);
+function filtersEvents() {
+  // external js: Isotope PACKAGED v3.0.1 (widgets.js);
+  var $body = $BODY,
+      $filtersWrapper = $('.products'), // $productsContainer
+      $filters = $('.filters-js'), // $elements
+      $filtersTagsGroup = $('.filters-tags-js'), // filtersGroup
+      $productsContainer = $('.filters-container-js'), // $productsContainer
+      $filtersOptions = $('.filters-options-js'), // $panelOptions
+      $jsDropContent = $('.filters-content-js'), // $moreFilters
+      jsDrop = '.filters-drop-js', // moreFiltersDrop
+      $jsDrop = $(jsDrop), // $moreFiltersDrop
+      jsDropOpener = '.filter-selector-js', // moreFiltersOpen
+      $jsDropOpener = $(jsDropOpener), // $moreFiltersOpen
+      jsFiltersOpener = '.btn-filters-opener-js', // config.filtersOpen
+      $jsFiltersOpener = $(jsFiltersOpener), // $filtersOpen
+      jsFiltersCloser = '.btn-filters-close-js', // config.filtersClose
+      $jsFiltersCloser = $(jsFiltersCloser), // $filtersClose
+      $jsFilterCounter = $('.filters-counter-js'), // counter
+      tags = {}, // перенес
+      classShowDrop = 'show-drop', // перенес
+      isCheckedClass = 'is-checked', // перенес
+      dataFilter = 'data-filter', // перенес
+      animationSpeed = 200, // animationSpeed
+      animationSpeedTween = animationSpeed / 1000, // animationSpeedTween
+      showButtonFind = false, // перенес
+      methodAndInit = false, // перенес
+      methodOrInit = false, // перенес
+      filtersDropShow = false; // перенес
+
+  // init Isotope
+  var $grid = $filtersWrapper.isotope({
+    itemSelector: '.products__item',
+    layoutMode: 'fitRows',
+    percentPosition: true
+  });
+
+  // bind filter tag click
+  $filtersTagsGroup.on('click', 'a', function (e) {
+    e.preventDefault();
+
+    var $currentTag = $(this),
+        dataTagsGroup = $currentTag.closest('.tags-group-js').attr('data-tags-group'),
+        currentDataFilter = $currentTag.attr(dataFilter),
+        filterMethod = $currentTag.closest($filtersTagsGroup).attr('data-filter-method'),
+        currentIsTagChecked = $currentTag.hasClass(isCheckedClass);
+
+    // var $currentTagIsInFilters = $currentTag.parents().hasClass(jsDrop.substring(1));
+    if (filterMethod == 'or' && !currentIsTagChecked) {
+      methodOrInit = true;
+    } else if (filterMethod == 'or' && currentIsTagChecked) {
+      methodOrInit = false;
+    }
+
+    if (currentIsTagChecked && filterMethod == 'and') {
+      methodAndInit = false;
+    } else if (filterMethod == 'and') {
+      methodAndInit = currentDataFilter;
+    }
+
+    dataTagsGroup = (dataTagsGroup === undefined) ?
+        currentDataFilter :
+        dataTagsGroup;
+
+    // tags [ dataTagsGroup ] = (currentIsTagChecked) ?
+    // 	'' :
+    // 	currentDataFilter;
+
+    if (currentIsTagChecked) {
+      tags [dataTagsGroup] = '';
+    } else {
+      tags [dataTagsGroup] = currentDataFilter;
+    }
+
+    var filterValue = (filterMethod == 'or' || methodAndInit || currentIsTagChecked) ? concatValuesOR(tags) : concatValuesEND(tags);
+
+    $grid.isotope({filter: filterValue});
+
+    showButtonFind = true;
+  });
+
+  // concatenation values of tags OR;
+  // example return '.prop1, .prop2';
+  // show items which contains prop1 or prop2;
+  function concatValuesOR(obj) {
+    var value,
+        // arr = Object.keys(obj);
+        arr = [];
+
+    for (var prop in obj) {
+      var thisProp = obj[prop];
+      if (!thisProp) continue;
+      if (methodOrInit && obj[prop] == methodAndInit) continue;
+      thisProp = (methodAndInit) ? (methodAndInit + thisProp) : thisProp;
+      arr.push(thisProp);
+    }
+
+    value = arr.join(', ');
+    return value;
+  }
+
+  // concatenation values of tags END;
+  // example return '.prop1.prop2';
+  // show items which contains prop1 and prop2;
+  function concatValuesEND(obj) {
+    var value = '';
+
+    for (var prop in obj) {
+      value += obj[prop];
+    }
+
+    return value;
+  }
+
+  // search
+  $(".filters-search-js input").on('change keyup', function () {
+    var text = $(this).val();
+
+    $grid.isotope({
+      filter: function () {
+        var name = $(this).find('.products__title').text();
+        return name.match(new RegExp('(' + text + ')', 'gi'));
+      }
+    });
+  });
+
+  // toggle class checked
+  $filtersTagsGroup.on('click', 'a', function (e) {
+    e.preventDefault();
+
+    var $this = $(this);
+
+    $this.parent().find('.filter-radio.is-checked').not(e.target).removeClass('is-checked');
+
+    $this.toggleClass('is-checked');
+
+    clearBtnState();
+    // toggleFiltersOptions();
+  });
+
+  // prepare filters options
+  // function prepareFiltersOptions() {
+  //   TweenMax.set($filtersOptions, {
+  //     autoAlpha: 0, percentY: 100, onComplete: function () {
+  //       $('.filters-options-js').show(0);
+  //     }
+  //   });
+  // }
+  // prepareFiltersOptions();
+
+  // toggle filters options
+  // Перенес
+  function toggleFiltersOptions() {
+    if ($filtersTagsGroup.find('.is-checked').length && filtersDropShow) {
+      // TweenMax.to($filtersOptions, animationSpeedTween, {autoAlpha: 1, percentY: 0});
+      $filtersOptions.addClass('active');
+    } else {
+      // TweenMax.to($filtersOptions, animationSpeedTween, {autoAlpha: 0, percentY: 100});
+      $filtersOptions.removeClass('active');
+    }
+  }
+
+  function eventBtnShowItem() {
+    $body.on('click', '.show-filter-items-js', function (e) {
+      e.preventDefault();
+
+      $jsFiltersOpener.add($filtersOptions).add($filters).removeClass('active');
+      $HTML.removeClass('css-scroll-fixed');
+
+      $('html,body').stop().animate({scrollTop: 0}, animationSpeed);
+    });
+  }
+  eventBtnShowItem();
+
+  // Перенес
+  // Открыть выпадающий список фильтров по клику на селектор
+  $jsDropContent.on('click', jsDropOpener, function () {
+    var $curSelector = $(this);
+    var $curJsDropContent = $curSelector.closest($jsDropContent),
+        $curDrop = $curJsDropContent.find($jsDrop),
+        _cond = $curDrop.hasClass(classShowDrop);
+
+    // Открыть / закрыть выпадающий список фильтров
+    toggleFiltersDrop($jsDrop, $curDrop, !_cond);
+
+    // Изменить текст селектора
+    // toggleBtnText($(this).find('span'), _cond);
+
+    // Добавить / удалить активный класс
+    switchClass($jsDropContent, $curJsDropContent, !_cond);
+    switchClass($jsDropOpener, $curSelector, !_cond);
+    switchClass($jsDrop, $curDrop, !_cond);
+
+    // Ограничить высоту выпадающего списка фильтров
+    // phonesDropHeight.call();
+
+    return false;
+  });
+
+  // Перенес
+  // $jsDropContent.on('click', jsDrop, function (e) {
+  //   e.stopPropagation();
+  //   return false;
+  // });
+
+  // Перенес
+  // $jsDropContent.on('click', '.phones-drop a', function () {
+  //   document.location.href = $(this).attr('href');
+  // });
+
+  // Перенес
+  // Открыть / закрыть выпадающий список фильтров
+  function toggleFiltersDrop(drops, curDrop, condition) {
+    drops = drops || $jsDrop;
+
+    // Закрыть все выпадающие списки фильтров
+    TweenMax.to(drops, animationSpeedTween, {autoAlpha: 0, ease: Power2.easeInOut});
+    filtersDropShow = false;
+
+    // fixedContainerHeight(false);
+    // toggleFiltersOptions();
+
+    // enable page scroll
+    toggleScrollPage('switch-drop');
+
+    if (curDrop === undefined) return false;
+
+    if (condition) {
+      // open current drop
+      TweenMax.to(curDrop, animationSpeedTween, {autoAlpha: 1, ease: Power2.easeInOut});
+      filtersDropShow = true;
+      // fixedContainerHeight();
+
+      // disable page scroll
+      toggleScrollPage('switch-drop', false);
+    }
+  }
+
+  // Перенес
+  // toggle text in button "additional filters"
+  // function toggleBtnText(btn, cond) {
+  //   var textShow = 'Show filters',
+  //       textHide = 'Hide filters';
+  //
+  //   if (btn === undefined) return false;
+  //
+  //   (cond === false) ? btn.text(textHide) : btn.text(textShow);
+  // }
+
+  // Перенес
+  function phonesDropHeight() {
+    var dropPosTop = $jsDrop.offset().top - $WINDOW.scrollTop();
+    var dropHeight = window.innerHeight - dropPosTop - 10;
+
+    $jsDrop.css('max-height', dropHeight);
+
+    // Пересчитать кастомный скролл
+    $jsDrop.find('.mCustomScrollbar').mCustomScrollbar("update");
+  }
+
+  // Перенес
+  // recalculate height of phone drop
+  // $WINDOW.on('resize scroll', function () {
+  //   phonesDropHeight.call();
+  // });
+
+  // Перенес
+  // add "no product" template
+  var tempNoProducts = $('<h2 style="text-align: center;">Items not found</h2>');
+  tempNoProducts.hide().insertAfter($filtersWrapper);
+
+  // Перенес
+  $grid.on('arrangeComplete', function (event, filteredItems) {
+    var lengthItems = filteredItems.length,
+        filterCounterContent = 'Items not found';
+
+    // search counter
+    if (lengthItems > 0) {
+      var items = (filteredItems.length > 1) ? 'items' : 'item';
+      filterCounterContent = 'Found <span style="display: inline-block;"><strong>' + lengthItems + '</strong> ' + items + '</span>';
+    }
+
+    $jsFilterCounter
+        .html(filterCounterContent)
+        .closest('.filters-button')
+        .toggleClass('btn-show', showButtonFind);
+
+    // "no product" show / hide
+    if (!lengthItems) {
+      $jsFilterCounter.closest('.filters-button').addClass('no-items');
+      tempNoProducts.show();
+    } else {
+      $jsFilterCounter.closest('.filters-button').removeClass('no-items');
+      tempNoProducts.hide();
+    }
+  });
+
+  // Перенес
+  // clear filter tags
+  clearFilters();
+
+  // Перенес
+  $('.clear-filters').on('click', function (e) {
+    e.preventDefault();
+
+    if ($(this).hasClass('disabled')) return;
+
+    clearFilters();
+    methodOrInit = false;
+  });
+
+  // Перенес
+  function clearFilters() {
+    $filtersTagsGroup.find('.is-checked').removeClass('is-checked');
+    $grid.isotope({filter: '*'});
+    tags = {};
+
+    switchClass($jsDropContent);
+    switchClass($jsDropOpener);
+    switchClass($jsDrop);
+    toggleFiltersDrop($jsDrop);
+
+    clearBtnState();
+
+    showButtonFind = false;
+  }
+
+  // Перенес
+  // clear on horizontal resize
+  $WINDOW.on('resizeByWidth', function () {
+    if ($filters.attr('style')) {
+      $filters.attr('style', '');
+      // $jsDropOpener.trigger('click');
+      // toggleScrollPage('mobile-filter-panel');
+    }
+
+    if ($jsFiltersOpener.hasClass('active')) {
+      hideFiltersPanel();
+    }
+  });
+
+  // Перенес
+  // Открыть панель фильтров (на мобиле)
+  // var filtersTLL = new TimelineLite();
+  $body.on('click', jsFiltersOpener, function () {
+    var $curBtn = $(this);
+
+    if (!$curBtn.hasClass('active')) {
+      showFiltersPanel();
+      // filtersTLL
+      //     .set($filters, {autoAlpha: 1, transitionDuration: 0})
+      //     .to($filters, animationSpeedTween, {x: 0, ease: Power2.easeInOut});
+    } else {
+      hideFiltersPanel();
+      // var filtersWidth = $('.filters-js').outerWidth();
+      // filtersTLL.to($filters, animationSpeedTween, {x: -filtersWidth, ease: Power2.easeInOut});
+    }
+
+    // toggleScrollPage('mobile-filter-panel', false);
+
+    return false;
+  });
+
+  // Перенес
+  // Закрыть панель фильтров на мобиле
+  $body.on('click', jsFiltersCloser, function () {
+    hideFiltersPanel();
+    // var filtersWidth = $('.filters-js').outerWidth();
+    // filtersTLL.to($filters, animationSpeedTween, {x: -filtersWidth, ease: Power2.easeInOut});
+
+    // toggleScrollPage('mobile-filter-panel');
+
+    return false;
+  });
+
+  // Перенес
+  // Открыть панель фильтров на мобиле в url хэш #filters-open
+  if (document.location.hash === "#filters-open" && window.innerWidth < TABLET_WIDTH) {
+    setTimeout(function () {
+      showFiltersPanel();
+    }, 200);
+  }
+
+  // Перенес
+  // Открыть панель фильтров на планшете и десктопе в url хэш #filters-open
+  if (document.location.hash === "#filters-open" && window.innerWidth >= TABLET_WIDTH) {
+    setTimeout(function () {
+      $jsDropOpener.trigger('click');
+    }, 200);
+  }
+
+  // Перенес
+  function showFiltersPanel() {
+    $jsFiltersOpener.add($filtersOptions).add($filters).addClass('active');
+    $HTML.addClass('css-scroll-fixed');
+    $('.mob-menu-opener-js').switchClass('remove');
+  }
+
+  // Перенес
+  function hideFiltersPanel() {
+    $jsFiltersOpener.add($filtersOptions).add($filters).removeClass('active');
+    $HTML.removeClass('css-scroll-fixed');
+  }
+
+  // switch class
+  // Перенес
+  function switchClass(remove, add, condition) {
+    // remove - element with remove class
+    // add - element with add class
+    // condition - condition add class
+
+    remove.removeClass(classShowDrop);
+
+    if (add === undefined) return false;
+    add.toggleClass(classShowDrop, condition);
+  }
+
+  // state clear button
+  // Перенес
+  function clearBtnState() {
+    $('.clear-filters').toggleClass('disabled', !$filtersTagsGroup.find('.is-checked').length);
+  }
+  clearBtnState();
+
+  // fixed height container products
+  // Перенес
+  function fixedContainerHeight(fixed) {
+    var productsContainerHeight = $productsContainer.outerHeight();
+
+    if (fixed === false) {
+      $productsContainer.css({
+        'min-height': 0,
+        'max-height': 'none'
+      });
+    } else {
+      $productsContainer.css({
+        'min-height': productsContainerHeight,
+        'max-height': productsContainerHeight
+      });
+    }
+  }
+}
+
+
+/**
+ * !Share Events
+ */
+function shareEvents() {
+  var $btn = $('.open-share-js');
+  $btn.each(function () {
+    var $currentBtn = $(this),
+        $wrapper = $currentBtn.parent(),
+        $itemList = $wrapper.find('.soc-square'),
+        $item = $wrapper.find('.soc-square li');
+
+    var tw = new TimelineLite({paused: true});
+
+    tw
+        .set($itemList, {perspective: 500})
+        .set($item, {display: "block"})
+        .staggerFrom($item, 0.2, {autoAlpha: 0, rotationX: -90, transformOrigin: "50% 0"}, 0.1);
+
+    $currentBtn
+        .on('click', function (e) {
+          e.preventDefault();
+        });
+
+    if (DESKTOP) {
+      $wrapper.on('mouseenter', function () {
+        tw.play();
+      }).on('mouseleave', function () {
+        tw.reverse();
+      });
+    } else {
+      $wrapper.on('click', function () {
+        if (tw.progress() !== 0) {
+          tw.reverse();
+
+          return false;
+        }
+        tw.play();
+      });
+    }
+  });
+}
+
+
+/**
+ * !Share Fixed
+ */
+function shareFixed() {
+  var $fixedBox = $('.soc-js');
+
+  if (!$fixedBox.length) return false;
+
+  var fixedBoxTopPosition = $fixedBox.offset().top,
+      $barrier = $('.full-width-js'),
+      $bottom = $('.footer'),
+      topSpace = 50;
+
+  $WINDOW.on('load scroll resizeByWidth', function () {
+
+    var barrierTopPosition = $barrier.offset().top,
+        barrierHeight = $barrier.outerHeight(),
+        fixedBoxHeight = $fixedBox.outerHeight(),
+        bottomTopPosition = $bottom.offset().top,
+        currentScrollTop = $WINDOW.scrollTop(),
+        intend = $('.header').innerHeight();
+
+    if (currentScrollTop >= (fixedBoxTopPosition - topSpace)) {
+      $fixedBox
+          .addClass('fixed')
+          .css({
+            'position': 'fixed',
+            'top': topSpace + intend
+          });
+    } else {
+      $fixedBox
+          .removeClass('fixed')
+          .css({
+            'position': 'relative',
+            'top': 'auto'
+          });
+    }
+
+    if (currentScrollTop >= barrierTopPosition - fixedBoxHeight - topSpace * 2 && currentScrollTop < barrierTopPosition + barrierHeight || currentScrollTop >= bottomTopPosition - fixedBoxHeight - topSpace * 2) {
+      var tl = TweenMax.to($fixedBox, 0.1, {autoAlpha: 0, ease: Power2.easeInOut});
+    } else {
+      TweenMax.to($fixedBox, 0.1, {autoAlpha: 1, ease: Power2.easeInOut});
+    }
+  });
+}
+
+
+/**
+ * !Toggle hover class
+ */
+(function ($) {
+  // external js:
+  // 1) device.js 0.2.7 (widgets.js);
+  // 2) debouncedresize (widgets.js);
+
+  var HoverClass = function (settings) {
+    var options = $.extend({
+      container: 'ul',
+      item: 'li',
+      drop: 'ul'
+    }, settings || {});
+
+    var self = this,
+        container = $(options.container);
+
+    self.options = options;
+    self.$container = container;
+    self.$item = $(options.item, container);
+    self.$drop = $(options.drop, container);
+    self.desktop = device.desktop();
+
+    self.modifiers = {
+      hover: 'hover'
+    };
+
+    self.addClassHover();
+
+    if (!self.desktop) {
+      $WINDOW.on('debouncedresize', function () {
+        self.removeClassHover();
+      });
+    }
+  };
+
+  HoverClass.prototype.addClassHover = function () {
+    var self = this,
+        $container = self.$container,
+        item = self.options.item,
+        $item = self.$item,
+        $drop = self.$drop,
+        _hover = this.modifiers.hover;
+
+    $container.on('click', '' + item + '', function (e) {
+
+      if (self.desktop || $WINDOW.width() < 980) return;
+
+      var $currentItem = $(this);
+
+      if (!$currentItem.has($drop).length) {
+        return;
+      }
+
+      if ($currentItem.hasClass(_hover)) {
+        $currentItem
+            .removeClass(_hover)
+            .find('.' + _hover + '')
+            .removeClass(_hover);
+
+        return;
+      }
+
+      $item.removeClass(_hover);
+      $currentItem.addClass(_hover);
+
+      return false;
+    });
+
+    $drop.children().not('.close-nav-drop-js').on('click', function (e) {
+      if (self.desktop || $WINDOW.width() < 980) return;
+
+      e.stopPropagation();
+    });
+
+    $DOC.on('click', function () {
+      if (self.desktop || $WINDOW.width() < 980) return;
+
+      $item.removeClass(_hover);
+    });
+
+    if (self.desktop) {
+      $container.on('mouseenter', '' + item + '', function () {
+        var currentItem = $(this);
+
+        if (currentItem.prop('hoverTimeout')) {
+          currentItem.prop('hoverTimeout',
+              clearTimeout(currentItem.prop('hoverTimeout')
+              )
+          );
+        }
+
+        currentItem.prop('hoverIntent', setTimeout(function () {
+          currentItem.addClass(_hover);
+        }, 50));
+
+      });
+      $container.on('mouseleave', '' + item + '', function () {
+        var currentItem = $(this);
+
+        if (currentItem.prop('hoverIntent')) {
+          currentItem.prop('hoverIntent',
+              clearTimeout(currentItem.prop('hoverIntent')
+              )
+          );
+        }
+
+        currentItem.prop('hoverTimeout', setTimeout(function () {
+          currentItem.removeClass(_hover);
+        }, 100));
+      });
+    }
+  };
+
+  HoverClass.prototype.removeClassHover = function () {
+    var self = this;
+    self.$item.removeClass(self.modifiers.hover);
+  };
+
+  window.HoverClass = HoverClass;
+
+}(jQuery));
+
+function hoverClassInit() {
+  var $navList = $('.nav-list');
+  if ($navList.length) {
+    new HoverClass({
+      container: $navList,
+      drop: '.js-nav-drop'
+    });
+  }
+}
+
+
 /**
  * !jquery.switch-class.js
  * !Version: 2.0
  * !Description: Extended toggle class
  */
+
 (function ($) {
-  // 'use strict';
+  'use strict';
 
   // Нужно для корректной работы с доп. классом блокирования скролла
   var countFixedScroll = 0;
@@ -868,7 +1544,6 @@ function selectResize() {
 
 })(jQuery);
 
-
 /**
  * !Toggle menu
  */
@@ -913,757 +1588,131 @@ function toggleMenu() {
 }
 
 
-/**
- * !Filters
- */
-(function (window, document, $, undefined) {
-  /*'use strict';*/
-
-  // External js
-  // ====================================================
-  // 1) resizeByWidth;
-  // 2) Isotope;
-
-  // Inner Plugin Classes and Modifiers
-  // ====================================================
-  var PREF = 'productsFilters';
-  var CONST_CLASSES = {
-    scrollFixedClass: 'css-scroll-fixed',
-    initClass: PREF + '_initialized',
-    element: PREF,
-  };
-
-  var ProductsFilters = function (element, config) {
-    var self,
-        $window = $(window),
-        $html = $('html'),
-        $body = $('body'),
-        $element = $(element),
-        $productsContainer = $(config.productsContainer),
-        $filter = $(config.filter),
-        $filtersGroup = $(config.filtersGroup),
-        $panelOptions = $(config.panelOptions),
-        $resetFilters = $(config.resetFilters),
-        $moreFilters = $(config.moreFilters),
-        $moreFiltersOpen = $(config.moreFiltersOpen),
-        $moreFiltersDrop = $(config.moreFiltersDrop),
-        $counter = $(config.counter),
-        $search = $(config.search),
-        $filtersOpen = $(config.filtersOpen),
-        $filtersClose = $(config.filtersClose),
-        _tplNoProducts = $('<h2 style="text-align: center;">Items not found</h2>'),
-        $grid,
-        tags = {},
-        showButtonFind = false,
-        methodAndInit = false,
-        methodOrInit = false,
-        filtersDropShow = false,
-        animationSpeedTween = config.animationSpeed / 1000;
-
-    var callbacks = function () {
-          /** track events */
-          $.each(config, function (key, value) {
-            if (typeof value === 'function') {
-              $element.on('productsFilters.' + key, function (e, param) {
-                return value(e, $element, param);
-              });
-            }
-          });
-        },
-        gridInit = function () {
-          $grid = $productsContainer.isotope({
-            itemSelector: config.productElement,
-            layoutMode: 'fitRows',
-            percentPosition: true
-          });
-        },
-        concatValuesOR = function (obj) {
-          // concatenation values of tags OR;
-          // example return '.prop1, .prop2';
-          // show items which contains prop1 or prop2;
-          var value,
-              arr = [],
-              prop;
-
-          for (prop in obj) {
-            var thisProp = obj[prop];
-            if (!thisProp) continue;
-            if (methodOrInit && obj[prop] === methodAndInit) continue;
-            thisProp = (methodAndInit) ? (methodAndInit + thisProp) : thisProp;
-            arr.push(thisProp);
-          }
-
-          value = arr.join(', ');
-
-          $element.trigger('productsFilters.afterFilteredOr', value);
-
-          return value;
-        },
-        concatValuesEND = function (obj) {
-          var value = '',
-              prop;
-
-          for (prop in obj) {
-            value += obj[prop];
-          }
-
-          $element.trigger('productsFilters.afterFilteredEnd', value);
-          return value;
-        },
-        toggleFiltersOptions = function () {
-          if ($filtersGroup.find('.' + config.modifiers.isCheckedClass).length && filtersDropShow) {
-            $panelOptions.addClass(config.modifiers.activeClass);
-          } else {
-            $panelOptions.removeClass(config.modifiers.activeClass);
-          }
-        },
-        switchClass = function (remove, add, condition) {
-          // remove - element with remove class
-          // add - element with add class
-          // condition - condition add class
-
-          remove.removeClass(config.modifiers.classShowDrop);
-
-          if (add === undefined) return false;
-          add.toggleClass(config.modifiers.classShowDrop, condition);
-        },
-        toggleFiltersDrop = function (drops, curDrop, condition) {
-          drops = drops || $jsDrop;
-
-          // Закрыть все выпадающие списки фильтров
-          TweenMax.to(drops, animationSpeedTween, {autoAlpha: 0, ease: Power2.easeInOut});
-          filtersDropShow = false;
-
-          // fixedContainerHeight(false);
-          // toggleFiltersOptions();
-
-          // enable page scroll
-          toggleScrollPage('switch-drop');
-
-          if (curDrop === undefined) return false;
-
-          if (condition) {
-            // open current drop
-            TweenMax.to(curDrop, animationSpeedTween, {autoAlpha: 1, ease: Power2.easeInOut});
-            filtersDropShow = true;
-            // fixedContainerHeight();
-
-            // disable page scroll
-            toggleScrollPage('switch-drop', false);
-          }
-        },
-        toggleBtnText = function (btn, cond) {
-          var textShow = 'Show filters',
-              textHide = 'Hide filters';
-
-          if (btn === undefined) return false;
-
-          (cond === false) ? btn.text(textHide) : btn.text(textShow);
-        },
-        clearBtnState = function() {
-          var _cond = $filtersGroup.find('.' + config.modifiers.isCheckedClass).length;
-          $resetFilters.toggleClass('disabled', !_cond).prop('disabled', _cond);
-        },
-        phonesDropHeight = function() {
-          var dropPosTop = $moreFiltersDrop.offset().top - $window.scrollTop();
-          var dropHeight = window.innerHeight - dropPosTop - 10;
-
-          $moreFiltersDrop.css('max-height', dropHeight);
-          // Пересчитать кастомный скролл списка фильтров
-          $moreFiltersDrop.find('.mCustomScrollbar').mCustomScrollbar("update");
-        },
-        clearFilters = function () {
-          $filtersGroup.find('.is-checked').removeClass('is-checked');
-          $grid.isotope({filter: '*'});
-          tags = {};
-
-          switchClass($moreFilters);
-          switchClass($moreFiltersOpen);
-          switchClass($moreFiltersDrop);
-          toggleFiltersDrop($moreFiltersDrop);
-
-          clearBtnState();
-
-          showButtonFind = false;
-        },
-        showFiltersPanel = function (){
-          $filtersOpen.add($panelOptions).add($element).addClass('active');
-          $HTML.addClass('css-scroll-fixed');
-          // Закрыть мобильное меню (если открыто)
-          // todo Вытести из плагина
-          $('.mob-menu-opener-js').switchClass('remove');
-        },
-        hideFiltersPanel = function (){
-          $filtersOpen.add($panelOptions).add($element).removeClass('active');
-          $HTML.addClass('css-scroll-fixed');
-        },
-        fixedContainerHeight = function (fixed) {
-          var productsContainerHeight = $productsContainer.outerHeight();
-
-          if (fixed === false) {
-            $productsContainer.css({
-              'min-height': 0,
-              'max-height': 'none'
-            });
-          } else {
-            $productsContainer.css({
-              'min-height': productsContainerHeight,
-              'max-height': productsContainerHeight
-            });
-          }
-        },
-        common = function () {
-          // Фильтрация продуктов по клику на фильтр
-          $element.on('click', config.filter, function (event) {
-            event.preventDefault();
-
-            var $curBtn = $(this);
-            var $curBtnGroup = $curBtn.closest($filtersGroup);
-
-            var filtersGroupName = $curBtnGroup.attr('data-tags-group'),
-                filterMethod = $curBtnGroup.attr('data-filter-method');
-
-            // var _checkedCurBtn = $curBtn.hasClass(config.modifiers.isCheckedClass);
-            var _checkedCurBtn = $curBtn.prop('checked');
-            var filterTag = $curBtn.attr('data-filter');
-
-            switch (filterMethod) {
-              case 'or':
-                methodOrInit = !_checkedCurBtn;
-                break;
-
-              case 'and':
-                if (_checkedCurBtn) {
-                  methodAndInit = false;
-                } else {
-                  methodAndInit = filterTag;
-                }
-                break;
-
-              default:
-                console.info('%c Warning! Filters method is undefined! Set attribute "data-tags-group" to the filters group element ', 'background: #bd0000; color: white');
-                return;
-            }
-
-            filtersGroupName = (filtersGroupName === undefined) ? filterTag : filtersGroupName;
-
-            if (_checkedCurBtn) {
-              tags [filtersGroupName] = '';
-            } else {
-              tags [filtersGroupName] = filterTag;
-            }
-
-            var filterValue = (filterMethod === 'or' || methodAndInit || _checkedCurBtn) ? concatValuesOR(tags) : concatValuesEND(tags);
-
-            $grid.isotope({filter: filterValue});
-
-            showButtonFind = true;
-
-            // toggle class checked
-            $curBtn.parent().find('.filter-radio.is-checked').not(event.target).removeClass(config.modifiers.isCheckedClass).prop('checked', false);
-
-            // $curBtn.toggleClass(config.modifiers.isCheckedClass);
-
-            if ($curBtn.prop('checked')) {
-              $curBtn.removeClass(config.modifiers.isCheckedClass).prop('checked', false);
-            } else {
-              $curBtn.addClass(config.modifiers.isCheckedClass).prop('checked', true);
-            }
-
-            clearBtnState();
-
-            // toggleFiltersOptions();
-
-            $element.trigger('productsFilters.afterFiltered', {
-              container: $element,
-              filter: $curBtn,
-              filtersGroup: filtersGroupName,
-              filterIsActive: $curBtn.prop('checked'),
-              filterMethod: filterMethod,
-              currentTag: filterTag,
-              tags: filterValue
-            });
-          });
-
-          // Фильтрация продуктов по введенному тексту
-          $search.on('change keyup', function () {
-            var text = $(this).val();
-
-            $grid.isotope({
-              filter: function () {
-                var name = $(this).find('.products__title').text();
-                return name.match(new RegExp('(' + text + ')', 'gi'));
-              }
-            });
-          });
-
-          // Навешивание события клика на кнопку, которая закрывает панель с фильрами и показывает отфильтрованные продукты
-          $body.on('click', config.showResults, function (e) {
-            e.preventDefault();
-
-            $filtersOpen.add($panelOptions).add($element).removeClass(config.modifiers.activeClass);
-            $html.removeClass(CONST_CLASSES.scrollFixedClass);
-
-            $('html, body').stop().animate({scrollTop: 0}, 300);
-          });
-
-          // Открыть выпадающий список фильтров по клику на селектор
-          $moreFilters.on('click', config.moreFiltersOpen, function () {
-            var $curSelector = $(this);
-            var $curJsDropContent = $curSelector.closest($moreFilters),
-                $curDrop = $curJsDropContent.find($moreFiltersDrop),
-                _cond = $curDrop.hasClass(config.modifiers.classShowDrop);
-
-            // Открыть / закрыть выпадающий список фильтров
-            toggleFiltersDrop($moreFiltersDrop, $curDrop, !_cond);
-
-            // Изменить текст селектора
-            toggleBtnText($(this).find('span'), _cond);
-
-            // Добавить / удалить активный класс
-            switchClass($moreFilters, $curJsDropContent, !_cond);
-            switchClass($moreFiltersOpen, $curSelector, !_cond);
-            switchClass($moreFiltersDrop, $curDrop, !_cond);
-
-            // Ограничить высоту выпадающего списка фильтров
-            // phonesDropHeight.call();
-
-            return false;
-          });
-
-          // Пересчет высоты дополнительного списка фильтров
-          // $window.on('resize scroll', function () {
-          //   phonesDropHeight.call();
-          // });
-
-          // Счетчик отфильтрованных товаров
-          $grid.on('arrangeComplete', function (event, filteredItems) {
-            var lengthItems = filteredItems.length,
-                filterCounterContent = 'Items not found';
-
-            // search counter
-            if (lengthItems > 0) {
-              var items = (filteredItems.length > 1) ? 'items' : 'item';
-              filterCounterContent = 'Found <span style="display: inline-block;"><strong>' + lengthItems + '</strong> ' + items + '</span>';
-            }
-
-            $counter
-                .html(filterCounterContent)
-                .closest('.filters-button')
-                .toggleClass('btn-show', showButtonFind);
-
-            // "no product" show / hide
-            if (!lengthItems) {
-              $counter.closest('.filters-button').addClass('no-items');
-              _tplNoProducts.show();
-            } else {
-              $counter.closest('.filters-button').removeClass('no-items');
-              _tplNoProducts.hide();
-            }
-          });
-
-          // Сброс фильтров
-          $resetFilters.on('click', function (e) {
-            e.preventDefault();
-
-            if ($(this).hasClass('disabled')) return;
-
-            clearFilters();
-            methodOrInit = false;
-          });
-
-          // Открыть панель фильтров (на мобиле)
-          $body.on('click', config.filtersOpen, function (event) {
-            var $curBtn = $(this);
-
-            if (!$curBtn.hasClass('active')) {
-              // console.log("Открыть панель фильтров (на мобиле)");
-              showFiltersPanel();
-            } else {
-              // console.log("Закрыть панель фильтров (на мобиле)");
-              hideFiltersPanel();
-            }
-
-            event.preventDefault();
-            // return false;
-          });
-
-          // Открыть панель фильтров на МОБИЛЕ, если в url хэш #filters-open
-          if (document.location.hash === "#filters-open" && window.innerWidth < config.breakpoints) {
-            setTimeout(function () {
-              showFiltersPanel();
-            }, 200);
-          }
-
-          // Открыть панель фильтров на планшете и десктопе в url хэш #filters-open
-          if (document.location.hash === "#filters-open" && window.innerWidth >= config.breakpoints) {
-            setTimeout(function () {
-              // todo Костыль нужно исправить
-              $moreFiltersOpen.trigger('click');
-            }, 200);
-          }
-
-          // Закрыть панель фильтров на мобиле
-          $body.on('click', config.filtersClose, function () {
-            hideFiltersPanel();
-
-            return false;
-          });
-
-          // Закрывать панель фильтров (мобильный вид) при ресайзе
-          // todo Пересмотреть это решение
-          $window.on('resizeByWidth', function () {
-            if ($element.attr('style')) {
-              $element.attr('style', '');
-              // $jsDropOpener.trigger('click');
-              // toggleScrollPage('mobile-filter-panel');
-            }
-
-            if ($filtersOpen.hasClass('active')) {
-              hideFiltersPanel();
-            }
-          });
-        },
-        init = function () {
-          // Включить/отключить кнопку сброса фильтров
-          clearBtnState();
-          // Добавтить сообщение об отсутствии товаров, и скрыть его
-          _tplNoProducts.hide().insertAfter($productsContainer);
-
-          $element.addClass(CONST_CLASSES.initClass);
-          $element.trigger('productsFilters.afterInit');
-        };
-
-    self = {
-      callbacks: callbacks,
-      gridInit: gridInit,
-      clearFilters: clearFilters,
-      common: common,
-      init: init
-    };
-
-    return self;
-  };
-
-  function _run (el) {
-    el.productsFilters.callbacks();
-    // Создание плитки продуктов Isotope
-    el.productsFilters.gridInit();
-    el.productsFilters.clearFilters();
-    el.productsFilters.common();
-    el.productsFilters.init();
-  }
-
-  $.fn.productsFilters = function () {
-    var self = this,
-        opt = arguments[0],
-        args = Array.prototype.slice.call(arguments, 1),
-        l = self.length,
-        i,
-        ret;
-
-    for (i = 0; i < l; i++) {
-      if (typeof opt === 'object' || typeof opt === 'undefined') {
-        if (self[i].productsFilters) {
-          console.info("%c Warning! Plugin already has initialized! ", 'background: #bd0000; color: white');
-          return;
-        }
-
-        self[i].productsFilters = new ProductsFilters(self[i], $.extend(true, {}, $.fn.productsFilters.defaultOptions, opt));
-
-        _run(self[i]);
-      } else {
-        ret = self[i].productsFilters[opt].apply(self[i].productsFilters, args);
-      }
-      if (typeof ret !== 'undefined') {
-        return ret;
-      }
-    }
-    return self;
-  };
-
-  $.fn.productsFilters.defaultOptions = {
-    // Контейнер фильтруемых продуктов
-    productsContainer: '.filters-container-js',
-    // Продукт
-    productElement: '.products__item',
-    // Фильтр
-    filter: '.filters-button-js',
-    // Группа фильтров с одним названием и методом фильтрации
-    filtersGroup: '.filters-tags-js',
-    
-    // Кнопка открытия панели фильтров (мобильный вид)
-    filtersOpen: '.btn-filters-opener-js',
-    // Кнопка закрытия панели фильтров (мобильный вид)
-    filtersClose: '.btn-filters-close-js',
-    
-    // Поле поиска
-    search: $('.filters-search-js input'),
-    
-    // Общий контейнер содержащий кнопку открытия списка фильтров и список дополнительных фильтров
-    moreFilters: '.filters-content-js',
-    // Кнопка открытия списка дополнительных фильтров
-    moreFiltersOpen: '.filter-selector-js',
-    // Список дополнительных фильтров
-    moreFiltersDrop: '.filters-drop-js',
-    // Елемент со счетчиком отфильтрованных товаров
-    counter: '.filters-counter-js',
-
-    // Панель с результатами поиска
-    panelOptions: '.filters-options-js',
-    // Кнопка сброса фильтров
-    resetFilters: '.clear-filters',
-    // Кнопка показа фильтров
-    showResults: '.show-filter-items-js',
-
-    breakpoints: 768,
-    animationSpeed: 200,
-    modifiers: {
-      activeClass: 'active',
-      classShowDrop: 'show-drop',
-      isCheckedClass: 'is-checked'
-    },
-
-    // events
-    afterFiltered: function(event, filters, obj){},
-  };
-
-})(window, document, jQuery);
-
-function filtersEvents() {
-  var $filters = $('.filters-js');
-  if ($filters.length) {
-    $filters.productsFilters({
-      filter: '.filters-tags-js a', // Не jquery-объект, а селектор
-
-      afterFiltered(event, filters, obj) {
-        console.log("obj: ", obj);
-      }
-    });
-  }
+function navDropHeight() {
+  var $navDrop = $('.js-nav-drop');
+  if (!$navDrop.length) return false;
+
+  $WINDOW.on('load resize', function () {
+    $navDrop.css('height', $WINDOW.outerHeight());
+  });
 }
 
+function navDropEvents() {
+  // external js:
+  // 1) TweetMax VERSION: 1.19.0 (widgets.js);
+  // 2) resizeByWidth (in this file);
+  // 3) toggleScrollPage function (in this file);
 
-/**
- * !Share Events
- */
-function shareEvents() {
-  var $btn = $('.open-share-js');
-  $btn.each(function () {
-    var $currentBtn = $(this),
-        $wrapper = $currentBtn.parent(),
-        $itemList = $wrapper.find('.soc-square'),
-        $item = $wrapper.find('.soc-square li');
+  var $navDrop = $('.js-nav-drop');
+  if ($navDrop.length) {
+    var $html = $HTML,
+        $item = $('.nav-list .has-drop'),
+        activeClass = 'show-nav-drop',
+        animateSpeed = 0.2,
+        $sidebarOverlay = $('<div class="overlay">');
 
-    var tw = new TimelineLite({paused: true});
+    $item.each(function () {
+      var $currentItem = $(this),
+          $currentNavDrop = $currentItem.find('.nav-drop');
 
-    tw
-        .set($itemList, {perspective: 500})
-        .set($item, {display: "block"})
-        .staggerFrom($item, 0.2, {autoAlpha: 0, rotationX: -90, transformOrigin: "50% 0"}, 0.1);
+      if (DESKTOP) {
+        $currentItem.on('mouseenter', function () {
 
-    $currentBtn
-        .on('click', function (e) {
-          e.preventDefault();
+          if ($WINDOW.width() >= 980) {
+            openNavDrop();
+          }
+
+        }).on('mouseleave', function () {
+
+          closeNavDrop();
+
         });
 
-    if (DESKTOP) {
-      $wrapper.on('mouseenter', function () {
-        tw.play();
-      }).on('mouseleave', function () {
-        tw.reverse();
-      });
-    } else {
-      $wrapper.on('click', function () {
-        if (tw.progress() !== 0) {
-          tw.reverse();
-
-          return false;
-        }
-        tw.play();
-      });
-    }
-  });
-}
-
-
-/**
- * !Share Fixed
- */
-function shareFixed() {
-  var $fixedBox = $('.soc-js');
-
-  if (!$fixedBox.length) return false;
-
-  var fixedBoxTopPosition = $fixedBox.offset().top,
-      $barrier = $('.full-width-js'),
-      $bottom = $('.footer'),
-      topSpace = 50;
-
-  $WINDOW.on('load scroll resizeByWidth', function () {
-
-    var barrierTopPosition = $barrier.offset().top,
-        barrierHeight = $barrier.outerHeight(),
-        fixedBoxHeight = $fixedBox.outerHeight(),
-        bottomTopPosition = $bottom.offset().top,
-        currentScrollTop = $WINDOW.scrollTop(),
-        intend = $('.header').innerHeight();
-
-    if (currentScrollTop >= (fixedBoxTopPosition - topSpace)) {
-      $fixedBox
-          .addClass('fixed')
-          .css({
-            'position': 'fixed',
-            'top': topSpace + intend
-          });
-    } else {
-      $fixedBox
-          .removeClass('fixed')
-          .css({
-            'position': 'relative',
-            'top': 'auto'
-          });
-    }
-
-    if (currentScrollTop >= barrierTopPosition - fixedBoxHeight - topSpace * 2 && currentScrollTop < barrierTopPosition + barrierHeight || currentScrollTop >= bottomTopPosition - fixedBoxHeight - topSpace * 2) {
-      var tl = TweenMax.to($fixedBox, 0.1, {autoAlpha: 0, ease: Power2.easeInOut});
-    } else {
-      TweenMax.to($fixedBox, 0.1, {autoAlpha: 1, ease: Power2.easeInOut});
-    }
-  });
-}
-
-
-/**
- * !Toggle hover class
- */
-(function ($) {
-  // external js:
-  // 1) device.js 0.2.7 (widgets.js);
-  // 2) debouncedresize (widgets.js);
-
-  var HoverClass = function (settings) {
-    var options = $.extend({
-      container: 'ul',
-      item: 'li',
-      drop: 'ul'
-    }, settings || {});
-
-    var self = this,
-        container = $(options.container);
-
-    self.options = options;
-    self.$container = container;
-    self.$item = $(options.item, container);
-    self.$drop = $(options.drop, container);
-    self.desktop = device.desktop();
-
-    self.modifiers = {
-      hover: 'hover'
-    };
-
-    self.addClassHover();
-
-    if (!self.desktop) {
-      $WINDOW.on('debouncedresize', function () {
-        self.removeClassHover();
-      });
-    }
-  };
-
-  HoverClass.prototype.addClassHover = function () {
-    var self = this,
-        $container = self.$container,
-        item = self.options.item,
-        $item = self.$item,
-        $drop = self.$drop,
-        _hover = this.modifiers.hover;
-
-    $container.on('click', '' + item + '', function (e) {
-
-      if (self.desktop || $WINDOW.width() < 980) return;
-
-      var $currentItem = $(this);
-
-      if (!$currentItem.has($drop).length) {
-        return;
+        $currentItem.on('click', function (e) {
+          e.stopPropagation();
+        });
       }
 
-      if ($currentItem.hasClass(_hover)) {
-        $currentItem
-            .removeClass(_hover)
-            .find('.' + _hover + '')
-            .removeClass(_hover);
+      if (!DESKTOP) {
+        $currentItem.on('click', function () {
+          if ($WINDOW.width() >= 980) {
+            openNavDrop();
 
-        return;
+            equalHeightNavDropGroup();
+            createOverlay();
+          }
+        });
       }
 
-      $item.removeClass(_hover);
-      $currentItem.addClass(_hover);
-
-      return false;
-    });
-
-    $drop.children().not('.close-nav-drop-js').on('click', function (e) {
-      if (self.desktop || $WINDOW.width() < 980) return;
-
-      e.stopPropagation();
-    });
-
-    $DOC.on('click', function () {
-      if (self.desktop || $WINDOW.width() < 980) return;
-
-      $item.removeClass(_hover);
-    });
-
-    if (self.desktop) {
-      $container.on('mouseenter', '' + item + '', function () {
-        var currentItem = $(this);
-
-        if (currentItem.prop('hoverTimeout')) {
-          currentItem.prop('hoverTimeout',
-              clearTimeout(currentItem.prop('hoverTimeout')
-              )
-          );
-        }
-
-        currentItem.prop('hoverIntent', setTimeout(function () {
-          currentItem.addClass(_hover);
-        }, 50));
-
+      $DOC.on('click', function () {
+        closeNavDrop();
       });
-      $container.on('mouseleave', '' + item + '', function () {
-        var currentItem = $(this);
 
-        if (currentItem.prop('hoverIntent')) {
-          currentItem.prop('hoverIntent',
-              clearTimeout(currentItem.prop('hoverIntent')
-              )
-          );
-        }
+      $('.close-nav-drop-js').on('click', function (e) {
+        e.preventDefault();
 
-        currentItem.prop('hoverTimeout', setTimeout(function () {
-          currentItem.removeClass(_hover);
-        }, 100));
+        closeNavDrop();
+
+        return false;
       });
-    }
-  };
 
-  HoverClass.prototype.removeClassHover = function () {
-    var self = this;
-    self.$item.removeClass(self.modifiers.hover);
-  };
+      $WINDOW.on('resizeByWidth', function () {
+        if ($currentNavDrop.is(':visible')) {
+          closeNavDrop();
+        }
+      });
 
-  window.HoverClass = HoverClass;
+      function openNavDrop() {
+        toggleScrollPage('nav-drop-events', false);
 
-}(jQuery));
+        // $html.addClass(activeClass);
+        TweenMax.set($currentNavDrop, {display: 'block'});
+        TweenMax.to($currentNavDrop, animateSpeed, {
+          autoAlpha: 1, onComplete: function () {
+            $('.sidebar__holder').mCustomScrollbar('update');
+          }
+        });
 
-function hoverClassInit() {
-  var $navList = $('.nav-list');
-  if ($navList.length) {
-    new HoverClass({
-      container: $navList,
-      drop: '.js-nav-drop'
+        equalHeightNavDropGroup();
+        createOverlay();
+      }
+
+      function closeNavDrop() {
+        toggleScrollPage('nav-drop-events');
+
+        // $html.removeClass(activeClass);
+        $currentItem.closest('li.hover').removeClass('hover');
+        TweenMax.to($currentNavDrop, animateSpeed, {
+          autoAlpha: 0, onComplete: function () {
+            $currentNavDrop.hide();
+          }
+        });
+        createOverlay('close');
+      }
+
+      function equalHeightNavDropGroup() {
+        var $navDropGroup = $navDrop.find('.nav-drop__group');
+
+        $navDropGroup.equalHeight({
+          resize: true,
+          amount: $navDropGroup.length
+        });
+
+        $navDropGroup.css('min-height', $WINDOW.outerHeight());
+      }
+
+      function createOverlay(close) {
+        if (close == "close") {
+          TweenMax.to($sidebarOverlay, animateSpeed, {autoAlpha: 0, onComplete: completeHandler});
+
+          function completeHandler() {
+            $sidebarOverlay.remove();
+          }
+        } else {
+          $sidebarOverlay.appendTo('body');
+          TweenMax.to($sidebarOverlay, animateSpeed, {autoAlpha: 0.8});
+        }
+      }
     });
   }
 }
@@ -2214,7 +2263,104 @@ function fotoramaInit() {
 
 
 /**
- * !Similar slider
+ * Text slide
+ */
+function textSlide() {
+  // external js:
+  // 1) TweetMax VERSION: 1.19.0 (widgets.js);
+  // 2) device.js 0.2.7 (widgets.js);
+  // 3) resizeByWidth (resize only width);
+
+  var $textSlide = $('.text-slide-js');
+
+  if (!$textSlide.length) return false;
+
+  var $window = $(window),
+      textFull = 'full description',
+      textShort = 'short description',
+      $tplSlideFull = $('<div class="text-full text-full-js"><a href="#" class="text-slide-switcher-js"><span>' + textFull + '</span><i class="depict-arrow-down"></i></a></div>'),
+      $tplTextSlideInner = $('<div class="text-slide-inner-js" />'),
+      $tplShadow = $('<div class="text-slide-shadow-js" >'),
+      textSlideHeight = $textSlide.outerHeight(),
+      isTextFull = false,
+      minHeight = 120;
+
+  $window.on('popupBeforeOpen resize', function () {
+    if (!$textSlide.length) return false;
+
+    if (!$('.text-slide-inner-js').length) {
+      console.log('hide element');
+
+      // hide elements
+      TweenMax.set($tplShadow, {autoAlpha: 0});
+      $tplSlideFull.hide(0);
+
+      // build structure
+      $textSlide
+          .wrapInner($tplTextSlideInner)
+          .after($tplSlideFull)
+          .append($tplShadow);
+    }
+
+    var wrapInnerHeight = $('.text-slide-inner-js').outerHeight();
+
+    $textSlide.css('max-height', 'none');
+
+    if (wrapInnerHeight <= minHeight) {
+      TweenMax.set($textSlide, {height: 'auto'});
+      TweenMax.set($tplShadow, {autoAlpha: 0});
+      $tplSlideFull.hide(0);
+    } else if (!isTextFull) {
+      TweenMax.set($textSlide, {height: minHeight});
+      TweenMax.set($tplShadow, {autoAlpha: 1});
+      $tplSlideFull.show(0);
+
+      textSlideHeight = $textSlide.outerHeight();
+    }
+  });
+
+  $textSlide.parent().on('click', '.text-slide-switcher-js', function (e) {
+    e.preventDefault();
+
+    var wrapInnerHeight = $('.text-slide-inner-js').outerHeight();
+
+    if (wrapInnerHeight <= minHeight) return false;
+
+    var $this = $(this);
+
+    if (isTextFull) {
+      TweenMax.to($textSlide, 0.5, {
+        height: textSlideHeight,
+        ease: Power3.easeInOut,
+        onComplete: function () {
+          $window.trigger('heightMainRecalc');
+        }
+      });
+      TweenMax.to($tplShadow, 0.5, {autoAlpha: 1});
+
+      $this.removeClass('active').children('span').text(textFull);
+
+      isTextFull = false;
+    } else {
+      TweenMax.to($textSlide, 0.5, {
+        height: wrapInnerHeight,
+        ease: Power3.easeInOut,
+        onComplete: function () {
+          TweenMax.set($textSlide, {height: 'auto'});
+          $window.trigger('heightMainRecalc');
+
+          isTextFull = true;
+        }
+      });
+
+      TweenMax.to($tplShadow, 0.5, {autoAlpha: 0});
+      $this.addClass('active').children('span').text(textShort);
+    }
+  });
+}
+
+/**
+ * Similar slider
  */
 function tapeSlider(reload) {
   var $frame = $('.tape-slider__frame');
@@ -2368,9 +2514,7 @@ function popupEvents() {
     e.preventDefault();
 
     // МОЙ КОД
-    if (false) {
-      history.pushState({}, '', '/products/');
-    }
+    history.pushState({}, '', '/products/');
     // МОЙ КОД_КОНЕЦ
 
 
@@ -2546,19 +2690,17 @@ function toggleScrollPage(id) {
 
   var arg = arguments[1];
   if (arg === false) {
-    // if (DESKTOP) {
-    //   $body.mCustomScrollbar('disable');
-    // } else {
-    //   $html.addClass('css-scroll-fixed');
-    // }
-    $html.addClass('css-scroll-fixed');
+    if (DESKTOP) {
+      $body.mCustomScrollbar('disable');
+    } else {
+      $html.addClass('css-scroll-fixed');
+    }
   } else {
-    // if (DESKTOP) {
-    //   $body.mCustomScrollbar('update');
-    // } else {
-    //   $html.removeClass('css-scroll-fixed');
-    // }
-    $html.removeClass('css-scroll-fixed');
+    if (DESKTOP) {
+      $body.mCustomScrollbar('update');
+    } else {
+      $html.removeClass('css-scroll-fixed');
+    }
 
     $html.removeAttr('data-toggle-scroll');
   }
@@ -2614,8 +2756,11 @@ $DOC.ready(function () {
   shareEvents();
   hoverClassInit();
   toggleMenu();
+  // navDropHeight();
+  // navDropEvents();
   mapMainInit();
   contacts();
+  // toggleScrollPage(id); // toggle scroll page
 
   videoSliderInit();
   promoSliderInit();
