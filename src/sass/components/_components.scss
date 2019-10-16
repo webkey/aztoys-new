@@ -3035,7 +3035,8 @@ $swp-space--mob: 9px;
   width: 100%;
   max-width: $layout-page-max-width;
   min-width: $layout-page-min-width;
-  background: #00abc7;
+  //background: #00abc7;
+  background: #343432;
   padding: 0 #{nth($layout-page-space, 2) + $header-btn-height + 20};
   height: $header-height;
   text-align: center;
@@ -3907,7 +3908,7 @@ $swp-space--mob: 9px;
   height: 100vh;
   max-width: $layout-page-max-width;
   width: 100%;
-  padding: #{$header-height} 0 0;
+  //padding: #{$header-height} 0 0;
   z-index: $promo-z;
 
   // Анимация промо-блока для десктопа и ширины больше 992
@@ -6796,7 +6797,7 @@ $swp-space--mob: 9px;
   width: $sidebar-width;
   padding-top: $header-height;
   //background: $base-color;
-  background-color: rgba(#1e1e1c, 0.85);
+  background-color: rgba(#1e1e1c, 0.9);
   z-index: $sidebar-z;
 
   // Анимация промо-блока для десктопа и ширины больше 992
