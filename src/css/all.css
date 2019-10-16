@@ -3396,7 +3396,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   max-width: 2560px;
   min-width: 320px;
   background: #343432;
-  padding: 0 112px;
+  padding: 0 112px 0 30px;
   height: 80px;
   text-align: center;
   z-index: 90;
@@ -3406,7 +3406,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 @media (max-width: 991px) {
   .header {
     height: 60px;
-    padding: 0 91px;
+    padding: 0 91px 0 25px;
   }
 }
 
@@ -3423,16 +3423,45 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   }
 }
 
+.home-page .header {
+  padding-left: 112px;
+}
+
+@media (max-width: 991px) {
+  .home-page .header {
+    padding-left: 91px;
+  }
+}
+
+@media (max-width: 639px) {
+  .home-page .header {
+    padding-left: 72px;
+  }
+}
+
+@media (max-width: 359px) {
+  .home-page .header {
+    padding-left: 57px;
+  }
+}
+
 /* logo */
 .header .logo {
   -ms-flex-negative: 0;
       flex-shrink: 0;
   overflow: hidden;
-  margin-right: 60px;
   border: none;
-  transition-property: transform;
-  transition-duration: 0.3s;
+  will-change: transform;
+  transition: transform 0.5s 0.3s;
   z-index: 5;
+}
+
+@media (min-width: 992px) {
+  .modify .header .logo {
+    -ms-transform: translate(-82px, 0);
+        transform: translate(-82px, 0);
+    transform: translate3d(-82px, 0, 0);
+  }
 }
 
 @media (max-width: 991px) {
@@ -3611,12 +3640,18 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   z-index: 5;
   background-color: #fcd105;
   box-shadow: 0 0 0 #fde46a;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, opacity 0.6s 0.5s;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+.modify .menu-opener {
+  opacity: 0;
+  transition-delay: 0s;
+  pointer-events: none;
 }
 
 @media (max-width: 991px) {
@@ -7753,10 +7788,18 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   z-index: 95;
   transition-property: opacity, visibility, transform;
   transition-duration: 0.3s;
-  opacity: 0;
+}
+
+.menu {
   -ms-transform: translate(-100%, 0);
       transform: translate(-100%, 0);
   transform: translate3d(-100%, 0, 0);
+}
+
+.modify .menu,
+.modify .menu.menu_open {
+  opacity: 0;
+  pointer-events: none;
 }
 
 @media (max-width: 991px) {

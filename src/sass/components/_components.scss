@@ -3037,7 +3037,7 @@ $swp-space--mob: 9px;
   min-width: $layout-page-min-width;
   //background: #00abc7;
   background: #343432;
-  padding: 0 #{nth($layout-page-space, 2) + $header-btn-height + 20};
+  padding: 0 #{nth($layout-page-space, 2) + $header-btn-height + 20} 0 #{nth($layout-page-space, 2)};
   height: $header-height;
   text-align: center;
   z-index: $header-z;
@@ -3046,7 +3046,8 @@ $swp-space--mob: 9px;
   // <992px
   @include media("<tab") {
     height: $header-height--tab;
-    padding: 0 #{nth($layout-page-space--tab, 2) + $header-btn-height--tab + 20};
+    //padding: 0 #{nth($layout-page-space--tab, 2) + $header-btn-height--tab + 20};
+    padding: 0 #{nth($layout-page-space--tab, 2) + $header-btn-height--tab + 20} 0 #{nth($layout-page-space--tab, 2)};
   }
 
   // <640px
@@ -3059,6 +3060,25 @@ $swp-space--mob: 9px;
   @include media("<mob-xxs") {
     padding: 0 #{$header-btn-height--mob + 10 + 5}
   }
+
+  .home-page & {
+    padding-left: nth($layout-page-space, 2) + $header-btn-height + 20;
+
+    // <992px
+    @include media("<tab") {
+      padding-left: nth($layout-page-space--tab, 2) + $header-btn-height--tab + 20;
+    }
+
+    // <640px
+    @include media("<mob") {
+      padding-left: #{nth($layout-page-space--mob, 2) + $header-btn-height--mob + 10};
+    }
+
+    // <360px
+    @include media("<mob-xxs") {
+      padding-left: #{$header-btn-height--mob + 10 + 5};
+    }
+  }
 }
 
 /* logo */
@@ -3066,11 +3086,19 @@ $swp-space--mob: 9px;
   .logo {
     flex-shrink: 0;
     overflow: hidden;
-    margin-right: nth($layout-page-space, 2) * 2;
     border: none;
-    transition-property: transform;
-    transition-duration: $animation-speed;
+    will-change: transform;
+    transition: transform 0.5s 0.3s;
     z-index: 5;
+
+    // >=992px
+    @include media(">=tab") {
+      .modify & {
+        $translate: -#{$header-btn-height + 20}, 0;
+        transform: translate($translate);
+        transform: translate3d($translate, 0);
+      }
+    }
 
     // <992px
     @include media("<tab") {
@@ -3234,9 +3262,15 @@ $swp-space--mob: 9px;
   z-index: 5;
   background-color: $highlight-color;
   box-shadow: 0 0 0 $highlight-color--hover;
-  transition: background-color $animation-speed, box-shadow $animation-speed;
+  transition: background-color $animation-speed, box-shadow $animation-speed, opacity 0.6s 0.5s;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+
+  .modify & {
+    opacity: 0;
+    transition-delay: 0s;
+    pointer-events: none;
+  }
 
   // <992px
   @include media("<tab") {
@@ -7357,11 +7391,17 @@ $swp-space--mob: 9px;
     duration: $animation-speed;
   };
 
-  // hide
-  opacity: 0;
-  $translate: -100%, 0;
-  transform: translate($translate);
-  transform: translate3d($translate, 0);
+  & {
+    $translate: -100%, 0;
+    transform: translate($translate);
+    transform: translate3d($translate, 0);
+  }
+
+  .modify &,
+  .modify &.menu_open {
+    opacity: 0;
+    pointer-events: none;
+  }
 
   // <992px
   @include media("<tab") {
