@@ -3406,7 +3406,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 @media (max-width: 991px) {
   .header {
     height: 60px;
-    padding: 0 91px 0 25px;
+    padding: 0 91px;
   }
 }
 
@@ -8622,7 +8622,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   right: 112px;
   height: 62px;
   margin-top: -31px;
-  padding: 0 20px 0 50px;
+  padding: 0 20px;
   font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
   font-size: 24px;
   line-height: 62px;
@@ -8632,7 +8632,6 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   box-shadow: 0 0 0 #fde46a;
   background-repeat: no-repeat;
   background-position: 15px 50%;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDI5ZGI1IiBkPSJNMTkuNDc5IDJsLTcuNDc5IDEyLjU0M3Y1LjkyNGwtMS0uNnYtNS4zMjRsLTcuNDc5LTEyLjU0M2gxNS45NTh6bTMuNTIxLTJoLTIzbDkgMTUuMDk0djUuOTA2bDUgM3YtOC45MDZsOS0xNS4wOTR6Ii8+PC9zdmc+);
   background-size: 26px;
   transition: background-color 0.3s, box-shadow 0.3s;
   -webkit-user-select: none;
@@ -8650,7 +8649,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
     font-size: 20px;
     line-height: 46px;
     margin-top: -23px;
-    padding: 0 15px 0 35px;
+    padding: 0 15px;
     background-position: 10px 50%;
     background-size: 20px;
   }
@@ -8693,8 +8692,14 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .btn-filters.active {
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMjMuOTU0IDIxLjAzbC05LjE4NC05LjA5NSA5LjA5Mi05LjE3NC0yLjgzMi0yLjgwNy05LjA5IDkuMTc5LTkuMTc2LTkuMDg4LTIuODEgMi44MSA5LjE4NiA5LjEwNS05LjA5NSA5LjE4NCAyLjgxIDIuODEgOS4xMTItOS4xOTIgOS4xOCA5LjF6Ij48L3BhdGg+PC9zdmc+);
-  background-size: 18px;
+  color: white;
+  background-color: #4dc4d8;
+  box-shadow: 0 0 0 #6cd5e6;
+}
+
+.desktop .btn-filters.active:hover {
+  background-color: #6cd5e6;
+  box-shadow: 0 0 20px #6cd5e6;
 }
 
 /* filters opener button end */

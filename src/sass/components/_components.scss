@@ -3046,8 +3046,8 @@ $swp-space--mob: 9px;
   // <992px
   @include media("<tab") {
     height: $header-height--tab;
-    //padding: 0 #{nth($layout-page-space--tab, 2) + $header-btn-height--tab + 20};
-    padding: 0 #{nth($layout-page-space--tab, 2) + $header-btn-height--tab + 20} 0 #{nth($layout-page-space--tab, 2)};
+    padding: 0 #{nth($layout-page-space--tab, 2) + $header-btn-height--tab + 20};
+    //padding: 0 #{nth($layout-page-space--tab, 2) + $header-btn-height--tab + 20} 0 #{nth($layout-page-space--tab, 2)};
   }
 
   // <640px
@@ -8196,7 +8196,8 @@ $swp-space--mob: 9px;
   right: #{nth($layout-page-space, 2) + $header-btn-height + 20};
   height: $header-btn-height;
   margin-top: -#{$header-btn-height / 2};
-  padding: 0 20px 0 50px;
+  //padding: 0 20px 0 50px;
+  padding: 0 20px;
   font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
   font-size: 24px;
   line-height: $header-btn-height;
@@ -8206,7 +8207,7 @@ $swp-space--mob: 9px;
   box-shadow: 0 0 0 $highlight-color--hover;
   background-repeat: no-repeat;
   background-position: 15px 50%;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDI5ZGI1IiBkPSJNMTkuNDc5IDJsLTcuNDc5IDEyLjU0M3Y1LjkyNGwtMS0uNnYtNS4zMjRsLTcuNDc5LTEyLjU0M2gxNS45NTh6bTMuNTIxLTJoLTIzbDkgMTUuMDk0djUuOTA2bDUgM3YtOC45MDZsOS0xNS4wOTR6Ii8+PC9zdmc+);
+  //background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDI5ZGI1IiBkPSJNMTkuNDc5IDJsLTcuNDc5IDEyLjU0M3Y1LjkyNGwtMS0uNnYtNS4zMjRsLTcuNDc5LTEyLjU0M2gxNS45NTh6bTMuNTIxLTJoLTIzbDkgMTUuMDk0djUuOTA2bDUgM3YtOC45MDZsOS0xNS4wOTR6Ii8+PC9zdmc+);
   background-size: 26px;
   transition: background-color $animation-speed, box-shadow $animation-speed;
   user-select: none;
@@ -8220,7 +8221,8 @@ $swp-space--mob: 9px;
     font-size: 20px;
     line-height: $header-btn-height--tab;
     margin-top: -#{$header-btn-height--tab / 2};
-    padding: 0 15px 0 35px;
+    //padding: 0 15px 0 35px;
+    padding: 0 15px ;
     background-position: 10px 50%;
     background-size: 20px;
   }
@@ -8259,9 +8261,19 @@ $swp-space--mob: 9px;
   }
 
   // .active
+  //&.active {
+  //  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMjMuOTU0IDIxLjAzbC05LjE4NC05LjA5NSA5LjA5Mi05LjE3NC0yLjgzMi0yLjgwNy05LjA5IDkuMTc5LTkuMTc2LTkuMDg4LTIuODEgMi44MSA5LjE4NiA5LjEwNS05LjA5NSA5LjE4NCAyLjgxIDIuODEgOS4xMTItOS4xOTIgOS4xOCA5LjF6Ij48L3BhdGg+PC9zdmc+);
+  //  background-size: 18px;
+  //}
+
+  // Active
   &.active {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMjMuOTU0IDIxLjAzbC05LjE4NC05LjA5NSA5LjA5Mi05LjE3NC0yLjgzMi0yLjgwNy05LjA5IDkuMTc5LTkuMTc2LTkuMDg4LTIuODEgMi44MSA5LjE4NiA5LjEwNS05LjA5NSA5LjE4NCAyLjgxIDIuODEgOS4xMTItOS4xOTIgOS4xOCA5LjF6Ij48L3BhdGg+PC9zdmc+);
-    background-size: 18px;
+    @include btn-checked;
+
+    // Active Hover
+    .desktop &:hover {
+      @include btn-checked-hover;
+    }
   }
 }
 
