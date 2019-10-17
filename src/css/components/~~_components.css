@@ -27,11 +27,11 @@ html.css-scroll-fixed:not(.open-only-mob) {
 }
 
 body {
-  font-family: "helvetica-neue-cyr-light", Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 18px;
   line-height: 32px;
   height: 100%;
-  color: #4c4c4c;
+  color: #1e1e1c;
   min-width: 320px;
 }
 
@@ -4546,7 +4546,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  font-family: "helvetica-neue-cyr-light", Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 24px;
 }
@@ -7722,7 +7722,7 @@ a.filters-button.is-checked > span {
 
 .filters-counter {
   display: block;
-  font-family: "helvetica-neue-cyr-light", Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 18px;
   letter-spacing: 0.05em;
@@ -8024,7 +8024,7 @@ a.filters-button.is-checked > span {
   font-weight: normal;
   font-size: 24px;
   line-height: 30px;
-  color: #333;
+  color: #1e1e1c;
 }
 
 @media (max-width: 767px) {
@@ -8044,7 +8044,7 @@ a.filters-button.is-checked > span {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-family: "helvetica-neue-cyr-bold", Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
   font-weight: normal;
   font-size: 15px;
   line-height: 24px;

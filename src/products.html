@@ -46,6 +46,9 @@
   <!--[if lt IE 9]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
+  <div class="page-preloader">
+    <div class="page-preloader__content">Loading...</div>
+  </div>
   <!--HEADER-->
   <header class="header has-filters">
     <!--mobile menu open button-->
@@ -253,15 +256,14 @@
                 <li><a href="contacts.html"><em class="icon-m icon-m-contacts--white"></em><span>Contacts</span></a></li>
               </ul>
             </div>
-            <div id="products" class="swiper-slide">
+            <div id="products" class="swiper-slide current">
               <ul class="category-list" data-swiper-parallax-opacity="0">
                 <li><a href="#all"><span>Products</span></a></li>
                 <li><a href="products.html?filter-preset-cat=music" style="background-color: #eab70c;"><em class="icon-c icon-c-sound--white"></em><span>Sound and Music Toys</span></a></li>
                 <li><a href="products.html?filter-preset-cat=educational" style="background-color: #e09a14;"><em class="icon-c icon-c-tablets--white"></em><span>Education Tablets</span></a></li>
                 <li><a href="products.html?filter-preset-cat=smartphone" style="background-color: #d06517;"><em class="icon-c icon-c-smartphones--white"></em><span>Toy Smartphones</span></a></li>
                 <li><a href="products.html?filter-preset-cat=smart-watch" style="background-color: #c10514;"><em class="icon-c icon-c-watches--white"></em><span>Smart Watches</span></a></li>
-                <li class="current"><span style="background-color: #c5127c;"><em class="icon-c icon-c-microphones--white"></em><span>Musical Microphones</span></span>
-                </li>
+                <li><a href="products.html?filter-preset-cat=smart-watch" style="background-color: #c5127c;"><em class="icon-c icon-c-microphones--white"></em><span>Musical Microphones</span></a></li>
                 <li><a href="products.html?filter-preset-cat=sound-mat" style="background-color: #801c7e;"><em class="icon-c icon-c-playmats--white"></em><span>Sound Playmats</span></a></li>
                 <li><a href="products.html?filter-preset-cat=educational-card" style="background-color: #214f9a;"><em class="icon-c icon-c-cards--white"></em><span>Educational Cards</span></a></li>
                 <li><a href="products.html?filter-preset-cat=puzzle" style="background-color: #0068b1;"><em class="icon-c icon-c-puzzle--white"></em><span>Puzzle Elements</span></a></li>
@@ -271,15 +273,12 @@
               </ul>
             </div>
             <div id="brands" class="swiper-slide">
-              <ul class="category-list" data-swiper-parallax-opacity="0">
+              <ul class="category-list category-list_brands" data-swiper-parallax-opacity="0">
                 <li><a href="#all"><span>Our Brands</span></a></li>
-                <li><a href="products.html" style="background-color: #fff;"><img src="img/brand1.jpg" alt="brand1" /></a></li>
-                <li><a href="products.html" style="background-color: #fff;"><img src="img/brand2.png" alt="brand2" /></a></li>
-                <li class="current"><span style="background-color: #fff;"><img src="img/brand3.png" alt="brand3" /></span></li>
-                <li><a href="products.html" style="background-color: #fff;"><img src="img/brand4.jpg" alt="brand4" /></a></li>
-                <li><a href="products.html" style="background-color: #fff;"><img src="img/brand5.png" alt="brand5" /></a></li>
-                <li><a href="products.html" style="background-color: #fff;"><img src="img/brand6.png" alt="brand6" /></a></li>
-                <li><a href="products.html" style="background-color: #fff;"><img src="img/brand7.png" alt="brand7" /></a></li>
+                <li><a href="products.html" style="background-color: #fff;"><img src="img/brand1.jpg" alt="Kids'Pad" /></a></li>
+                <li><a href="products.html" style="background-color: #fff;"><img src="img/brand2.jpg" alt="Talky blocks" /></a></li>
+                <li><a href="products.html" style="background-color: #fff;"><img src="img/brand3.jpg" alt="Little one" /></a></li>
+                <li><a href="products.html" style="background-color: #fff;"><img src="img/brand4.jpg" alt="Magic Lights" /></a></li>
               </ul>
             </div>
           </div>
@@ -338,7 +337,7 @@
     <div class="main">
       <!--CONTENT-->
       <div class="content user-content layout">
-        <div class="section-title">
+        <div class="section-title" style="display: none;">
           <h1>Products</h1>
         </div>
         <div class="products__list products filters-container-js">
@@ -353,11 +352,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5, 6+</dd><dt>Category:</dt>
-                  <dd>Educational Toys, Sound and Music Toys, Tablets with Touch Screen Pages</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -373,11 +372,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>Baby Player</strong><span>Ladybird</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd><dt>Category:</dt>
-                  <dd>Learn</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -393,11 +392,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5</dd><dt>Category:</dt>
-                  <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -410,11 +409,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>Kids' Pad</strong><span>My First Atlas</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>4-5 years</dd><dt>Category:</dt>
-                  <dd>Learn</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -430,8 +429,8 @@
                 <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd><dt>Category:</dt>
-                  <dd>Active Learning Toys, Educational Tablets, Sound and Music Toys</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -447,11 +446,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>3D Drawing Tablet</strong><span>Let's Learn ABC</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd><dt>Category:</dt>
-                  <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -464,11 +463,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>Kids' Pad</strong><span>Smart Quest</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd><dt>Category:</dt>
-                  <dd>Active Learning Toys, Educational Tablets, Sound and Music Toys</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -484,11 +483,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5, 6+</dd><dt>Category:</dt>
-                  <dd>Educational Toys, Sound and Music Toys, Tablets with Touch Screen Pages</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -501,11 +500,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>Baby Player</strong><span>Ladybird</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd><dt>Category:</dt>
-                  <dd>Learn</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -518,11 +517,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5</dd><dt>Category:</dt>
-                  <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -538,8 +537,8 @@
                 <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd><dt>Category:</dt>
-                  <dd>Active Learning Toys, Educational Tablets, Sound and Music Toys</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -552,11 +551,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>Kids' Pad</strong><span>Smart Quest</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd><dt>Category:</dt>
-                  <dd>Active Learning Toys, Educational Tablets, Sound and Music Toys</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -569,11 +568,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>3D Drawing Tablet</strong><span>Let's Learn ABC</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd><dt>Category:</dt>
-                  <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -589,11 +588,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>Kids' Pad</strong><span>Smart Quest</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd><dt>Category:</dt>
-                  <dd>Active Learning Toys, Educational Tablets, Sound and Music Toys</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -609,11 +608,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>Kids' Pad</strong><span>My First Atlas</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>4-5 years</dd><dt>Category:</dt>
-                  <dd>Learn</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -629,8 +628,8 @@
                 <h3 class="products__title"><strong>3D Drawing Tablet</strong><span>Let's Learn ABC</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd><dt>Category:</dt>
-                  <dd>Microphones, Sound Mats, Sound Construction Models and Sets, Educational Cards, Puzzle Elements, Sticker Elements</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -646,11 +645,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>Baby Player</strong><span>Fire Kids Edition Tablet</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>2-3, 4-5, 6+</dd><dt>Category:</dt>
-                  <dd>Educational Toys, Sound and Music Toys, Tablets with Touch Screen Pages</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>
@@ -666,11 +665,11 @@
                 </div>
               </div>
               <div class="products__content">
-                <h3 class="products__title"><strong>Kids' Pad</strong><span>Smart Quest</span></h3>
+                <h3 class="products__title"><strong>Kids’ Pad</strong><span>Little Expert</span></h3>
                 <dl class="products__param">
                   <dt>Age:</dt>
-                  <dd>5-7 years</dd><dt>Category:</dt>
-                  <dd>Active Learning Toys, Educational Tablets, Sound and Music Toys</dd>
+                  <dd>4-5 years, 6+ years</dd><dt>Category:</dt>
+                  <dd>Educational Tablets, Sound and Music Toys</dd>
                 </dl>
               </div>
             </a>

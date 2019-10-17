@@ -1,47 +1,28 @@
 /* fonts */
 /* helveticaneuecyr bold */
-@font-face {
-  font-family: 'helvetica-neue-cyr-bold';
-  src: url("../fonts/helvetica-neue-cyr/bold/helveticaneuecyr-bold.eot");
-  src: url("../fonts/helvetica-neue-cyr/bold/helveticaneuecyr-bold.eot?#iefix") format("embedded-opentype"), url("../fonts/helvetica-neue-cyr/bold/helveticaneuecyr-bold.woff") format("woff"), url("../fonts/helvetica-neue-cyr/bold/helveticaneuecyr-bold.ttf") format("truetype"), url("../fonts/helvetica-neue-cyr/bold/helveticaneuecyr-bold.svg#helveticaneuecyr-bold") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* helveticaneuecyr bold italic */
-@font-face {
-  font-family: 'helvetica-neue-cyr-bold-italic';
-  src: url("../fonts/helvetica-neue-cyr/bold-italic/helveticaneuecyr-bolditalic.eot");
-  src: url("../fonts/helvetica-neue-cyr/bold-italic/helveticaneuecyr-bolditalic.eot?#iefix") format("embedded-opentype"), url("../fonts/helvetica-neue-cyr/bold-italic/helveticaneuecyr-bolditalic.woff") format("woff"), url("../fonts/helvetica-neue-cyr/bold-italic/helveticaneuecyr-bolditalic.ttf") format("truetype"), url("../fonts/helvetica-neue-cyr/bold-italic/helveticaneuecyr-bolditalic.svg#helveticaneuecyr-bolditalic") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* helveticaneuecyr light */
-@font-face {
-  font-family: 'helvetica-neue-cyr-light';
-  src: url("../fonts/helvetica-neue-cyr/light/helveticaneuecyr-light.eot");
-  src: url("../fonts/helvetica-neue-cyr/light/helveticaneuecyr-light.eot?#iefix") format("embedded-opentype"), url("../fonts/helvetica-neue-cyr/light/helveticaneuecyr-light.woff") format("woff"), url("../fonts/helvetica-neue-cyr/light/helveticaneuecyr-light.ttf") format("truetype"), url("../fonts/helvetica-neue-cyr/light/helveticaneuecyr-light.svg#helveticaneuecyr-light") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* helveticaneuecyr light italic*/
-@font-face {
-  font-family: 'helvetica-neue-cyr-light-italic';
-  src: url("../fonts/helvetica-neue-cyr/light-italic/helveticaneuecyr-lightitalic.eot");
-  src: url("../fonts/helvetica-neue-cyr/light-italic/helveticaneuecyr-lightitalic.eot?#iefix") format("embedded-opentype"), url("../fonts/helvetica-neue-cyr/light-italic/helveticaneuecyr-lightitalic.woff") format("woff"), url("../fonts/helvetica-neue-cyr/light-italic/helveticaneuecyr-lightitalic.ttf") format("truetype"), url("../fonts/helvetica-neue-cyr/light-italic/helveticaneuecyr-lightitalic.svg#helveticaneuecyr-lightitalic") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* helveticaneuecyr thinitalic */
 @font-face {
-  font-family: 'helvetica-neue-cyr-thin-italic';
-  src: url("../fonts/helvetica-neue-cyr/thin-italic/helveticaneuecyr-thinitalic.eot");
-  src: url("../fonts/helvetica-neue-cyr/thin-italic/helveticaneuecyr-thinitalic.eot?#iefix") format("embedded-opentype"), url("../fonts/helvetica-neue-cyr/thin-italic/helveticaneuecyr-thinitalic.woff") format("woff"), url("../fonts/helvetica-neue-cyr/thin-italic/helveticaneuecyr-thinitalic.ttf") format("truetype"), url("../fonts/helvetica-neue-cyr/thin-italic/helveticaneuecyr-thinitalic.svg#helveticaneuecyr-thinitalic") format("svg");
-  font-weight: normal;
+  font-family: "museo-sans-rounded-500";
   font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/museo-sans-rounded/MuseoSansRounded-500.eot?") format("eot"), url("../fonts/museo-sans-rounded/MuseoSansRounded-500.woff") format("woff"), url("../fonts/museo-sans-rounded/MuseoSansRounded-500.woff2") format("woff2"), url("../fonts/museo-sans-rounded/MuseoSansRounded-500.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "museo-sans-rounded-700";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/museo-sans-rounded/MuseoSansRounded-700.eot?") format("eot"), url("../fonts/museo-sans-rounded/MuseoSansRounded-700.woff") format("woff"), url("../fonts/museo-sans-rounded/MuseoSansRounded-700.woff2") format("woff2"), url("../fonts/museo-sans-rounded/MuseoSansRounded-700.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "museo-sans-rounded-900";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/museo-sans-rounded/MuseoSansRounded-900.eot?") format("eot"), url("../fonts/museo-sans-rounded/MuseoSansRounded-900.woff") format("woff"), url("../fonts/museo-sans-rounded/MuseoSansRounded-900.woff2") format("woff2"), url("../fonts/museo-sans-rounded/MuseoSansRounded-900.ttf") format("truetype");
 }
 
 /* rotondac regular */
@@ -394,11 +375,11 @@ html.css-scroll-fixed:not(.open-only-mob) {
 }
 
 body {
-  font-family: "helvetica-neue-cyr-light", Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 18px;
   line-height: 32px;
   height: 100%;
-  color: #4c4c4c;
+  color: #1e1e1c;
   min-width: 320px;
 }
 
@@ -441,7 +422,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-900", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 40px;
   line-height: 50px;
   color: #00abc7;
@@ -461,14 +443,16 @@ h1 {
 }
 
 h2 {
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-900", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 24px;
   line-height: 36px;
   padding: 0 0 30px;
 }
 
 h3 {
-  font-family: 'helvetica-neue-cyr-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-900", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 14px;
   line-height: 30px;
   text-transform: uppercase;
@@ -477,7 +461,8 @@ h3 {
 }
 
 h4 {
-  font-family: 'helvetica-neue-cyr-light-italic', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 16px;
   line-height: 30px;
   color: #808080;
@@ -549,13 +534,13 @@ img {
 }
 
 b, strong, th {
-  font-family: 'helvetica-neue-cyr-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
   font-weight: normal;
 }
 
 i, em {
-  font-family: 'helvetica-neue-cyr-light-italic', Arial, Helvetica, sans-serif;
-  font-style: normal;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
+  font-style: italic;
 }
 
 i b,
@@ -566,9 +551,9 @@ b i,
 b em,
 strong i,
 strong em {
-  font-family: 'helvetica-neue-cyr-bold-italic', Arial, Helvetica, sans-serif;
-  font-weight: normal;
-  font-style: normal;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .nobr {
@@ -1177,13 +1162,13 @@ input[type="submit"],
 input[type="button"],
 input[type="reset"],
 button {
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 30px;
   color: #00abc7;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.01em;
   padding: 10px 34px;
   border: 1px solid transparent;
   background: #fcd105;
@@ -1481,7 +1466,8 @@ table th {
   display: block;
   margin: 0;
   padding: 0;
-  font-family: 'helvetica-neue-cyr-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 14px;
   line-height: 30px;
   text-transform: uppercase;
@@ -1508,7 +1494,7 @@ table th {
   padding: 15px 0 0;
   margin-left: auto;
   margin-bottom: -45px;
-  font-family: 'helvetica-neue-cyr-light-italic', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 30px;
   color: #b2b2b2;
@@ -1563,7 +1549,7 @@ table th {
 /*aligned content end*/
 /*note*/
 .note {
-  font-family: 'helvetica-neue-cyr-light-italic', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   border: solid #55c7da;
   border-width: 2px 0 0;
   padding: 30px 0 0;
@@ -1603,7 +1589,8 @@ table th {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-family: 'helvetica-neue-cyr-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 14px;
   line-height: 30px;
   text-transform: uppercase;
@@ -1684,7 +1671,9 @@ input[type="search"],
 textarea {
   display: block;
   color: #808080;
-  font: 16px/30px 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 30px;
   letter-spacing: normal;
   height: 60px;
   width: 100%;
@@ -2258,7 +2247,7 @@ label {
 .select select,
 .select button.cselect,
 .select button.cselect .select-inner {
-  font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 20px;
   text-transform: none;
@@ -2409,7 +2398,7 @@ div.cselect .ui-multiselect-checkboxes label input {
 div.cselect .ui-multiselect-checkboxes label {
   display: block;
   cursor: pointer;
-  font: 16px/20px 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   text-transform: none;
   color: #333;
   font-weight: normal;
@@ -2931,7 +2920,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .soc-list .soc-count {
   display: inline-block;
   vertical-align: middle;
-  font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 16px;
   letter-spacing: normal;
 }
@@ -3042,7 +3031,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   position: absolute;
   left: 0;
   top: 0;
-  font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 30px;
   letter-spacing: normal;
@@ -3395,7 +3384,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   width: 100%;
   max-width: 2560px;
   min-width: 320px;
-  background: #343432;
+  background: #00abc7;
   padding: 0 112px 0 30px;
   height: 80px;
   text-align: center;
@@ -3614,7 +3603,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .header .slogan {
   overflow: hidden;
   text-align: center;
-  font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 18px;
   line-height: 24px;
   color: #fff;
@@ -3744,7 +3733,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .menu-opener > span {
   display: block;
   text-align: center;
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   letter-spacing: 0.1em;
@@ -3911,7 +3901,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .search-form input[type="text"] {
   box-sizing: border-box;
   margin: 0;
-  font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 18px;
   line-height: 24px;
   height: 62px;
@@ -4196,7 +4186,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: inherit;
   line-height: inherit;
   color: #ccc;
@@ -4262,7 +4252,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 /*datetime*/
 .datetime {
   display: block;
-  font-family: "rotondac-bold", Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
   font-weight: normal;
   font-style: normal;
   font-size: 0.85em;
@@ -4541,7 +4531,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   display: inline-block;
   vertical-align: top;
   padding: 0 6px;
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 40px;
   line-height: 50px;
   letter-spacing: normal;
@@ -4638,7 +4629,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   display: inline-block;
   vertical-align: top;
   padding: 0 0 30px;
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 40px;
   line-height: 50px;
   text-align: center;
@@ -4693,7 +4685,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
       align-items: center;
   -ms-flex-pack: center;
       justify-content: center;
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.1em;
@@ -4836,16 +4829,22 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .products__content {
-  max-width: 220px;
+  max-width: 170px;
   box-sizing: border-box;
   margin: 0 auto;
 }
 
 .products__img {
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 54px;
   background: #fff;
   position: relative;
+}
+
+@media (max-width: 991px) {
+  .products__img {
+    margin-bottom: 20px;
+  }
 }
 
 .products__img::before {
@@ -4885,91 +4884,67 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .products__title {
-  font-family: "rotondac-bold", Arial, Helvetica, sans-serif;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 32px;
-  color: #333;
-  padding: 0 0 20px;
+  font-size: 20px;
+  line-height: 1.2;
   text-transform: none;
+  margin: 0;
+  padding: 0;
 }
 
-@media (max-width: 639px) {
-  .products__title {
-    font-size: 22px;
-    line-height: 30px;
-    padding-bottom: 15px;
-  }
+.products__title > strong {
+  display: block;
+  font-family: "museo-sans-rounded-900", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #1e1e1c;
 }
 
 @media (max-width: 359px) {
-  .products__title {
+  .products__title > strong {
     font-size: 18px;
-    line-height: 24px;
   }
 }
 
-.products__title > strong,
 .products__title > span {
   display: block;
-  font-family: inherit;
-}
-
-.products__title > span {
-  font-family: "rotondac-regular", Arial, Helvetica, sans-serif;
-  font-size: 18px;
-  line-height: 28px;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
   text-transform: none;
-}
-
-@media (max-width: 639px) {
-  .products__title > span {
-    font-size: 16px;
-    line-height: 26px;
-  }
+  color: #1e1e1c;
 }
 
 .products__subtitle {
-  font-family: "rotondac-regular", Arial, Helvetica, sans-serif;
-  font-size: 18px;
-  line-height: 28px;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.43;
   text-transform: none;
-}
-
-@media (max-width: 639px) {
-  .products__subtitle {
-    font-size: 16px;
-    line-height: 26px;
-    padding-bottom: 20px;
-  }
+  padding: 0;
+  margin: 0;
 }
 
 .products__param {
-  margin: 0;
+  margin: 20px 0 0;
   padding: 0;
   overflow: hidden;
-  font-family: "helvetica-neue-cyr-light", Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-@media (max-width: 639px) {
-  .products__param {
-    font-size: 15px;
-    line-height: 21px;
-  }
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1.67;
 }
 
 .products__param dt {
   margin: 0;
-  padding: 0 5px 0 0;
+  padding: 0 4px 0 0;
   float: left;
   color: #00abc7;
 }
 
 .products__param dd {
   margin: 0;
-  padding: 0 0 5px;
+  padding: 0;
   color: #6c757d;
 }
 
@@ -4997,7 +4972,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .section-title > div,
 .section-title > strong {
   display: block;
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 40px;
   line-height: 50px;
   color: #00abc7;
@@ -5039,7 +5015,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 @media (max-width: 479px) {
   .previews {
-    max-width: 280px;
+    max-width: none;
+    border-bottom: 1px solid #d8d8d8;
   }
 }
 
@@ -5058,13 +5035,32 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   }
 }
 
-.previews__list:before,
-.previews__list:after {
+@media (max-width: 479px) {
+  .previews__list {
+    max-width: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+        align-items: flex-start;
+    background-color: #fff;
+  }
+}
+
+.previews__list::before, .previews__list::after {
   content: "";
   display: table;
 }
 
-.previews__list:after {
+@media (max-width: 479px) {
+  .previews__list::before, .previews__list::after {
+    content: none;
+  }
+}
+
+.previews__list::after {
   clear: both;
 }
 
@@ -5111,7 +5107,10 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 @media (max-width: 479px) {
   .previews__item {
     display: block;
-    max-width: none;
+    -ms-flex: 1 0 280px;
+        flex: 1 0 280px;
+    max-width: 280px;
+    width: 280px;
   }
 }
 
@@ -5130,6 +5129,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   bottom: 0;
   border: 1px solid #d8d8d8;
   box-sizing: border-box;
+  pointer-events: none;
 }
 
 @media (max-width: 1279px) {
@@ -5142,6 +5142,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 @media (max-width: 479px) {
   .previews__item:before {
     border-left-color: #d8d8d8;
+    bottom: auto;
+    height: 9999px;
   }
 }
 
@@ -5154,6 +5156,12 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .previews__item:hover {
   box-shadow: 0 10px 27px rgba(0, 44, 51, 0.25);
   z-index: 1;
+}
+
+@media (max-width: 479px) {
+  .previews__item:hover {
+    box-shadow: none;
+  }
 }
 
 .desktop .previews__item:hover:before {
@@ -5189,14 +5197,16 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .previews__img,
 .previews__content {
   font-size: 16px;
+  line-height: 1.43;
   letter-spacing: normal;
 }
 
 .previews__title {
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
-  font-size: 24px;
-  line-height: 30px;
-  color: #333;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #1e1e1c;
   text-transform: none;
   padding: 0 0 20px;
 }
@@ -5224,6 +5234,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 @media (max-width: 479px) {
   .previews__item_lg {
     max-width: none;
+    display: none;
   }
 }
 
@@ -5483,7 +5494,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   left: 50px;
   bottom: 0;
   padding-bottom: 20px;
-  font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 24px;
   line-height: 36px;
   max-height: 72px;
@@ -5698,12 +5709,13 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .news__title {
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 24px;
   line-height: 36px;
   padding: 0;
   margin: 0 0 16px;
-  color: #333;
+  color: #1e1e1c;
   overflow: hidden;
   text-transform: none;
   transition-property: color;
@@ -5850,7 +5862,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .load-more strong {
   display: block;
-  font-family: 'rotondac-regular', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 24px;
   line-height: 30px;
   color: #00abc7;
@@ -5977,7 +5990,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   left: 0;
   top: 0;
   overflow: hidden;
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 24px;
   line-height: 30px;
   -ms-transform: translate(120px, 100px);
@@ -6207,7 +6221,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .locate-cont__item dd {
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   padding: 0;
   margin: 0;
   overflow: hidden;
@@ -6303,7 +6318,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .map-popup h4,
 .map-popup h3 {
-  font-family: "rotondac-bold", Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
   font-weight: normal;
   color: #fcd105;
   padding: 0 0 7px;
@@ -6332,7 +6347,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .contacts-form h3 {
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 40px;
   line-height: 50px;
   color: #00abc7;
@@ -6557,7 +6573,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .product-card__title {
   display: block;
   padding: 0 20px 35px 0;
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   color: #00abc7;
   font-size: 30px;
   line-height: 36px;
@@ -6575,7 +6592,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .product-card__title > strong {
   display: block;
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 30px;
   color: #00abc7;
   text-transform: uppercase;
@@ -6583,7 +6601,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .product-card__title > span {
   display: block;
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 20px;
   color: #00abc7;
 }
@@ -6816,7 +6835,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .product-card__subtitle {
   display: block;
-  font-family: 'rotondac-regular', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 24px;
   line-height: 28px;
   color: #00abc7;
@@ -6879,7 +6899,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 /*popup footer*/
 .popup-subtitle,
 .popup-subtitle h2 {
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 30px;
   line-height: 36px;
   color: #00abc7;
@@ -7198,7 +7219,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .about__title {
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 30px;
   line-height: 36px;
   text-transform: none;
@@ -7451,7 +7473,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   position: relative;
   text-align: left;
   padding: 10px 25px;
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 22px;
   line-height: 26px;
   letter-spacing: 0.05em;
@@ -7522,7 +7545,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .category-list {
   list-style: none;
   margin: 0;
-  padding: 20px 0;
+  padding: 15px 0;
 }
 
 .category-list li {
@@ -7536,19 +7559,35 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   -ms-flex-align: start;
       align-items: flex-start;
   position: relative;
-  font-family: "rotondac-bold", Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
   font-weight: normal;
   font-size: 15px;
   line-height: 24px;
   letter-spacing: 0.03em;
   color: white;
-  padding: 12px 8px 12px 15px;
+  padding: 12px 5px 12px 10px;
   border-radius: 12px;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 639px) {
+  .category-list a,
+  .category-list li > span {
+    font-size: 22px;
+    line-height: 30px;
+  }
+}
+
+@media (max-width: 359px) {
+  .category-list a,
+  .category-list li > span {
+    font-size: 20px;
+    line-height: 28px;
+  }
 }
 
 .category-list a::before,
@@ -7585,6 +7624,26 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   max-width: 20px;
   height: 20px;
   margin: 2px 10px -2px 0;
+}
+
+@media (max-width: 639px) {
+  .category-list a [class*="icon"],
+  .category-list li > span [class*="icon"] {
+    -ms-flex-preferred-size: 26px;
+        flex-basis: 26px;
+    max-width: 26px;
+    height: 26px;
+  }
+}
+
+@media (max-width: 359px) {
+  .category-list a [class*="icon"],
+  .category-list li > span [class*="icon"] {
+    -ms-flex-preferred-size: 24px;
+        flex-basis: 24px;
+    max-width: 24px;
+    height: 24px;
+  }
 }
 
 .category-list a span,
@@ -7647,9 +7706,9 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .category-list li:first-child a, .category-list li:first-child > span {
-  font-size: 22px;
-  line-height: 26px;
-  letter-spacing: 0.08em;
+  font-size: 21px;
+  line-height: 24px;
+  letter-spacing: 0.05em;
   color: white;
 }
 
@@ -7670,6 +7729,15 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   text-decoration: none;
   transition-duration: 0.1s;
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.category-list_brands li {
+  padding: 2px 15px;
+}
+
+.category-list_brands li a,
+.category-list_brands li li > span {
+  padding: 15px;
 }
 
 /* category list end */
@@ -7738,18 +7806,19 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .slogan__text span {
-  font-family: 'helvetica-neue-cyr-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
 }
 
 .slogan__text em {
   display: block;
-  font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
 }
 
 /* slogan end */
 /* phone */
 .phone {
-  font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 24px;
   text-align: center;
@@ -8074,7 +8143,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .filters-counter {
   display: block;
-  font-family: "helvetica-neue-cyr-light", Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 18px;
   letter-spacing: 0.05em;
@@ -8091,7 +8160,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .filters-counter strong {
-  font-family: "rotondac-bold", Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
   font-weight: normal;
   font-size: 16px;
 }
@@ -8100,7 +8169,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   position: relative;
   display: inline-block;
   vertical-align: top;
-  font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 18px;
   letter-spacing: 0.05em;
@@ -8372,16 +8441,16 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 .filters-drop__title {
   display: block;
   padding: 0 0 10px 30px;
-  font-family: "rotondac-regular", Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-weight: normal;
   font-size: 24px;
   line-height: 30px;
-  color: #333;
+  color: #1e1e1c;
 }
 
 @media (max-width: 767px) {
   .filters-drop__title {
-    font-family: "rotondac-bold", Arial, Helvetica, sans-serif;
+    font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
     font-weight: normal;
     font-size: 18px;
     line-height: 24px;
@@ -8396,8 +8465,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-family: "helvetica-neue-cyr-bold", Arial, Helvetica, sans-serif;
-  font-weight: normal;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 15px;
   line-height: 24px;
   letter-spacing: 0.05em;
@@ -8418,7 +8486,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
       align-items: flex-start;
   padding: 0 0 0 38px;
   position: relative;
-  color: #1a1a1a;
+  color: #1e1e1c;
   text-decoration: none;
   transition-property: color;
   transition-duration: 0.3s;
@@ -8623,10 +8691,11 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   height: 62px;
   margin-top: -31px;
   padding: 0 20px;
-  font-family: 'rotondac-bold', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 24px;
   line-height: 62px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
   border-radius: 10px;
   background-color: #fcd105;
   box-shadow: 0 0 0 #fde46a;
@@ -8840,7 +8909,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .footer-nav__list,
 .user-content .footer-nav__list {
-  font-family: 'rotondac-regular', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 24px;
   line-height: 30px;
   color: #00abc7;
@@ -8897,7 +8967,8 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .footer-nav__title {
   display: block;
-  font-family: 'rotondac-regular', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
+  font-weight: normal;
   font-size: 24px;
   line-height: 30px;
   color: #00abc7;
@@ -8984,7 +9055,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 }
 
 .search-from-alt__note {
-  font-family: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif;
+  font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
   font-size: 10px;
   line-height: 14px;
   text-transform: uppercase;
@@ -9223,6 +9294,60 @@ body.mCS_no_scrollbar > .mCustomScrollBox > .mCSB_container.mCS_no_scrollbar_y.m
 }
 
 /*custom page scroll end*/
+/* preloader */
+html {
+  overflow: hidden;
+}
+
+html.no-js, html.overflow-visible {
+  overflow: visible;
+}
+
+.page-preloader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 2147483647 !important;
+  background: #00d1f2;
+  text-align: center;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  padding: 20px;
+  color: #fff;
+  transition: 0.6s;
+  box-sizing: border-box;
+}
+
+.no-js .page-preloader {
+  display: none;
+}
+
+.page-preloader.hide {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.page-preloader__content {
+  padding: 100px;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-image: url(../img/logo.svg);
+  background-size: 200px;
+}
+
+@media (max-width: 991px) {
+  .page-preloader__content {
+    padding: 70px;
+    background-size: 120px;
+  }
+}
+
+/* preloader end */
 @media print {
   *,
   *:before,

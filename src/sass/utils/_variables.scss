@@ -22,11 +22,16 @@ $breakpoints: (
 
 // Fonts style
 // ====================================================
-$font-norm: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif !default;
-$font-bold: 'helvetica-neue-cyr-bold', Arial, Helvetica, sans-serif !default;
-$font-italic: 'helvetica-neue-cyr-light-italic', Arial, Helvetica, sans-serif !default;
-$font-bold-italic: 'helvetica-neue-cyr-bold-italic', Arial, Helvetica, sans-serif !default;
-$font-thin: 'helvetica-neue-cyr-thin-italic', Arial, Helvetica, sans-serif !default;
+//$font-norm: 'helvetica-neue-cyr-light', Arial, Helvetica, sans-serif !default;
+//$font-bold: 'helvetica-neue-cyr-bold', Arial, Helvetica, sans-serif !default;
+//$font-italic: 'helvetica-neue-cyr-light-italic', Arial, Helvetica, sans-serif !default;
+//$font-bold-italic: 'helvetica-neue-cyr-bold-italic', Arial, Helvetica, sans-serif !default;
+//$font-thin: 'helvetica-neue-cyr-thin-italic', Arial, Helvetica, sans-serif !default;
+
+$font-norm: 'museo-sans-rounded-500', Arial, Helvetica, sans-serif !default;
+$font-bold: 'museo-sans-rounded-700', Arial, Helvetica, sans-serif !default;
+$font-extra-bold: 'museo-sans-rounded-900', Arial, Helvetica, sans-serif !default;
+
 $font-alt: 'rotondac-regular', Arial, Helvetica, sans-serif !default;
 $font-alt-bold: 'rotondac-bold', Arial, Helvetica, sans-serif !default;
 
@@ -41,20 +46,20 @@ $font-alt-bold: 'rotondac-bold', Arial, Helvetica, sans-serif !default;
   font-weight: normal;
 }
 
+@mixin font-extra-bold {
+  font-family: $font-extra-bold;
+  font-weight: normal;
+}
+
 @mixin font-italic {
-  font-family: $font-italic;
-  font-style: normal;
+  font-family: $font-norm;
+  font-style: italic;
 }
 
 @mixin font-bold-italic {
-  font-family: $font-bold-italic;
-  font-weight: normal;
-  font-style: normal;
-}
-
-@mixin font-thin {
-  font-family: $font-thin;
-  font-weight: normal;
+  font-family: $font-bold;
+  font-weight: bold;
+  font-style: italic;
 }
 
 // Alternative font
@@ -246,11 +251,11 @@ $highlight-color-alt--hover: lighten($highlight-color-alt, 20%) !default
 $bg-color: #fff !default;
 $bg-color-alt: #f3f3f3 !default;
 // ----------------------------------------------------
-$text-color: #4c4c4c !default;
+$text-color: #1e1e1c !default;
 $text-color-muted: #6c757d !default;
 $text-color-light: #ccc !default;
 // ----------------------------------------------------
-$title-color: #333 !default;
+$title-color: #1e1e1c !default;
 $title-color-alt: $base-color !default;
 // ----------------------------------------------------
 $border-color: #ccc !default;

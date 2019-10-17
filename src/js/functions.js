@@ -2589,7 +2589,9 @@ function imgLazyLoad() {
 }
 
 /** ready/load/resize document **/
-$WINDOW.load(function () {
+$WINDOW.on('load', function () {
+  $('.page-preloader').addClass('hide');
+  $HTML.addClass('overflow-visible');
   popupEvents();
 });
 
