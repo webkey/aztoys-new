@@ -3,35 +3,61 @@
   <div class="menu__holder">
     <div class="menu__frame">
       <!-- main navigation -->
-      <nav class="nav">
-        <ul class="nav-list">
-          @@if(context.currentItem != "Home"){<li><a href="index.html"><em class="icon-m icon-m-home--white"></em></em><span>Home</span></a></li>}
+      <div class="swiper-container nav-slider nav-slider-js">
+        <div class="swiper-wrapper">
+          <div id="all" class="swiper-slide">
+            <ul class="nav-list" data-swiper-parallax-opacity="0">
+              @@if(context.currentItem != "Home"){<li><a href="index.html"><em class="icon-m icon-m-home--white"></em><span>Home</span></a></li>}
 
-          @@if(context.currentItem == "Products"){<li class="active"><span><em class="icon-m icon-m-products--white"></em><span>Products</span></span></li>}
-          @@if(context.currentItem != "Products"){<li><a href="products.html"><em class="icon-m icon-m-products--white"></em><span>Products</span></a></li>}
+              <li><a href="#products"><em class="icon-m icon-m-products--white"></em><span>Products</span></a></li>
 
-          @@if(context.currentItem == "Our Brands"){<li class="active"><span><em class="icon-m icon-m-brands--white"></em><span>Our Brands</span></span></li>}
-          @@if(context.currentItem != "Our Brands"){<li><a href="products.html"><em class="icon-m icon-m-brands--white"></em><span>Our Brands</span></a></li>}
+              <li><a href="#brands"><em class="icon-m icon-m-brands--white"></em><span>Our Brands</span></a></li>
 
+              @@if(context.currentItem == "Apps"){<li class="active"><span><em class="icon-m icon-m-apps--white"></em><span>Apps</span></span></li>}
+              @@if(context.currentItem != "Apps"){<li><a href="news.html"><em class="icon-m icon-m-apps--white"></em><span>Apps</span></a></li>}
 
-          @@if(context.currentItem == "Apps"){<li class="active"><span><em class="icon-m icon-m-apps--white"></em><span>Apps</span></span></li>}
-          @@if(context.currentItem != "Apps"){<li><a href="news.html"><em class="icon-m icon-m-apps--white"></em><span>Apps</span></a></li>}
-
-          @@if(context.currentItem == "Video"){<li class="active"><span><em class="icon-m icon-m-videos--white"></em><span>Videos</span></span></li>}
-          @@if(context.currentItem != "Video"){<li><a href="news.html"><em class="icon-m icon-m-videos--white"></em><span>Videos</span></a></li>}
-
-
-          @@if(context.currentItem == "About Us"){<li class="active"><span><em class="icon-m icon-m-about--white"></em><span>About Us</span></span></li>}
-          @@if(context.currentItem != "About Us"){<li><a href="about.html"><em class="icon-m icon-m-about--white"></em><span>About Us</span></a></li>}
-
-          @@if(context.currentItem == "News"){<li class="active"><span><em class="icon-m icon-m-news--white"></em><span>News</span></span></li>}
-          @@if(context.currentItem != "News"){<li><a href="news.html"><em class="icon-m icon-m-news--white"></em><span>News</span></a></li>}
+              @@if(context.currentItem == "Video"){<li class="active"><span><em class="icon-m icon-m-videos--white"></em><span>Videos</span></span></li>}
+              @@if(context.currentItem != "Video"){<li><a href="news.html"><em class="icon-m icon-m-videos--white"></em><span>Videos</span></a></li>}
 
 
-          @@if(context.currentItem == "Contacts"){<li class="active"><span><em class="icon-m icon-m-contacts--white"></em><span>Contacts</span></span></li>}
-          @@if(context.currentItem != "Contacts"){<li><a href="contacts.html"><em class="icon-m icon-m-contacts--white"></em><span>Contacts</span></a></li>}
-        </ul>
-      </nav>
+              @@if(context.currentItem == "About Us"){<li class="active"><span><em class="icon-m icon-m-about--white"></em><span>About Us</span></span></li>}
+              @@if(context.currentItem != "About Us"){<li><a href="about.html"><em class="icon-m icon-m-about--white"></em><span>About Us</span></a></li>}
+
+              @@if(context.currentItem == "News"){<li class="active"><span><em class="icon-m icon-m-news--white"></em><span>News</span></span></li>}
+              @@if(context.currentItem != "News"){<li><a href="news.html"><em class="icon-m icon-m-news--white"></em><span>News</span></a></li>}
+
+
+              @@if(context.currentItem == "Contacts"){<li class="active"><span><em class="icon-m icon-m-contacts--white"></em><span>Contacts</span></span></li>}
+              @@if(context.currentItem != "Contacts"){<li><a href="contacts.html"><em class="icon-m icon-m-contacts--white"></em><span>Contacts</span></a></li>}
+            </ul>
+          </div>
+          <div id="products" class="swiper-slide">
+            <ul class="category-list" data-swiper-parallax-opacity="0">
+              <li><a href="#all"><span>Products</span></a></li>
+              <li><a href="products.html?filter-preset-cat=music" style="background-color: #eab70c;"><em class="icon-c icon-c-sound--white"></em><span>Sound and Music Toys</span></a></li>
+              <li><a href="products.html?filter-preset-cat=educational" style="background-color: #e09a14;"><em class="icon-c icon-c-tablets--white"></em><span>Education Tablets</span></a></li>
+              <li><a href="products.html?filter-preset-cat=smartphone" style="background-color: #d06517;"><em class="icon-c icon-c-smartphones--white"></em><span>Toy Smartphones</span></a></li>
+              <li><a href="products.html?filter-preset-cat=smart-watch" style="background-color: #c10514;"><em class="icon-c icon-c-watches--white"></em><span>Smart Watches</span></a></li>
+              <li><a href="products.html?filter-preset-cat=smart-watch" style="background-color: #c5127c;"><em class="icon-c icon-c-microphones--white"></em><span>Musical Microphones</span></a></li>
+              <li><a href="products.html?filter-preset-cat=sound-mat" style="background-color: #801c7e;"><em class="icon-c icon-c-playmats--white"></em><span>Sound Playmats</span></a></li>
+              <li><a href="products.html?filter-preset-cat=educational-card" style="background-color: #214f9a;"><em class="icon-c icon-c-cards--white"></em><span>Educational Cards</span></a></li>
+              <li><a href="products.html?filter-preset-cat=puzzle" style="background-color: #0068b1;"><em class="icon-c icon-c-puzzle--white"></em><span>Puzzle Elements</span></a></li>
+              <li><a href="products.html?filter-preset-cat=console" style="background-color: #249cdb;"><em class="icon-c icon-c-soft--white"></em><span>Soft Activity Toys</span></a></li>
+              <li><a href="products.html?filter-preset-cat=educational-card" style="background-color: #4d8d3f;"><em class="icon-c icon-c-lights--white"></em><span>Toys with Lights</span></a></li>
+              <li><a href="products.html?filter-preset-cat=set" style="background-color: #a4c037;"><em class="icon-c icon-c-sorting--white"></em><span>Sorting Elements</span></a></li>
+            </ul>
+          </div>
+          <div id="brands" class="swiper-slide">
+            <ul class="category-list category-list_brands" data-swiper-parallax-opacity="0">
+              <li><a href="#all"><span>Our Brands</span></a></li>
+              <li><a href="products.html" style="background-color: #fff;"><img src="img/brand1.jpg" alt="Kids'Pad" /></a></li>
+              <li><a href="products.html" style="background-color: #fff;"><img src="img/brand2.jpg" alt="Talky blocks" /></a></li>
+              <li><a href="products.html" style="background-color: #fff;"><img src="img/brand3.jpg" alt="Little one" /></a></li>
+              <li><a href="products.html" style="background-color: #fff;"><img src="img/brand4.jpg" alt="Magic Lights" /></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <!-- main navigation end -->
       <!--sidebar footer-->
       <div class="menu-footer">
