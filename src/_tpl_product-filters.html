@@ -11,8 +11,14 @@
       <div class="filters__group">
         <div class="tags-group tags-group-js filters-tags-js" data-tags-group="state"  data-filter-method="and">
           <div class="filters-buttons-group">
-            <a href="#" class="filters-button filters-button-js filter-radio" data-filter=".tag-new">New</a>
-            <a href="#" class="filters-button filters-button-js filter-radio" data-filter=".tag-popular">Popular</a>
+            <label class="filters-button">
+              <input class="filter-js" type="checkbox" name="state" data-filter=".tag-new">
+              <span>New</span>
+            </label>
+            <label class="filters-button">
+              <input class="filter-js" type="checkbox" name="state" data-filter=".tag-popular">
+              <span>Popular</span>
+            </label>
           </div>
         </div>
       </div>
@@ -24,10 +30,30 @@
             <div class="filters-drop__group">
               <strong class="filters-drop__title">Age</strong>
               <ul class="filters-drop__list filters-tags-js" data-filter-method="or">
-                <li><a href="#" data-filter=".tag-baby"><span>0+ years</span></a></li>
-                <li><a href="#" data-filter=".tag-younger"><span>1+ years</span></a></li>
-                <li><a href="#" data-filter=".tag-middle"><span>4-5 years</span></a></li>
-                <li><a href="#" data-filter=".tag-senior"><span>6+ years</span></a></li>
+                <li>
+                  <label class="filters-button">
+                    <input class="filter-js" type="checkbox" name="tag-baby" data-filter=".tag-baby">
+                    <span>0+ years</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filters-button">
+                    <input class="filter-js" type="checkbox" name="tag-younger" data-filter=".tag-younger">
+                    <span>1+ years</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filters-button">
+                    <input class="filter-js" type="checkbox" name="tag-middle" data-filter=".tag-middle">
+                    <span>4-5 years</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filters-button">
+                    <input class="filter-js" type="checkbox" name="tag-senior" data-filter=".tag-senior">
+                    <span>6+ years</span>
+                  </label>
+                </li>
               </ul>
             </div>
             <div class="filters-drop__group">

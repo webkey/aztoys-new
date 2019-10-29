@@ -966,6 +966,7 @@
 // ====================================================
 // btn:checked:hover
 @mixin btn-checked-hover {
+  color: white;
   background-color: #6cd5e6;
   box-shadow: 0 0 20px #6cd5e6;
 }

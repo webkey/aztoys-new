@@ -3608,7 +3608,6 @@ $swp-space--mob: 9px;
     @include placeholder {
       color: #ccc;
     }
-  ;
 
     @include placeholder-focus {
       color: #ccc !important;
@@ -7727,47 +7726,116 @@ $swp-space--mob: 9px;
 }
 
 .filters-button {
-  position: relative;
+  $filter: &;
   box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
-  padding: $filter-btn-spaces;
   margin: 5px;
-  @include filter-btn-font;
-  @include filter-btn-bg;
+  text-decoration: none;
+  color: inherit;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 
-  // <992px
-  @include media("<tab") {
-    padding: $filter-btn-spaces--tab;
-    @include filter-btn-font--tab;
+  & > span {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    padding: $filter-btn-spaces;
+    cursor: pointer;
+    @include filter-btn-font;
+    @include filter-btn-bg;
+
+    // <992px
+    @include media("<tab") {
+      padding: $filter-btn-spaces--tab;
+      @include filter-btn-font--tab;
+    }
+
+    // <768px
+    @include media("<tab-s") {
+      padding: $filter-btn-spaces--tab-s;
+      @include filter-btn-font--tab-s;
+      border-color: $base-color;
+    }
   }
 
-  // <768px
-  @include media("<tab-s") {
-    padding: $filter-btn-spaces--tab-s;
-    @include filter-btn-font--tab-s;
-    border-color: $base-color;
+  // Hide default inputs
+  input[type="checkbox"],
+  input[type="radio"] {
+    position: absolute;
+    @include size(16px);
+    padding: 0;
+    margin: 0;
+    display: none;
+
+    &:disabled {
+      color: #bdbdbd !important;
+
+      & + span {
+        cursor: default !important;
+        color: #d6d6d6 !important;
+
+        &::before,
+        &::after {
+          border-color: currentColor !important;
+        }
+
+        &::before {
+          background-color: #f3f3f3 !important;
+        }
+      }
+    }
   }
 
   //:hover
   .desktop &:hover {
-    @include btn-hover;
+    & > span {
+      @include btn-hover;
+    }
   }
 
   // :active
   &:active {
-    @include btn-active;
+    & > span {
+      @include btn-active;
+    }
   }
 
+  // Если фильтр является чекбоксом, или радиобаттоном
   // Checked
-  &.is-checked {
-    &, .desktop &:hover {
+  input[type="checkbox"],
+  input[type="radio"] {
+    &:checked + span {
       @include btn-checked;
+    }
+  }
+
+  // Checked Hover
+  .desktop &:hover {
+    input[type="checkbox"],
+    input[type="radio"] {
+      &:checked + span {
+        @include btn-checked-hover;
+      }
+    }
+  }
+
+  // Если фильтр является ссылкой
+  // Checked
+  @at-root {
+    a#{$filter} {
+      &.is-checked {
+        & > span {
+          @include btn-checked;
+        }
+      }
     }
 
     // Checked Hover
-    .desktop &:hover {
-      @include btn-checked-hover;
+    .desktop a#{$filter}.is-checked:hover {
+      & > span {
+        @include btn-checked-hover;
+      }
     }
   }
 }

@@ -995,8 +995,6 @@ function toggleMenu() {
 
           value = arr.join(', ');
 
-          $element.trigger('productsFilters.afterFilteredOr', value);
-
           return value;
         },
         concatValuesEND = function (obj) {
@@ -1007,7 +1005,6 @@ function toggleMenu() {
             value += obj[prop];
           }
 
-          $element.trigger('productsFilters.afterFilteredEnd', value);
           return value;
         },
         toggleFiltersOptions = function () {
@@ -1114,60 +1111,58 @@ function toggleMenu() {
         },
         common = function () {
           // Фильтрация продуктов по клику на фильтр
-          $element.on('click', config.filter, function (event) {
+          $element.on('change', config.filter, function (event) {
             event.preventDefault();
 
-            var $curBtn = $(this);
-            var $curBtnGroup = $curBtn.closest($filtersGroup);
+            var $curFilter = $(this);
+            var $curFiltersGroup = $curFilter.closest($filtersGroup);
 
-            var filtersGroupName = $curBtnGroup.attr('data-tags-group'),
-                filterMethod = $curBtnGroup.attr('data-filter-method');
+            var filtersGroupName = $curFiltersGroup.attr('data-tags-group'),
+                filterType = $curFiltersGroup.attr('data-filter-method'),
+                filterTag = $curFilter.attr('data-filter');
 
-            // var _checkedCurBtn = $curBtn.hasClass(config.modifiers.isCheckedClass);
-            var _checkedCurBtn = $curBtn.prop('checked');
-            var filterTag = $curBtn.attr('data-filter');
-
-            switch (filterMethod) {
+            switch (filterType) {
               case 'or':
-                methodOrInit = !_checkedCurBtn;
-                break;
-
-              case 'and':
-                if (_checkedCurBtn) {
-                  methodAndInit = false;
-                } else {
-                  methodAndInit = filterTag;
-                }
+                methodOrInit = $curFilter.prop('checked');
                 break;
 
               default:
-                console.info('%c Warning! Filters method is undefined! Set attribute "data-tags-group" to the filters group element ', 'background: #bd0000; color: white');
-                return;
+                if ($curFilter.prop('checked')) {
+                  methodAndInit = filterTag;
+                } else {
+                  methodAndInit = false;
+                }
+                break;
+
+              // default:
+              //   console.info('%c Warning! Filters method is undefined! Set attribute "data-tags-group" to the filters group element ', 'background: #bd0000; color: white');
+              //   return;
             }
 
-            filtersGroupName = (filtersGroupName === undefined) ? filterTag : filtersGroupName;
+            filtersGroupName = (filtersGroupName === undefined) ? filterTag.substr(1) : filtersGroupName;
 
-            if (_checkedCurBtn) {
-              tags [filtersGroupName] = '';
-            } else {
+            if ($curFilter.prop('checked')) {
               tags [filtersGroupName] = filterTag;
+            } else {
+              tags [filtersGroupName] = '';
             }
 
-            var filterValue = (filterMethod === 'or' || methodAndInit || _checkedCurBtn) ? concatValuesOR(tags) : concatValuesEND(tags);
+            // var filterSelector = (filterType === 'or' || methodAndInit || $curFilter.prop('checked')) ? concatValuesOR(tags) : concatValuesEND(tags);
+            var filterSelector = (filterType === 'or' || methodAndInit) ? concatValuesOR(tags) : concatValuesEND(tags);
 
-            $grid.isotope({filter: filterValue});
+            $grid.isotope({filter: filterSelector});
 
             showButtonFind = true;
 
             // toggle class checked
-            $curBtn.parent().find('.filter-radio.is-checked').not(event.target).removeClass(config.modifiers.isCheckedClass).prop('checked', false);
+            $curFilter.parent().find('.filter-radio.is-checked').not(event.target).removeClass(config.modifiers.isCheckedClass);
 
-            // $curBtn.toggleClass(config.modifiers.isCheckedClass);
+            // $curFilter.toggleClass(config.modifiers.isCheckedClass);
 
-            if ($curBtn.prop('checked')) {
-              $curBtn.removeClass(config.modifiers.isCheckedClass).prop('checked', false);
+            if ($curFilter.prop('checked')) {
+              $curFilter.removeClass(config.modifiers.isCheckedClass);
             } else {
-              $curBtn.addClass(config.modifiers.isCheckedClass).prop('checked', true);
+              $curFilter.addClass(config.modifiers.isCheckedClass);
             }
 
             clearBtnState();
@@ -1176,12 +1171,13 @@ function toggleMenu() {
 
             $element.trigger('productsFilters.afterFiltered', {
               container: $element,
-              filter: $curBtn,
+              filter: $curFilter,
               filtersGroup: filtersGroupName,
-              filterIsActive: $curBtn.prop('checked'),
-              filterMethod: filterMethod,
+              filterIsActive: $curFilter.prop('checked'),
+              filterType: filterType,
               currentTag: filterTag,
-              tags: filterValue
+              tagsObj: tags,
+              filterSelector: filterSelector,
             });
           });
 
@@ -1388,7 +1384,7 @@ function toggleMenu() {
     // Продукт
     productElement: '.products__item',
     // Фильтр
-    filter: '.filters-button-js',
+    filter: '.filter-js',
     // Группа фильтров с одним названием и методом фильтрации
     filtersGroup: '.filters-tags-js',
     
@@ -1434,8 +1430,6 @@ function filtersEvents() {
   var $filters = $('.filters-js');
   if ($filters.length) {
     $filters.productsFilters({
-      filter: '.filters-tags-js a', // Не jquery-объект, а селектор
-
       afterFiltered(event, filters, obj) {
         console.log("obj: ", obj);
       }
