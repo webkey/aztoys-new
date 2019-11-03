@@ -1292,6 +1292,12 @@ function toggleMenu() {
           if (document.location.hash === "#filters-open" && window.innerWidth < config.breakpoints) {
             setTimeout(function () {
               showFiltersPanel();
+
+              // Hide preloader
+              setTimeout(function () {
+                $('.page-preloader').addClass('hide');
+                $HTML.addClass('overflow-visible');
+              }, 100);
             }, 200);
           }
 
@@ -1300,6 +1306,13 @@ function toggleMenu() {
             setTimeout(function () {
               // todo Костыль нужно исправить
               $moreFiltersOpen.trigger('click');
+
+              // todo Переделать на фидбэк после открытия доп фильтров
+              // Hide preloader
+              setTimeout(function () {
+                $('.page-preloader').addClass('hide');
+                $HTML.addClass('overflow-visible');
+              }, 100);
             }, 200);
           }
 
@@ -2590,8 +2603,13 @@ function imgLazyLoad() {
 
 /** ready/load/resize document **/
 $WINDOW.on('load', function () {
-  $('.page-preloader').addClass('hide');
-  $HTML.addClass('overflow-visible');
+  var $pagePreloader = $('.page-preloader');
+  if (document.location.hash !== "#filters-open") {
+    setTimeout(function () {
+      $pagePreloader.addClass('hide');
+      $HTML.addClass('overflow-visible');
+    }, 50);
+  }
   popupEvents();
 });
 
