@@ -147,26 +147,6 @@ hr {
 a {
   color: #00abc7;
   outline: none;
-  text-decoration: underline;
-  cursor: default;
-}
-
-a:link {
-  cursor: pointer;
-}
-
-.desktop a:hover {
-  text-decoration: none;
-}
-
-a[href^="tel"],
-.desktop a[href^="tel"]:hover {
-  text-decoration: none !important;
-  color: inherit;
-}
-
-a[href^="javascript:"] {
-  cursor: default;
 }
 
 img {
@@ -817,7 +797,7 @@ button {
   border: 1px solid transparent;
   background: $highlight-color;
   box-shadow: 0 0 0 $highlight-color--hover;
-  border-radius: 25px;
+  border-radius: 10px;
   transition: color $animation-speed, background-color $animation-speed, box-shadow $animation-speed;
   position: relative;
   box-sizing: border-box;
@@ -7295,17 +7275,17 @@ $swp-space--mob: 9px;
 
       &::before {
         box-shadow: 0 0 15px rgba(black, 0.15);
-        transform: translateZ(0) scale(1.1);
+        transform: translateZ(0) scale(1.1, 1);
         transition-duration: $animation-speed;
 
         // <640px
         @include media("<mob") {
-          transform: translateZ(0) scale(1.03, 1.1);
+          transform: translateZ(0) scale(1.03, 1);
         }
 
         // <480px
         @include media("<mob-s") {
-          transform: translateZ(0) scale(1.06, 1.1);
+          transform: translateZ(0) scale(1.06, 1);
         }
       }
     }
@@ -7691,6 +7671,7 @@ $swp-space--mob: 9px;
   box-sizing: border-box;
   position: relative;
   margin: 0 0 20px 20px;
+  line-height: 1;
 
   // <992px
   @include media("<tab") {
@@ -7776,8 +7757,8 @@ $swp-space--mob: 9px;
 .filters-counter {
   display: block;
   @include font-normal;
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 12px;
+  line-height: 14px;
   letter-spacing: 0.05em;
   text-align: left;
   white-space: nowrap;
@@ -7810,7 +7791,7 @@ $swp-space--mob: 9px;
   padding: 5px 12px 5px 27px;
   text-decoration: none;
   border: 1px solid currentColor;
-  border-radius: 10px;
+  border-radius: 4px;
   transition: opacity $animation-speed;
 
   // Icon
@@ -7847,7 +7828,7 @@ $swp-space--mob: 9px;
 // Filters tools
 .filters-tools {
   position: relative;
-  padding: 24px 0 0;
+  padding: 18px 0 0;
 
   // <992px
   @include media("<tab") {
@@ -8728,7 +8709,8 @@ $swp-space--mob: 9px;
   height: 50px;
   padding-left: 0;
   padding-right: 0;
-  border-radius: 0;
+  border-radius: 0 6px 6px 0;
+  text-transform: uppercase;
 }
 
 /*footer nav end*/

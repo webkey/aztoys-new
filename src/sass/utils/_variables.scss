@@ -632,7 +632,7 @@ $filter-btn-spaces--tab-s: 12px 20px;
 }
 
 @mixin filter-btn-bg {
-  border-radius: 25px;
+  border-radius: 10px;
   background-color: $highlight-color;
   box-shadow: 0 0 0 $highlight-color--hover;
   transition: color $animation-speed, background-color $animation-speed, box-shadow $animation-speed;

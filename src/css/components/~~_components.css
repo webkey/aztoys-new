@@ -3182,7 +3182,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  border-radius: 25px;
+  border-radius: 10px;
   background-color: #fcd105;
   box-shadow: 0 0 0 #fde46a;
   transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
@@ -7625,7 +7625,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  border-radius: 25px;
+  border-radius: 10px;
   background-color: #fcd105;
   box-shadow: 0 0 0 #fde46a;
   transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
@@ -7829,7 +7829,7 @@ a.filters-button.is-checked > span {
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  border-radius: 25px;
+  border-radius: 10px;
   background-color: #fcd105;
   box-shadow: 0 0 0 #fde46a;
   transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
