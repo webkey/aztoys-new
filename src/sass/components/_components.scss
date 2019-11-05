@@ -4186,7 +4186,7 @@ $swp-space--mob: 9px;
     position: relative;
     display: block;
     padding: 5px 32px;
-    border-radius: 30px;
+    border-radius: 10px;
     color: #00abc7;
     text-decoration: none;
     user-select: none;
@@ -8930,15 +8930,17 @@ html {
 }
 
 .page-preloader__content {
-  padding: 100px;
+  padding: 100px 0 0;
   background-repeat: no-repeat;
   background-position: 50% 0;
   background-image: url(../../img/logo.svg);
   background-size: 200px;
+  width: 100%;
+  flex-basis: 100%;
 
   // <992px
   @include media("<tab") {
-    padding: 70px;
+    padding: 70px 0 0;
     background-size: 120px;
   }
 }

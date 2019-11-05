@@ -4530,7 +4530,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   position: relative;
   display: block;
   padding: 5px 32px;
-  border-radius: 30px;
+  border-radius: 10px;
   color: #00abc7;
   text-decoration: none;
   -webkit-user-select: none;
@@ -9292,16 +9292,19 @@ html.no-js, html.overflow-visible {
 }
 
 .page-preloader__content {
-  padding: 100px;
+  padding: 100px 0 0;
   background-repeat: no-repeat;
   background-position: 50% 0;
   background-image: url(../img/logo.svg);
   background-size: 200px;
+  width: 100%;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
 }
 
 @media (max-width: 991px) {
   .page-preloader__content {
-    padding: 70px;
+    padding: 70px 0 0;
     background-size: 120px;
   }
 }
