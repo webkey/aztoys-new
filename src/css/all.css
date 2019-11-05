@@ -5665,6 +5665,12 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   max-height: 30px;
 }
 
+@media (max-width: 359px) {
+  .new__date {
+    margin-bottom: 10px;
+  }
+}
+
 .news__title {
   font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
   font-weight: normal;
@@ -5677,6 +5683,13 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   text-transform: none;
   transition-property: color;
   transition-duration: 0.3s;
+}
+
+@media (max-width: 359px) {
+  .news__title {
+    font-size: 20px;
+    line-height: 28px;
+  }
 }
 
 .desktop a.news__inner:hover .news__title {
