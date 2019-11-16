@@ -481,26 +481,6 @@ hr {
 a {
   color: #00abc7;
   outline: none;
-  text-decoration: underline;
-  cursor: default;
-}
-
-a:link {
-  cursor: pointer;
-}
-
-.desktop a:hover {
-  text-decoration: none;
-}
-
-a[href^="tel"],
-.desktop a[href^="tel"]:hover {
-  text-decoration: none !important;
-  color: inherit;
-}
-
-a[href^="javascript:"] {
-  cursor: default;
 }
 
 img {
@@ -1150,7 +1130,7 @@ button {
   border: 1px solid transparent;
   background: #fcd105;
   box-shadow: 0 0 0 #fde46a;
-  border-radius: 25px;
+  border-radius: 10px;
   transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
   position: relative;
   box-sizing: border-box;
@@ -3544,7 +3524,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  border-radius: 25px;
+  border-radius: 10px;
   background-color: #fcd105;
   box-shadow: 0 0 0 #fde46a;
   transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
@@ -4550,7 +4530,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   position: relative;
   display: block;
   padding: 5px 32px;
-  border-radius: 30px;
+  border-radius: 10px;
   color: #00abc7;
   text-decoration: none;
   -webkit-user-select: none;
@@ -5685,6 +5665,12 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   max-height: 30px;
 }
 
+@media (max-width: 359px) {
+  .new__date {
+    margin-bottom: 10px;
+  }
+}
+
 .news__title {
   font-family: "museo-sans-rounded-700", Arial, Helvetica, sans-serif;
   font-weight: normal;
@@ -5697,6 +5683,13 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   text-transform: none;
   transition-property: color;
   transition-duration: 0.3s;
+}
+
+@media (max-width: 359px) {
+  .news__title {
+    font-size: 20px;
+    line-height: 28px;
+  }
 }
 
 .desktop a.news__inner:hover .news__title {
@@ -7639,19 +7632,19 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
 
 .category-list a:hover::before {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-  transform: translateZ(0) scale(1.1);
+  transform: translateZ(0) scale(1.1, 1);
   transition-duration: 0.3s;
 }
 
 @media (max-width: 639px) {
   .category-list a:hover::before {
-    transform: translateZ(0) scale(1.03, 1.1);
+    transform: translateZ(0) scale(1.03, 1);
   }
 }
 
 @media (max-width: 479px) {
   .category-list a:hover::before {
-    transform: translateZ(0) scale(1.06, 1.1);
+    transform: translateZ(0) scale(1.06, 1);
   }
 }
 
@@ -8012,6 +8005,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   box-sizing: border-box;
   position: relative;
   margin: 0 0 20px 20px;
+  line-height: 1;
 }
 
 @media (max-width: 991px) {
@@ -8081,7 +8075,7 @@ div.cselect .ui-multiselect-checkboxes input[type="radio"] + span:after {
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  border-radius: 25px;
+  border-radius: 10px;
   background-color: #fcd105;
   box-shadow: 0 0 0 #fde46a;
   transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
@@ -8181,8 +8175,8 @@ a.filters-button.is-checked > span {
 .filters-counter {
   display: block;
   font-family: "museo-sans-rounded-500", Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 12px;
+  line-height: 14px;
   letter-spacing: 0.05em;
   text-align: left;
   white-space: nowrap;
@@ -8216,7 +8210,7 @@ a.filters-button.is-checked > span {
   padding: 5px 12px 5px 27px;
   text-decoration: none;
   border: 1px solid currentColor;
-  border-radius: 10px;
+  border-radius: 4px;
   transition: opacity 0.3s;
 }
 
@@ -8250,7 +8244,7 @@ a.filters-button.is-checked > span {
 
 .filters-tools {
   position: relative;
-  padding: 24px 0 0;
+  padding: 18px 0 0;
 }
 
 @media (max-width: 991px) {
@@ -8287,7 +8281,7 @@ a.filters-button.is-checked > span {
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  border-radius: 25px;
+  border-radius: 10px;
   background-color: #fcd105;
   box-shadow: 0 0 0 #fde46a;
   transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
@@ -9147,7 +9141,8 @@ a.filters-button.is-checked > span {
   height: 50px;
   padding-left: 0;
   padding-right: 0;
-  border-radius: 0;
+  border-radius: 0 6px 6px 0;
+  text-transform: uppercase;
 }
 
 /*footer nav end*/
@@ -9372,16 +9367,19 @@ html.no-js, html.overflow-visible {
 }
 
 .page-preloader__content {
-  padding: 100px;
+  padding: 100px 0 0;
   background-repeat: no-repeat;
   background-position: 50% 0;
   background-image: url(../img/logo.svg);
   background-size: 200px;
+  width: 100%;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
 }
 
 @media (max-width: 991px) {
   .page-preloader__content {
-    padding: 70px;
+    padding: 70px 0 0;
     background-size: 120px;
   }
 }
