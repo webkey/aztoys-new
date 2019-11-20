@@ -3553,8 +3553,16 @@ $swp-space--mob: 9px;
   position: relative;
 
   .input-wrap {
+    box-sizing: border-box;
     position: relative;
-    padding: 0;
+    padding: 5px #{$header-btn-height + 5} 5px 5px;
+    border-radius: 10px;
+    background-color: #fff;
+
+    // <992px
+    @include media("<tab") {
+      padding: 5px #{$header-btn-height--tab + 5} 5px 5px;
+    }
   }
 
   input[type="search"],
@@ -3564,10 +3572,11 @@ $swp-space--mob: 9px;
     @include font-normal;
     font-size: 18px;
     line-height: 24px;
-    height: $header-btn-height;
-    padding: 19px 25px;
+    //height: $header-btn-height;
+    height: 38px;
+    padding: 7px 15px;
     width: 100%;
-    border: none;
+    border: 1px solid $border-color;
     border-radius: 10px;
     box-shadow: none;
 
@@ -3636,19 +3645,110 @@ $swp-space--mob: 9px;
     &:active {
       transform: scale(1, 1);
     }
+  }
+}
 
-    // Если кнопка есть, то на инпут добавить отступ
-    & + input[type="search"],
-    & + input[type="text"] {
-      $intend: $header-btn-height - 10;
-      margin-right: $intend;
-      width: calc(100% - #{$intend});
+.search-type {
+  $cur: &;
 
-      // <992px
-      @include media("<tab") {
-        $intend: $header-btn-height--tab - 10;
-        margin-right: $intend;
-        width: calc(100% - #{$intend});
+  padding: 2px 15px;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: left;
+  color: $text-color-light;
+
+  &__item {
+    margin-bottom: 4px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  input#{$cur}__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &__inner {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: top;
+    padding: 0 0 0 24px;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: color $animation-speed;
+
+    &::before {
+      box-sizing: border-box;
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 14px;
+      width: 14px;
+      border-radius: 4px;
+      border: 1px solid currentColor;
+      transition-property: border;
+      transition-duration: $animation-speed;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 6px;
+      height: 6px;
+      opacity: 0;
+      background-color: currentColor;
+      transition-property: opacity;
+      transition-duration: $animation-speed;
+    }
+  }
+
+  &__el {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+
+    // Hover
+    .desktop &:hover {
+      #{$cur}__inner {
+        color: $text-color;
+
+        &::before {
+          border-color: $text-color;
+        }
+      }
+    }
+
+    // Checked
+    input#{$cur}__input:checked {
+      & ~ #{$cur}__inner {
+        color: $text-color;
+
+        &::before {
+          border-color: $text-color;
+        }
+
+        &::after {
+          opacity: 1;
+        }
       }
     }
   }
