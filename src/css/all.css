@@ -9470,6 +9470,21 @@ a.filters-button.is-checked > span {
 }
 
 /* filters-not-found end */
+/* btn-show-items */
+.btn-show-items {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.btn-show-items.active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* btn-show-items end */
 /*FILTERS end*/
 @media print {
   *,

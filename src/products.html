@@ -78,6 +78,13 @@
       <div class="filters__panel">
         <div class="filters__groups">
           <div class="filters__group">
+            <div class="filters-buttons-group">
+              <a class="filters-button clear-filters-js">
+            <span>All</span>
+          </a>
+            </div>
+          </div>
+          <div class="filters__group">
             <div class="filters-buttons-group" data-filters-group="state" data-filters-type="switchers">
               <label class="filters-button filter-item-js">
             <input class="filter-js" type="checkbox" name="state" data-filter=".tag-new" data-filter-method="and">
@@ -337,7 +344,14 @@
             <div class="filters-counter">
               <div class="filters-counter-js"></div>
             </div>
-            <a href="#" class="clear-filters disabled">Clear filters</a>
+            <a href="#" class="clear-filters clear-filters-js disabled">Clear filters</a>
+          </div>
+          <div class="filters__group">
+            <div class="filters-buttons-group">
+              <a class="filters-button show-filter-items-js btn-show-items">
+            <span>Show items</span>
+          </a>
+            </div>
           </div>
         </div>
       </div>
@@ -347,7 +361,7 @@
         <div class="filters-counter-js"></div>
       </div>
       <a href="#" class="btn-default show-filters-items show-filter-items-js">Show items</a>
-      <a href="#" class="clear-filters disabled"><span>Clear filter</span></a>
+      <a href="#" class="clear-filters clear-filters-js disabled"><span>Clear filter</span></a>
     </div>
     <!--FILTERS end-->
     <!--btn search-->

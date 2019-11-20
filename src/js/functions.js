@@ -948,7 +948,7 @@ function toggleMenu() {
         $moreFiltersOpenEl = $(config.moreFiltersOpenEl),
         $moreFiltersDrop = $(config.moreFiltersDrop),
         filtersDropIsShow = false,
-        $counter = $(config.counter),
+        $filtersCounter = $(config.filtersCounter),
         $filtersSearchInput = $(config.filtersSearchInput),
         $mobFiltersMenuOpenEl = $(config.mobFiltersMenuOpenEl),
         $mobFiltersMenuCloseEl = $(config.mobFiltersMenuCloseEl),
@@ -1143,7 +1143,6 @@ function toggleMenu() {
             toggleFiltersResultsPanel();
 
             $element.trigger('productsFilters.afterFilterChange', {
-              container: $element,
               countActiveFilters: countActiveFilters(),
               countActiveFiltersByGroup: countActiveFiltersByGroup(),
               currentFilter: {
@@ -1154,7 +1153,6 @@ function toggleMenu() {
                 tag: curFTag,
               },
               filtersDropShow: filtersDropIsShow,
-              filtersSearchValue: getFiltersSearchValue(),
               filterSelector: filterSelector,
               filtersIsActive: filtersIsActive(),
               tagsAndObj: tagsAND,
@@ -1210,21 +1208,30 @@ function toggleMenu() {
               filterCounterContent = 'Found <span style="display: inline-block;"><strong>' + lengthFilteredItems + '</strong> ' + items + '</span>';
             }
 
-            $counter
+            $filtersCounter
                 .html(filterCounterContent)
                 .closest('.filters-button')
                 .toggleClass('btn-show', filtersIsActive());
 
             // "no product" show / hide
             if (!lengthFilteredItems) {
-              $counter.closest('.filters-button').addClass('no-items');
+              $filtersCounter.closest('.filters-button').addClass('no-items');
               tplFiltersNotFound.show();
             } else {
-              $counter.closest('.filters-button').removeClass('no-items');
+              $filtersCounter.closest('.filters-button').removeClass('no-items');
               tplFiltersNotFound.hide();
             }
 
-            $element.trigger('productsFilters.afterFiltered');
+            $element.trigger('productsFilters.afterFiltered', {
+              countActiveFilters: countActiveFilters(),
+              countActiveFiltersByGroup: countActiveFiltersByGroup(),
+              filtersDropShow: filtersDropIsShow,
+              filtersIsActive: filtersIsActive(),
+              filteredItems: filteredItems,
+              lengthFilteredItems: lengthFilteredItems,
+              tagsAndObj: tagsAND,
+              tagsOrObj: tagsOR
+            });
           });
 
           // Очистить фильтры и поле поиска
@@ -1351,12 +1358,12 @@ function toggleMenu() {
     // Список дополнительных фильтров
     moreFiltersDrop: '.filters-drop-js',
     // Елемент со счетчиком отфильтрованных товаров
-    counter: '.filters-counter-js',
+    filtersCounter: '.filters-counter-js',
 
     // Панель с результатами поиска
     resultsPanel: '.filters-results-panel-js',
     // Кнопка сброса фильтров
-    resetFilters: '.clear-filters',
+    resetFilters: '.clear-filters-js',
     // Кнопка показа фильтров
     showResultsEl: '.show-filter-items-js',
 
@@ -1381,8 +1388,9 @@ function filtersEvents() {
   var $filters = $('.filters-js');
   if ($filters.length) {
     $filters.productsFilters({
-      afterFilterChange: function (event, filters, obj) {
+      afterFiltered: function (event, filters, obj) {
         console.log("obj: ", obj);
+        $('.btn-show-items').toggleClass('active', obj.filtersIsActive);
       },
       afterMoreFiltersShow: function () {
         $('.mob-menu-opener-js').switchClass('remove');

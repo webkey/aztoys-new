@@ -1016,4 +1016,20 @@
 
 /* filters-not-found end */
 
+/* btn-show-items */
+.btn-show-items {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity $animation-speed, visibility $animation-speed;
+
+  &.active {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+  }
+}
+
+/* btn-show-items end */
+
 /*FILTERS end*/
