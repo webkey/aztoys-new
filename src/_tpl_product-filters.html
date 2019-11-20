@@ -9,17 +9,15 @@
   <div class="filters__panel">
     <div class="filters__groups">
       <div class="filters__group">
-        <div class="tags-group tags-group-js filters-tags-js" data-tags-group="state"  data-filter-method="and">
-          <div class="filters-buttons-group">
-            <label class="filters-button">
-              <input class="filter-js" type="checkbox" name="state" data-filter=".tag-new">
-              <span>New</span>
-            </label>
-            <label class="filters-button">
-              <input class="filter-js" type="checkbox" name="state" data-filter=".tag-popular">
-              <span>Popular</span>
-            </label>
-          </div>
+        <div class="filters-buttons-group" data-filters-group="state" data-filters-type="switchers">
+          <label class="filters-button filter-item-js">
+            <input class="filter-js" type="checkbox" name="state" data-filter=".tag-new" data-filter-method="and">
+            <span>New</span>
+          </label>
+          <label class="filters-button filter-item-js">
+            <input class="filter-js" type="checkbox" name="state" data-filter=".tag-popular" data-filter-method="and">
+            <span>Popular</span>
+          </label>
         </div>
       </div>
 
@@ -29,68 +27,60 @@
           <div class="filters-drop__holder">
             <div class="filters-drop__group">
               <strong class="filters-drop__title">Age</strong>
-              <ul class="filters-drop__list filters-tags-js" data-filter-method="or">
-                <li>
-                  <label class="filters-button">
-                    <input class="filter-js" type="checkbox" name="tag-baby" data-filter=".tag-baby">
-                    <span>0+ years</span>
-                  </label>
-                </li>
-                <li>
-                  <label class="filters-button">
-                    <input class="filter-js" type="checkbox" name="tag-younger" data-filter=".tag-younger">
-                    <span>1+ years</span>
-                  </label>
-                </li>
-                <li>
-                  <label class="filters-button">
-                    <input class="filter-js" type="checkbox" name="tag-middle" data-filter=".tag-middle">
-                    <span>4-5 years</span>
-                  </label>
-                </li>
-                <li>
-                  <label class="filters-button">
-                    <input class="filter-js" type="checkbox" name="tag-senior" data-filter=".tag-senior">
-                    <span>6+ years</span>
-                  </label>
-                </li>
-              </ul>
+              <div class="filters-drop__list">
+                <div class="f-group" data-filters-group="age">
+                  <div class="f-list">
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-baby",    "title": "0+ years"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-younger", "title": "1+ years"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-middle",  "title": "4-5 years"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-senior",  "title": "6+ years"})</div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="filters-drop__group">
               <strong class="filters-drop__title">Category</strong>
-              <ul class="filters-drop__list filters-tags-js" data-filter-method="or">
-                <li><a href="#" data-filter=".tag-music"><em class="icon-c icon-c-sound--blue"></em><span>Sound and Music Toys</span></a></li>
-                <li><a href="#" data-filter=".tag-educational"><em class="icon-c icon-c-tablets--blue"></em><span>Education Tablets</span></a></li>
-                <li><a href="#" data-filter=".tag-smartphone"><em class="icon-c icon-c-smartphones--blue"></em><span>Toy Smartphones</span></a></li>
-                <li><a href="#" data-filter=".tag-smart-watch"><em class="icon-c icon-c-watches--blue"></em><span>Smart Watches</span></a></li>
-                <li><a href="#" data-filter=".tag-microphone"><em class="icon-c icon-c-microphones--blue"></em><span>Musical Microphones</span></a></li>
-                <li><a href="#" data-filter=".tag-sound-mat"><em class="icon-c icon-c-playmats--blue"></em><span>Sound Playmats</span></a></li>
-                <li><a href="#" data-filter=".tag-educational-card"><em class="icon-c icon-c-cards--blue"></em><span>Educational Cards</span></a></li>
-                <li><a href="#" data-filter=".tag-puzzle"><em class="icon-c icon-c-puzzle--blue"></em><span>Puzzle Elements</span></a></li>
-                <li><a href="#" data-filter=".tag-console"><em class="icon-c icon-c-soft--blue"></em><span>Soft Activity Toys</span></a></li>
-                <li><a href="#" data-filter=".tag-educational-card"><em class="icon-c icon-c-lights--blue"></em><span>Toys with Lights</span></a></li>
-                <li><a href="#" data-filter=".tag-set"><em class="icon-c icon-c-sorting--blue"></em><span>Sorting Elements</span></a></li>
-              </ul>
+              <div class="filters-drop__list">
+                <div class="f-group" data-filters-group="category">
+                  <div class="f-list">
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-music",            "title": "Sound and Music Toys", "icon": "icon-c icon-c-sound--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-educational",      "title": "Education Tablets",    "icon": "icon-c icon-c-tablets--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-smartphone",       "title": "Toy Smartphones",      "icon": "icon-c icon-c-smartphones--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-smart-watch",      "title": "Smart Watches",        "icon": "icon-c icon-c-watches--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-microphone",       "title": "Musical Microphones",  "icon": "icon-c icon-c-microphones--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-sound-mat",        "title": "Sound Playmats",       "icon": "icon-c icon-c-playmats--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-educational-card", "title": "Educational Cards",    "icon": "icon-c icon-c-cards--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-puzzle",           "title": "Puzzle Elements",      "icon": "icon-c icon-c-puzzle--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-console",          "title": "Soft Activity Toys",   "icon": "icon-c icon-c-soft--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-educational-card", "title": "Toys with Lights",     "icon": "icon-c icon-c-lights--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-set",              "title": "Sorting Elements",     "icon": "icon-c icon-c-sorting--blue"})</div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="filters-drop__group">
               <strong class="filters-drop__title">Skills</strong>
-              <ul class="filters-drop__list filters-tags-js" data-filter-method="or">
-                <li><a href="#" data-filter=".tag-physical"><em class="icon-s icon-s-physical--blue"></em><span>Physical</span></a></li>
-                <li><a href="#" data-filter=".tag-self-development"><em class="icon-s icon-s-self-development--blue"></em><span>Self-development</span></a></li>
-                <li><a href="#" data-filter=".tag-visual-memory"><em class="icon-s icon-s-visual-memory--blue"></em><span>Visual memory</span></a></li>
-                <li><a href="#" data-filter=".tag-cognitive"><em class="icon-s icon-s-cognitive--blue"></em><span>Cognitive</span></a></li>
-                <li><a href="#" data-filter=".tag-math"><em class="icon-s icon-s-maths--blue"></em><span>Maths</span></a></li>
-                <li><a href="#" data-filter=".tag-imagination"><em class="icon-s icon-s-imagination--blue"></em><span>Imagination</span></a></li>
-                <li><a href="#" data-filter=".tag-musical"><em class="icon-s icon-s-musical-ability--blue"></em><span>Musical ability</span></a></li>
-                <li><a href="#" data-filter=".tag-research"><em class="icon-s icon-s-research--blue"></em><span>Research</span></a></li>
-                <li><a href="#" data-filter=".tag-speech"><em class="icon-s icon-s-speech-dev--blue"></em><span>Speech development</span></a></li>
-                <li><a href="#" data-filter=".tag-sensory"><em class="icon-s icon-s-sensory-ability--blue"></em><span>Sensory ability</span></a></li>
-                <li><a href="#" data-filter=".tag-writing"><em class="icon-s icon-s-writing--blue"></em><span>Writing</span></a></li>
-                <li><a href="#" data-filter=".tag-social"><em class="icon-s icon-s-social--blue"></em><span>Social</span></a></li>
-                <li><a href="#" data-filter=".tag-reading"><em class="icon-s icon-s-reading--blue"></em><span>Reading</span></a></li>
-                <li><a href="#" data-filter=".tag-problem-solving"><em class="icon-s icon-s-problem-solving--blue"></em><span>Problem solving</span></a></li>
-                <li><a href="#" data-filter=".tag-hand-eye"><em class="icon-s icon-s-hand-eye--blue"></em><span>Hand-eye coordination</span></a></li>
-              </ul>
+              <div class="filters-drop__list">
+                <div class="f-group" data-filters-group="skills">
+                  <div class="f-list">
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-physical",         "title": "Physical", "icon": "icon-c icon-s-physical--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-self-development", "title": "Self-development", "icon": "icon-c icon-s-self-development--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-visual-memory",    "title": "Visual memory", "icon": "icon-c icon-s-visual-memory--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-cognitive",        "title": "Cognitive", "icon": "icon-c icon-s-cognitive--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-math",             "title": "Maths", "icon": "icon-c icon-s-maths--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-imagination",      "title": "Imagination", "icon": "icon-c icon-s-imagination--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-musical",          "title": "Musical ability", "icon": "icon-c icon-s-musical-ability--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-research",         "title": "Research", "icon": "icon-c icon-s-research--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-speech",           "title": "Speech development", "icon": "icon-c icon-s-speech-dev--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-sensory",          "title": "Sensory ability", "icon": "icon-c icon-s-sensory-ability--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-writing",          "title": "Writing", "icon": "icon-c icon-s-writing--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-social",           "title": "Social", "icon": "icon-c icon-s-social--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-reading",          "title": "Reading", "icon": "icon-c icon-s-reading--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-problem-solving",  "title": "Problem solving", "icon": "icon-c icon-s-problem-solving--blue"})</div>
+                    <div class="f-list__item">@@include("_tpl_f-unit.html", {"tag": "tag-hand-eye",         "title": "Hand-eye coordination", "icon": "icon-c icon-s-hand-eye--blue"})</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -105,7 +95,7 @@
     </div>
   </div>
 </div>
-<div class="filters-options layout filters-options-js">
+<div class="filters-results-panel layout filters-results-panel-js">
   <div class="filters-counter">
     <div class="filters-counter-js"></div>
   </div>

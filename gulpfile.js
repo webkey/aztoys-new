@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp             = require('gulp'),
+    plumber          = require('gulp-plumber'),
     sass             = require('gulp-sass'),
     browserSync      = require('browser-sync').create(),
     reload           = browserSync.reload,
@@ -40,6 +41,7 @@ var path = {
  */
 gulp.task('htmlCompilation', function () {
   return gulp.src(['src/__*.html'])
+      .pipe(plumber())
       .pipe(fileinclude({
         filters: {
           markdown: markdown.parse
@@ -118,6 +120,7 @@ gulp.task('mergeCssLibs', function () {
     'src/css/_temp/widgets.css',
     'node_modules/swiper/css/swiper.min.css'
   ])
+      .pipe(plumber())
       .pipe(concatCss("src/css/widgets.css", {
         rebaseUrls: false
       }))
@@ -136,6 +139,7 @@ gulp.task('copyLibsScriptsToJs', function () {
     'node_modules/swiper/js/swiper.min.js'
     // 'src/libs/matchHeight/dist/jquery.matchHeight-min.js'
   ])
+      .pipe(plumber())
       .pipe(concat('widgets.js'))
       .pipe(gulp.dest('src/js'))
       .pipe(rename({suffix: '.min'}))

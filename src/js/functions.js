@@ -392,6 +392,7 @@ function equalHeightInit() {
       // }
 
       filtersEvents();
+      showFilterByHash();
 
       // _____________________НОВЫЙ КОД !!!!!
       // переход по ссылкам с пресетом фильтра
@@ -936,29 +937,26 @@ function toggleMenu() {
   var ProductsFilters = function (element, config) {
     var self,
         $window = $(window),
-        $html = $('html'),
         $body = $('body'),
         $element = $(element),
         $productsContainer = $(config.productsContainer),
         $filter = $(config.filter),
         $filtersGroup = $(config.filtersGroup),
-        $panelOptions = $(config.panelOptions),
-        $resetFilters = $(config.resetFilters),
-        $moreFilters = $(config.moreFilters),
-        $moreFiltersOpen = $(config.moreFiltersOpen),
+        $resultsPanel = $(config.resultsPanel),
+        $resetFiltersEl = $(config.resetFilters),
+        $moreFiltersContainer = $(config.moreFiltersContainer),
+        $moreFiltersOpenEl = $(config.moreFiltersOpenEl),
         $moreFiltersDrop = $(config.moreFiltersDrop),
+        filtersDropIsShow = false,
         $counter = $(config.counter),
-        $search = $(config.search),
-        $filtersOpen = $(config.filtersOpen),
-        $filtersClose = $(config.filtersClose),
-        _tplNoProducts = $('<h2 style="text-align: center;">Items not found</h2>'),
+        $filtersSearchInput = $(config.filtersSearchInput),
+        $mobFiltersMenuOpenEl = $(config.mobFiltersMenuOpenEl),
+        $mobFiltersMenuCloseEl = $(config.mobFiltersMenuCloseEl),
+        tplFiltersNotFound = $(config.tplFiltersNotFound),
         $grid,
-        tags = {},
-        showButtonFind = false,
-        methodAndInit = false,
-        methodOrInit = false,
-        filtersDropShow = false,
-        animationSpeedTween = config.animationSpeed / 1000;
+        lengthFilteredItems = 0,
+        tagsOR = {},
+        tagsAND = {};
 
     var callbacks = function () {
           /** track events */
@@ -977,367 +975,298 @@ function toggleMenu() {
             percentPosition: true
           });
         },
-        concatValuesOR = function (obj) {
-          // concatenation values of tags OR;
-          // example return '.prop1, .prop2';
-          // show items which contains prop1 or prop2;
-          var value,
-              arr = [],
-              prop;
-
-          for (prop in obj) {
-            var thisProp = obj[prop];
-            if (!thisProp) continue;
-            if (methodOrInit && obj[prop] === methodAndInit) continue;
-            thisProp = (methodAndInit) ? (methodAndInit + thisProp) : thisProp;
-            arr.push(thisProp);
+        isEmptyObject = function (obj) {
+          for (var i in obj) {
+            if (obj.hasOwnProperty(i)) {
+              return false;
+            }
           }
-
-          value = arr.join(', ');
-
-          return value;
+          return true;
         },
-        concatValuesEND = function (obj) {
-          var value = '',
-              prop;
+        createFilterSelector = function () {
+          // Create selector for isotope filtering.
+          // Example return '.prop1.prop2' or '.prop1, .prop2' or '.prop1.prop3, .prop2.prop3';
 
-          for (prop in obj) {
-            value += obj[prop];
-          }
+          var arr = [];
 
-          return value;
-        },
-        toggleFiltersOptions = function () {
-          if ($filtersGroup.find('.' + config.modifiers.isCheckedClass).length && filtersDropShow) {
-            $panelOptions.addClass(config.modifiers.activeClass);
+          if (isEmptyObject(tagsOR)) {
+            return concatValues(tagsAND);
           } else {
-            $panelOptions.removeClass(config.modifiers.activeClass);
+            for (var keyOr in tagsOR) {
+              var propOr = tagsOR[keyOr];
+
+              if (!isEmptyObject(tagsAND)) {
+                var propAnd;
+                for (var keyAnd in tagsAND) {
+                  propAnd = propOr += tagsAND[keyAnd];
+                }
+                arr.push(propAnd);
+              } else {
+                arr.push(propOr);
+              }
+            }
+
+            return arr.join(', ');
           }
         },
-        switchClass = function (remove, add, condition) {
-          // remove - element with remove class
-          // add - element with add class
-          // condition - condition add class
+        concatValues = function (obj) {
+          // Concatenation values of tags END.
+          // Example return '.prop1.prop2'.
+          // Show items which contains prop1 and prop2.
 
-          remove.removeClass(config.modifiers.classShowDrop);
+          var value = '',
+              key;
 
-          if (add === undefined) return false;
-          add.toggleClass(config.modifiers.classShowDrop, condition);
-        },
-        toggleFiltersDrop = function (drops, curDrop, condition) {
-          drops = drops || $jsDrop;
-
-          // Закрыть все выпадающие списки фильтров
-          TweenMax.to(drops, animationSpeedTween, {autoAlpha: 0, ease: Power2.easeInOut});
-          filtersDropShow = false;
-
-          // fixedContainerHeight(false);
-          // toggleFiltersOptions();
-
-          // enable page scroll
-          toggleScrollPage('switch-drop');
-
-          if (curDrop === undefined) return false;
-
-          if (condition) {
-            // open current drop
-            TweenMax.to(curDrop, animationSpeedTween, {autoAlpha: 1, ease: Power2.easeInOut});
-            filtersDropShow = true;
-            // fixedContainerHeight();
-
-            // disable page scroll
-            toggleScrollPage('switch-drop', false);
+          for (key in obj) {
+            value += obj[key];
           }
-        },
-        toggleBtnText = function (btn, cond) {
-          var textShow = 'Show filters',
-              textHide = 'Hide filters';
 
-          if (btn === undefined) return false;
-
-          (cond === false) ? btn.text(textHide) : btn.text(textShow);
+          return value;
         },
-        clearBtnState = function() {
-          var _cond = $filtersGroup.find('.' + config.modifiers.isCheckedClass).length;
-          $resetFilters.toggleClass('disabled', !_cond).prop('disabled', _cond);
+        countActiveFilters = function () {
+          return $filter.filter(':checked').length;
         },
-        phonesDropHeight = function() {
-          var dropPosTop = $moreFiltersDrop.offset().top - $window.scrollTop();
-          var dropHeight = window.innerHeight - dropPosTop - 10;
+        countActiveFiltersByGroup = function () {
+          var objectGroup = {};
+          $.each($filtersGroup, function () {
+            var $curFGroup = $(this);
+            objectGroup[$curFGroup.attr('data-filters-group')] = $(config.filter, $curFGroup).filter(':checked').length;
+          });
+          return objectGroup;
+        },
+        getFiltersSearchValue = function () {
+          return $filtersSearchInput.val();
+        },
+        filtersIsActive = function () {
+          return !!countActiveFilters() || getFiltersSearchValue() !== '';
+        },
+        btnResetChangeState = function() {
+          $resetFiltersEl.toggleClass('disabled', !filtersIsActive()).prop('disabled', !filtersIsActive());
+        },
+        toggleFiltersResultsPanel = function () {
+          $resultsPanel.toggleClass('filters-results-panel_' + config.modifiers.activeClass, filtersDropIsShow && filtersIsActive());
+        },
+        showMoreFilters = function () {
+          $moreFiltersOpenEl.addClass(config.modifiers.showMoreFilters);
+          $moreFiltersDrop.addClass(config.modifiers.showMoreFilters);
+          $moreFiltersContainer.addClass(config.modifiers.showMoreFilters);
+          filtersDropIsShow = true;
 
-          $moreFiltersDrop.css('max-height', dropHeight);
-          // Пересчитать кастомный скролл списка фильтров
-          $moreFiltersDrop.find('.mCustomScrollbar').mCustomScrollbar("update");
+          $('html').addClass(CONST_CLASSES.scrollFixedClass);
+
+          $element.trigger('productsFilters.afterMoreFiltersShow');
+
+          toggleFiltersResultsPanel();
+        },
+        hideMoreFilters = function () {
+          $moreFiltersOpenEl.removeClass(config.modifiers.showMoreFilters);
+          $moreFiltersDrop.removeClass(config.modifiers.showMoreFilters);
+          $moreFiltersContainer.removeClass(config.modifiers.showMoreFilters);
+          filtersDropIsShow = false;
+
+          $('html').removeClass(CONST_CLASSES.scrollFixedClass);
+
+          $element.trigger('productsFilters.afterMoreFiltersHide');
+
+          toggleFiltersResultsPanel();
         },
         clearFilters = function () {
-          $filtersGroup.find('.is-checked').removeClass('is-checked');
+          $filter.filter(':checked').prop('checked', false);
+          tagsOR = {};
+          tagsAND = {};
+          $filtersSearchInput.val('');
           $grid.isotope({filter: '*'});
-          tags = {};
 
-          switchClass($moreFilters);
-          switchClass($moreFiltersOpen);
-          switchClass($moreFiltersDrop);
-          toggleFiltersDrop($moreFiltersDrop);
-
-          clearBtnState();
-
-          showButtonFind = false;
+          btnResetChangeState();
+          hideMoreFilters();
         },
-        showFiltersPanel = function (){
-          $filtersOpen.add($panelOptions).add($element).addClass('active');
-          $HTML.addClass('css-scroll-fixed');
-          // Закрыть мобильное меню (если открыто)
-          // todo Вытести из плагина
-          $('.mob-menu-opener-js').switchClass('remove');
-        },
-        hideFiltersPanel = function (){
-          $filtersOpen.add($panelOptions).add($element).removeClass('active');
-          $HTML.addClass('css-scroll-fixed');
-        },
-        fixedContainerHeight = function (fixed) {
-          var productsContainerHeight = $productsContainer.outerHeight();
+        showMobFiltersMenu = function (){
+          $mobFiltersMenuOpenEl.add($element).addClass(config.modifiers.activeClass);
+          $resultsPanel.addClass('filters-results-panel_' + config.modifiers.activeClass + '-mob');
 
-          if (fixed === false) {
-            $productsContainer.css({
-              'min-height': 0,
-              'max-height': 'none'
-            });
-          } else {
-            $productsContainer.css({
-              'min-height': productsContainerHeight,
-              'max-height': productsContainerHeight
-            });
-          }
+          $('html').addClass(CONST_CLASSES.scrollFixedClass);
+        },
+        hideMobFiltersMenu = function (){
+          $mobFiltersMenuOpenEl.add($element).removeClass(config.modifiers.activeClass);
+          $resultsPanel.removeClass('filters-results-panel_' + config.modifiers.activeClass + '-mob');
+
+          $('html').removeClass(CONST_CLASSES.scrollFixedClass);
         },
         common = function () {
           // Фильтрация продуктов по клику на фильтр
           $element.on('change', config.filter, function (event) {
             event.preventDefault();
 
-            var $curFilter = $(this);
-            var $curFiltersGroup = $curFilter.closest($filtersGroup);
+            var $curF = $(this);
+            var $curFGroup = $curF.closest($filtersGroup);
 
-            var filtersGroupName = $curFiltersGroup.attr('data-tags-group'),
-                filterType = $curFiltersGroup.attr('data-filter-method'),
-                filterTag = $curFilter.attr('data-filter');
+            var curFGroupName = $curFGroup.attr('data-filters-group');
+            var curFMethod = $curF.attr('data-filter-method');
 
-            switch (filterType) {
-              case 'or':
-                methodOrInit = $curFilter.prop('checked');
-                break;
-
-              default:
-                if ($curFilter.prop('checked')) {
-                  methodAndInit = filterTag;
-                } else {
-                  methodAndInit = false;
-                }
-                break;
-
-              // default:
-              //   console.info('%c Warning! Filters method is undefined! Set attribute "data-tags-group" to the filters group element ', 'background: #bd0000; color: white');
-              //   return;
+            if (curFMethod !== 'or' && curFMethod !== 'and') {
+              console.info('%c Warning! Filters method not specified. Add attribute "data-filter-method" ', 'background: #bd0000; color: white');
             }
 
-            filtersGroupName = (filtersGroupName === undefined) ? filterTag.substr(1) : filtersGroupName;
+            var curFGroupType = $curFGroup.attr('data-filters-type');
 
-            if ($curFilter.prop('checked')) {
-              tags [filtersGroupName] = filterTag;
-            } else {
-              tags [filtersGroupName] = '';
+            if (curFGroupType === 'switchers' && $curF.prop('checked')) {
+              $curFGroup.find(config.filter).not($curF).filter(':checked').prop('checked', false).trigger('change');
             }
 
-            // var filterSelector = (filterType === 'or' || methodAndInit || $curFilter.prop('checked')) ? concatValuesOR(tags) : concatValuesEND(tags);
-            var filterSelector = (filterType === 'or' || methodAndInit) ? concatValuesOR(tags) : concatValuesEND(tags);
+            var curFTag = $curF.attr('data-filter');
+            var tagsKey = curFTag.substr(1);
 
+            if (curFMethod === 'or') {
+              if ($curF.prop('checked')) {
+                tagsOR[tagsKey] = curFTag;
+              } else {
+                delete tagsOR[tagsKey];
+              }
+            }
+
+            if (curFMethod === 'and') {
+              if ($curF.prop('checked')) {
+                tagsAND[tagsKey] = curFTag;
+              } else {
+                delete tagsAND[tagsKey];
+              }
+            }
+
+            var filterSelector = createFilterSelector();
             $grid.isotope({filter: filterSelector});
 
-            showButtonFind = true;
+            $curF.toggleClass('filter_' + config.modifiers.activeFilter, $curF.prop('checked'));
+            $curF.closest(config.filterItem).toggleClass('filter-item_' + config.modifiers.activeFilter, $curF.prop('checked'));
 
-            // toggle class checked
-            $curFilter.parent().find('.filter-radio.is-checked').not(event.target).removeClass(config.modifiers.isCheckedClass);
+            btnResetChangeState();
 
-            // $curFilter.toggleClass(config.modifiers.isCheckedClass);
+            toggleFiltersResultsPanel();
 
-            if ($curFilter.prop('checked')) {
-              $curFilter.removeClass(config.modifiers.isCheckedClass);
-            } else {
-              $curFilter.addClass(config.modifiers.isCheckedClass);
-            }
-
-            clearBtnState();
-
-            // toggleFiltersOptions();
-
-            $element.trigger('productsFilters.afterFiltered', {
+            $element.trigger('productsFilters.afterFilterChange', {
               container: $element,
-              filter: $curFilter,
-              filtersGroup: filtersGroupName,
-              filterIsActive: $curFilter.prop('checked'),
-              filterType: filterType,
-              currentTag: filterTag,
-              tagsObj: tags,
+              countActiveFilters: countActiveFilters(),
+              countActiveFiltersByGroup: countActiveFiltersByGroup(),
+              currentFilter: {
+                isActive: $curF.prop('checked'),
+                el: $curF,
+                group: curFGroupName,
+                method: curFMethod,
+                tag: curFTag,
+              },
+              filtersDropShow: filtersDropIsShow,
+              filtersSearchValue: getFiltersSearchValue(),
               filterSelector: filterSelector,
+              filtersIsActive: filtersIsActive(),
+              tagsAndObj: tagsAND,
+              tagsOrObj: tagsOR
             });
           });
 
           // Фильтрация продуктов по введенному тексту
-          $search.on('change keyup', function () {
+          $filtersSearchInput.on('change keyup', function () {
             var text = $(this).val();
 
             $grid.isotope({
               filter: function () {
-                var name = $(this).find('.products__title').text();
+                var name = $(this).find(config.filtersSearchSelector).text();
                 return name.match(new RegExp('(' + text + ')', 'gi'));
               }
             });
+
+            btnResetChangeState();
+            toggleFiltersResultsPanel();
           });
 
-          // Навешивание события клика на кнопку, которая закрывает панель с фильрами и показывает отфильтрованные продукты
-          $body.on('click', config.showResults, function (e) {
-            e.preventDefault();
-
-            $filtersOpen.add($panelOptions).add($element).removeClass(config.modifiers.activeClass);
-            $html.removeClass(CONST_CLASSES.scrollFixedClass);
-
-            $('html, body').stop().animate({scrollTop: 0}, 300);
-          });
-
-          // Открыть выпадающий список фильтров по клику на селектор
-          $moreFilters.on('click', config.moreFiltersOpen, function () {
-            var $curSelector = $(this);
-            var $curJsDropContent = $curSelector.closest($moreFilters),
-                $curDrop = $curJsDropContent.find($moreFiltersDrop),
-                _cond = $curDrop.hasClass(config.modifiers.classShowDrop);
-
-            // Открыть / закрыть выпадающий список фильтров
-            toggleFiltersDrop($moreFiltersDrop, $curDrop, !_cond);
-
-            // Изменить текст селектора
-            toggleBtnText($(this).find('span'), _cond);
-
-            // Добавить / удалить активный класс
-            switchClass($moreFilters, $curJsDropContent, !_cond);
-            switchClass($moreFiltersOpen, $curSelector, !_cond);
-            switchClass($moreFiltersDrop, $curDrop, !_cond);
-
-            // Ограничить высоту выпадающего списка фильтров
-            // phonesDropHeight.call();
+          // Открыть дополнительный список фильтров по клику на селектор
+          $moreFiltersOpenEl.on('click', function () {
+            if (filtersDropIsShow) {
+              hideMoreFilters();
+            } else {
+              showMoreFilters();
+            }
 
             return false;
           });
 
-          // Пересчет высоты дополнительного списка фильтров
-          // $window.on('resize scroll', function () {
-          //   phonesDropHeight.call();
-          // });
+          // Показать результаты
+          $body.on('click', config.showResultsEl, function (e) {
+            e.preventDefault();
+
+            hideMobFiltersMenu();
+            hideMoreFilters();
+
+            $('html, body').stop().animate({scrollTop: 0}, 300);
+          });
 
           // Счетчик отфильтрованных товаров
           $grid.on('arrangeComplete', function (event, filteredItems) {
-            var lengthItems = filteredItems.length,
-                filterCounterContent = 'Items not found';
+            lengthFilteredItems = filteredItems.length;
+
+            var filterCounterContent = 'Items not found';
 
             // search counter
-            if (lengthItems > 0) {
+            if (lengthFilteredItems > 0) {
               var items = (filteredItems.length > 1) ? 'items' : 'item';
-              filterCounterContent = 'Found <span style="display: inline-block;"><strong>' + lengthItems + '</strong> ' + items + '</span>';
+              filterCounterContent = 'Found <span style="display: inline-block;"><strong>' + lengthFilteredItems + '</strong> ' + items + '</span>';
             }
 
             $counter
                 .html(filterCounterContent)
                 .closest('.filters-button')
-                .toggleClass('btn-show', showButtonFind);
+                .toggleClass('btn-show', filtersIsActive());
 
             // "no product" show / hide
-            if (!lengthItems) {
+            if (!lengthFilteredItems) {
               $counter.closest('.filters-button').addClass('no-items');
-              _tplNoProducts.show();
+              tplFiltersNotFound.show();
             } else {
               $counter.closest('.filters-button').removeClass('no-items');
-              _tplNoProducts.hide();
+              tplFiltersNotFound.hide();
             }
+
+            $element.trigger('productsFilters.afterFiltered');
           });
 
-          // Сброс фильтров
-          $resetFilters.on('click', function (e) {
+          // Очистить фильтры и поле поиска
+          $resetFiltersEl.on('click', function (e) {
             e.preventDefault();
-
-            if ($(this).hasClass('disabled')) return;
-
             clearFilters();
-            methodOrInit = false;
+            btnResetChangeState();
           });
 
           // Открыть панель фильтров (на мобиле)
-          $body.on('click', config.filtersOpen, function (event) {
+          $body.on('click', config.mobFiltersMenuOpenEl, function (event) {
             var $curBtn = $(this);
 
-            if (!$curBtn.hasClass('active')) {
-              // console.log("Открыть панель фильтров (на мобиле)");
-              showFiltersPanel();
+            if (!$curBtn.hasClass(config.modifiers.activeClass)) {
+              showMobFiltersMenu();
             } else {
-              // console.log("Закрыть панель фильтров (на мобиле)");
-              hideFiltersPanel();
+              hideMobFiltersMenu();
             }
 
             event.preventDefault();
-            // return false;
           });
 
-          // Открыть панель фильтров на МОБИЛЕ, если в url хэш #filters-open
-          if (document.location.hash === "#filters-open" && window.innerWidth < config.breakpoints) {
-            setTimeout(function () {
-              showFiltersPanel();
-
-              // Hide preloader
-              setTimeout(function () {
-                $('.page-preloader').addClass('hide');
-                $HTML.addClass('overflow-visible');
-              }, 100);
-            }, 200);
-          }
-
-          // Открыть панель фильтров на планшете и десктопе в url хэш #filters-open
-          if (document.location.hash === "#filters-open" && window.innerWidth >= config.breakpoints) {
-            setTimeout(function () {
-              // todo Костыль нужно исправить
-              $moreFiltersOpen.trigger('click');
-
-              // todo Переделать на фидбэк после открытия доп фильтров
-              // Hide preloader
-              setTimeout(function () {
-                $('.page-preloader').addClass('hide');
-                $HTML.addClass('overflow-visible');
-              }, 100);
-            }, 200);
-          }
-
           // Закрыть панель фильтров на мобиле
-          $body.on('click', config.filtersClose, function () {
-            hideFiltersPanel();
+          $body.on('click', config.mobFiltersMenuCloseEl, function (event) {
+            hideMobFiltersMenu();
 
-            return false;
+            event.preventDefault();
           });
 
           // Закрывать панель фильтров (мобильный вид) при ресайзе
-          // todo Пересмотреть это решение
           $window.on('resizeByWidth', function () {
-            if ($element.attr('style')) {
-              $element.attr('style', '');
-              // $jsDropOpener.trigger('click');
-              // toggleScrollPage('mobile-filter-panel');
-            }
-
-            if ($filtersOpen.hasClass('active')) {
-              hideFiltersPanel();
+            if (window.innerWidth >= config.breakpoints) {
+              hideMobFiltersMenu();
             }
           });
         },
         init = function () {
-          // Включить/отключить кнопку сброса фильтров
-          clearBtnState();
-          // Добавтить сообщение об отсутствии товаров, и скрыть его
-          _tplNoProducts.hide().insertAfter($productsContainer);
+          // Триггер change на активных фильтрах
+          $filter.filter(':checked').trigger('change');
+          // Добавтить сообщение об отсутствии товаров.
+          // Скрыть его.
+          tplFiltersNotFound.hide().insertAfter($productsContainer);
 
           $element.addClass(CONST_CLASSES.initClass);
           $element.trigger('productsFilters.afterInit');
@@ -1347,6 +1276,10 @@ function toggleMenu() {
       callbacks: callbacks,
       gridInit: gridInit,
       clearFilters: clearFilters,
+      showMoreFilters: showMoreFilters,
+      hideMoreFilters: hideMoreFilters,
+      showMobFiltersMenu: showMobFiltersMenu,
+      hideMobFiltersMenu: hideMobFiltersMenu,
       common: common,
       init: init
     };
@@ -1356,9 +1289,7 @@ function toggleMenu() {
 
   function _run (el) {
     el.productsFilters.callbacks();
-    // Создание плитки продуктов Isotope
     el.productsFilters.gridInit();
-    el.productsFilters.clearFilters();
     el.productsFilters.common();
     el.productsFilters.init();
   }
@@ -1393,44 +1324,51 @@ function toggleMenu() {
 
   $.fn.productsFilters.defaultOptions = {
     // Контейнер фильтруемых продуктов
-    productsContainer: '.filters-container-js',
+    productsContainer: '.filtered-elements-js',
     // Продукт
     productElement: '.products__item',
     // Фильтр
     filter: '.filter-js',
-    // Группа фильтров с одним названием и методом фильтрации
-    filtersGroup: '.filters-tags-js',
+    // Елемент содержащий фильтр
+    filterItem: '.filter-item-js',
+    // Группа фильтров одного типа
+    filtersGroup: '[data-filters-group]',
     
     // Кнопка открытия панели фильтров (мобильный вид)
-    filtersOpen: '.btn-filters-opener-js',
+    mobFiltersMenuOpenEl: '.btn-filters-opener-js',
     // Кнопка закрытия панели фильтров (мобильный вид)
-    filtersClose: '.btn-filters-close-js',
+    mobFiltersMenuCloseEl: '.btn-filters-close-js',
     
     // Поле поиска
-    search: $('.filters-search-js input'),
+    filtersSearchInput: $('.filters-search-js input'),
+    // Селектор, по которому ведется поиск
+    filtersSearchSelector: '.products__content',
     
     // Общий контейнер содержащий кнопку открытия списка фильтров и список дополнительных фильтров
-    moreFilters: '.filters-content-js',
+    moreFiltersContainer: '.filters-content-js',
     // Кнопка открытия списка дополнительных фильтров
-    moreFiltersOpen: '.filter-selector-js',
+    moreFiltersOpenEl: '.filter-selector-js',
     // Список дополнительных фильтров
     moreFiltersDrop: '.filters-drop-js',
     // Елемент со счетчиком отфильтрованных товаров
     counter: '.filters-counter-js',
 
     // Панель с результатами поиска
-    panelOptions: '.filters-options-js',
+    resultsPanel: '.filters-results-panel-js',
     // Кнопка сброса фильтров
     resetFilters: '.clear-filters',
     // Кнопка показа фильтров
-    showResults: '.show-filter-items-js',
+    showResultsEl: '.show-filter-items-js',
+
+    // Темплейт уведомления о ненайденных продуктах
+    tplFiltersNotFound: '<div class="filters-not-found">Items not found</div>',
 
     breakpoints: 768,
     animationSpeed: 200,
     modifiers: {
       activeClass: 'active',
-      classShowDrop: 'show-drop',
-      isCheckedClass: 'is-checked'
+      showMoreFilters: 'show-drop',
+      activeFilter: 'active'
     },
 
     // events
@@ -1443,10 +1381,36 @@ function filtersEvents() {
   var $filters = $('.filters-js');
   if ($filters.length) {
     $filters.productsFilters({
-      afterFiltered(event, filters, obj) {
+      afterFilterChange: function (event, filters, obj) {
         console.log("obj: ", obj);
+      },
+      afterMoreFiltersShow: function () {
+        $('.mob-menu-opener-js').switchClass('remove');
+
+        // Hide preloader
+        $('.page-preloader').addClass('hide');
+        $HTML.addClass('overflow-visible');
       }
     });
+  }
+}
+
+
+function showFilterByHash() {
+  var breakpoints = 768;
+
+  // Открыть панель фильтров на МОБИЛЕ, если в url хэш #filters-open
+  if (document.location.hash === "#filters-open" && window.innerWidth < breakpoints) {
+    setTimeout(function () {
+      $('.filters-js').productsFilters('showMobFiltersMenu');
+    }, 200);
+  }
+
+  // Открыть панель фильтров на планшете и десктопе в url хэш #filters-open
+  if (document.location.hash === "#filters-open" && window.innerWidth >= breakpoints) {
+    setTimeout(function () {
+      $('.filters-js').productsFilters('showMoreFilters');
+    }, 200);
   }
 }
 

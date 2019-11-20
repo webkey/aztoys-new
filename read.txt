@@ -23,12 +23,3 @@ rimraf node_modules/
 
 @source
 https://www.youtube.com/watch?v=kesyrCZE1bA&feature=youtu.be
-
-
-
-2019.10.16
-символами ~~ заккоментил изменения, которые делались под новый плагин фильтрации
-~~functions.js
-~~_components.scss
-~~_mixins.scss
-~~_tpl_product-filters.html

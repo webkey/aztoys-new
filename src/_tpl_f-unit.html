@@ -1,0 +1,7 @@
+<label class="f-unit filter-item-js">
+  <input class="f-unit__input filter-js" type="checkbox"@@if(context.checked){ checked}@@if(context.disabled){ disabled} name="@@tag" data-filter=".@@tag" data-filter-method="or">
+  <span class="f-unit__inner">
+    @@if(context.icon){<span class="f-unit__icon @@icon"></span>}
+    <span class="f-unit__title">@@title</span>
+  </span>
+</label>

@@ -1,0 +1,1019 @@
+@import "../utils/variables";
+@import "../utils/mixins";
+@import "../../libs/include-media/dist/include-media";
+
+/* FILTERS */
+.filters {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0 auto;
+  text-align: left;
+
+  // <992px
+  @include media("<tab") {
+    margin: 0;
+  }
+
+  // <768px
+  @include media("<tab-s") {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: calc(100% - #{$header-height--tab});
+    padding-bottom: #{$header-height--tab};
+    top: $header-height--tab;
+    border: none;
+    background: #fff;
+    box-shadow: 25px 0 15px -15px transparent;
+
+    // transition
+    will-change: opacity, transform, box-shadow;
+    transition: {
+      property: opacity, transform;
+      duration: $animation-speed;
+    };
+
+    // hide
+    $translate: -100%, 0;
+    transform: translate($translate);
+    transform: translate3d($translate, 0);
+  }
+
+  // <640px
+  @include media("<mob") {
+    height: calc(100% - #{$header-height--mob});
+    padding-bottom: #{$header-height--mob};
+    top: $header-height--mob;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    height: $header-height--mob;
+    width: 100%;
+    pointer-events: none;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.3);
+    display: none;
+    opacity: 0;
+    transition: opacity $animation-speed 0s;
+
+    // <768px
+    @include media("<tab-s") {
+      display: block;
+    }
+  }
+
+  // show
+  &.active {
+    // <768px
+    @include media("<tab-s") {
+      box-shadow: 25px 0 15px -15px rgba(0, 0, 0, 0.15);
+      $translate: 0, 0;
+      transform: translate($translate);
+      transform: translate3d($translate, 0);
+    }
+
+    &::before {
+      opacity: 1;
+      transition-delay: $animation-speed;
+    }
+  }
+}
+
+.filters__panel {
+  position: relative;
+  box-sizing: border-box;
+
+  // <768px
+  @include media("<tab-s") {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.filters__groups {
+  box-sizing: border-box;
+  position: relative;
+  margin: 0 0 -20px -20px;
+  display: flex;
+  align-items: center;
+
+  // <768px
+  @include media("<tab-s") {
+    margin: 0;
+    padding: #{nth($layout-page-space--tab, 1)} #{nth($layout-page-space--tab, 2)} 10px;
+    display: block;
+  }
+
+  // <640px
+  @include media("<mob") {
+    padding: #{nth($layout-page-space--mob, 1)} #{nth($layout-page-space--mob, 2)} 10px;
+  }
+}
+
+.filters__group {
+  box-sizing: border-box;
+  position: relative;
+  margin: 0 0 20px 20px;
+  line-height: 1;
+
+  // <992px
+  @include media("<tab") {
+    margin-left: 10px;
+  }
+
+  // <768px
+  @include media("<tab-s") {
+    margin: 0 0 20px;
+  }
+}
+
+// Filters buttons group
+.filters-buttons-group {
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  //border-radius: 10px;
+  //border: 2px solid rgba(white, 0.8);
+  margin: -5px;
+
+  // <768px
+  @include media("<tab-s") {
+    border-color: $base-color;
+  }
+}
+
+.filters-button {
+  $filter: &;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  margin: 5px;
+  text-decoration: none;
+  color: inherit;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  & > span {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    padding: $filter-btn-spaces;
+    cursor: pointer;
+    @include filter-btn-font;
+    @include filter-btn-bg;
+
+    // <992px
+    @include media("<tab") {
+      padding: $filter-btn-spaces--tab;
+      @include filter-btn-font--tab;
+    }
+
+    // <768px
+    @include media("<tab-s") {
+      padding: $filter-btn-spaces--tab-s;
+      @include filter-btn-font--tab-s;
+      border-color: $base-color;
+    }
+  }
+
+  // Hide default inputs
+  input[type="checkbox"],
+  input[type="radio"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+
+    &:disabled {
+      color: #bdbdbd !important;
+
+      & + span {
+        cursor: default !important;
+        color: #d6d6d6 !important;
+
+        &::before,
+        &::after {
+          border-color: currentColor !important;
+        }
+
+        &::before {
+          background-color: #f3f3f3 !important;
+        }
+      }
+    }
+  }
+
+  //:hover
+  .desktop &:hover {
+    & > span {
+      @include btn-hover;
+    }
+  }
+
+  // :active
+  &:active {
+    & > span {
+      @include btn-active;
+    }
+  }
+
+  // Если фильтр является чекбоксом, или радиобаттоном
+  // Checked
+  input[type="checkbox"],
+  input[type="radio"] {
+    &:checked + span {
+      @include btn-checked;
+    }
+  }
+
+  // Checked Hover
+  .desktop &:hover {
+    input[type="checkbox"],
+    input[type="radio"] {
+      &:checked + span {
+        @include btn-checked-hover;
+      }
+    }
+  }
+
+  // Если фильтр является ссылкой
+  // Checked
+  @at-root {
+    a#{$filter} {
+      &.is-checked {
+        & > span {
+          @include btn-checked;
+        }
+      }
+    }
+
+    // Checked Hover
+    .desktop a#{$filter}.is-checked:hover {
+      & > span {
+        @include btn-checked-hover;
+      }
+    }
+  }
+}
+
+// Filters counter
+.filters-counter {
+  display: block;
+  @include font-normal;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.05em;
+  text-align: left;
+  white-space: nowrap;
+  color: $base-color-alt;
+
+  // <992px
+  @include media("<tab") {
+    font-size: 13px;
+    line-height: 17px;
+  }
+
+  strong {
+    @include font-bold;
+    font-size: 16px;
+  }
+}
+
+// Clear filters button
+.clear-filters {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  @include font-normal;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  color: #fff;
+  white-space: nowrap;
+  opacity: 0.7;
+  padding: 5px 12px 5px 27px;
+  text-decoration: none;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  transition: opacity $animation-speed;
+
+  // Icon
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 27px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNOSAxMmwtNC40NjMgNC45NjktNC41MzctNC45NjloM2MwLTQuOTcgNC4wMy05IDktOSAyLjM5NSAwIDQuNTY1Ljk0MiA2LjE3OSAyLjQ2OGwtMi4wMDQgMi4yMzFjLTEuMDgxLTEuMDUtMi41NTMtMS42OTktNC4xNzUtMS42OTktMy4zMDkgMC02IDIuNjkxLTYgNmgzem0xMC40NjMtNC45NjlsLTQuNDYzIDQuOTY5aDNjMCAzLjMwOS0yLjY5MSA2LTYgNi0xLjYyMyAwLTMuMDk0LS42NS00LjE3NS0xLjY5OWwtMi4wMDQgMi4yMzFjMS42MTMgMS41MjYgMy43ODQgMi40NjggNi4xNzkgMi40NjggNC45NyAwIDktNC4wMyA5LTloM2wtNC41MzctNC45Njl6Ij48L3BhdGg+PC9zdmc+);
+    background-size: 16px;
+    transition: transform $animation-speed;
+  }
+
+  // Disabled
+  &.disabled {
+    cursor: default;
+    opacity: 0.3;
+  }
+
+  .desktop &:not(.disabled):hover {
+    opacity: 0.95;
+
+    &::before {
+      transform: translateZ(0) rotate(-45deg);
+    }
+  }
+}
+
+// Filters tools
+.filters-tools {
+  position: relative;
+  padding: 18px 0 0;
+
+  // <992px
+  @include media("<tab") {
+    padding-top: 20px;
+  }
+
+  // <768px
+  @include media("<tab-s") {
+    display: none;
+  }
+
+  .filters-counter {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+// Filters Selector
+.filter-selector {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  $sp: $filter-btn-spaces;
+  padding: #{nth($sp, 1)} #{$filter-btn-arr-size - 4} #{nth($sp, 1)} #{nth($sp, 2)};
+  @include filter-btn-font;
+  @include filter-btn-bg;
+
+  // <992px
+  @include media("<tab") {
+    $sp: $filter-btn-spaces--tab;
+    padding: #{nth($sp, 1)} #{$filter-btn-arr-size--tab - 4} #{nth($sp, 1)} #{nth($sp, 2)};
+    @include filter-btn-font--tab;
+  }
+
+  // <768px
+  @include media("<tab-s") {
+    display: none;
+  }
+
+  // Arrow
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: $filter-btn-arr-size;
+    background-repeat: no-repeat;
+    background-image: none;
+    background-position: 50%;
+    background-size: 10px;
+    transition: opacity $animation-speed;
+
+    // <992px
+    @include media("<tab") {
+      width: $filter-btn-arr-size--tab;
+    }
+  }
+
+  &::before {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMCA3LjMzbDIuODI5LTIuODMgOS4xNzUgOS4zMzkgOS4xNjctOS4zMzkgMi44MjkgMi44My0xMS45OTYgMTIuMTd6Ij48L3BhdGg+PC9zdmc+);
+  }
+
+  &::after {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCA3LjMzbDIuODI5LTIuODMgOS4xNzUgOS4zMzkgOS4xNjctOS4zMzkgMi44MjkgMi44My0xMS45OTYgMTIuMTd6Ij48L3BhdGg+PC9zdmc+);
+    opacity: 0;
+  }
+
+  //:hover
+  .desktop &:hover {
+    @include btn-hover;
+  }
+
+  // :clicked
+  &:active {
+    @include btn-active;
+  }
+
+  // Active
+  &.show-drop {
+    @include btn-checked;
+
+    &::before,
+    &::after {
+      transform: rotate(-180deg);
+    }
+
+    &::before {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
+
+    // Active Hover
+    .desktop &:hover {
+      @include btn-checked-hover;
+    }
+  }
+}
+
+/* filter unit */
+// checkbox, radiobutton, link
+// Element
+.f-unit {
+  $cur: &;
+
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  text-decoration: none;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+
+  input#{$cur}__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &__inner {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: top;
+    padding: 0 0 0 38px;
+    font-size: inherit;
+    line-height: inherit;
+    color: #1e1e1c;
+    cursor: pointer;
+    transition: color $animation-speed;
+
+    &::before {
+      box-sizing: border-box;
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 24px;
+      width: 24px;
+      border-radius: 5px;
+      border: 2px solid #333;
+      transition-property: border;
+      transition-duration: $animation-speed;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 6px;
+      width: 16px;
+      height: 14px;
+      opacity: 0;
+      background: url(../../img/sprite-icons.png) 0 -250px no-repeat;
+      transition-property: opacity;
+      transition-duration: $animation-speed;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    $size: 20px;
+    flex: 0 0 $size;
+    max-width: $size;
+    width: $size;
+    height: $size;
+    margin-right: 10px;
+    filter: grayscale(1);
+    transition: filter $animation-speed;
+  }
+
+  // Hover
+  .desktop &:hover {
+    #{$cur}__inner {
+      color: $base-color;
+
+      &::before {
+        border-color: $base-color;
+      }
+    }
+
+    #{$cur}__icon {
+      filter: grayscale(0)
+    }
+  }
+
+  // Checked
+  input#{$cur}__input:checked {
+    & ~ #{$cur}__inner {
+      color: $base-color;
+
+      &::before {
+        border-color: $base-color;
+      }
+
+      &::after {
+        opacity: 1;
+      }
+
+      #{$cur}__icon {
+        filter: grayscale(0)
+      }
+    }
+  }
+
+  // Disabled
+  input#{$cur}__input:disabled {
+    & ~ #{$cur}__inner {
+      color: $form-text-color--disabled;
+      cursor: default;
+
+      &::before {
+        border-color: $form-border-color--disabled;
+      }
+
+      &::after {
+        background-position: 0 -284px;
+        width: 16px;
+        height: 14px;
+      }
+
+      #{$cur}__icon {
+        filter: grayscale(1) opacity(0.4);
+      }
+    }
+  }
+
+  // Checked and Disabled
+  input#{$cur}__input:checked:disabled {
+    & ~ #{$cur}__inner {
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+/* filter unit end */
+
+/* filters list */
+// Element
+.f-list {
+  box-sizing: border-box;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  @include font-normal;
+  font-size: 15px;
+  line-height: 24px;
+  letter-spacing: 0.05em;
+
+  &__item {
+    margin: 10px 0;
+    box-sizing: border-box;
+  }
+}
+
+/* filters list end */
+
+/* filters group */
+.f-group {
+  position: relative;
+}
+
+/* filters group end */
+
+/* filters drop */
+.filters-drop {
+  box-sizing: border-box;
+  position: fixed;
+  left: $sidebar-width;
+  top: $header-height;
+  height: calc(100% - #{$header-height});
+  width: calc(100% - #{$sidebar-width});
+  max-width: calc(#{$layout-page-max-width} - #{$sidebar-width});
+  background-color: rgba(#fff, 0.92);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  transition: opacity $animation-speed, visibility $animation-speed;
+  opacity: 0;
+  visibility: hidden;
+
+  // <992px
+  @include media("<tab") {
+    left: 0;
+    top: $header-height--tab;
+    height: calc(100% - #{$header-height--tab});
+    width: 100%;
+    max-width: none;
+  }
+
+  // <768px
+  @include media("<tab-s") {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    //opacity: 1 !important;
+    //overflow: visible !important;
+    //visibility: visible !important;
+    //height: auto !important;
+    opacity: 1;
+    overflow: visible;
+    visibility: visible;
+    height: auto;
+    background: none;
+    box-shadow: none;
+  }
+
+  .mobile & {
+    overflow: auto;
+  }
+
+  // Show
+  &.show-drop {
+    opacity: 1;
+    visibility: visible;
+    // <768px
+    //@include media("<tab-s") {
+    //  display: block;
+    //}
+  }
+}
+
+.filters-drop__holder {
+  position: relative;
+  box-sizing: content-box;
+  //padding: 30px #{nth($layout-page-space, 2) - nth($filters-drop-group-space, 2) / 2};
+  padding: 30px 5px;
+  max-width: $layout-flood-width;
+  //margin: 0 auto;
+  //display: flex;
+  //flex-wrap: wrap;
+  //align-items: flex-start;
+  display: table;
+
+  // <768px
+  @include media("<tab-s") {
+    padding: 0;
+    display: block;
+  }
+}
+
+.filters-drop__group {
+  display: table-cell;
+  box-sizing: border-box;
+  //$width: 33.33%;
+  //flex: 1 0 $width;
+  //max-width: $width;
+  padding: 0 #{nth($filters-drop-group-space, 2) / 2} nth($filters-drop-group-space, 1);
+
+  // <1920px
+  @include media("<desk-s") {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  // <1280px
+  @include media("<lap-s") {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  // <768px
+  @include media("<tab-s") {
+    display: block;
+    max-width: none;
+    margin-bottom: 20px;
+    padding: $filter-btn-spaces--tab;
+    border: 2px solid $base-color;
+    border-radius: 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.filters-drop__title {
+  display: block;
+  padding: 0 0 10px 30px;
+  @include font-normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 30px;
+  color: $title-color;
+
+  // <768px
+  @include media("<tab-s") {
+    @include font-bold;
+    font-size: 18px;
+    line-height: 24px;
+    color: $base-color;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.filters-drop__list {
+  display: block;
+}
+
+/* filters drop end */
+
+/* filters results panel */
+.filters-results-panel {
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  left: $sidebar-width;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $header-height;
+  padding: 5px #{nth($layout-page-space, 2)};
+  width: calc(100% - #{$sidebar-width});
+  max-width: calc(#{$layout-page-max-width} - #{$sidebar-width});
+  background: #fff;
+  box-shadow: 0 -5px 15px -3px rgba(0, 0, 0, 0.25);
+  z-index: 5;
+  will-change: opacity, transform;
+  transition: {
+    property: opacity, transform;
+    duration: $animation-speed;
+  };
+
+  // hide
+  opacity: 0;
+  pointer-events: none;
+  $translate: 0, 120%;
+  transform: translate($translate);
+  transform: translate3d($translate, 0);
+
+  @include media(">=tab-s") {
+    // show
+    &_active {
+      opacity: 1;
+      pointer-events: auto;
+      $translate: 0, 0;
+      transform: translate($translate);
+      transform: translate3d($translate, 0);
+    }
+  }
+
+  // <768px
+  @include media("<tab-s") {
+    left: 0;
+    top: 0;
+    justify-content: space-between;
+    height: $header-height--tab;
+    width: 100%;
+    padding: 5px #{nth($layout-page-space--tab, 2)};
+
+    // show for mov
+    &_active-mob {
+      opacity: 1;
+      pointer-events: auto;
+      $translate: 0, 0;
+      transform: translate($translate);
+      transform: translate3d($translate, 0);
+    }
+  }
+
+  // <640px
+  @include media("<mob") {
+    height: $header-height--mob;
+    padding: 5px #{nth($layout-page-space--mob, 2)};
+  }
+
+  // <360px
+  @include media("<mob-xxs") {
+    padding: 5px 8px;
+  }
+
+  // Счетчик
+  .filters-counter {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100px;
+    color: $base-color;
+    padding: 0;
+    margin-right: 20px;
+
+    &.no-items {
+      color: $error-color;
+    }
+  }
+
+  // Кнопка "Show found items"
+  .show-filters-items {
+    // <768px
+    @include media("<tab-s") {
+      font-size: 16px;
+      line-height: 24px;
+      text-transform: none;
+    }
+
+    // <640px
+    @include media("<mob") {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      $width: 90px;
+      width: $width;
+      margin-left: -#{$width / 2};
+      height: $header-height--mob + 10px;
+      padding: 12px 15px;
+      font-size: 15px;
+      line-height: 18px;
+      border-radius: 10px 10px 0 0;
+    }
+
+    // <360px
+    @include media("<mob-xxs") {
+      $width: 70px;
+      width: $width;
+      margin-left: -#{$width / 2};
+      padding: 12px 10px;
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+
+  // Конпка очистки фильтров
+  .clear-filters {
+    margin: 0 0 0 20px;
+    color: $base-color;
+    opacity: 1;
+
+    &.disabled {
+      opacity: 0.3;
+    }
+
+    &::before {
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNOSAxMmwtNC40NjMgNC45NjktNC41MzctNC45NjloM2MwLTQuOTcgNC4wMy05IDktOSAyLjM5NSAwIDQuNTY1Ljk0MiA2LjE3OSAyLjQ2OGwtMi4wMDQgMi4yMzFjLTEuMDgxLTEuMDUtMi41NTMtMS42OTktNC4xNzUtMS42OTktMy4zMDkgMC02IDIuNjkxLTYgNmgzem0xMC40NjMtNC45NjlsLTQuNDYzIDQuOTY5aDNjMCAzLjMwOS0yLjY5MSA2LTYgNi0xLjYyMyAwLTMuMDk0LS42NS00LjE3NS0xLjY5OWwtMi4wMDQgMi4yMzFjMS42MTMgMS41MjYgMy43ODQgMi40NjggNi4xNzkgMi40NjggNC45NyAwIDktNC4wMyA5LTloM2wtNC41MzctNC45Njl6Ij48L3BhdGg+PC9zdmc+);
+    }
+  }
+}
+
+/* filter results panel end */
+
+/* filters open button */
+.btn-filters {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  right: #{nth($layout-page-space, 2) + $header-btn-height + 20};
+  height: $header-btn-height;
+  margin-top: -#{$header-btn-height / 2};
+  //padding: 0 20px 0 50px;
+  padding: 0 20px;
+  @include font-bold;
+  font-size: 24px;
+  line-height: $header-btn-height;
+  letter-spacing: 0.02em;
+  border-radius: 10px;
+  background-color: $highlight-color;
+  box-shadow: 0 0 0 $highlight-color--hover;
+  background-repeat: no-repeat;
+  background-position: 15px 50%;
+  //background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDI5ZGI1IiBkPSJNMTkuNDc5IDJsLTcuNDc5IDEyLjU0M3Y1LjkyNGwtMS0uNnYtNS4zMjRsLTcuNDc5LTEyLjU0M2gxNS45NTh6bTMuNTIxLTJoLTIzbDkgMTUuMDk0djUuOTA2bDUgM3YtOC45MDZsOS0xNS4wOTR6Ii8+PC9zdmc+);
+  background-size: 26px;
+  transition: background-color $animation-speed, box-shadow $animation-speed;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 5;
+
+  // <992px
+  @include media("<tab") {
+    right: #{nth($layout-page-space--tab, 2) + $header-btn-height--tab + 20};
+    height: $header-btn-height--tab;
+    font-size: 20px;
+    line-height: $header-btn-height--tab;
+    margin-top: -#{$header-btn-height--tab / 2};
+    //padding: 0 15px 0 35px;
+    padding: 0 15px;
+    background-position: 10px 50%;
+    background-size: 20px;
+  }
+
+  // <640px
+  @include media("<mob") {
+    right: #{nth($layout-page-space--mob, 2) + $header-btn-height--mob + 10};
+    height: $header-btn-height--mob;
+    font-size: 18px;
+    line-height: $header-btn-height--mob;
+    margin-top: -#{$header-btn-height--mob / 2};
+  }
+
+  // <360px
+  @include media("<mob-xxs") {
+    right: #{$header-btn-height--mob + 10 + 5};
+  }
+
+  &.btn-filters-opener {
+    display: none;
+
+    // <768px
+    @include media("<tab-s") {
+      display: block;
+    }
+  }
+
+  //:hover
+  .desktop &:hover {
+    @include btn-hover;
+  }
+
+  // :active
+  &:active {
+    @include btn-active;
+  }
+
+  // .active
+  //&.active {
+  //  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNMjMuOTU0IDIxLjAzbC05LjE4NC05LjA5NSA5LjA5Mi05LjE3NC0yLjgzMi0yLjgwNy05LjA5IDkuMTc5LTkuMTc2LTkuMDg4LTIuODEgMi44MSA5LjE4NiA5LjEwNS05LjA5NSA5LjE4NCAyLjgxIDIuODEgOS4xMTItOS4xOTIgOS4xOCA5LjF6Ij48L3BhdGg+PC9zdmc+);
+  //  background-size: 18px;
+  //}
+
+  // Active
+  &.active {
+    @include btn-checked;
+
+    // Active Hover
+    .desktop &:hover {
+      @include btn-checked-hover;
+    }
+  }
+}
+
+/* filters opener button end */
+
+/* filters close button */
+.btn-filters-close {
+  visibility: visible;
+  opacity: 1;
+  position: absolute;
+
+  display: none;
+
+  // <768px
+  //@include media("<tab-s") {
+  //  display: block;
+  //}
+}
+
+/* filters close button end */
+
+/* filters-not-found */
+.filters-not-found {
+  text-align: center;
+  font-size: 24px;
+  padding: 20px 0;
+}
+
+/* filters-not-found end */
+
+/*FILTERS end*/
