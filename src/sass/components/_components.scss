@@ -790,10 +790,10 @@ button {
   @include font-bold;
   font-weight: normal;
   font-size: 16px;
-  line-height: 30px;
+  line-height: 18px;
   color: $base-color;
   letter-spacing: 0.01em;
-  padding: 10px 34px;
+  padding: 16px 34px;
   border: 1px solid transparent;
   background: $highlight-color;
   box-shadow: 0 0 0 $highlight-color--hover;
@@ -801,10 +801,16 @@ button {
   transition: color $animation-speed, background-color $animation-speed, box-shadow $animation-speed;
   position: relative;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 
   // <768px
   @include media("<tab-s") {
-    padding: 8px 30px;
+    padding: 14px 30px;
+  }
+
+  // <640px
+  @include media("<mob") {
+    padding: 14px 15px;
   }
 
   // hover
@@ -818,8 +824,24 @@ button {
   }
 }
 
-
 /*btn-default end*/
+
+/* btn-default-group */
+.btn-default-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+
+  &__item,
+  li {
+    padding: 5px;
+  }
+}
+
+/* btn-default-group end */
 
 /*btn close*/
 .btn-close {
@@ -1341,61 +1363,27 @@ textarea {
 
 /* placeholder hidden end */
 
-/* form field hover */
-.desktop input[type="text"]:hover,
-.desktop input[type="password"]:hover,
-.desktop input[type="email"]:hover,
-.desktop input[type="search"]:hover,
-.desktop textarea:hover {
-  box-shadow: inset 0 0 0 1px #54c7d9;
-}
-
-/*form field hover end*/
-/*form field complete*/
-input[type="text"].input-complete,
-input[type="password"].input-complete,
-input[type="email"].input-complete,
-input[type="search"].input-complete,
-textarea.input-complete {
-  background: #54c7d9;
-  color: #fff;
-}
-
-/*form field complete end*/
-/*form field focus*/
-input[type="text"]:focus,
-input[type="text"]:focus:hover,
-input[type="text"].input-complete:focus,
-input[type="text"].input-complete:focus:hover,
-input[type="password"]:focus,
-input[type="password"]:focus:hover,
-input[type="password"].input-complete:focus,
-input[type="password"].input-complete:focus:hover,
-input[type="email"]:focus,
-input[type="email"]:focus:hover,
-input[type="email"].input-complete:focus,
-input[type="email"].input-complete:focus:hover,
-input[type="search"]:focus,
-input[type="search"]:focus:hover,
-input[type="search"].input-complete:focus,
-input[type="search"].input-complete:focus:hover,
-textarea:focus,
-textarea:focus:hover,
-textarea.input-complete:focus,
-textarea.input-complete:focus:hover {
-  box-shadow: inset 0 0 0 1px #54c7d9, inset 4px 4px 6px rgba(0, 0, 0, 0.08);
-  color: #333;
-  background: #fff;
-}
-
-/*form field focus end*/
-/*form error*/
-
+/* form field states */
 input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="search"],
 textarea {
+  &:hover {
+    box-shadow: inset 0 0 0 1px $box-shadow;
+  }
+
+  &.input-complete {
+    background: #54c7d9;
+    color: #fff;
+  }
+
+  &:focus {
+    box-shadow: inset 0 0 0 1px #54c7d9, inset 4px 4px 6px rgba(0, 0, 0, 0.08);
+    color: #333;
+    background: #fff;
+  }
+
   &.error {
     &,
     &:hover {
@@ -3124,7 +3112,7 @@ $swp-space--mob: 9px;
 
     // <992px
     @include media("<tab") {
-      margin-right: nth($layout-page-space--tab, 2);
+      margin-right: 20px;
     }
 
     // <640px
@@ -3441,8 +3429,237 @@ $swp-space--mob: 9px;
 
 /* menu opener end */
 
-/* search */
-// Button search
+/* search form in header */
+// Search form
+.search-form {
+  $search-form: &;
+
+  display: block;
+  position: relative;
+  padding-right: #{$header-btn-height};
+
+  // <992px
+  @include media("<tab") {
+    padding-right: #{$header-btn-height--tab};
+  }
+
+  &_no-btn {
+    padding-right: 0;
+  }
+
+  &__holder {
+    position: relative;
+    box-sizing: border-box;
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 10px 0 0 10px;
+
+    #{$search-form}_no-btn & {
+      border-radius: 10px;
+    }
+  }
+
+  &__input {
+    $this: &;
+
+    @at-root {
+      input#{$this} {
+        box-sizing: border-box;
+        margin: 0;
+        @include font-normal;
+        font-size: 18px;
+        line-height: 24px;
+        height: 38px;
+        padding: 7px 15px;
+        width: 100%;
+        border: 1px solid $border-color;
+        border-radius: 10px;
+        box-shadow: none;
+
+        // <992px
+        @include media("<tab") {
+          height: 36px;
+          padding: 6px 15px;
+        }
+
+        // <640px
+        @include media("<mob") {
+          font-size: 16px;
+        }
+
+        @include placeholder {
+          color: #ccc;
+        }
+
+        @include placeholder-focus {
+          color: #ccc !important;
+        }
+
+        &:focus,
+        &:hover {
+          color: #000;
+          background: #fff;
+          box-shadow: none;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: rgba($base-color, 0.5);
+          box-shadow: 0 0 0 2px rgba($base-color, 0.5);
+        }
+      }
+    }
+  }
+
+  &__setting {
+    $this: &;
+
+    padding: 5px 15px 0;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: left;
+    color: $text-color-light;
+
+    &-item {
+      margin-bottom: 4px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    input#{$this}-input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      margin: 0;
+      padding: 0;
+      opacity: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    &-inner {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      vertical-align: top;
+      padding: 0 0 0 24px;
+      font-size: inherit;
+      line-height: inherit;
+      color: inherit;
+      cursor: pointer;
+      transition: color $animation-speed;
+
+      &::before {
+        box-sizing: border-box;
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 14px;
+        width: 14px;
+        border-radius: 2px;
+        border: 1px solid currentColor;
+        transition: border-color $animation-speed;
+      }
+
+      &::after {
+        box-sizing: border-box;
+        content: '';
+        position: absolute;
+        left: 4px;
+        top: 0;
+        width: 6px;
+        height: 10px;
+        opacity: 0;
+        border: solid currentColor;
+        border-width: 0 2px 2px 0;
+        transition: opacity $animation-speed;
+        transform: rotate(50deg) skew(10deg);
+      }
+    }
+
+    &-el {
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      font-size: inherit;
+      line-height: inherit;
+      color: inherit;
+
+      // Hover
+      .desktop &:hover {
+        #{$this}-inner {
+          color: $text-color;
+
+          &::before {
+            border-color: $text-color;
+          }
+        }
+      }
+
+      // Checked
+      input#{$this}-input:checked {
+        & ~ #{$this}-inner {
+          color: $text-color;
+
+          &::before {
+            border-color: $text-color;
+          }
+
+          &::after {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  // Кнопка отправки формы
+  &__submit {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: $header-btn-height;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    background-color: $base-color;
+    box-shadow: none;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjEuMTcyIDI0bC03LjM4Ny03LjM4N2MtMS4zODguODc0LTMuMDI0IDEuMzg3LTQuNzg1IDEuMzg3LTQuOTcxIDAtOS00LjAyOS05LTlzNC4wMjktOSA5LTkgOSA0LjAyOSA5IDljMCAxLjc2MS0uNTE0IDMuMzk4LTEuMzg3IDQuNzg1bDcuMzg3IDcuMzg3LTIuODI4IDIuODI4em0tMTIuMTcyLThjMy44NTkgMCA3LTMuMTQgNy03cy0zLjE0MS03LTctNy03IDMuMTQtNyA3IDMuMTQxIDcgNyA3eiIvPjwvc3ZnPg==);
+    background-size: 30px;
+    transition: background-color $animation-speed, box-shadow $animation-speed;
+    z-index: 5;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    // <992px
+    @include media("<tab") {
+      width: $header-btn-height--tab;
+      background-size: 24px;
+    }
+
+    #{$search-form}_no-btn & {
+      display: none;
+    }
+
+    //:hover
+    &:hover {
+      background-color: lighten($base-color, 10%);
+      box-shadow: none;
+    }
+  }
+}
+
+// Button search open
 .btn-search-open {
   box-sizing: border-box;
   position: absolute;
@@ -3510,28 +3727,29 @@ $swp-space--mob: 9px;
   }
 }
 
-// Filters search
 .filters-search {
   position: absolute;
-  right: #{nth($layout-page-space, 2) + $header-btn-height + 20};
+  top: 9px;
+  right: #{nth($layout-page-space, 2) + $header-btn-height + 15};
   width: 320px;
   z-index: 10;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   transition: opacity $animation-speed, visibility $animation-speed, transform $animation-speed;
   transform: translateZ(0);
-  transform-origin: right center;
   opacity: 0;
   visibility: hidden;
 
   // <992px
   @include media("<tab") {
-    right: #{nth($layout-page-space--tab, 2) + $header-btn-height--tab + 20};
+    top: 8px;
+    right: #{nth($layout-page-space--tab, 2) + $header-btn-height--tab + 15};
   }
 
   // <640px
   @include media("<mob") {
     width: auto;
+    top: 4px;
     left: nth($layout-page-space--mob, 2);
     right: #{nth($layout-page-space--mob, 2) + $header-btn-height--mob + 10};
   }
@@ -3549,212 +3767,7 @@ $swp-space--mob: 9px;
   }
 }
 
-.search-form {
-  position: relative;
-
-  .input-wrap {
-    box-sizing: border-box;
-    position: relative;
-    padding: 5px #{$header-btn-height + 5} 5px 5px;
-    border-radius: 10px;
-    background-color: #fff;
-
-    // <992px
-    @include media("<tab") {
-      padding: 5px #{$header-btn-height--tab + 5} 5px 5px;
-    }
-  }
-
-  input[type="search"],
-  input[type="text"] {
-    box-sizing: border-box;
-    margin: 0;
-    @include font-normal;
-    font-size: 18px;
-    line-height: 24px;
-    //height: $header-btn-height;
-    height: 38px;
-    padding: 7px 15px;
-    width: 100%;
-    border: 1px solid $border-color;
-    border-radius: 10px;
-    box-shadow: none;
-
-    // <992px
-    @include media("<tab") {
-      height: $header-btn-height--tab;
-    }
-
-    // <640px
-    @include media("<mob") {
-      font-size: 16px;
-    }
-
-    @include placeholder {
-      color: #ccc;
-    }
-
-    @include placeholder-focus {
-      color: #ccc !important;
-    }
-
-    &:focus,
-    &:hover {
-      color: #000;
-      background: #fff;
-      box-shadow: none;
-    }
-  }
-
-  // Кнопка отправки формы
-  .btn-search {
-    box-sizing: border-box;
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: $header-btn-height;
-    padding: 0;
-    margin: 0;
-    border: none;
-    border-radius: 0 10px 10px 0;
-    background-color: $base-color;
-    box-shadow: none;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjEuMTcyIDI0bC03LjM4Ny03LjM4N2MtMS4zODguODc0LTMuMDI0IDEuMzg3LTQuNzg1IDEuMzg3LTQuOTcxIDAtOS00LjAyOS05LTlzNC4wMjktOSA5LTkgOSA0LjAyOSA5IDljMCAxLjc2MS0uNTE0IDMuMzk4LTEuMzg3IDQuNzg1bDcuMzg3IDcuMzg3LTIuODI4IDIuODI4em0tMTIuMTcyLThjMy44NTkgMCA3LTMuMTQgNy03cy0zLjE0MS03LTctNy03IDMuMTQtNyA3IDMuMTQxIDcgNyA3eiIvPjwvc3ZnPg==);
-    background-size: 30px;
-    transition: background-color $animation-speed, box-shadow $animation-speed;
-    z-index: 5;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-
-    // <992px
-    @include media("<tab") {
-      width: $header-btn-height--tab;
-      background-size: 24px;
-    }
-
-    //:hover
-    .desktop &:hover {
-      background-color: lighten($base-color, 10%);
-      box-shadow: none;
-    }
-
-    // :active
-    &:active {
-      transform: scale(1, 1);
-    }
-  }
-}
-
-.search-type {
-  $cur: &;
-
-  padding: 2px 15px;
-  font-size: 13px;
-  line-height: 16px;
-  text-align: left;
-  color: $text-color-light;
-
-  &__item {
-    margin-bottom: 4px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  input#{$cur}__input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  &__inner {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    vertical-align: top;
-    padding: 0 0 0 24px;
-    font-size: inherit;
-    line-height: inherit;
-    color: inherit;
-    cursor: pointer;
-    transition: color $animation-speed;
-
-    &::before {
-      box-sizing: border-box;
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 14px;
-      width: 14px;
-      border-radius: 4px;
-      border: 1px solid currentColor;
-      transition-property: border;
-      transition-duration: $animation-speed;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 4px;
-      top: 4px;
-      width: 6px;
-      height: 6px;
-      opacity: 0;
-      background-color: currentColor;
-      transition-property: opacity;
-      transition-duration: $animation-speed;
-    }
-  }
-
-  &__el {
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-    font-size: inherit;
-    line-height: inherit;
-    color: inherit;
-
-    // Hover
-    .desktop &:hover {
-      #{$cur}__inner {
-        color: $text-color;
-
-        &::before {
-          border-color: $text-color;
-        }
-      }
-    }
-
-    // Checked
-    input#{$cur}__input:checked {
-      & ~ #{$cur}__inner {
-        color: $text-color;
-
-        &::before {
-          border-color: $text-color;
-        }
-
-        &::after {
-          opacity: 1;
-        }
-      }
-    }
-  }
-}
-
-/* search end */
+/* search form in header end */
 
 /*MAIN*/
 /*CONTENT*/
@@ -4097,6 +4110,7 @@ $swp-space--mob: 9px;
   // <992px
   @include media("<tab") {
     padding: #{$header-height--tab} 0 0;
+    margin-bottom: 10px;
     height: auto;
     overflow: hidden;
   }
@@ -4195,6 +4209,54 @@ $swp-space--mob: 9px;
 /* scroll down trigger end */
 
 /* tabs */
+.tabs-wrap {
+  .btn-default-group {
+    // <992px
+    @include media("<tab") {
+      margin-bottom: 20px;
+    }
+
+    // <640px
+    @include media("<mob") {
+      margin-bottom: 10px;
+    }
+
+    .home-page & {
+      opacity: 0;
+      overflow: hidden;
+      height: 0;
+      padding: 0;
+
+      @include media("<tab") {
+        opacity: 1;
+        overflow: visible;
+        height: auto;
+        padding: 0 #{nth($layout-page-space, 2)};
+      }
+
+      // <992px
+      @include media("<tab") {
+        padding: 0 #{nth($layout-page-space--tab, 2)};
+      }
+
+      // <640px
+      @include media("<mob") {
+        padding: 0 #{nth($layout-page-space--mob, 2)};
+      }
+    }
+  }
+}
+
+.tabs-btn {
+  .r-tabs-state-active > & {
+    @include btn-checked;
+
+    &:hover {
+      @include btn-checked-hover;
+    }
+  }
+}
+
 .tab-controls {
   .tabs-wrap &,
   .user-content & {

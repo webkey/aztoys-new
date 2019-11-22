@@ -303,8 +303,8 @@ function searchToggle() {
  * !Tabs initialize
  */
 function tabs() {
-  var $headerCategories = $('.header-categories-js');
-  var $helpfulTabs = $('.tabs-wrap');
+  var $headerCategories = $('.js-header-categories');
+  var $helpfulTabs = $('.js-tabs');
   var equalTimer;
 
   if ($helpfulTabs) {
@@ -331,13 +331,17 @@ function tabs() {
 
   $headerCategories.on('click', 'a', function (event) {
     var $curTab = $(this);
-    $('a[href="' + $curTab.attr('href') + '"]', $helpfulTabs).trigger('click');
+    var href = $curTab.attr('href');
 
-    if (!$(this).is(':animated')) {
-      $('html,body').stop().animate({scrollTop: $helpfulTabs.offset().top - $('.header').innerHeight() + 1}, 600);
+    if (href[0] === '#') {
+      $('a[href="' + href + '"]', $helpfulTabs).trigger('click');
+
+      if (!$(this).is(':animated')) {
+        $('html,body').stop().animate({scrollTop: $helpfulTabs.offset().top - $('.header').innerHeight() + 1}, 600);
+      }
+
+      event.preventDefault();
     }
-
-    event.preventDefault();
   })
 }
 
@@ -1347,7 +1351,7 @@ function toggleMenu() {
     mobFiltersMenuCloseEl: '.btn-filters-close-js',
     
     // Поле поиска
-    filtersSearchInput: $('.filters-search-js input'),
+    filtersSearchInput: $('.filters-search-js'),
     // Селектор, по которому ведется поиск
     filtersSearchSelector: '.products__content',
     
@@ -1386,20 +1390,29 @@ function toggleMenu() {
 
 function filtersEvents() {
   var $filters = $('.filters-js');
+  var animationSpeed = 200;
   if ($filters.length) {
+    $filters.on('productsFilters.afterInit', function () {
+      // Hide preloader
+      setTimeout(function () {
+        $('.page-preloader').addClass('hide');
+        $HTML.addClass('overflow-visible');
+      }, animationSpeed + 100)
+    });
+
     $filters.productsFilters({
+      animationSpeed: animationSpeed,
       afterFiltered: function (event, filters, obj) {
-        console.log("obj: ", obj);
         $('.btn-show-items').toggleClass('active', obj.filtersIsActive);
       },
       afterMoreFiltersShow: function () {
         $('.mob-menu-opener-js').switchClass('remove');
-
-        // Hide preloader
-        $('.page-preloader').addClass('hide');
-        $HTML.addClass('overflow-visible');
       }
     });
+  } else {
+    // Hide preloader
+    $('.page-preloader').addClass('hide');
+    $HTML.addClass('overflow-visible');
   }
 }
 
@@ -2148,7 +2161,19 @@ function navSlider() {
         var $curLink = $(this);
         curSlider.slideTo($($curLink.attr('href')).index());
         event.preventDefault();
-      })
+      });
+
+      var hash = document.location.hash;
+
+      switch (hash) {
+        case '#prod':
+          curSlider.slideTo(1);
+          break;
+
+        case '#brand':
+          curSlider.slideTo(2);
+          break;
+      }
     });
   }
 }

@@ -37,7 +37,8 @@
 
   @@if(context.currentItem == "Home"){
   <!--header-categories tabs-->
-  <ul class="header-categories header-categories-js">
+  <ul class="header-categories js-header-categories">
+    <li><a href="products.html"><span>All</span></a></li>
     <li class="active"><a href="#newToys"><span>New</span></a></li>
     <li><a href="#popularToys"><span>Popular</span></a></li>
   </ul>
@@ -52,62 +53,29 @@
 
   @@if(context.currentItem == "Products"){@@include("_tpl_product-filters.html")}
 
-  <!--btn search-->
-  @@if(context.currentItem != "Products"){
   <a href="#" class="btn-search-open btn-search-open-js"></a>
   <div class="filters-search search-panel-js" data-swc-prevent-remove>
-    <div class="search-form">
-      <form action="#" method="post">
-        <div class="input-wrap">
-          <button type="submit" class="btn-search"></button>
-          <input type="search" value="" placeholder="Search">
-          <div class="search-type">
-            <div class="search-type__item">
-              <label class="search-type__el">
-                <input class="search-type__input" type="radio" name="search-type" checked>
-                <span class="search-type__inner">Search in Catalogue</span>
-              </label>
-            </div>
-            <div class="search-type__item">
-              <label class="search-type__el">
-                <input class="search-type__input" type="radio" name="search-type">
-                <span class="search-type__inner">Search in Filtered</span>
-              </label>
-            </div>
+    <div class="search-form search-form_no-btn">
+      <div class="search-form__holder">
+        <input type="search" value="" placeholder="Search" class="search-form__input @@if(context.currentItem == 'Products'){ filters-search-js}">
+        <div class="search-form__setting">
+          <div class="search-form__setting-item">
+            <label class="search-form__setting-el">
+              <input class="search-form__setting-input" type="radio" name="search-type" checked>
+              <span class="search-form__setting-inner">Search in Filtered</span>
+            </label>
+          </div>
+          <div class="search-form__setting-item">
+            <label class="search-form__setting-el">
+              <input class="search-form__setting-input" type="radio" name="search-type">
+              <span class="search-form__setting-inner">Search in Catalogue</span>
+            </label>
           </div>
         </div>
-      </form>
+      </div>
+      <button type="submit" class="search-form__submit"></button>
     </div>
   </div>
-  }
-  @@if(context.currentItem == "Products"){
-  <a href="#" class="btn-search-open btn-search-open-js"></a>
-  <div class="filters-search search-panel-js" data-swc-prevent-remove>
-    <div class="search-form">
-      <form action="#" method="post" class="filters-search-js">
-        <div class="input-wrap">
-          <button type="submit" class="btn-search"></button>
-          <input type="search" value="" placeholder="Search">
-          <div class="search-type">
-            <div class="search-type__item">
-              <label class="search-type__el">
-                <input class="search-type__input" type="radio" name="search-type" checked>
-                <span class="search-type__inner">Search in Catalogue</span>
-              </label>
-            </div>
-            <div class="search-type__item">
-              <label class="search-type__el">
-                <input class="search-type__input" type="radio" name="search-type">
-                <span class="search-type__inner">Search in Filtered</span>
-              </label>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-  }
-  <!--btn search end-->
 
   <!--slogan-->
   <div class="slogan"><span>Playing to get smart</span></div>

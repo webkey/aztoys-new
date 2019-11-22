@@ -605,8 +605,8 @@ $filters-drop-group-space: 40px 140px !default;
 $filter-btn-arr-size: 30px;
 $filter-btn-arr-size--tab: 28px;
 $filter-btn-spaces: 12px 20px;
-$filter-btn-spaces--tab: 9px 15px;
-$filter-btn-spaces--tab-s: 12px 20px;
+$filter-btn-spaces--tab: 9px 10px;
+$filter-btn-spaces--tab-s: 9px 15px;
 
 @mixin filter-btn-font {
   @include font-alt-bold;
@@ -626,7 +626,7 @@ $filter-btn-spaces--tab-s: 12px 20px;
 }
 
 @mixin filter-btn-font--tab-s {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 24px;
   color: $base-color;
 }

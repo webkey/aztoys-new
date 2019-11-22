@@ -101,6 +101,11 @@
   display: flex;
   align-items: center;
 
+  // <992px
+  @include media("<tab") {
+    margin: 0 0 -10px -10px;
+  }
+
   // <768px
   @include media("<tab-s") {
     margin: 0;
@@ -122,7 +127,7 @@
 
   // <992px
   @include media("<tab") {
-    margin-left: 10px;
+    margin: 0 0 10px 10px;
   }
 
   // <768px
@@ -156,6 +161,15 @@
   color: inherit;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+
+  &_all {
+    margin-right: 15px;
+
+    // <992px
+    @include media("<tab") {
+      margin-right: 5px;
+    }
+  }
 
   & > span {
     box-sizing: border-box;
@@ -307,6 +321,16 @@
   border-radius: 4px;
   transition: opacity $animation-speed;
 
+  // <640px
+  @include media("<mob") {
+    letter-spacing: -0.01em;
+  }
+
+  // <360px
+  @include media("<mob-xxs") {
+    padding-left: 12px;
+  }
+
   // Icon
   &::before {
     content: "";
@@ -362,18 +386,23 @@
 
 // Filters Selector
 .filter-selector {
+  $this: &;
+
   position: relative;
   box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
   $sp: $filter-btn-spaces;
   padding: #{nth($sp, 1)} #{$filter-btn-arr-size - 4} #{nth($sp, 1)} #{nth($sp, 2)};
+  width: 160px;
+  white-space: nowrap;
   @include filter-btn-font;
   @include filter-btn-bg;
 
   // <992px
   @include media("<tab") {
     $sp: $filter-btn-spaces--tab;
+    width: 132px;
     padding: #{nth($sp, 1)} #{$filter-btn-arr-size--tab - 4} #{nth($sp, 1)} #{nth($sp, 2)};
     @include filter-btn-font--tab;
   }
@@ -412,6 +441,24 @@
   &::after {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCA3LjMzbDIuODI5LTIuODMgOS4xNzUgOS4zMzkgOS4xNjctOS4zMzkgMi44MjkgMi44My0xMS45OTYgMTIuMTd6Ij48L3BhdGg+PC9zdmc+);
     opacity: 0;
+  }
+
+  &__text {
+    &_on {
+      display: block;
+
+      #{$this}.show-drop & {
+        display: none;
+      }
+    }
+
+    &_off {
+      display: none;
+
+      #{$this}.show-drop & {
+        display: block;
+      }
+    }
   }
 
   //:hover
@@ -685,13 +732,8 @@
 .filters-drop__holder {
   position: relative;
   box-sizing: content-box;
-  //padding: 30px #{nth($layout-page-space, 2) - nth($filters-drop-group-space, 2) / 2};
-  padding: 30px 5px;
+  padding: 30px 5px 60px;
   max-width: $layout-flood-width;
-  //margin: 0 auto;
-  //display: flex;
-  //flex-wrap: wrap;
-  //align-items: flex-start;
   display: table;
 
   // <768px
@@ -704,9 +746,6 @@
 .filters-drop__group {
   display: table-cell;
   box-sizing: border-box;
-  //$width: 33.33%;
-  //flex: 1 0 $width;
-  //max-width: $width;
   padding: 0 #{nth($filters-drop-group-space, 2) / 2} nth($filters-drop-group-space, 1);
 
   // <1920px
@@ -791,6 +830,12 @@
   transform: translate($translate);
   transform: translate3d($translate, 0);
 
+  // <992px
+  @include media("<tab") {
+    left: 0;
+    width: 100%;
+  }
+
   @include media(">=tab-s") {
     // show
     &_active {
@@ -804,8 +849,6 @@
 
   // <768px
   @include media("<tab-s") {
-    left: 0;
-    top: 0;
     justify-content: space-between;
     height: $header-height--tab;
     width: 100%;
@@ -894,6 +937,11 @@
 
     &::before {
       background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDBhYmM3IiBkPSJNOSAxMmwtNC40NjMgNC45NjktNC41MzctNC45NjloM2MwLTQuOTcgNC4wMy05IDktOSAyLjM5NSAwIDQuNTY1Ljk0MiA2LjE3OSAyLjQ2OGwtMi4wMDQgMi4yMzFjLTEuMDgxLTEuMDUtMi41NTMtMS42OTktNC4xNzUtMS42OTktMy4zMDkgMC02IDIuNjkxLTYgNmgzem0xMC40NjMtNC45NjlsLTQuNDYzIDQuOTY5aDNjMCAzLjMwOS0yLjY5MSA2LTYgNi0xLjYyMyAwLTMuMDk0LS42NS00LjE3NS0xLjY5OWwtMi4wMDQgMi4yMzFjMS42MTMgMS41MjYgMy43ODQgMi40NjggNi4xNzkgMi40NjggNC45NyAwIDktNC4wMyA5LTloM2wtNC41MzctNC45Njl6Ij48L3BhdGg+PC9zdmc+);
+
+      // <360px
+      @include media("<mob-xxs") {
+        content: none;
+      }
     }
   }
 }
@@ -1015,21 +1063,5 @@
 }
 
 /* filters-not-found end */
-
-/* btn-show-items */
-.btn-show-items {
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  transition: opacity $animation-speed, visibility $animation-speed;
-
-  &.active {
-    opacity: 1;
-    pointer-events: auto;
-    visibility: visible;
-  }
-}
-
-/* btn-show-items end */
 
 /*FILTERS end*/
