@@ -386,39 +386,21 @@ function equalHeightInit() {
         resize: true
       });
 
-      // equal height of elements
-      // var $productsList = $('.products__list');
-      //
-      // if($productsList.length) {
-      //   $productsList.children().matchHeight({
-      //     byRow: true, property: 'height', target: null, remove: false
-      //   });
-      // }
-
       filtersEvents();
       showFilterByHash();
+      hideMobFiltersMenuTrigger();
 
-      // _____________________НОВЫЙ КОД !!!!!
-      // переход по ссылкам с пресетом фильтра
-      var years = getQueryVariable('filter-preset-age');
-      var skill = getQueryVariable('filter-preset-skill');
       var category = getQueryVariable('filter-preset-cat');
+      var brand = getQueryVariable('filter-preset-brand');
 
-
-      if ($.trim(years)) {
-        $('.filters-button[data-filter=".tag-' + years + '"]').trigger('click');
-      }
-      if ($.trim(skill)) {
-        $('a[data-filter=".tag-' + skill + '"]').trigger('click');
-      }
       if ($.trim(category)) {
-        $('a[data-filter=".tag-' + category + '"]').trigger('click');
+        $('.filter-js[data-filter=".tag-' + category + '"]').prop('checked', true).trigger('change');
+        // $('a[href*="filter-preset-cat=' + category + '"]').parent().addClass('current');
       }
-
-
-      // _____________________НОВЫЙ КОД КОНЕЦ!!!!!
-
-
+      if ($.trim(brand)) {
+        $('.filter-js[data-filter=".tag-' + brand + '"]').prop('checked', true).trigger('change');
+        // $('a[href*="filter-preset-brand=' + brand + '"]').parent().addClass('current');
+      }
     });
   }
 }
@@ -907,11 +889,6 @@ function toggleMenu() {
         if ($btnFilters.length && $btnFilters.hasClass('active')) {
           $btnFilters.trigger('click');
         }
-
-        // var $popupProd = $('.popup-js');
-        // if ($popupProd.length) {
-        //   $popupProd.trigger('popupProdClose');
-        // }
       }
     });
   }
@@ -1391,6 +1368,7 @@ function toggleMenu() {
 function filtersEvents() {
   var $filters = $('.filters-js');
   var animationSpeed = 200;
+
   if ($filters.length) {
     $filters.on('productsFilters.afterInit', function () {
       // Hide preloader
@@ -1404,6 +1382,10 @@ function filtersEvents() {
       animationSpeed: animationSpeed,
       afterFiltered: function (event, filters, obj) {
         $('.btn-show-items').toggleClass('active', obj.filtersIsActive);
+
+        setTimeout(function () {
+          $('.products__figure img').trigger("unveil");
+        }, 50)
       },
       afterMoreFiltersShow: function () {
         $('.mob-menu-opener-js').switchClass('remove');
@@ -1433,6 +1415,17 @@ function showFilterByHash() {
       $('.filters-js').productsFilters('showMoreFilters');
     }, 200);
   }
+}
+
+
+function hideMobFiltersMenuTrigger() {
+  $('.search-form__submit-js').on('click', function (event) {
+    $('.filters-js').productsFilters('hideMobFiltersMenu');
+    if ($(this).closest('.search-form-js').find('.search-form__input-js').val().length) {
+      $.switchClass.remove(true);
+    }
+    event.preventDefault();
+  })
 }
 
 
@@ -2089,6 +2082,9 @@ function promoSliderInit() {
         },
         centeredSlides: true,
         loop: true,
+        autoplay: {
+          delay: 5000
+        },
         watchSlidesVisibility: true,
         navigation: {
           nextEl: $navNext,
@@ -2163,14 +2159,14 @@ function navSlider() {
         event.preventDefault();
       });
 
-      var hash = document.location.hash;
+      var currentGroup = getQueryVariable('current-group');
 
-      switch (hash) {
-        case '#prod':
+      switch ($.trim(currentGroup)) {
+        case 'products':
           curSlider.slideTo(1);
           break;
 
-        case '#brand':
+        case 'brands':
           curSlider.slideTo(2);
           break;
       }
@@ -2569,22 +2565,18 @@ function toggleScrollPage(id) {
 }
 
 
-// ___________________________________________НОВЫЙ КОД !!!
-
 function getQueryVariable(variable) {
   var query = window.location.search.substring(1);
   var vars = query.split("&");
   for (var i = 0; i < vars.length; i++) {
     var pair = vars[i].split("=");
-    if (pair[0] == variable) {
+    if (pair[0] === variable) {
       return pair[1];
     }
   }
-  return (false);
+  return false;
 }
 
-
-// __________________________________________НОВЫЙ КОД КОНЕЦ !!!
 
 function imgLazyLoad() {
   if ($('.products__figure').length > 0) {

@@ -74,25 +74,25 @@
     <!--filters open button end-->
     <a href="#" class="btn-search-open btn-search-open-js"></a>
     <div class="filters-search search-panel-js" data-swc-prevent-remove>
-      <div class="search-form search-form_no-btn">
+      <div class="search-form search-form-js">
         <div class="search-form__holder">
-          <input type="search" value="" placeholder="Search" class="search-form__input ">
+          <input type="search" value="" placeholder="Search" class="search-form__input search-form__input-js ">
           <div class="search-form__setting">
             <div class="search-form__setting-item">
               <label class="search-form__setting-el">
               <input class="search-form__setting-input" type="radio" name="search-type" checked>
-              <span class="search-form__setting-inner">Search in Filtered</span>
+              <span class="search-form__setting-inner">Search in Catalogue</span>
             </label>
             </div>
             <div class="search-form__setting-item">
               <label class="search-form__setting-el">
-              <input class="search-form__setting-input" type="radio" name="search-type">
-              <span class="search-form__setting-inner">Search in Catalogue</span>
+              <input class="search-form__setting-input" type="radio" name="search-type" value="">
+              <span class="search-form__setting-inner">Search in Filtered</span>
             </label>
             </div>
           </div>
         </div>
-        <button type="submit" class="search-form__submit"></button>
+        <button type="submit" class="search-form__submit search-form__submit-js"></button>
       </div>
     </div>
     <!--slogan-->
@@ -119,29 +119,29 @@
                 <li><a href="contacts.html"><em class="icon-m icon-m-contacts--white"></em><span>Contacts</span></a></li>
               </ul>
             </div>
-            <div id="products" class="swiper-slide">
+            <div id="productsSlide" class="swiper-slide">
               <ul class="category-list" data-swiper-parallax-opacity="0">
-                <li><a href="#all"><span>Products</span></a></li>
-                <li><a href="products.html?filter-preset-cat=music#prod" style="background-color: #eab70c;"><em class="icon-c icon-c-sound--white"></em><span>Sound and Music Toys</span></a></li>
-                <li><a href="products.html?filter-preset-cat=educational#prod" style="background-color: #e09a14;"><em class="icon-c icon-c-tablets--white"></em><span>Education Tablets</span></a></li>
-                <li><a href="products.html?filter-preset-cat=smartphone#prod" style="background-color: #d06517;"><em class="icon-c icon-c-smartphones--white"></em><span>Toy Smartphones</span></a></li>
-                <li><a href="products.html?filter-preset-cat=smart-watch#prod" style="background-color: #c10514;"><em class="icon-c icon-c-watches--white"></em><span>Smart Watches</span></a></li>
-                <li><a href="products.html?filter-preset-cat=smart-watch#prod" style="background-color: #c5127c;"><em class="icon-c icon-c-microphones--white"></em><span>Musical Microphones</span></a></li>
-                <li><a href="products.html?filter-preset-cat=sound-mat#prod" style="background-color: #801c7e;"><em class="icon-c icon-c-playmats--white"></em><span>Sound Playmats</span></a></li>
-                <li><a href="products.html?filter-preset-cat=educational-card#prod" style="background-color: #214f9a;"><em class="icon-c icon-c-cards--white"></em><span>Educational Cards</span></a></li>
-                <li><a href="products.html?filter-preset-cat=puzzle#prod" style="background-color: #0068b1;"><em class="icon-c icon-c-puzzle--white"></em><span>Puzzle Elements</span></a></li>
-                <li><a href="products.html?filter-preset-cat=console#prod" style="background-color: #249cdb;"><em class="icon-c icon-c-soft--white"></em><span>Soft Activity Toys</span></a></li>
-                <li><a href="products.html?filter-preset-cat=educational-card#prod" style="background-color: #4d8d3f;"><em class="icon-c icon-c-lights--white"></em><span>Toys with Lights</span></a></li>
-                <li><a href="products.html?filter-preset-cat=set#prod" style="background-color: #a4c037;"><em class="icon-c icon-c-sorting--white"></em><span>Sorting Elements</span></a></li>
+                <li><a href="#allSlide"><span>Products</span></a></li>
+                <li><a href="products.html?filter-preset-cat=music&current-group=products" style="background-color: #eab70c;"><em class="icon-c icon-c-sound--white"></em><span>Sound and Music Toys</span></a></li>
+                <li><a href="products.html?filter-preset-cat=educational&current-group=products" style="background-color: #e09a14;"><em class="icon-c icon-c-tablets--white"></em><span>Education Tablets</span></a></li>
+                <li><a href="products.html?filter-preset-cat=smartphone&current-group=products" style="background-color: #d06517;"><em class="icon-c icon-c-smartphones--white"></em><span>Toy Smartphones</span></a></li>
+                <li><a href="products.html?filter-preset-cat=smart-watch&current-group=products" style="background-color: #c10514;"><em class="icon-c icon-c-watches--white"></em><span>Smart Watches</span></a></li>
+                <li><a href="products.html?filter-preset-cat=smart-watch&current-group=products" style="background-color: #c5127c;"><em class="icon-c icon-c-microphones--white"></em><span>Musical Microphones</span></a></li>
+                <li><a href="products.html?filter-preset-cat=sound-mat&current-group=products" style="background-color: #801c7e;"><em class="icon-c icon-c-playmats--white"></em><span>Sound Playmats</span></a></li>
+                <li><a href="products.html?filter-preset-cat=educational-card&current-group=products" style="background-color: #214f9a;"><em class="icon-c icon-c-cards--white"></em><span>Educational Cards</span></a></li>
+                <li><a href="products.html?filter-preset-cat=puzzle&current-group=products" style="background-color: #0068b1;"><em class="icon-c icon-c-puzzle--white"></em><span>Puzzle Elements</span></a></li>
+                <li><a href="products.html?filter-preset-cat=console&current-group=products" style="background-color: #249cdb;"><em class="icon-c icon-c-soft--white"></em><span>Soft Activity Toys</span></a></li>
+                <li><a href="products.html?filter-preset-cat=educational-card&current-group=products" style="background-color: #4d8d3f;"><em class="icon-c icon-c-lights--white"></em><span>Toys with Lights</span></a></li>
+                <li><a href="products.html?filter-preset-cat=set&current-group=products" style="background-color: #a4c037;"><em class="icon-c icon-c-sorting--white"></em><span>Sorting Elements</span></a></li>
               </ul>
             </div>
-            <div id="brands" class="swiper-slide">
+            <div id="brandsSlide" class="swiper-slide">
               <ul class="category-list category-list_brands" data-swiper-parallax-opacity="0">
-                <li><a href="#all"><span>Our Brands</span></a></li>
-                <li><a href="products.html?filter-preset-brand=kids-pad#brand" style="background-color: #fff;"><img src="img/brand1.jpg" alt="Kids'Pad" /></a></li>
-                <li><a href="products.html?filter-preset-brand=talky-blocks#brand" style="background-color: #fff;"><img src="img/brand2.jpg" alt="Talky blocks" /></a></li>
-                <li><a href="products.html?filter-preset-brand=little-one#brand" style="background-color: #fff;"><img src="img/brand3.jpg" alt="Little one" /></a></li>
-                <li><a href="products.html?filter-preset-brand=magic-lights#brand" style="background-color: #fff;"><img src="img/brand4.jpg" alt="Magic Lights" /></a></li>
+                <li><a href="#allSlide"><span>Our Brands</span></a></li>
+                <li><a href="products.html?filter-preset-brand=kids-pad&current-group=brands" style="background-color: #fff;"><img src="img/brand1.jpg" alt="Kids'Pad" /></a></li>
+                <li><a href="products.html?filter-preset-brand=talky-blocks&current-group=brands" style="background-color: #fff;"><img src="img/brand2.jpg" alt="Talky blocks" /></a></li>
+                <li><a href="products.html?filter-preset-brand=little-one&current-group=brands" style="background-color: #fff;"><img src="img/brand3.jpg" alt="Little one" /></a></li>
+                <li><a href="products.html?filter-preset-brand=magic-lights&current-group=brands" style="background-color: #fff;"><img src="img/brand4.jpg" alt="Magic Lights" /></a></li>
               </ul>
             </div>
           </div>
@@ -200,11 +200,11 @@
         <!-- main navigation -->
         <div class="swiper-container nav-slider nav-slider-js">
           <div class="swiper-wrapper">
-            <div id="all" class="swiper-slide">
+            <div id="allSlide" class="swiper-slide">
               <ul class="nav-list" data-swiper-parallax-opacity="0">
                 <li><a href="index.html"><em class="icon-m icon-m-home--white"></em><span>Home</span></a></li>
-                <li><a href="#products"><em class="icon-m icon-m-products--white"></em><span>Products</span></a></li>
-                <li><a href="#brands"><em class="icon-m icon-m-brands--white"></em><span>Our Brands</span></a></li>
+                <li><a href="#productsSlide"><em class="icon-m icon-m-products--white"></em><span>Products</span></a></li>
+                <li><a href="#brandsSlide"><em class="icon-m icon-m-brands--white"></em><span>Our Brands</span></a></li>
                 <li><a href="news.html"><em class="icon-m icon-m-apps--white"></em><span>Apps</span></a></li>
                 <li><a href="news.html"><em class="icon-m icon-m-videos--white"></em><span>Videos</span></a></li>
                 <li><a href="about.html"><em class="icon-m icon-m-about--white"></em><span>About Us</span></a></li>
@@ -212,29 +212,29 @@
                 <li><a href="contacts.html"><em class="icon-m icon-m-contacts--white"></em><span>Contacts</span></a></li>
               </ul>
             </div>
-            <div id="products" class="swiper-slide">
+            <div id="productsSlide" class="swiper-slide">
               <ul class="category-list" data-swiper-parallax-opacity="0">
-                <li><a href="#all"><span>Products</span></a></li>
-                <li><a href="products.html?filter-preset-cat=music#prod" style="background-color: #eab70c;"><em class="icon-c icon-c-sound--white"></em><span>Sound and Music Toys</span></a></li>
-                <li><a href="products.html?filter-preset-cat=educational#prod" style="background-color: #e09a14;"><em class="icon-c icon-c-tablets--white"></em><span>Education Tablets</span></a></li>
-                <li><a href="products.html?filter-preset-cat=smartphone#prod" style="background-color: #d06517;"><em class="icon-c icon-c-smartphones--white"></em><span>Toy Smartphones</span></a></li>
-                <li><a href="products.html?filter-preset-cat=smart-watch#prod" style="background-color: #c10514;"><em class="icon-c icon-c-watches--white"></em><span>Smart Watches</span></a></li>
-                <li><a href="products.html?filter-preset-cat=smart-watch#prod" style="background-color: #c5127c;"><em class="icon-c icon-c-microphones--white"></em><span>Musical Microphones</span></a></li>
-                <li><a href="products.html?filter-preset-cat=sound-mat#prod" style="background-color: #801c7e;"><em class="icon-c icon-c-playmats--white"></em><span>Sound Playmats</span></a></li>
-                <li><a href="products.html?filter-preset-cat=educational-card#prod" style="background-color: #214f9a;"><em class="icon-c icon-c-cards--white"></em><span>Educational Cards</span></a></li>
-                <li><a href="products.html?filter-preset-cat=puzzle#prod" style="background-color: #0068b1;"><em class="icon-c icon-c-puzzle--white"></em><span>Puzzle Elements</span></a></li>
-                <li><a href="products.html?filter-preset-cat=console#prod" style="background-color: #249cdb;"><em class="icon-c icon-c-soft--white"></em><span>Soft Activity Toys</span></a></li>
-                <li><a href="products.html?filter-preset-cat=educational-card#prod" style="background-color: #4d8d3f;"><em class="icon-c icon-c-lights--white"></em><span>Toys with Lights</span></a></li>
-                <li><a href="products.html?filter-preset-cat=set#prod" style="background-color: #a4c037;"><em class="icon-c icon-c-sorting--white"></em><span>Sorting Elements</span></a></li>
+                <li><a href="#allSlide"><span>Products</span></a></li>
+                <li><a href="products.html?filter-preset-cat=music&current-group=products" style="background-color: #eab70c;"><em class="icon-c icon-c-sound--white"></em><span>Sound and Music Toys</span></a></li>
+                <li><a href="products.html?filter-preset-cat=educational&current-group=products" style="background-color: #e09a14;"><em class="icon-c icon-c-tablets--white"></em><span>Education Tablets</span></a></li>
+                <li><a href="products.html?filter-preset-cat=smartphone&current-group=products" style="background-color: #d06517;"><em class="icon-c icon-c-smartphones--white"></em><span>Toy Smartphones</span></a></li>
+                <li><a href="products.html?filter-preset-cat=smart-watch&current-group=products" style="background-color: #c10514;"><em class="icon-c icon-c-watches--white"></em><span>Smart Watches</span></a></li>
+                <li><a href="products.html?filter-preset-cat=smart-watch&current-group=products" style="background-color: #c5127c;"><em class="icon-c icon-c-microphones--white"></em><span>Musical Microphones</span></a></li>
+                <li><a href="products.html?filter-preset-cat=sound-mat&current-group=products" style="background-color: #801c7e;"><em class="icon-c icon-c-playmats--white"></em><span>Sound Playmats</span></a></li>
+                <li><a href="products.html?filter-preset-cat=educational-card&current-group=products" style="background-color: #214f9a;"><em class="icon-c icon-c-cards--white"></em><span>Educational Cards</span></a></li>
+                <li><a href="products.html?filter-preset-cat=puzzle&current-group=products" style="background-color: #0068b1;"><em class="icon-c icon-c-puzzle--white"></em><span>Puzzle Elements</span></a></li>
+                <li><a href="products.html?filter-preset-cat=console&current-group=products" style="background-color: #249cdb;"><em class="icon-c icon-c-soft--white"></em><span>Soft Activity Toys</span></a></li>
+                <li><a href="products.html?filter-preset-cat=educational-card&current-group=products" style="background-color: #4d8d3f;"><em class="icon-c icon-c-lights--white"></em><span>Toys with Lights</span></a></li>
+                <li><a href="products.html?filter-preset-cat=set&current-group=products" style="background-color: #a4c037;"><em class="icon-c icon-c-sorting--white"></em><span>Sorting Elements</span></a></li>
               </ul>
             </div>
-            <div id="brands" class="swiper-slide">
+            <div id="brandsSlide" class="swiper-slide">
               <ul class="category-list category-list_brands" data-swiper-parallax-opacity="0">
-                <li><a href="#all"><span>Our Brands</span></a></li>
-                <li><a href="products.html?filter-preset-brand=kids-pad#brand" style="background-color: #fff;"><img src="img/brand1.jpg" alt="Kids'Pad" /></a></li>
-                <li><a href="products.html?filter-preset-brand=talky-blocks#brand" style="background-color: #fff;"><img src="img/brand2.jpg" alt="Talky blocks" /></a></li>
-                <li><a href="products.html?filter-preset-brand=little-one#brand" style="background-color: #fff;"><img src="img/brand3.jpg" alt="Little one" /></a></li>
-                <li><a href="products.html?filter-preset-brand=magic-lights#brand" style="background-color: #fff;"><img src="img/brand4.jpg" alt="Magic Lights" /></a></li>
+                <li><a href="#allSlide"><span>Our Brands</span></a></li>
+                <li><a href="products.html?filter-preset-brand=kids-pad&current-group=brands" style="background-color: #fff;"><img src="img/brand1.jpg" alt="Kids'Pad" /></a></li>
+                <li><a href="products.html?filter-preset-brand=talky-blocks&current-group=brands" style="background-color: #fff;"><img src="img/brand2.jpg" alt="Talky blocks" /></a></li>
+                <li><a href="products.html?filter-preset-brand=little-one&current-group=brands" style="background-color: #fff;"><img src="img/brand3.jpg" alt="Little one" /></a></li>
+                <li><a href="products.html?filter-preset-brand=magic-lights&current-group=brands" style="background-color: #fff;"><img src="img/brand4.jpg" alt="Magic Lights" /></a></li>
               </ul>
             </div>
           </div>

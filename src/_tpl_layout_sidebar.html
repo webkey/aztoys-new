@@ -5,13 +5,13 @@
       <!-- main navigation -->
       <div class="swiper-container nav-slider nav-slider-js">
         <div class="swiper-wrapper">
-          <div id="all" class="swiper-slide">
+          <div id="allSlide" class="swiper-slide">
             <ul class="nav-list" data-swiper-parallax-opacity="0">
               @@if(context.currentItem != "Home"){<li><a href="index.html"><em class="icon-m icon-m-home--white"></em><span>Home</span></a></li>}
 
-              <li><a href="#products"><em class="icon-m icon-m-products--white"></em><span>Products</span></a></li>
+              <li><a href="#productsSlide"><em class="icon-m icon-m-products--white"></em><span>Products</span></a></li>
               
-              <li><a href="#brands"><em class="icon-m icon-m-brands--white"></em><span>Our Brands</span></a></li>
+              <li><a href="#brandsSlide"><em class="icon-m icon-m-brands--white"></em><span>Our Brands</span></a></li>
 
               @@if(context.currentItem == "Apps"){<li class="active"><span><em class="icon-m icon-m-apps--white"></em><span>Apps</span></span></li>}
               @@if(context.currentItem != "Apps"){<li><a href="news.html"><em class="icon-m icon-m-apps--white"></em><span>Apps</span></a></li>}
