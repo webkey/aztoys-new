@@ -358,23 +358,7 @@ body {
   height: 100%;
   color: #1e1e1c;
   min-width: 320px;
-}
-
-@media (max-width: 639px) {
-  body {
-    font-size: 16px;
-    line-height: 25px;
-  }
-}
-
-body,
-body > .mCustomScrollBox > .mCSB_container {
-  background: #fff url(../img/bg-page.png) 50% 0;
-}
-
-body.about-page,
-body.about-page > .mCustomScrollBox > .mCSB_container {
-  background-attachment: fixed;
+  background: #fff url(../img/empty.png) 0 0 no-repeat fixed;
 }
 
 body.preloader-show {
@@ -387,9 +371,11 @@ body.preloader-show {
   overflow: hidden !important;
 }
 
-body .no-js {
-  overflow: auto;
-  max-height: none;
+@media (max-width: 639px) {
+  body {
+    font-size: 16px;
+    line-height: 25px;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -6434,24 +6420,17 @@ input.search-form__input:focus {
   }
 }
 
-@media (max-width: 1279px) {
-  .see-map {
-    right: 40px;
-    top: 40px;
-  }
-}
-
 @media (max-width: 767px) {
   .see-map {
-    right: 10px;
-    top: 38px;
+    right: 50px;
+    top: 50px;
   }
 }
 
 @media (max-width: 479px) {
   .see-map {
-    right: 18px;
-    top: 18px;
+    right: 40px;
+    top: 40px;
     width: 56px;
     height: 56px;
   }

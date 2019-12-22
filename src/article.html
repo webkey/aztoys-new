@@ -101,17 +101,16 @@
   </header>
   <!--HEADER end-->
   <!--MENU-->
-  <aside class="menu menu-js is-open" data-swc-prevent-remove>
+  <aside class="menu menu-js" data-swc-prevent-remove>
     <div class="menu__holder">
       <div class="menu__frame">
-        <!-- main navigation -->
         <div class="swiper-container nav-slider nav-slider-js">
           <div class="swiper-wrapper">
-            <div id="all" class="swiper-slide">
+            <div id="menuMainSlide" class="swiper-slide">
               <ul class="nav-list" data-swiper-parallax-opacity="0">
                 <li><a href="index.html"><em class="icon-m icon-m-home--white"></em><span>Home</span></a></li>
-                <li><a href="#products"><em class="icon-m icon-m-products--white"></em><span>Products</span></a></li>
-                <li><a href="#brands"><em class="icon-m icon-m-brands--white"></em><span>Our Brands</span></a></li>
+                <li><a href="#menuProductsSlide"><em class="icon-m icon-m-products--white"></em><span>Products</span></a></li>
+                <li><a href="#menuBrandsSlide"><em class="icon-m icon-m-brands--white"></em><span>Our Brands</span></a></li>
                 <li><a href="news.html"><em class="icon-m icon-m-apps--white"></em><span>Apps</span></a></li>
                 <li><a href="news.html"><em class="icon-m icon-m-videos--white"></em><span>Videos</span></a></li>
                 <li><a href="about.html"><em class="icon-m icon-m-about--white"></em><span>About Us</span></a></li>
@@ -120,9 +119,9 @@
                 <li><a href="contacts.html"><em class="icon-m icon-m-contacts--white"></em><span>Contacts</span></a></li>
               </ul>
             </div>
-            <div id="productsSlide" class="swiper-slide">
+            <div id="menuProductsSlide" class="swiper-slide">
               <ul class="category-list" data-swiper-parallax-opacity="0">
-                <li><a href="#allSlide"><span>Products</span></a></li>
+                <li><a href="#menuMainSlide"><span>Products</span></a></li>
                 <li><a href="products.html?filter-preset-cat=music&current-group=products" style="background-color: #eab70c;"><em class="icon-c icon-c-sound--white"></em><span>Sound and Music Toys</span></a></li>
                 <li><a href="products.html?filter-preset-cat=educational&current-group=products" style="background-color: #e09a14;"><em class="icon-c icon-c-tablets--white"></em><span>Education Tablets</span></a></li>
                 <li><a href="products.html?filter-preset-cat=smartphone&current-group=products" style="background-color: #d06517;"><em class="icon-c icon-c-smartphones--white"></em><span>Toy Smartphones</span></a></li>
@@ -136,9 +135,9 @@
                 <li><a href="products.html?filter-preset-cat=set&current-group=products" style="background-color: #a4c037;"><em class="icon-c icon-c-sorting--white"></em><span>Sorting Elements</span></a></li>
               </ul>
             </div>
-            <div id="brandsSlide" class="swiper-slide">
+            <div id="menuBrandsSlide" class="swiper-slide">
               <ul class="category-list category-list_brands" data-swiper-parallax-opacity="0">
-                <li><a href="#allSlide"><span>Our Brands</span></a></li>
+                <li><a href="#menuMainSlide"><span>Our Brands</span></a></li>
                 <li><a href="products.html?filter-preset-brand=kids-pad&current-group=brands" style="background-color: #fff;"><img src="img/brand1.jpg" alt="Kids'Pad" /></a></li>
                 <li><a href="products.html?filter-preset-brand=talky-blocks&current-group=brands" style="background-color: #fff;"><img src="img/brand2.jpg" alt="Talky blocks" /></a></li>
                 <li><a href="products.html?filter-preset-brand=little-one&current-group=brands" style="background-color: #fff;"><img src="img/brand3.jpg" alt="Little one" /></a></li>
@@ -147,8 +146,6 @@
             </div>
           </div>
         </div>
-        <!-- main navigation end -->
-        <!--sidebar footer-->
         <div class="menu-footer">
           <div class="menu-footer__holder">
             <!--slogan-->
@@ -189,7 +186,6 @@
             <!--social networks end-->
           </div>
         </div>
-        <!--sidebar footer end-->
       </div>
     </div>
   </aside>
@@ -198,10 +194,9 @@
   <aside class="sidebar mob-menu-js" data-swc-prevent-remove>
     <div class="sidebar__holder">
       <div class="sidebar__frame">
-        <!-- main navigation -->
         <div class="swiper-container nav-slider nav-slider-js">
           <div class="swiper-wrapper">
-            <div id="allSlide" class="swiper-slide">
+            <div id="mainSlide" class="swiper-slide">
               <ul class="nav-list" data-swiper-parallax-opacity="0">
                 <li><a href="index.html"><em class="icon-m icon-m-home--white"></em><span>Home</span></a></li>
                 <li><a href="#productsSlide"><em class="icon-m icon-m-products--white"></em><span>Products</span></a></li>
@@ -216,7 +211,7 @@
             </div>
             <div id="productsSlide" class="swiper-slide">
               <ul class="category-list" data-swiper-parallax-opacity="0">
-                <li><a href="#allSlide"><span>Products</span></a></li>
+                <li><a href="#mainSlide"><span>Products</span></a></li>
                 <li><a href="products.html?filter-preset-cat=music&current-group=products" style="background-color: #eab70c;"><em class="icon-c icon-c-sound--white"></em><span>Sound and Music Toys</span></a></li>
                 <li><a href="products.html?filter-preset-cat=educational&current-group=products" style="background-color: #e09a14;"><em class="icon-c icon-c-tablets--white"></em><span>Education Tablets</span></a></li>
                 <li><a href="products.html?filter-preset-cat=smartphone&current-group=products" style="background-color: #d06517;"><em class="icon-c icon-c-smartphones--white"></em><span>Toy Smartphones</span></a></li>
@@ -232,7 +227,7 @@
             </div>
             <div id="brandsSlide" class="swiper-slide">
               <ul class="category-list category-list_brands" data-swiper-parallax-opacity="0">
-                <li><a href="#allSlide"><span>Our Brands</span></a></li>
+                <li><a href="#mainSlide"><span>Our Brands</span></a></li>
                 <li><a href="products.html?filter-preset-brand=kids-pad&current-group=brands" style="background-color: #fff;"><img src="img/brand1.jpg" alt="Kids'Pad" /></a></li>
                 <li><a href="products.html?filter-preset-brand=talky-blocks&current-group=brands" style="background-color: #fff;"><img src="img/brand2.jpg" alt="Talky blocks" /></a></li>
                 <li><a href="products.html?filter-preset-brand=little-one&current-group=brands" style="background-color: #fff;"><img src="img/brand3.jpg" alt="Little one" /></a></li>
@@ -241,8 +236,6 @@
             </div>
           </div>
         </div>
-        <!-- main navigation end -->
-        <!--sidebar footer-->
         <div class="sidebar-footer">
           <div class="sidebar-footer__holder">
             <!--slogan-->
@@ -283,7 +276,6 @@
             <!--social networks end-->
           </div>
         </div>
-        <!--sidebar footer end-->
       </div>
     </div>
   </aside>

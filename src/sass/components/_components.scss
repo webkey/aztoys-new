@@ -31,6 +31,18 @@ body {
   color: $text-color;
   min-width: $layout-page-min-width;
 
+  background: #fff url(../../img/empty.png) 0 0 no-repeat fixed;
+
+  &.preloader-show {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
   // <640px
   @include media("<mob") {
     font-size: $font-size--mob;
@@ -38,29 +50,8 @@ body {
   }
 }
 
-body,
-body > .mCustomScrollBox > .mCSB_container {
-  background: #fff url(../../img/bg-page.png) 50% 0;
-}
+body {
 
-body.about-page,
-body.about-page > .mCustomScrollBox > .mCSB_container {
-  background-attachment: fixed;
-}
-
-body.preloader-show {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-}
-
-body .no-js {
-  overflow: auto;
-  max-height: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -6019,22 +6010,16 @@ $swp-space--mob: 9px;
     top: 60px;
   }
 
-  // <1280px
-  @include media("<lap-s") {
-    right: 40px;
-    top: 40px;
-  }
-
   // <768px
   @include media("<tab-s") {
-    right: 10px;
-    top: 38px;
+    right: 50px;
+    top: 50px;
   }
 
   // <480px
   @include media("<mob-s") {
-    right: 18px;
-    top: 18px;
+    right: 40px;
+    top: 40px;
     width: 56px;
     height: 56px;
   }

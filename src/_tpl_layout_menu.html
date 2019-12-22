@@ -1,17 +1,16 @@
 <!--MENU-->
-<aside class="menu menu-js is-open" data-swc-prevent-remove>
+<aside class="menu menu-js" data-swc-prevent-remove>
   <div class="menu__holder">
     <div class="menu__frame">
-      <!-- main navigation -->
       <div class="swiper-container nav-slider nav-slider-js">
         <div class="swiper-wrapper">
-          <div id="all" class="swiper-slide">
+          <div id="menuMainSlide" class="swiper-slide">
             <ul class="nav-list" data-swiper-parallax-opacity="0">
               @@if(context.currentItem != "Home"){<li><a href="index.html"><em class="icon-m icon-m-home--white"></em><span>Home</span></a></li>}
 
-              <li><a href="#products"><em class="icon-m icon-m-products--white"></em><span>Products</span></a></li>
+              <li><a href="#menuProductsSlide"><em class="icon-m icon-m-products--white"></em><span>Products</span></a></li>
 
-              <li><a href="#brands"><em class="icon-m icon-m-brands--white"></em><span>Our Brands</span></a></li>
+              <li><a href="#menuBrandsSlide"><em class="icon-m icon-m-brands--white"></em><span>Our Brands</span></a></li>
 
               @@if(context.currentItem == "Apps"){<li class="active"><span><em class="icon-m icon-m-apps--white"></em><span>Apps</span></span></li>}
               @@if(context.currentItem != "Apps"){<li><a href="news.html"><em class="icon-m icon-m-apps--white"></em><span>Apps</span></a></li>}
@@ -31,18 +30,15 @@
               @@if(context.currentItem != "Contacts"){<li><a href="contacts.html"><em class="icon-m icon-m-contacts--white"></em><span>Contacts</span></a></li>}
             </ul>
           </div>
-          @@include("_tpl_slide-product-categories.html")
-          @@include("_tpl_slide-product-brands.html")
+          @@include("_tpl_slide-product-categories.html", {"id": "menuProductsSlide", "idMain": "menuMainSlide"})
+          @@include("_tpl_slide-product-brands.html", {"id": "menuBrandsSlide", "idMain": "menuMainSlide"})
         </div>
       </div>
-      <!-- main navigation end -->
-      <!--sidebar footer-->
       <div class="menu-footer">
         <div class="menu-footer__holder">
           @@include("_tpl_layout_sidebar-footer.html")
         </div>
       </div>
-      <!--sidebar footer end-->
     </div>
   </div>
 </aside>
