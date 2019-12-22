@@ -269,7 +269,7 @@ function stateFields() {
  */
 function searchToggle() {
   var $searchOpen = $('.btn-search-open-js');
-  var $searchForm = $('.search-panel-js');
+    var $searchForm = $('.search-panel-js');
   var timeout;
 
   if ($searchOpen.length) {
@@ -294,6 +294,8 @@ function searchToggle() {
   if (document.location.hash === "#open-search") {
     setTimeout(function () {
       $searchOpen.switchClass('add');
+
+      $searchForm.find('input[type="search"]').focus();
     }, 1000);
   }
 }
@@ -2358,7 +2360,7 @@ function popupEvents() {
 
   // close popup on click to "Esc" key
   $DOC.keyup(function (e) {
-    if (e.keyCode == 27) {
+    if (e.keyCode === 27) {
       closePopup();
     }
   });
@@ -2379,12 +2381,7 @@ function popupEvents() {
 
   // popup open
   function openPopup() {
-    // set scroll position
-    if (DESKTOP) {
-      topPosition = $('#mCSB_1_container').position().top;
-    } else {
-      topPosition = $WINDOW.scrollTop();
-    }
+    topPosition = $WINDOW.scrollTop();
 
     $popup.height('auto');
     // show popup
@@ -2474,26 +2471,14 @@ function popupEvents() {
 
   // page scroll to top
   function pageScrollToTop() {
-    if (DESKTOP) {
-      $BODY.mCustomScrollbar("scrollTo", 0, {
-        scrollInertia: 0
-      });
-    } else {
-      TweenMax.to(window, 0.1, {scrollTo: {y: 0}, ease: Power3.easeInOut});
-    }
+    TweenMax.to(window, 0.1, {scrollTo: {y: 0}, ease: Power3.easeInOut});
   }
 
   // page scroll to item
   function pageScrollToItem() {
     topPosition = topPosition || 0;
 
-    if (DESKTOP) {
-      $BODY.mCustomScrollbar("scrollTo", topPosition, {
-        scrollInertia: 0
-      });
-    } else {
-      $('html,body').scrollTop(topPosition);
-    }
+    $('html,body').scrollTop(topPosition);
   }
 
   // hide filters opener and header

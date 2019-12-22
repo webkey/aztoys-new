@@ -53,6 +53,11 @@
 
   @@if(context.currentItem == "Products"){@@include("_tpl_product-filters.html")}
 
+  @@if(context.currentItem != "Products"){
+  <a href="products.html#open-search" class="btn-search-open"></a>
+  }
+
+  @@if(context.currentItem == "Products"){
   <a href="#" class="btn-search-open btn-search-open-js"></a>
   <div class="filters-search search-panel-js" data-swc-prevent-remove>
     <div class="search-form search-form-js">
@@ -76,6 +81,7 @@
       <button type="submit" class="search-form__submit search-form__submit-js"></button>
     </div>
   </div>
+  }
 
   <!--slogan-->
   <div class="slogan"><span>Playing to get smart</span></div>
