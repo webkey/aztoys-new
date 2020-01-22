@@ -1180,7 +1180,7 @@ function toggleMenu() {
           });
 
           // Счетчик отфильтрованных товаров
-          $grid.on('arrangeComplete', function (event, filteredItems) {
+          $grid.on('layoutComplete', function (event, filteredItems) {
             lengthFilteredItems = filteredItems.length;
 
             var filterCounterContent = 'Items not found';
@@ -1387,7 +1387,17 @@ function filtersEvents() {
 
         setTimeout(function () {
           $('.products__figure img').trigger("unveil");
-        }, 50)
+        }, 50);
+
+        var $doc = $('html, body');
+
+        $doc.on("scroll mousedown wheel DOMMouseScroll mousewheel keyup touchmove", function(){
+          $doc.stop();
+        });
+
+        $doc.animate({ scrollTop: 0 }, 300, function(){
+          $doc.off("scroll mousedown wheel DOMMouseScroll mousewheel keyup touchmove");
+        });
       },
       afterMoreFiltersShow: function () {
         $('.mob-menu-opener-js').switchClass('remove');
